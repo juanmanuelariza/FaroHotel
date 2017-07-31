@@ -1,0 +1,123 @@
+﻿@model IEnumerable<FaroHotel.Models.Pasajero>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">Listado de Pasajeros</h2>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.box-header -->
+        <div class="x_content">
+            <!-- Button trigger modal -->
+            <button type="button" style="margin-bottom: 15px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Create', 'Agregar', 'Pasajeros')">
+                <i class="fa fa-plus"></i> Nuevo
+            </button>
+            @*<div class="table-responsive">*@
+            <table id="dtPasajeros" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th style="width:100px">Acciones</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Apellido)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th>
+                            Sexo
+                        </th>
+                        <th>
+                            Fecha de Nac.
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Telefono)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.Diabetes)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Celiaquia)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Motricidad)
+                            </th>*@
+                        <th>
+                            Lista Negra
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="btn-group-sm">
+                                    <span title="Editar" data-toggle="tooltip"><a class="btn btn-info btn-table fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Edit/@item.ID','Editar','Pasajero')"></a></span>
+                                    <span title="Detalle" data-toggle="tooltip"><a class="btn btn-default btn-table fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Details/@item.ID','Detalle','Pasajero')"></a></span>
+                                    <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger btn-table fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Delete/@item.ID','Eliminar','Pasajero')"></a></span>
+                                </div>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Apellido)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TipoSexo.Descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Telefono)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.Diabetes)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Celiaquia)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Motricidad)
+                                </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ListaNegra)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        @*</div>*@
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</section>
+
+<script type="text/javascript">
+    $(function () {
+        $('#dtPasajeros').DataTable({
+            "responsive": true,
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": DataTableEsp()
+        });
+    });
+</script>

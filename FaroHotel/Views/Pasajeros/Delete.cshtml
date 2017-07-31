@@ -1,0 +1,177 @@
+﻿@model FaroHotel.Models.Pasajero
+
+@{
+    ViewBag.Title = "Delete";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="form-horizontal">
+        <div class="container">
+
+            <fieldset id="fsDatosPasajero">
+	    
+            <div class="alert alert-danger alert-dismissible">
+                <h4><i class="icon fa fa-ban"></i> Atencion!</h4>
+                ¿Esta seguro que desea eliminar este elemento?
+            </div>
+	    
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="DNI">DNI:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DNI, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="Apellido">Apellido:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Nombre">Nombre:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Sexo">Sexo:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.TipoSexo.Descripcion, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="FechaNacimiento">Fecha de Nacimiento:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.FechaNacimiento, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Telefono">Teléfono:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Email">Email:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Diabetes">Diabetes:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Diabetes, new { htmlAttributes = new { @disabled = "disabled" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Celiaquia">Celiaquia:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Celiaquia, new { htmlAttributes = new { @disabled = "disabled" } })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Motricidad">Motricidad:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Motricidad, new { htmlAttributes = new { @disabled = "disabled" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="ListaNegra">Lista Negra:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.ListaNegra, new { htmlAttributes = new { @disabled = "disabled" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+	    
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+    	    @Html.HiddenFor(model => model.ID)
+        }
+        </div>
+    </div>
+
+<script>
+    //Click "Guardar"
+    $("#btnGuardar").click(function () {
+        //debugger
+        $('#contenidoModal form').submit()
+    });
+
+    //Submit
+    jQuery(function ($) {
+        var form = $('form'), oldSubmit = form[0].onsubmit;
+        form[0].onsubmit = null;
+
+        $('form').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    beforeSend: function (xhr) {
+                        abrirWaiting();
+                    },
+                    success: function (result) {
+                        //debugger
+                        cerrarWaiting();
+                        if (result.ok) {
+                            cerrarModal();
+                            window.location.href = window.location.href;
+                            return;
+                        }
+                        $('#contenidoModal').html(result);
+                    },
+                    error: function () {
+                        cerrarWaiting();
+                    }
+                });
+            }
+            oldSubmit.call(this); // preserve the context
+        });
+    });
+
+</script>
+

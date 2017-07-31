@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4111cbaee88c4cf88d23d6f233eba18f" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Accion" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Menu" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MenuAspNetRoles" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MenuAspNetRolesAccion" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_MenuAspNetRolesAccion_Accion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_MenuAspNetRoles_AspNetRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Menu_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_MenuAspNetRoles_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_MenuAspNetRolesAccion_MenuAspNetRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.Ventanilla" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Pasajero" Width="1.5" PointX="9.625" PointY="4" />
+        <EntityTypeShape EntityType="Model.TipoSexo" Width="1.5" PointX="7.375" PointY="4.875" />
+        <AssociationConnector Association="Model.FK_Pasajero_TipoSexo" />
+        <AssociationConnector Association="Model.FK_AspNetUsers_Ventanilla" />
+        <EntityTypeShape EntityType="Model.Paquete" Width="1.5" PointX="5.125" PointY="16.5" />
+        <EntityTypeShape EntityType="Model.TipoCuota" Width="1.5" PointX="2.875" PointY="21.5" />
+        <EntityTypeShape EntityType="Model.TipoDescripcionPaquete" Width="1.5" PointX="2.875" PointY="18.75" />
+        <EntityTypeShape EntityType="Model.TipoNoche" Width="1.5" PointX="2.875" PointY="13.875" />
+        <EntityTypeShape EntityType="Model.TipoTemporada" Width="1.5" PointX="2.875" PointY="16.375" />
+        <AssociationConnector Association="Model.FK_Paquete_TipoCuota" />
+        <AssociationConnector Association="Model.FK_Paquete_TipoDescripcionPaquete" />
+        <AssociationConnector Association="Model.FK_Paquete_TipoNoche" />
+        <AssociationConnector Association="Model.FK_Paquete_TipoTemporada" />
+        <AssociationConnector Association="Model.EnlacePaqueteVentanilla" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

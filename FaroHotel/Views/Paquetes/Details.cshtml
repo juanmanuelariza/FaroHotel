@@ -1,0 +1,99 @@
+﻿@model FaroHotel.Models.Paquete
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Paquete</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaFin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioSingle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioSingle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioDoble)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioDoble)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaAlta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaAlta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoCuota.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoCuota.ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoDescripcionPaquete.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoDescripcionPaquete.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoNoche.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoNoche.ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoTemporada.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoTemporada.Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

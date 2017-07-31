@@ -1,0 +1,1193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="VentanillaId" Type="int" />
+        </EntityType>
+        <EntityType Name="EnlacePaqueteVentanilla">
+          <Key>
+            <PropertyRef Name="PaqueteId" />
+            <PropertyRef Name="VentanillaId" />
+          </Key>
+          <Property Name="PaqueteId" Type="int" Nullable="false" />
+          <Property Name="VentanillaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PadreID" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Orden" Type="tinyint" />
+          <Property Name="Icono" Type="nvarchar" MaxLength="50" />
+          <Property Name="Accion" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Controlador" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+          <Property Name="AspNetRolesId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRolesAccion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccionId" Type="int" Nullable="false" />
+          <Property Name="MenuAspNetRolesId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Paquete">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DescripcionId" Type="tinyint" Nullable="false" />
+          <Property Name="TemporadaId" Type="tinyint" Nullable="false" />
+          <Property Name="NochesId" Type="tinyint" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" Nullable="false" />
+          <Property Name="PrecioSingle" Type="float" Nullable="false" />
+          <Property Name="PrecioDoble" Type="float" Nullable="false" />
+          <Property Name="CuotasId" Type="tinyint" Nullable="false" />
+          <Property Name="FechaAlta" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pasajero">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DNI" Type="bigint" Nullable="false" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Sexo" Type="tinyint" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="Telefono" Type="bigint" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Diabetes" Type="bit" Nullable="false" />
+          <Property Name="Celiaquia" Type="bit" Nullable="false" />
+          <Property Name="Motricidad" Type="bit" Nullable="false" />
+          <Property Name="ListaNegra" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoCuota">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cuotas" Type="int" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoDescripcionPaquete">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FechaAlta" Type="date" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoNoche">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Noches" Type="int" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoSexo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoTemporada">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ventanilla">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="500" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AspNetUsers_Ventanilla">
+          <End Role="Ventanilla" Type="Self.Ventanilla" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventanilla">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="VentanillaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlacePaqueteVentanilla_Paquete">
+          <End Role="Paquete" Type="Self.Paquete" Multiplicity="1" />
+          <End Role="EnlacePaqueteVentanilla" Type="Self.EnlacePaqueteVentanilla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paquete">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlacePaqueteVentanilla">
+              <PropertyRef Name="PaqueteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlacePaqueteVentanilla_Ventanilla">
+          <End Role="Ventanilla" Type="Self.Ventanilla" Multiplicity="1" />
+          <End Role="EnlacePaqueteVentanilla" Type="Self.EnlacePaqueteVentanilla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventanilla">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlacePaqueteVentanilla">
+              <PropertyRef Name="VentanillaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="PadreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="AspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRolesAccion_Accion">
+          <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
+          <End Role="MenuAspNetRolesAccion" Type="Self.MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="AccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="1" />
+          <End Role="MenuAspNetRolesAccion" Type="Self.MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuAspNetRoles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="MenuAspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paquete_TipoCuota">
+          <End Role="TipoCuota" Type="Self.TipoCuota" Multiplicity="1" />
+          <End Role="Paquete" Type="Self.Paquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCuota">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Paquete">
+              <PropertyRef Name="CuotasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paquete_TipoDescripcionPaquete">
+          <End Role="TipoDescripcionPaquete" Type="Self.TipoDescripcionPaquete" Multiplicity="1" />
+          <End Role="Paquete" Type="Self.Paquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDescripcionPaquete">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Paquete">
+              <PropertyRef Name="DescripcionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paquete_TipoNoche">
+          <End Role="TipoNoche" Type="Self.TipoNoche" Multiplicity="1" />
+          <End Role="Paquete" Type="Self.Paquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNoche">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Paquete">
+              <PropertyRef Name="NochesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paquete_TipoTemporada">
+          <End Role="TipoTemporada" Type="Self.TipoTemporada" Multiplicity="1" />
+          <End Role="Paquete" Type="Self.Paquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoTemporada">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Paquete">
+              <PropertyRef Name="TemporadaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pasajero_TipoSexo">
+          <End Role="TipoSexo" Type="Self.TipoSexo" Multiplicity="1" />
+          <End Role="Pasajero" Type="Self.Pasajero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoSexo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pasajero">
+              <PropertyRef Name="Sexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetPermisosPorNombreDeUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Accion" EntityType="Self.Accion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EnlacePaqueteVentanilla" EntityType="Self.EnlacePaqueteVentanilla" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuAspNetRoles" EntityType="Self.MenuAspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuAspNetRolesAccion" EntityType="Self.MenuAspNetRolesAccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paquete" EntityType="Self.Paquete" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pasajero" EntityType="Self.Pasajero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCuota" EntityType="Self.TipoCuota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDescripcionPaquete" EntityType="Self.TipoDescripcionPaquete" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoNoche" EntityType="Self.TipoNoche" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoSexo" EntityType="Self.TipoSexo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoTemporada" EntityType="Self.TipoTemporada" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ventanilla" EntityType="Self.Ventanilla" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AspNetUsers_Ventanilla" Association="Self.FK_AspNetUsers_Ventanilla">
+            <End Role="Ventanilla" EntitySet="Ventanilla" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlacePaqueteVentanilla_Paquete" Association="Self.FK_EnlacePaqueteVentanilla_Paquete">
+            <End Role="Paquete" EntitySet="Paquete" />
+            <End Role="EnlacePaqueteVentanilla" EntitySet="EnlacePaqueteVentanilla" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlacePaqueteVentanilla_Ventanilla" Association="Self.FK_EnlacePaqueteVentanilla_Ventanilla">
+            <End Role="Ventanilla" EntitySet="Ventanilla" />
+            <End Role="EnlacePaqueteVentanilla" EntitySet="EnlacePaqueteVentanilla" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_AspNetRoles" Association="Self.FK_MenuAspNetRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_Menu" Association="Self.FK_MenuAspNetRoles_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_Accion" Association="Self.FK_MenuAspNetRolesAccion_Accion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles" Association="Self.FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paquete_TipoCuota" Association="Self.FK_Paquete_TipoCuota">
+            <End Role="TipoCuota" EntitySet="TipoCuota" />
+            <End Role="Paquete" EntitySet="Paquete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paquete_TipoDescripcionPaquete" Association="Self.FK_Paquete_TipoDescripcionPaquete">
+            <End Role="TipoDescripcionPaquete" EntitySet="TipoDescripcionPaquete" />
+            <End Role="Paquete" EntitySet="Paquete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paquete_TipoNoche" Association="Self.FK_Paquete_TipoNoche">
+            <End Role="TipoNoche" EntitySet="TipoNoche" />
+            <End Role="Paquete" EntitySet="Paquete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paquete_TipoTemporada" Association="Self.FK_Paquete_TipoTemporada">
+            <End Role="TipoTemporada" EntitySet="TipoTemporada" />
+            <End Role="Paquete" EntitySet="Paquete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pasajero_TipoSexo" Association="Self.FK_Pasajero_TipoSexo">
+            <End Role="TipoSexo" EntitySet="TipoSexo" />
+            <End Role="Pasajero" EntitySet="Pasajero" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MenuAspNetRolesAccion" Relationship="Self.FK_MenuAspNetRolesAccion_Accion" FromRole="Accion" ToRole="MenuAspNetRolesAccion" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MenuAspNetRoles" Relationship="Self.FK_MenuAspNetRoles_AspNetRoles" FromRole="AspNetRoles" ToRole="MenuAspNetRoles" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="VentanillaId" Type="Int32" />
+          <NavigationProperty Name="Ventanilla" Relationship="Model.FK_AspNetUsers_Ventanilla" FromRole="AspNetUsers" ToRole="Ventanilla" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PadreID" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Orden" Type="Byte" />
+          <Property Name="Icono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Accion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Controlador" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Menu1" Relationship="Self.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
+          <NavigationProperty Name="Menu2" Relationship="Self.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
+          <NavigationProperty Name="MenuAspNetRoles" Relationship="Self.FK_MenuAspNetRoles_Menu" FromRole="Menu" ToRole="MenuAspNetRoles" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <Property Name="AspNetRolesId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.FK_MenuAspNetRoles_AspNetRoles" FromRole="MenuAspNetRoles" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_MenuAspNetRoles_Menu" FromRole="MenuAspNetRoles" ToRole="Menu" />
+          <NavigationProperty Name="MenuAspNetRolesAccion" Relationship="Self.FK_MenuAspNetRolesAccion_MenuAspNetRoles" FromRole="MenuAspNetRoles" ToRole="MenuAspNetRolesAccion" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRolesAccion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccionId" Type="Int32" Nullable="false" />
+          <Property Name="MenuAspNetRolesId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accion" Relationship="Self.FK_MenuAspNetRolesAccion_Accion" FromRole="MenuAspNetRolesAccion" ToRole="Accion" />
+          <NavigationProperty Name="MenuAspNetRoles" Relationship="Self.FK_MenuAspNetRolesAccion_MenuAspNetRoles" FromRole="MenuAspNetRolesAccion" ToRole="MenuAspNetRoles" />
+        </EntityType>
+        <Association Name="FK_MenuAspNetRolesAccion_Accion">
+          <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
+          <End Role="MenuAspNetRolesAccion" Type="Self.MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="AccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="AspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="PadreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="1" />
+          <End Role="MenuAspNetRolesAccion" Type="Self.MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuAspNetRoles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="MenuAspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="FaroHotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accion" EntityType="Self.Accion" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
+          <EntitySet Name="MenuAspNetRoles" EntityType="Self.MenuAspNetRoles" />
+          <EntitySet Name="MenuAspNetRolesAccion" EntityType="Self.MenuAspNetRolesAccion" />
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_Accion" Association="Self.FK_MenuAspNetRolesAccion_Accion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_AspNetRoles" Association="Self.FK_MenuAspNetRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_Menu" Association="Self.FK_MenuAspNetRoles_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles" Association="Self.FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <FunctionImport Name="GetPermisosPorNombreDeUsuario" ReturnType="Collection(Model.GetPermisosPorNombreDeUsuario_Result)">
+          <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Ventanilla" EntityType="Model.Ventanilla" />
+          <EntitySet Name="Pasajero" EntityType="Model.Pasajero" />
+          <EntitySet Name="TipoSexo" EntityType="Model.TipoSexo" />
+          <AssociationSet Name="FK_Pasajero_TipoSexo" Association="Model.FK_Pasajero_TipoSexo">
+            <End Role="TipoSexo" EntitySet="TipoSexo" />
+            <End Role="Pasajero" EntitySet="Pasajero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_Ventanilla" Association="Model.FK_AspNetUsers_Ventanilla">
+            <End Role="Ventanilla" EntitySet="Ventanilla" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Paquete" EntityType="Model.Paquete" />
+          <EntitySet Name="TipoCuota" EntityType="Model.TipoCuota" />
+          <EntitySet Name="TipoDescripcionPaquete" EntityType="Model.TipoDescripcionPaquete" />
+          <EntitySet Name="TipoNoche" EntityType="Model.TipoNoche" />
+          <EntitySet Name="TipoTemporada" EntityType="Model.TipoTemporada" />
+          <AssociationSet Name="FK_Paquete_TipoCuota" Association="Model.FK_Paquete_TipoCuota">
+            <End Role="TipoCuota" EntitySet="TipoCuota" />
+            <End Role="Paquete" EntitySet="Paquete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paquete_TipoDescripcionPaquete" Association="Model.FK_Paquete_TipoDescripcionPaquete">
+            <End Role="TipoDescripcionPaquete" EntitySet="TipoDescripcionPaquete" />
+            <End Role="Paquete" EntitySet="Paquete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paquete_TipoNoche" Association="Model.FK_Paquete_TipoNoche">
+            <End Role="TipoNoche" EntitySet="TipoNoche" />
+            <End Role="Paquete" EntitySet="Paquete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paquete_TipoTemporada" Association="Model.FK_Paquete_TipoTemporada">
+            <End Role="TipoTemporada" EntitySet="TipoTemporada" />
+            <End Role="Paquete" EntitySet="Paquete" />
+          </AssociationSet>
+          <AssociationSet Name="EnlacePaqueteVentanilla" Association="Model.EnlacePaqueteVentanilla">
+            <End Role="Paquete" EntitySet="Paquete" />
+            <End Role="Ventanilla" EntitySet="Ventanilla" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="PadreID" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Byte" Name="Orden" Nullable="true" />
+          <Property Type="String" Name="Icono" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Accion" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Controlador" Nullable="false" MaxLength="150" />
+          <Property Type="Boolean" Name="Activo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAlta" Nullable="false" Precision="23" />
+        </ComplexType>
+        <EntityType Name="Ventanilla">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_AspNetUsers_Ventanilla" FromRole="Ventanilla" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Paquete" Relationship="Model.EnlacePaqueteVentanilla" FromRole="Ventanilla" ToRole="Paquete" />
+        </EntityType>
+        <EntityType Name="Pasajero">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DNI" Type="Int64" Nullable="false" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sexo" Type="Byte" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Diabetes" Type="Boolean" Nullable="false" />
+          <Property Name="Celiaquia" Type="Boolean" Nullable="false" />
+          <Property Name="Motricidad" Type="Boolean" Nullable="false" />
+          <Property Name="ListaNegra" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TipoSexo" Relationship="Model.FK_Pasajero_TipoSexo" FromRole="Pasajero" ToRole="TipoSexo" />
+          <Property Name="Telefono" Type="Int64" />
+        </EntityType>
+        <EntityType Name="TipoSexo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Pasajero" Relationship="Model.FK_Pasajero_TipoSexo" FromRole="TipoSexo" ToRole="Pasajero" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Pasajero_TipoSexo">
+          <End Type="Model.TipoSexo" Role="TipoSexo" Multiplicity="1" />
+          <End Type="Model.Pasajero" Role="Pasajero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoSexo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pasajero">
+              <PropertyRef Name="Sexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_Ventanilla">
+          <End Type="Model.Ventanilla" Role="Ventanilla" Multiplicity="0..1" />
+          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventanilla">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="VentanillaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Paquete">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DescripcionId" Type="Byte" Nullable="false" />
+          <Property Name="TemporadaId" Type="Byte" Nullable="false" />
+          <Property Name="NochesId" Type="Byte" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PrecioSingle" Type="Double" Nullable="false" />
+          <Property Name="PrecioDoble" Type="Double" Nullable="false" />
+          <Property Name="CuotasId" Type="Byte" Nullable="false" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="TipoCuota" Relationship="Model.FK_Paquete_TipoCuota" FromRole="Paquete" ToRole="TipoCuota" />
+          <NavigationProperty Name="TipoDescripcionPaquete" Relationship="Model.FK_Paquete_TipoDescripcionPaquete" FromRole="Paquete" ToRole="TipoDescripcionPaquete" />
+          <NavigationProperty Name="TipoNoche" Relationship="Model.FK_Paquete_TipoNoche" FromRole="Paquete" ToRole="TipoNoche" />
+          <NavigationProperty Name="TipoTemporada" Relationship="Model.FK_Paquete_TipoTemporada" FromRole="Paquete" ToRole="TipoTemporada" />
+          <NavigationProperty Name="Ventanilla" Relationship="Model.EnlacePaqueteVentanilla" FromRole="Paquete" ToRole="Ventanilla" />
+        </EntityType>
+        <EntityType Name="TipoCuota">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cuotas" Type="Int32" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Paquete" Relationship="Model.FK_Paquete_TipoCuota" FromRole="TipoCuota" ToRole="Paquete" />
+        </EntityType>
+        <EntityType Name="TipoDescripcionPaquete">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Paquete" Relationship="Model.FK_Paquete_TipoDescripcionPaquete" FromRole="TipoDescripcionPaquete" ToRole="Paquete" />
+        </EntityType>
+        <EntityType Name="TipoNoche">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Noches" Type="Int32" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Paquete" Relationship="Model.FK_Paquete_TipoNoche" FromRole="TipoNoche" ToRole="Paquete" />
+        </EntityType>
+        <EntityType Name="TipoTemporada">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Paquete" Relationship="Model.FK_Paquete_TipoTemporada" FromRole="TipoTemporada" ToRole="Paquete" />
+        </EntityType>
+        <Association Name="FK_Paquete_TipoCuota">
+          <End Type="Model.TipoCuota" Role="TipoCuota" Multiplicity="1" />
+          <End Type="Model.Paquete" Role="Paquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCuota">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Paquete">
+              <PropertyRef Name="CuotasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paquete_TipoDescripcionPaquete">
+          <End Type="Model.TipoDescripcionPaquete" Role="TipoDescripcionPaquete" Multiplicity="1" />
+          <End Type="Model.Paquete" Role="Paquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDescripcionPaquete">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Paquete">
+              <PropertyRef Name="DescripcionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paquete_TipoNoche">
+          <End Type="Model.TipoNoche" Role="TipoNoche" Multiplicity="1" />
+          <End Type="Model.Paquete" Role="Paquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNoche">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Paquete">
+              <PropertyRef Name="NochesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paquete_TipoTemporada">
+          <End Type="Model.TipoTemporada" Role="TipoTemporada" Multiplicity="1" />
+          <End Type="Model.Paquete" Role="Paquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoTemporada">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Paquete">
+              <PropertyRef Name="TemporadaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EnlacePaqueteVentanilla">
+          <End Type="Model.Paquete" Role="Paquete" Multiplicity="*" />
+          <End Type="Model.Ventanilla" Role="Ventanilla" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="FaroHotelEntities">
+          <EntitySetMapping Name="Accion">
+            <EntityTypeMapping TypeName="Model.Accion">
+              <MappingFragment StoreEntitySet="Accion">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="Model.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="Model.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="Model.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="VentanillaId" ColumnName="VentanillaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="Model.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PadreID" ColumnName="PadreID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuAspNetRoles">
+            <EntityTypeMapping TypeName="Model.MenuAspNetRoles">
+              <MappingFragment StoreEntitySet="MenuAspNetRoles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="AspNetRolesId" ColumnName="AspNetRolesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuAspNetRolesAccion">
+            <EntityTypeMapping TypeName="Model.MenuAspNetRolesAccion">
+              <MappingFragment StoreEntitySet="MenuAspNetRolesAccion">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AccionId" ColumnName="AccionId" />
+                <ScalarProperty Name="MenuAspNetRolesId" ColumnName="MenuAspNetRolesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="GetPermisosPorNombreDeUsuario" FunctionName="Model.Store.GetPermisosPorNombreDeUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetPermisosPorNombreDeUsuario_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PadreID" ColumnName="PadreID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Ventanilla">
+            <EntityTypeMapping TypeName="Model.Ventanilla">
+              <MappingFragment StoreEntitySet="Ventanilla">
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pasajero">
+            <EntityTypeMapping TypeName="Model.Pasajero">
+              <MappingFragment StoreEntitySet="Pasajero">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="ListaNegra" ColumnName="ListaNegra" />
+                <ScalarProperty Name="Motricidad" ColumnName="Motricidad" />
+                <ScalarProperty Name="Celiaquia" ColumnName="Celiaquia" />
+                <ScalarProperty Name="Diabetes" ColumnName="Diabetes" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoSexo">
+            <EntityTypeMapping TypeName="Model.TipoSexo">
+              <MappingFragment StoreEntitySet="TipoSexo">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paquete">
+            <EntityTypeMapping TypeName="Model.Paquete">
+              <MappingFragment StoreEntitySet="Paquete">
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="CuotasId" ColumnName="CuotasId" />
+                <ScalarProperty Name="PrecioDoble" ColumnName="PrecioDoble" />
+                <ScalarProperty Name="PrecioSingle" ColumnName="PrecioSingle" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="NochesId" ColumnName="NochesId" />
+                <ScalarProperty Name="TemporadaId" ColumnName="TemporadaId" />
+                <ScalarProperty Name="DescripcionId" ColumnName="DescripcionId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCuota">
+            <EntityTypeMapping TypeName="Model.TipoCuota">
+              <MappingFragment StoreEntitySet="TipoCuota">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDescripcionPaquete">
+            <EntityTypeMapping TypeName="Model.TipoDescripcionPaquete">
+              <MappingFragment StoreEntitySet="TipoDescripcionPaquete">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoNoche">
+            <EntityTypeMapping TypeName="Model.TipoNoche">
+              <MappingFragment StoreEntitySet="TipoNoche">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="Noches" ColumnName="Noches" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoTemporada">
+            <EntityTypeMapping TypeName="Model.TipoTemporada">
+              <MappingFragment StoreEntitySet="TipoTemporada">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="EnlacePaqueteVentanilla" TypeName="Model.EnlacePaqueteVentanilla" StoreEntitySet="EnlacePaqueteVentanilla">
+            <EndProperty Name="Ventanilla">
+              <ScalarProperty Name="ID" ColumnName="VentanillaId" />
+            </EndProperty>
+            <EndProperty Name="Paquete">
+              <ScalarProperty Name="ID" ColumnName="PaqueteId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
