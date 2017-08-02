@@ -34,7 +34,10 @@ namespace FaroHotel.Controllers
             {
                 return HttpNotFound();
             }
-            return View(paquete);
+            ViewBag.Ventanillas = db.Ventanilla.ToList();
+            paquete.VentanillaIds = (from t in paquete.Ventanilla select t.ID).ToArray();
+
+            return PartialView(paquete);
         }
 
         // GET: Paquetes/Create
@@ -45,13 +48,13 @@ namespace FaroHotel.Controllers
             ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches");
             ViewBag.TemporadaId = new SelectList(db.TipoTemporada, "ID", "Descripcion");
 
-            Paquete model = new Paquete
+            Paquete paquete = new Paquete
             {
                 VentanillaIds = new int[0]
             };
 
             ViewBag.Ventanillas = db.Ventanilla.ToList();
-            return View(model);
+            return PartialView(paquete);
         }
 
         // POST: Paquetes/Create
@@ -72,14 +75,14 @@ namespace FaroHotel.Controllers
 
                 db.Paquete.Add(paquete);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { ok = "true" });
             }
 
-            ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "ID", paquete.CuotasId);
+            ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "Cuotas", paquete.CuotasId);
             ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Descripcion", paquete.DescripcionId);
-            ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "ID", paquete.NochesId);
+            ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches", paquete.NochesId);
             ViewBag.TemporadaId = new SelectList(db.TipoTemporada, "ID", "Descripcion", paquete.TemporadaId);
-            return View(paquete);
+            return PartialView(paquete);
         }
 
         // GET: Paquetes/Edit/5
@@ -94,11 +97,17 @@ namespace FaroHotel.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "ID", paquete.CuotasId);
+            ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "Cuotas", paquete.CuotasId);
             ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Descripcion", paquete.DescripcionId);
-            ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "ID", paquete.NochesId);
+            ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches", paquete.NochesId);
             ViewBag.TemporadaId = new SelectList(db.TipoTemporada, "ID", "Descripcion", paquete.TemporadaId);
-            return View(paquete);
+
+            ViewBag.Ventanillas = db.Ventanilla.ToList();
+
+            paquete.VentanillaIds = (from t in paquete.Ventanilla select t.ID).ToArray();
+
+
+            return PartialView(paquete);
         }
 
         // POST: Paquetes/Edit/5
@@ -106,46 +115,64 @@ namespace FaroHotel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Titulo,DescripcionId,TemporadaId,NochesId,FechaInicio,FechaFin,PrecioSingle,PrecioDoble,CuotasId,FechaAlta")] Paquete paquete)
+        public ActionResult Edit(Paquete paquete)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(paquete).State = EntityState.Modified;
+                Paquete paqueteOriginal = db.Paquete.Find(paquete.ID);
+
+                paqueteOriginal.Titulo = paquete.Titulo;
+                paqueteOriginal.DescripcionId = paquete.DescripcionId;
+                paqueteOriginal.TemporadaId = paquete.TemporadaId;
+                paqueteOriginal.NochesId = paquete.NochesId;
+                paqueteOriginal.FechaInicio = paquete.FechaInicio;
+                paqueteOriginal.FechaFin = paquete.FechaFin;
+                paqueteOriginal.PrecioSingle = paquete.PrecioSingle;
+                paqueteOriginal.PrecioDoble = paquete.PrecioDoble;
+                paqueteOriginal.CuotasId = paquete.CuotasId;
+                
+                paqueteOriginal.Ventanilla.Clear();                                
+                if (paquete.VentanillaIds != null)
+                {
+                    paqueteOriginal.Ventanilla = (from t in db.Ventanilla.ToList() where paquete.VentanillaIds.Contains(t.ID) select t).ToList();
+                }
+
+                db.Entry(paqueteOriginal).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { ok = "true" });
             }
-            ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "ID", paquete.CuotasId);
+            ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "Cuotas", paquete.CuotasId);
             ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Descripcion", paquete.DescripcionId);
-            ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "ID", paquete.NochesId);
+            ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches", paquete.NochesId);
             ViewBag.TemporadaId = new SelectList(db.TipoTemporada, "ID", "Descripcion", paquete.TemporadaId);
-            return View(paquete);
+            return PartialView(paquete);
         }
 
-        // GET: Paquetes/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Paquete paquete = db.Paquete.Find(id);
-            if (paquete == null)
-            {
-                return HttpNotFound();
-            }
-            return View(paquete);
-        }
+        //// GET: Paquetes/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Paquete paquete = db.Paquete.Find(id);
+        //    if (paquete == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return PartialView(paquete);
+        //}
 
-        // POST: Paquetes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Paquete paquete = db.Paquete.Find(id);
-            db.Paquete.Remove(paquete);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Paquetes/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Paquete paquete = db.Paquete.Find(id);
+        //    db.Paquete.Remove(paquete);
+        //    db.SaveChanges();
+        //    return Json(new { ok = "true" });
+        //}
 
         protected override void Dispose(bool disposing)
         {

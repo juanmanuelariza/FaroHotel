@@ -433,3 +433,41 @@ function LogOff() {
         }        
     });
 }
+
+
+function InitModalSubmitAjax() {
+    //Click "Guardar"
+    $("#btnGuardar").unbind();
+    $("#btnGuardar").click(function () {
+        //debugger
+        $('#contenidoModal form').submit();
+    });
+
+    //Submit
+    $('form').submit(function () {
+        if ($(this).valid()) {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                beforeSend: function (xhr) {
+                    abrirWaiting();
+                },
+                success: function (result) {
+                    //debugger
+                    cerrarWaiting();
+                    if (result.ok) {
+                        cerrarModal();
+                        window.location.href = window.location.href;
+                        return;
+                    }
+                    $('#contenidoModal').html(result);
+                },
+                error: function () {
+                    cerrarWaiting();
+                }
+            });
+        }
+    });
+
+}

@@ -174,6 +174,7 @@
     <Compile Include="Controllers\Menu\MenuController.cs" />
     <Compile Include="Controllers\PaquetesController.cs" />
     <Compile Include="Controllers\PasajerosController.cs" />
+    <Compile Include="Controllers\ReservasController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\VentanillasController.cs" />
     <Compile Include="Global.asax.cs">
@@ -210,7 +211,8 @@
     <Compile Include="Models\MenuAspNetRolesAccion.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Menu\MenuVM.cs" />
+    <Compile Include="Models\ClassesVM\MenuVM.cs" />
+    <Compile Include="Models\Metadata\PaqueteMetadata.cs" />
     <Compile Include="Models\Model_FaroHotel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -229,11 +231,11 @@
     <Compile Include="Models\Paquete.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ClasesPartiales.cs" />
+    <Compile Include="Models\ClassesVM\PartialClasses.cs" />
     <Compile Include="Models\Pasajero.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Pasajero\PasajeroVM.cs" />
+    <Compile Include="Models\ClassesVM\PasajeroVM.cs" />
     <Compile Include="Models\TipoCuota.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
@@ -249,11 +251,11 @@
     <Compile Include="Models\TipoTemporada.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usuario\UsuarioVM.cs" />
+    <Compile Include="Models\ClassesVM\UsuarioVM.cs" />
     <Compile Include="Models\Ventanilla.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Ventanilla\VentanillaVM.cs" />
+    <Compile Include="Models\ClassesVM\VentanillaVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -357,6 +359,8 @@
     <Content Include="Views\Paquetes\Details.cshtml" />
     <Content Include="Views\Paquetes\Edit.cshtml" />
     <Content Include="Views\Paquetes\Index.cshtml" />
+    <Content Include="Views\Reservas\Index.cshtml" />
+    <Content Include="Views\Reservas\_Busqueda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

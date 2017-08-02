@@ -2,14 +2,10 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>Paquete</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Titulo)
@@ -91,9 +87,32 @@
             @Html.DisplayFor(model => model.TipoTemporada.Descripcion)
         </dd>
 
+        @foreach (FaroHotel.Models.Ventanilla ItemVentanilla in ViewBag.Ventanillas)
+        {
+
+            <dt>
+            </dt>
+
+            <dd>
+                @if (Model.Ventanilla.Select(e => e).Where(e => e.ID == ItemVentanilla.ID).Count() > 0)
+                {
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="VentanillaIds" value="@ItemVentanilla.ID" checked="checked" />
+                            @ItemVentanilla.Nombre
+                        </label>
+                    </div>
+                }
+                else
+                {
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="VentanillaIds" value="@ItemVentanilla.ID" />
+                            @ItemVentanilla.Nombre
+                        </label>
+                    </div>
+                }
+            </dd>
+        }
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

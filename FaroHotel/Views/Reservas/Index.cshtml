@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form_wizard wizard_horizontal">
+    <ul class="wizard_steps anchor">
+        <li>
+            <a id="wizard_step1" class="selected">
+                <span class="step_no">1</span>
+                <span class="step_descr">
+                    Paso 1<br>
+                    <small>Disponibilidad</small>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a id="wizard_step2" class="disabled">
+                <span class="step_no">2</span>
+                <span class="step_descr">
+                    Paso 2<br>
+                    <small>Datos de Pasajeros</small>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a id="wizard_step3" class="disabled">
+                <span class="step_no">3</span>
+                <span class="step_descr">
+                    Paso 3<br>
+                    <small>Adicionales y Resumen</small>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a id="wizard_step4" class="disabled">
+                <span class="step_no">4</span>
+                <span class="step_descr">
+                    Paso 4<br>
+                    <small>Solicitud de Reserva Enviada</small>
+                </span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<div id="div_step1" class="row">
+    <div class="col-md-3">
+        <div class="x_panel">
+@using (Html.BeginForm("Buscar", "Reservas", FormMethod.Post, new { @id = "formBusqueda" }))
+{
+    @Html.AntiForgeryToken()
+            <div class="x_title">
+                <h2>Buscar Disponibilidad</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="form-group">
+                    <input value="" class="form-control date-picker text-box single-line hasDatepicker has-feedback-left active" data-val="true" id="FechaEntrada" name="FechaEntrada" type="datetime">
+                    <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                </div>
+                <div id="div_RadioButtonNights" class="form-group">
+                    <div class="radio">
+                        <label>
+                            <input id="RB_7Noches" type="radio" name="Noches" value="7" checked="checked">
+                            7 Noches
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="RB_14Noches" type="radio" name="Noches" value="14">
+                            14 Noches
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select name="DDL_Pasajeros" id="DDL_Pasajeros" class="form-control">
+                        <option selected="selected" value="0">Cantidad de Personas</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button id="btnBuscar" class="btn btn-primary">Buscar</button>
+                </div>
+                
+            </div>
+}
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div ID="Panel_Resultados">
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    //$(function () {
+    //    $('#formBusqueda').submit(function (e) {
+    //        //$('#btnBusca').click(function (e) {
+    //        //debugger
+    //        var _url = GetPathApp("/Reservas/Buscar");
+
+    //        Pace.track(function () {
+    //            $.ajax({
+    //                method: "POST",
+    //                url: _url,
+    //                data: { __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
+    //                beforeSend: function (xhr) {
+    //                    $('#contentMsg').hide();
+    //                    $('#contenTitulos').empty();
+    //                },
+    //                success: function (result) {
+    //                    //debugger
+    //                    if (result.ok == "false") {
+
+    //                        $('#contenTitulos').empty();
+    //                        $('#contentMsg').show();
+    //                        $('#contentMsg p').text(result.mensaje);
+    //                    }
+    //                    else {
+    //                        $('#contentMsg').hide();
+    //                        $('#Panel_Resultados').html(result);
+    //                    }
+
+    //                }
+    //            });
+    //        });
+
+    //        e.preventDefault();
+    //    });//Fin "submit"
+    //});
+
+
+</script>

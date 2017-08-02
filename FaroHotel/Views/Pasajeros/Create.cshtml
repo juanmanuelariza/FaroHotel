@@ -139,44 +139,6 @@
 }
 
 <script>
-    //Click "Guardar"
-    $("#btnGuardar").click(function () {
-        //debugger
-        $('#contenidoModal form').submit()
-    });
-
-    //Submit
-    jQuery(function ($) {
-        var form = $('form'), oldSubmit = form[0].onsubmit;
-        form[0].onsubmit = null;
-
-        $('form').submit(function () {
-            if ($(this).valid()) {
-                $.ajax({
-                    url: this.action,
-                    type: this.method,
-                    data: $(this).serialize(),
-                    beforeSend: function (xhr) {
-                        abrirWaiting();
-                    },
-                    success: function (result) {
-                        //debugger
-                        cerrarWaiting();
-                        if (result.ok) {
-                            cerrarModal();
-                            window.location.href = window.location.href;
-                            return;
-                        }
-                        $('#contenidoModal').html(result);
-                    },
-                    error: function () {
-                        cerrarWaiting();
-                    }
-                });
-            }
-            oldSubmit.call(this); // preserve the context
-        });
-    });
-
+    InitModalSubmitAjax();
 </script>
 
