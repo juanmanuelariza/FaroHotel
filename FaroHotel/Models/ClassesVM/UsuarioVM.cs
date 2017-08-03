@@ -21,6 +21,6 @@ namespace FaroHotel.Models
         public string PhoneNumber { get; set; }
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        public Nullable<int> VentanillaId { get; set; }
+        public int VentanillaId { get; set; }
     }
 }

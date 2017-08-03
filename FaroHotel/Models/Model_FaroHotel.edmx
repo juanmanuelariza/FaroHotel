@@ -12,6 +12,17 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="Icono" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MSP-Desarrollo.dbo.AspNetMenuAccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AspNetMenuAccion">
+          <Key>
+            <PropertyRef Name="IdMenu" />
+            <PropertyRef Name="IdAccion" />
+          </Key>
+          <Property Name="IdMenu" Type="int" Nullable="false" />
+          <Property Name="IdAccion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -63,7 +74,9 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="VentanillaId" Type="int" />
+          <Property Name="VentanillaId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="EnlacePaqueteVentanilla">
           <Key>
@@ -187,15 +200,27 @@
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="FechaAlta" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK_AspNetUsers_Ventanilla">
-          <End Role="Ventanilla" Type="Self.Ventanilla" Multiplicity="0..1" />
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        <Association Name="FK_AspNetMenuAccion_Accion">
+          <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
+          <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Ventanilla">
+            <Principal Role="Accion">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="AspNetUsers">
-              <PropertyRef Name="VentanillaId" />
+            <Dependent Role="AspNetMenuAccion">
+              <PropertyRef Name="IdAccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetMenuAccion_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AspNetMenuAccion">
+              <PropertyRef Name="IdMenu" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -421,9 +446,19 @@
           <EntitySet Name="TipoSexo" EntityType="Self.TipoSexo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoTemporada" EntityType="Self.TipoTemporada" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ventanilla" EntityType="Self.Ventanilla" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AspNetUsers_Ventanilla" Association="Self.FK_AspNetUsers_Ventanilla">
-            <End Role="Ventanilla" EntitySet="Ventanilla" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          <EntitySet Name="AspNetMenuAccion" EntityType="Self.AspNetMenuAccion" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AspNetMenuAccion].[IdMenu] AS [IdMenu], 
+    [AspNetMenuAccion].[IdAccion] AS [IdAccion]
+    FROM [dbo].[AspNetMenuAccion] AS [AspNetMenuAccion]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AspNetMenuAccion_Accion" Association="Self.FK_AspNetMenuAccion_Accion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetMenuAccion_Menu" Association="Self.FK_AspNetMenuAccion_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -502,6 +537,8 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MenuAspNetRolesAccion" Relationship="Self.FK_MenuAspNetRolesAccion_Accion" FromRole="Accion" ToRole="MenuAspNetRolesAccion" />
+          <NavigationProperty Name="Menu" Relationship="Model.AspNetMenuAccion" FromRole="Accion" ToRole="Menu" />
+          <Property Name="Icono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -552,8 +589,10 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <Property Name="VentanillaId" Type="Int32" />
+          <Property Name="VentanillaId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Ventanilla" Relationship="Model.FK_AspNetUsers_Ventanilla" FromRole="AspNetUsers" ToRole="Ventanilla" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -571,6 +610,7 @@
           <NavigationProperty Name="Menu1" Relationship="Self.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
           <NavigationProperty Name="Menu2" Relationship="Self.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
           <NavigationProperty Name="MenuAspNetRoles" Relationship="Self.FK_MenuAspNetRoles_Menu" FromRole="Menu" ToRole="MenuAspNetRoles" />
+          <NavigationProperty Name="Accion1" Relationship="Model.AspNetMenuAccion" FromRole="Menu" ToRole="Accion" />
         </EntityType>
         <EntityType Name="MenuAspNetRoles">
           <Key>
@@ -765,6 +805,10 @@
             <End Role="Paquete" EntitySet="Paquete" />
             <End Role="Ventanilla" EntitySet="Ventanilla" />
           </AssociationSet>
+          <AssociationSet Name="AspNetMenuAccion" Association="Model.AspNetMenuAccion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -830,7 +874,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AspNetUsers_Ventanilla">
-          <End Type="Model.Ventanilla" Role="Ventanilla" Multiplicity="0..1" />
+          <End Type="Model.Ventanilla" Role="Ventanilla" Multiplicity="1" />
           <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ventanilla">
@@ -950,6 +994,10 @@
           <End Type="Model.Paquete" Role="Paquete" Multiplicity="*" />
           <End Type="Model.Ventanilla" Role="Ventanilla" Multiplicity="*" />
         </Association>
+        <Association Name="AspNetMenuAccion">
+          <End Type="Model.Accion" Role="Accion" Multiplicity="*" />
+          <End Type="Model.Menu" Role="Menu" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -959,6 +1007,7 @@
           <EntitySetMapping Name="Accion">
             <EntityTypeMapping TypeName="Model.Accion">
               <MappingFragment StoreEntitySet="Accion">
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
@@ -995,6 +1044,8 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="Model.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="VentanillaId" ColumnName="VentanillaId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -1165,6 +1216,14 @@
             </EndProperty>
             <EndProperty Name="Paquete">
               <ScalarProperty Name="ID" ColumnName="PaqueteId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="AspNetMenuAccion" TypeName="Model.AspNetMenuAccion" StoreEntitySet="AspNetMenuAccion">
+            <EndProperty Name="Menu">
+              <ScalarProperty Name="ID" ColumnName="IdMenu" />
+            </EndProperty>
+            <EndProperty Name="Accion">
+              <ScalarProperty Name="ID" ColumnName="IdAccion" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

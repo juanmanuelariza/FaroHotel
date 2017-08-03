@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Accion">
       <EntityTypeMapping TypeName="Model.Accion">
         <MappingFragment StoreEntitySet="Accion">
+          <ScalarProperty Name="Icono" ColumnName="Icono" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
@@ -40,6 +41,8 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="Model.AspNetUsers">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="VentanillaId" ColumnName="VentanillaId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -210,6 +213,14 @@
       </EndProperty>
       <EndProperty Name="Paquete">
         <ScalarProperty Name="ID" ColumnName="PaqueteId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AspNetMenuAccion" TypeName="Model.AspNetMenuAccion" StoreEntitySet="AspNetMenuAccion">
+      <EndProperty Name="Menu">
+        <ScalarProperty Name="ID" ColumnName="IdMenu" />
+      </EndProperty>
+      <EndProperty Name="Accion">
+        <ScalarProperty Name="ID" ColumnName="IdAccion" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

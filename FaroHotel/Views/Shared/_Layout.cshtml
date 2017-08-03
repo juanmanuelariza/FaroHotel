@@ -36,7 +36,7 @@
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
                             <h3>Menu Principal</h3>
-                            <ul class="nav side-menu">
+                            @*<ul class="nav side-menu">
                                 <li>
                                     <a><i class="fa fa-home"></i>Sección de venta <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
@@ -68,12 +68,12 @@
                                         <li><a href="/Paquetes"><i class="fa fa-ticket"></i>Paquetes</a></li>
                                     </ul>
                                 </li>
-                            </ul>
+                            </ul>*@
+                            @Html.Partial("_MenuPartial")
                         </div>
                     </div>
                     <!-- /sidebar menu -->
                 </div>
-                @*@Html.Partial("_MenuPartial")*@
             </div>
 
             <!-- top navigation -->
@@ -91,7 +91,14 @@
                                     <span class="fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="javascript:LogOff()"><i class="fa fa-sign-out pull-right"></i> Salir</a></li>
+                                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <li>
+                                            <a class="fa fa-sign-out pull-right" href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesion</a>
+                                        </li>
+                                    }
+                                    
                                 </ul>
                             </li>
                         </ul>

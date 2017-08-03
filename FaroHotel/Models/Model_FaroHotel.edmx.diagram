@@ -36,6 +36,7 @@
         <AssociationConnector Association="Model.FK_Paquete_TipoNoche" />
         <AssociationConnector Association="Model.FK_Paquete_TipoTemporada" />
         <AssociationConnector Association="Model.EnlacePaqueteVentanilla" />
+        <AssociationConnector Association="Model.AspNetMenuAccion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

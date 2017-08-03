@@ -29,17 +29,78 @@ namespace FaroHotel.Controllers
 
         public List<MenuVM> GetMenu(String UserName)
         {
-            var datos = Context.GetPermisosPorNombreDeUsuario(UserName).Select(r => new MenuVM()
+
+            List<MenuVM> datos = Context.GetPermisosPorNombreDeUsuario(UserName).Select(r => new MenuVM()
             {
                 ID = r.ID,
                 PadreID = r.PadreID,
                 Nombre = r.Nombre,
                 Accion = r.Accion,
                 Controlador = r.Controlador,
-                Icono = r.Icono
+                Icono = r.Icono,
+                Orden = r.Orden
             }).ToList();
 
-            return datos;
+            List<MenuVM> datos_aux = datos.Where(r => r.PadreID != null).ToList();
+
+            foreach (var item in datos_aux)
+            {
+                if (!datos.Any(r => r.ID == item.PadreID))
+                {
+                    datos.Add(
+                        Context.Menu.Where(r => r.ID == item.PadreID).Select(r => new MenuVM()
+                        {
+                            ID = r.ID,
+                            PadreID = r.PadreID,
+                            Nombre = r.Nombre,
+                            Accion = r.Accion,
+                            Controlador = r.Controlador,
+                            Icono = r.Icono,
+                            Orden = r.Orden
+                        }).FirstOrDefault());
+                }
+            }
+
+            return datos.OrderBy(r => r.Orden).ToList();
         }
+
+
+
+
+        public List<MenuAccionVM> GetPermisos(String UserName)
+        {
+            FaroHotelEntities db = new FaroHotelEntities();
+            List<MenuAccionVM> Permisos = new List<MenuAccionVM>();
+
+            var rolesUser = db.AspNetUsers.FirstOrDefault(r => r.UserName == UserName).AspNetRoles;
+
+            //Recorro todos los Roles asociados al Usuario
+            foreach (var rol in rolesUser)
+            {
+                //Recorro todos los Menus asociados al Rol
+                foreach (var menu in rol.MenuAspNetRoles)
+                {
+                    MenuAccionVM item = new MenuAccionVM();
+
+                    item.menu.ID = menu.Menu.ID;
+                    item.menu.Nombre = menu.Menu.Nombre;
+
+                    //Recorro todas los Acciones asociados al Menu
+                    foreach (var accion in menu.MenuAspNetRolesAccion)
+                    {
+                        item.accion.Add(new Accion
+                        {
+                            ID = accion.Accion.ID,
+                            Nombre = accion.Accion.Nombre
+                        });
+                    }
+
+                    Permisos.Add(item);
+                }
+            }
+
+            return Permisos;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿@model FaroHotel.Models.UsuarioVM
+﻿@model FaroHotel.Models.RegisterViewModel
+
 @{
     ViewBag.Title = "Create";
     //Layout = "~/Views/Shared/_Layout.cshtml";
@@ -38,6 +39,27 @@
 
                     <div class="col-md-12">
                         <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="Nombre">Nombre:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="Apellido">Apellido:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group row">
                             <label class="control-label col-md-2 col-md-offset-1" for="Teléfono">Teléfono:</label>
                             <div class="col-md-8">
                                 @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
@@ -62,7 +84,7 @@
                             <label class="control-label col-md-3" for="Ventanilla">Ventanilla:</label>
                             <div class="col-md-8">
                                 @Html.DropDownList("Ventanilla", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Ventanilla.Nombre, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.VentanillaId, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -72,44 +94,6 @@
     </div>
 }
 
-<script>
-    //Click "Guardar"
-    $("#btnGuardar").click(function () {
-        //debugger
-        $('#contenidoModal form').submit()
-    });
-
-    //Submit
-    jQuery(function ($) {
-        var form = $('form'), oldSubmit = form[0].onsubmit;
-        form[0].onsubmit = null;
-
-        $('form').submit(function () {
-            if ($(this).valid()) {
-                $.ajax({
-                    url: this.action,
-                    type: this.method,
-                    data: $(this).serialize(),
-                    beforeSend: function (xhr) {
-                        abrirWaiting();
-                    },
-                    success: function (result) {
-                        //debugger
-                        cerrarWaiting();
-                        if (result.ok) {
-                            cerrarModal();
-                            window.location.href = window.location.href;
-                            return;
-                        }
-                        $('#contenidoModal').html(result);
-                    },
-                    error: function () {
-                        cerrarWaiting();
-                    }
-                });
-            }
-            oldSubmit.call(this); // preserve the context
-        });
-    });
-
+<script type="text/javascript">
+    InitModalSubmitAjax();
 </script>

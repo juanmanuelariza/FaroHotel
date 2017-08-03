@@ -7,12 +7,34 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FaroHotel.Models;
+using System.Text;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace FaroHotel.Controllers
 {
+    //[Authorize]
     public class UsuariosController : Controller
     {
         private FaroHotelEntities db = new FaroHotelEntities();
+        private ApplicationDbContext dbUserContext = new ApplicationDbContext();
+
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: Usuarios
         public ActionResult Index()
@@ -33,7 +55,7 @@ namespace FaroHotel.Controllers
             {
                 return HttpNotFound();
             }
-            return PartialView(aspNetUsers);
+            return View(aspNetUsers);
         }
 
         // GET: Usuarios/Create
@@ -48,17 +70,22 @@ namespace FaroHotel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,VentanillaId")] AspNetUsers aspNetUsers)
+        public async Task<ActionResult> Create(RegisterViewModel model)//[Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")]
         {
             if (ModelState.IsValid)
             {
-                db.AspNetUsers.Add(aspNetUsers);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, VentanillaId = model.VentanillaId, FirstName = model.FirstName, LastName = model.LastName };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    return Json(new { ok = "true" });
+                    //return RedirectToAction("Index", "AspNetUsers");
+                }
+                //AddErrors(result);
             }
 
-            ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre", aspNetUsers.VentanillaId);
-            return PartialView(aspNetUsers);
+            ViewBag.Ventanilla = new SelectList(db.Ventanilla, "ID", "Nombre", model.VentanillaId);
+            return PartialView(model);
         }
 
         // GET: Usuarios/Edit/5
@@ -68,21 +95,23 @@ namespace FaroHotel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
-            //UsuarioVM user = new UsuarioVM();
-            //user.Id = aspNetUsers.Id;
-            //user.UserName = aspNetUsers.UserName;
-            //user.Password = aspNetUsers.PasswordHash;
-            //user.Email = aspNetUsers.Email;
-            //user.PhoneNumber = aspNetUsers.PhoneNumber;
-            //user.VentanillaId = aspNetUsers.VentanillaId;
 
-            if (aspNetUsers == null)
+            ApplicationUser appUser = new ApplicationUser();
+            appUser = UserManager.FindById(id);
+
+            if (appUser == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre", aspNetUsers.VentanillaId);
-            return PartialView(aspNetUsers);
+            AspNetUsers user = new AspNetUsers();
+            user.UserName = appUser.UserName;
+            user.FirstName = appUser.FirstName;
+            user.LastName = appUser.LastName;
+            user.PhoneNumber = appUser.PhoneNumber;
+            user.Email = appUser.Email;
+            user.VentanillaId = appUser.VentanillaId;
+            ViewBag.Ventanilla = new SelectList(db.Ventanilla, "ID", "Nombre");
+            return View(user);
         }
 
         // POST: Usuarios/Edit/5
@@ -90,16 +119,80 @@ namespace FaroHotel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,VentanillaId")] AspNetUsers aspNetUsers)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Email,UserName,FirstName,LastName")] AspNetUsers model)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(aspNetUsers).State = EntityState.Modified;
-                db.SaveChanges();
+
+                try
+                {
+                    var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+                    //var manager = new UserManager<ApplicationUser>(store);
+                    var currentUser = UserManager.FindById(model.Id);
+                    currentUser.UserName = model.UserName;
+                    currentUser.FirstName = model.FirstName;
+                    currentUser.LastName = model.LastName;
+                    currentUser.Email = model.Email;
+                    await UserManager.UpdateAsync(currentUser);
+
+                    var ctx = store.Context;
+
+                    ctx.SaveChanges();
+
+                    return Json(new { ok = "true" });
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+
+
+
+            }
+            //ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre", aspNetUsers.VentanillaId);
+            return View(model);
+        }
+
+
+        // GET: /Account/ResetPassword/id
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string id)
+        {
+            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+
+            ResetPasswordViewModel model = new ResetPasswordViewModel { UserName = aspNetUsers.UserName, Code = "1" };
+            return PartialView(model);
+        }
+
+        //
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = UserManager.FindByName(model.UserName);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return RedirectToAction("ResetPasswordConfirmation", "Account");
+            }
+
+            model.Code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);//model.Code
+            if (result.Succeeded)
+            {
+                //return RedirectToAction("ResetPasswordConfirmation", "Account");
                 return Json(new { ok = "true" });
             }
-            ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre", aspNetUsers.VentanillaId);
-            return PartialView(aspNetUsers);
+            //AddErrors(result);
+            return PartialView();
         }
 
         // GET: Usuarios/Delete/5
@@ -114,8 +207,7 @@ namespace FaroHotel.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre", aspNetUsers.VentanillaId);
-            return PartialView(aspNetUsers);
+            return View(aspNetUsers);
         }
 
         // POST: Usuarios/Delete/5
@@ -126,6 +218,7 @@ namespace FaroHotel.Controllers
             AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
             db.AspNetUsers.Remove(aspNetUsers);
             db.SaveChanges();
+            //return RedirectToAction("Index");
             return Json(new { ok = "true" });
         }
 

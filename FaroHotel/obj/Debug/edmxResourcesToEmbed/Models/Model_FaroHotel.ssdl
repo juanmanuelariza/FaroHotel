@@ -7,6 +7,17 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+    <Property Name="Icono" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'MSP-Desarrollo.dbo.AspNetMenuAccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AspNetMenuAccion">
+    <Key>
+      <PropertyRef Name="IdMenu" />
+      <PropertyRef Name="IdAccion" />
+    </Key>
+    <Property Name="IdMenu" Type="int" Nullable="false" />
+    <Property Name="IdAccion" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="AspNetRoles">
     <Key>
@@ -58,7 +69,9 @@
     <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-    <Property Name="VentanillaId" Type="int" />
+    <Property Name="VentanillaId" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="EnlacePaqueteVentanilla">
     <Key>
@@ -182,15 +195,27 @@
     <Property Name="Email" Type="nvarchar" MaxLength="100" />
     <Property Name="FechaAlta" Type="datetime" Nullable="false" />
   </EntityType>
-  <Association Name="FK_AspNetUsers_Ventanilla">
-    <End Role="Ventanilla" Type="Self.Ventanilla" Multiplicity="0..1" />
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+  <Association Name="FK_AspNetMenuAccion_Accion">
+    <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
+    <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Ventanilla">
+      <Principal Role="Accion">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="AspNetUsers">
-        <PropertyRef Name="VentanillaId" />
+      <Dependent Role="AspNetMenuAccion">
+        <PropertyRef Name="IdAccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetMenuAccion_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+    <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AspNetMenuAccion">
+        <PropertyRef Name="IdMenu" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -416,9 +441,19 @@
     <EntitySet Name="TipoSexo" EntityType="Self.TipoSexo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoTemporada" EntityType="Self.TipoTemporada" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ventanilla" EntityType="Self.Ventanilla" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_AspNetUsers_Ventanilla" Association="Self.FK_AspNetUsers_Ventanilla">
-      <End Role="Ventanilla" EntitySet="Ventanilla" />
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    <EntitySet Name="AspNetMenuAccion" EntityType="Self.AspNetMenuAccion" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AspNetMenuAccion].[IdMenu] AS [IdMenu], 
+    [AspNetMenuAccion].[IdAccion] AS [IdAccion]
+    FROM [dbo].[AspNetMenuAccion] AS [AspNetMenuAccion]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_AspNetMenuAccion_Accion" Association="Self.FK_AspNetMenuAccion_Accion">
+      <End Role="Accion" EntitySet="Accion" />
+      <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetMenuAccion_Menu" Association="Self.FK_AspNetMenuAccion_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />

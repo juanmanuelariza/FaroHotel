@@ -445,6 +445,7 @@ function InitModalSubmitAjax() {
 
     //Submit
     $('form').submit(function () {
+        debugger
         if ($(this).valid()) {
             $.ajax({
                 url: this.action,
