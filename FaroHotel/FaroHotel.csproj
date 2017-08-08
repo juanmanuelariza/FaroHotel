@@ -172,13 +172,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DescripcionesPaquetesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Menu\MenuController.cs" />
     <Compile Include="Controllers\PaquetesController.cs" />
     <Compile Include="Controllers\PasajerosController.cs" />
     <Compile Include="Controllers\ReservasController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Controllers\Usuarios2Controller.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\VentanillasController.cs" />
     <Compile Include="Global.asax.cs">
@@ -374,6 +374,12 @@
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\Permisos.cshtml" />
+    <Content Include="Views\Usuarios\SetRoles.cshtml" />
+    <Content Include="Views\DescripcionesPaquetes\Create.cshtml" />
+    <Content Include="Views\DescripcionesPaquetes\Delete.cshtml" />
+    <Content Include="Views\DescripcionesPaquetes\Details.cshtml" />
+    <Content Include="Views\DescripcionesPaquetes\Edit.cshtml" />
+    <Content Include="Views\DescripcionesPaquetes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -395,6 +395,7 @@
     <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Activa" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Paquete" Relationship="Model.FK_Paquete_TipoDescripcionPaquete" FromRole="TipoDescripcionPaquete" ToRole="Paquete" />
+    <Property Name="Titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="TipoNoche">
     <Key>

@@ -183,6 +183,7 @@
     <EntitySetMapping Name="TipoDescripcionPaquete">
       <EntityTypeMapping TypeName="Model.TipoDescripcionPaquete">
         <MappingFragment StoreEntitySet="TipoDescripcionPaquete">
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
           <ScalarProperty Name="Activa" ColumnName="Activa" />
           <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />

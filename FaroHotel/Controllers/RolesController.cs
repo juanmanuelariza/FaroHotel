@@ -8,10 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using FaroHotel.Models;
 using System.Transactions;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 namespace FaroHotel.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class RolesController : Controller
     {
         private FaroHotelEntities db = new FaroHotelEntities();
@@ -48,13 +51,25 @@ namespace FaroHotel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] AspNetRoles aspNetRoles)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name")] AspNetRoles aspNetRoles)
         {
             if (ModelState.IsValid)
             {
-                db.AspNetRoles.Add(aspNetRoles);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                using (var context = new ApplicationDbContext())
+                {
+                    var roleStore = new RoleStore<IdentityRole>(context);
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+                    await roleManager.CreateAsync(new IdentityRole { Name = aspNetRoles.Name });
+
+                    return Json(new
+                    {
+                        ok = 1,
+                        mensaje = ""
+                    });
+
+                }
             }
 
             return View(aspNetRoles);
@@ -80,13 +95,30 @@ namespace FaroHotel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] AspNetRoles aspNetRoles)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name")] AspNetRoles aspNetRoles)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(aspNetRoles).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //db.Entry(aspNetRoles).State = EntityState.Modified;
+                //db.SaveChanges();
+                //return RedirectToAction("Index");
+
+                using (var context = new ApplicationDbContext())
+                {
+                    var roleStore = new RoleStore<IdentityRole>(context);
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+                    var currentRol = roleManager.FindById(aspNetRoles.Id);
+                    currentRol.Name = aspNetRoles.Name;
+
+                    await roleManager.UpdateAsync(currentRol);
+
+                    return Json(new
+                    {
+                        ok = 1,
+                        mensaje = ""
+                    });
+                }
             }
             return View(aspNetRoles);
         }
@@ -114,7 +146,8 @@ namespace FaroHotel.Controllers
             AspNetRoles aspNetRoles = db.AspNetRoles.Find(id);
             db.AspNetRoles.Remove(aspNetRoles);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return Json(new { ok = "true" });
         }
 
         protected override void Dispose(bool disposing)

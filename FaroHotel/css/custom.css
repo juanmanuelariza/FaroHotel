@@ -10093,7 +10093,4 @@ ul.notifications {
     background: rgba(0, 0, 0, 0.5)
 }
 
-.btn-table {
-    width: 35px;
-
-}
+.btn-group-sm span a{ margin:0px}

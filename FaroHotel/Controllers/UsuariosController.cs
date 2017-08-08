@@ -13,10 +13,13 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Transactions;
+using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 
 namespace FaroHotel.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class UsuariosController : Controller
     {
         private FaroHotelEntities db = new FaroHotelEntities();
@@ -229,6 +232,102 @@ namespace FaroHotel.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
+
+
+
+
+
+
+
+
+
+        // GET: AspNetUsers/SetRoles/5
+        public ActionResult SetRoles(string id)
+        {
+            JsonSerializer jss = new JsonSerializer();
+
+            var user = db.AspNetUsers.FirstOrDefault(r => r.Id == id);//.AspNetRoles.Select(r => r.Id).ToArray();
+
+            //ViewBag.roles = roles;
+            ViewBag.RolesID = new SelectList(db.AspNetRoles, "Name", "Name");
+
+            return View(user);
+        }
+
+        // POST: AspNetUsers/SetRoles/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SetRoles(string userId, string[] roles)
+        {
+
+
+            try
+            {
+                using (var context = new ApplicationDbContext())
+                {
+                    var userStore = new UserStore<ApplicationUser>(context);
+                    var userManager = new UserManager<ApplicationUser>(userStore);
+
+                    var user = UserManager.FindById(userId);
+
+                    //Se eliminan todos los Roles previamente cargados
+                    var UserRoles = await UserManager.GetRolesAsync(user.Id);
+                    if (UserRoles != null)
+                    {
+                        await UserManager.RemoveFromRolesAsync(user.Id, UserRoles.ToArray());
+                    }
+
+                    //Se agregan los roles seleccionados
+                    if (roles.Length>0)
+                    {
+                        await userManager.AddToRolesAsync(user.Id, roles);
+                    }
+                    return Json(new
+                    {
+                        ok = 1,
+                        mensaje = ""
+                    });
+
+                }
+
+
+
+
+                ////Codigo para Asociar un usuario a un rol
+                ////var userStore = new UserStore<ApplicationUser>(context);
+                ////var userManager = new UserManager<ApplicationUser>(userStore);
+
+                ////var user = UserManager.FindById(userId);
+                ////var user = new ApplicationUser { UserName = "admin" };
+
+
+                //await userManager.CreateAsync(user);
+                //await userManager.AddToRoleAsync(user.Id, "Administrator");
+
+                //return Json(new { ok = "true" });
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    ok = 0,
+                    mensaje = ex.InnerException.Message
+                });
+                //throw ex;
+            }            
         }
     }
 }

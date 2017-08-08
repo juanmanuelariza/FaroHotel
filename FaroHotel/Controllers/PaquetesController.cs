@@ -11,7 +11,8 @@ using FaroHotel.Models;
 namespace FaroHotel.Controllers
 {
 
-       public class PaquetesController : Controller
+    [Authorize]
+    public class PaquetesController : Controller
     {
         private FaroHotelEntities db = new FaroHotelEntities();
 
@@ -44,7 +45,7 @@ namespace FaroHotel.Controllers
         public ActionResult Create()
         {
             ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "Cuotas");
-            ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Descripcion");
+            ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Titulo");
             ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches");
             ViewBag.TemporadaId = new SelectList(db.TipoTemporada, "ID", "Descripcion");
 
@@ -79,7 +80,7 @@ namespace FaroHotel.Controllers
             }
 
             ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "Cuotas", paquete.CuotasId);
-            ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Descripcion", paquete.DescripcionId);
+            ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Titulo", paquete.DescripcionId);
             ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches", paquete.NochesId);
             ViewBag.TemporadaId = new SelectList(db.TipoTemporada, "ID", "Descripcion", paquete.TemporadaId);
             return PartialView(paquete);
@@ -98,7 +99,7 @@ namespace FaroHotel.Controllers
                 return HttpNotFound();
             }
             ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "Cuotas", paquete.CuotasId);
-            ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Descripcion", paquete.DescripcionId);
+            ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Titulo", paquete.DescripcionId);
             ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches", paquete.NochesId);
             ViewBag.TemporadaId = new SelectList(db.TipoTemporada, "ID", "Descripcion", paquete.TemporadaId);
 
@@ -142,7 +143,7 @@ namespace FaroHotel.Controllers
                 return Json(new { ok = "true" });
             }
             ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "Cuotas", paquete.CuotasId);
-            ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Descripcion", paquete.DescripcionId);
+            ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Titulo", paquete.DescripcionId);
             ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches", paquete.NochesId);
             ViewBag.TemporadaId = new SelectList(db.TipoTemporada, "ID", "Descripcion", paquete.TemporadaId);
             return PartialView(paquete);

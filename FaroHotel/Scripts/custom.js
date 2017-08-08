@@ -423,16 +423,16 @@ function GetPathApp(url) {
     //fullPathApp = fullPathApp.toLowerCase().replace('home/index', '');
     return fullPathApp + url;
 }
-function LogOff() {
-    $.ajax({
-        url: '/Account/LogOff',
-        type: 'Post',
-        success: function (result) {
-            window.location.href = window.location.href;
-            return;
-        }        
-    });
-}
+//function LogOff() {
+//    $.ajax({
+//        url: '/Account/LogOff',
+//        type: 'Post',
+//        success: function (result) {
+//            window.location.href = window.location.href;
+//            return;
+//        }        
+//    });
+//}
 
 
 function InitModalSubmitAjax() {
@@ -455,7 +455,7 @@ function InitModalSubmitAjax() {
                     abrirWaiting();
                 },
                 success: function (result) {
-                    //debugger
+                    debugger
                     cerrarWaiting();
                     if (result.ok) {
                         cerrarModal();

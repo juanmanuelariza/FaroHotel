@@ -68,7 +68,7 @@ namespace FaroHotel.Helpers
 
                     foreach (var item in menusPadres)
                     {
-                        string x = string.Format(@"<ul class=""nav side-menu""><li><a><i class=""{1}""></i><span> {0} </span><span class=""fa fa-chevron-down""></span></a>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o": item.Icono);
+                        string x = string.Format(@"<li><a><i class=""{1}""></i><span> {0} </span><span class=""fa fa-chevron-down""></span></a>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o": item.Icono);
                         output += x;
 
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())
@@ -81,7 +81,7 @@ namespace FaroHotel.Helpers
                             string z = @"</ul>";
                             output += z;
                         }
-                        output += "</li></ul>";
+                        output += "</li>";
 
                     }
 

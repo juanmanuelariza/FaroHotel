@@ -3,20 +3,25 @@
     var aux = Session["Menu"] as List<FaroHotel.Models.MenuVM>;
     if (Session["Menu"] == null || aux.Count == 0)
     {
-        var menuClient = new FaroHotel.Controllers.MenuController();
+        String user = User.Identity.Name;
+
+        var menuClien = new FaroHotel.Controllers.MenuController();
         if (Session["UserName"] != null)
         {
-            Session["Menu"] = menuClient.GetMenu(Session["UserName"].ToString());
+            Session["Menu"] = menuClien.GetMenu(Session["UserName"].ToString());
+            Session["Permisos"] = menuClien.GetPermisos(Session["UserName"].ToString());
         }
         else
         {
-            Session["Menu"] = menuClient.GetMenu("");
+            Session["Menu"] = menuClien.GetMenu(user);
+            Session["Permisos"] = menuClien.GetPermisos(user);
         }
     }
 
     menus = Session["Menu"] as List<FaroHotel.Models.MenuVM>;
 }
-@*<ul class="sidebar-menu">*@
+<ul class="nav side-menu">
     @FaroHotel.Helpers.HtmlHelperExtensions.RenderMenu(menus);
-@*</ul>*@
+</ul>
+
 

@@ -1,7 +1,7 @@
-﻿@model IEnumerable<FaroHotel.Models.AspNetRoles>
+﻿@model IEnumerable<FaroHotel.Models.TipoDescripcionPaquete>
 
 @{
-    ViewBag.Title = "Roles";
+    ViewBag.Title = "Index";
 }
 
 <section class="content">
@@ -13,14 +13,14 @@
         <!-- /.box-header -->
         <div class="x_content">
             <!-- Button trigger modal -->
-            <button type="button" style="margin-bottom: 15px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Roles/Create', 'Agregar', 'Roles')">
+            <button type="button" style="margin-bottom: 15px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DescripcionesPaquetes/Create', 'Agregar', 'Descripción')">
                 <i class="fa fa-plus"></i> Nuevo
             </button>
             <table id="dtRoles" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th style="width:150px">Acciones</th>
-                        <th>Rol</th>
+                        <th>Titulo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,23 +30,18 @@
                             <td>
                                 <div class="btn-group-sm">
                                     <div class="btn-group-sm">
-                                        <span data-placement="top" title="Editar" data-toggle="tooltip">
-                                            <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Roles/Edit/@item.Id','Editar','Roles')"></a>
-                                        </span>
-
                                         <span data-placement="top" title="Detalles" data-toggle="tooltip">
-                                            <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Roles/Details/@item.Id','Detalle','Roles')"></a>
+                                            <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DescripcionesPaquetes/Details/@item.ID','Detalle','Descripción')"></a>
                                         </span>
-                                        <span data-placement="top" title="Eliminar" data-toggle="tooltip">
-                                            <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Roles/Delete/@item.Id','Eliminar','Roles')"></a>
-                                        </span>
-                                        <span data-placement="top" title="Permisos" data-toggle="tooltip">
-                                            <a class="btn btn-success fa fa-list" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Roles/Permisos/@item.Id','Asignar','Permisos')"></a>
+                                        <span data-placement="top" title="Editar" data-toggle="tooltip">
+                                            <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DescripcionesPaquetes/Edit/@item.ID','Editar','Descripción')"></a>
                                         </span>
                                     </div>
                                 </div>
                             </td>
-                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Titulo)
+                            </td>
                         </tr>
                     }
                 </tbody>

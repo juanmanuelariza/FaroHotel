@@ -36,39 +36,6 @@
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
                             <h3>Menu Principal</h3>
-                            @*<ul class="nav side-menu">
-                                <li>
-                                    <a><i class="fa fa-home"></i>Sección de venta <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="/faro/gestion/venta/paquetes">Paquetes</a></li>
-                                        <li><a href="index2.html">Dashboard2</a></li>
-                                        <li><a href="index3.html">Dashboard3</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <ul class="nav side-menu">
-                                <li>
-                                    <a><i class="fa fa-bar-chart-o"></i>Sección de Informes <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="#">Informe 1</a></li>
-                                        <li><a href="#">Informe 2</a></li>
-                                        <li><a href="#">Informe 3</a></li>
-                                        <li><a href="#">Informe 4</a></li>
-                                        <li><a href="#">Informe 5</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <ul class="nav side-menu">
-                                <li>
-                                    <a><i class="fa fa-cogs"></i>ABM <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="/Usuarios"><i class="fa fa-user"></i>Usuarios</a></li>
-                                        <li><a href="/Pasajeros"><i class="fa fa-users"></i>Pasajeros</a></li>
-                                        <li><a href="/Ventanillas"><i class="fa fa-square-o"></i>Ventanillas</a></li>
-                                        <li><a href="/Paquetes"><i class="fa fa-ticket"></i>Paquetes</a></li>
-                                    </ul>
-                                </li>
-                            </ul>*@
                             @Html.Partial("_MenuPartial")
                         </div>
                     </div>
@@ -83,25 +50,24 @@
                         <div class="nav toggle">
                             <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                         </div>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    @User.Identity.Name
-                                    <span class="fa fa-angle-down"></span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                    {
-                                        @Html.AntiForgeryToken()
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        @User.Identity.Name
+                                        <span class="fa fa-angle-down"></span>
+                                    </a>
+                                    @Html.AntiForgeryToken()
+                                    <ul class="dropdown-menu dropdown-usermenu pull-right">
                                         <li>
-                                            <a class="fa fa-sign-out pull-right" href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesion</a>
+                                            <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
                                         </li>
-                                    }
-                                    
-                                </ul>
-                            </li>
-                        </ul>
+                                    </ul>
+
+                                </li>
+                            </ul>
+                        }
                     </nav>
                 </div>
             </div>

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace FaroHotel.Controllers
 {
+    [Authorize]
     public class ReservasController : Controller
     {
         // GET: Reservas

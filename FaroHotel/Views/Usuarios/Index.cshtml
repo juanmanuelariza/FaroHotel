@@ -34,10 +34,11 @@
                             <td>
                                 <div class="btn-group-sm">
                                     <span title="Detalle" data-toggle="tooltip"><a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Usuarios/Details/@item.Id','Detalle','Usuario')"></a></span>
-                                    <span title="Editar" data-toggle="tooltip"><a class="btn btn-info btn-table fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Usuarios/Edit/@item.Id','Editar','Usuario')"></a></span>
-                                    <span title="Cambiar Contraseña" data-toggle="tooltip"><a class="btn btn-success fa fa-refresh" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Usuarios/ResetPassword/@item.Id','Cambiar Contraseña','Usuarios')"></a></span>
-                                    <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger btn-table fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Usuarios/Delete/@item.Id','Eliminar','Usuario')"></a></span>                                    
-                                </div>
+                                    <span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Usuarios/Edit/@item.Id','Editar','Usuario')"></a></span>
+                                    <span title="Cambiar Contraseña" data-toggle="tooltip"><a class="btn btn-success fa fa-unlock-alt" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Usuarios/ResetPassword/@item.Id','Cambiar Contraseña','Usuarios')"></a></span>
+                                    @*<span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Usuarios/Delete/@item.Id','Eliminar','Usuario')"></a></span>*@                                    
+                                    <span title="Asignar Rol" data-toggle="tooltip"><a class="btn btn-dark fa fa-users" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Usuarios/SetRoles/@item.Id','Asignar','Roles')"></a></span>
+</div>
                             </td>
                             <td>@Html.DisplayFor(modelItem => item.UserName)</td>
                             <td>@Html.DisplayFor(modelItem => item.LastName)</td>

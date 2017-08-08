@@ -14,8 +14,6 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
           <Property Name="Icono" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'MSP-Desarrollo.dbo.AspNetMenuAccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AspNetMenuAccion">
           <Key>
             <PropertyRef Name="IdMenu" />
@@ -165,6 +163,7 @@ warning 6002: The table/view 'MSP-Desarrollo.dbo.AspNetMenuAccion' does not have
           <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
           <Property Name="FechaAlta" Type="date" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="TipoNoche">
           <Key>
@@ -429,6 +428,7 @@ warning 6002: The table/view 'MSP-Desarrollo.dbo.AspNetMenuAccion' does not have
         </Function>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Accion" EntityType="Self.Accion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetMenuAccion" EntityType="Self.AspNetMenuAccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -446,12 +446,6 @@ warning 6002: The table/view 'MSP-Desarrollo.dbo.AspNetMenuAccion' does not have
           <EntitySet Name="TipoSexo" EntityType="Self.TipoSexo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoTemporada" EntityType="Self.TipoTemporada" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ventanilla" EntityType="Self.Ventanilla" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetMenuAccion" EntityType="Self.AspNetMenuAccion" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [AspNetMenuAccion].[IdMenu] AS [IdMenu], 
-    [AspNetMenuAccion].[IdAccion] AS [IdAccion]
-    FROM [dbo].[AspNetMenuAccion] AS [AspNetMenuAccion]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_AspNetMenuAccion_Accion" Association="Self.FK_AspNetMenuAccion_Accion">
             <End Role="Accion" EntitySet="Accion" />
             <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
@@ -924,6 +918,7 @@ warning 6002: The table/view 'MSP-Desarrollo.dbo.AspNetMenuAccion' does not have
           <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Paquete" Relationship="Model.FK_Paquete_TipoDescripcionPaquete" FromRole="TipoDescripcionPaquete" ToRole="Paquete" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TipoNoche">
           <Key>
@@ -1186,6 +1181,7 @@ warning 6002: The table/view 'MSP-Desarrollo.dbo.AspNetMenuAccion' does not have
           <EntitySetMapping Name="TipoDescripcionPaquete">
             <EntityTypeMapping TypeName="Model.TipoDescripcionPaquete">
               <MappingFragment StoreEntitySet="TipoDescripcionPaquete">
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="Activa" ColumnName="Activa" />
                 <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />

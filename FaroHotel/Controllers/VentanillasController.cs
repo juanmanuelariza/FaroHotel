@@ -10,6 +10,7 @@ using FaroHotel.Models;
 
 namespace FaroHotel.Controllers
 {
+    [Authorize]
     public class VentanillasController : Controller
     {
         private FaroHotelEntities db = new FaroHotelEntities();

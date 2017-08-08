@@ -10,113 +10,110 @@ using FaroHotel.Models;
 
 namespace FaroHotel.Controllers
 {
-    [Authorize]
-    public class PasajerosController : Controller
+    public class DescripcionesPaquetesController : Controller
     {
         private FaroHotelEntities db = new FaroHotelEntities();
 
-        // GET: Pasajeros
+        // GET: DescripcionesPaquetes
         public ActionResult Index()
         {
-            var pasajero = db.Pasajero.Include(p => p.TipoSexo);
-            return View(pasajero.ToList());
+            return View(db.TipoDescripcionPaquete.ToList());
         }
 
-        // GET: Pasajeros/Details/5
-        public ActionResult Details(int? id)
+        // GET: DescripcionesPaquetes/Details/5
+        public ActionResult Details(byte? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pasajero pasajero = db.Pasajero.Find(id);
-            if (pasajero == null)
+            TipoDescripcionPaquete tipoDescripcionPaquete = db.TipoDescripcionPaquete.Find(id);
+            if (tipoDescripcionPaquete == null)
             {
                 return HttpNotFound();
             }
-            return PartialView(pasajero);
+            return PartialView(tipoDescripcionPaquete);
         }
 
-        // GET: Pasajeros/Create
+        // GET: DescripcionesPaquetes/Create
         public ActionResult Create()
         {
-            ViewBag.Sexo = new SelectList(db.TipoSexo, "ID", "Descripcion");
-            return PartialView();
+            return View();
         }
 
-        // POST: Pasajeros/Create
+        // POST: DescripcionesPaquetes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,DNI,Apellido,Nombre,Sexo,FechaNacimiento,Telefono,Email,Diabetes,Celiaquia,Motricidad,ListaNegra")] Pasajero pasajero)
+        public ActionResult Create([Bind(Include = "ID,Descripcion,FechaAlta,Activa,Titulo")] TipoDescripcionPaquete tipoDescripcionPaquete)
         {
             if (ModelState.IsValid)
             {
-                db.Pasajero.Add(pasajero);
+                tipoDescripcionPaquete.FechaAlta = DateTime.Now;
+                tipoDescripcionPaquete.Activa = true;
+                db.TipoDescripcionPaquete.Add(tipoDescripcionPaquete);
                 db.SaveChanges();
                 return Json(new { ok = "true" });
             }
 
-            ViewBag.Sexo = new SelectList(db.TipoSexo, "ID", "Descripcion", pasajero.Sexo);
-            return PartialView(pasajero);
+            return PartialView(tipoDescripcionPaquete);
         }
 
-        // GET: Pasajeros/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: DescripcionesPaquetes/Edit/5
+        public ActionResult Edit(byte? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pasajero pasajero = db.Pasajero.Find(id);
-            if (pasajero == null)
+            TipoDescripcionPaquete tipoDescripcionPaquete = db.TipoDescripcionPaquete.Find(id);
+            if (tipoDescripcionPaquete == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Sexo = new SelectList(db.TipoSexo, "ID", "Descripcion", pasajero.Sexo);
-            return PartialView(pasajero);
+            return View(tipoDescripcionPaquete);
         }
 
-        // POST: Pasajeros/Edit/5
+        // POST: DescripcionesPaquetes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,DNI,Apellido,Nombre,Sexo,FechaNacimiento,Telefono,Email,Diabetes,Celiaquia,Motricidad,ListaNegra")] Pasajero pasajero)
+        public ActionResult Edit([Bind(Include = "ID,Descripcion,FechaAlta,Activa,Titulo")] TipoDescripcionPaquete tipoDescripcionPaquete)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pasajero).State = EntityState.Modified;
+                db.Entry(tipoDescripcionPaquete).State = EntityState.Modified;
                 db.SaveChanges();
                 return Json(new { ok = "true" });
             }
-            ViewBag.Sexo = new SelectList(db.TipoSexo, "ID", "Descripcion", pasajero.Sexo);
-            return PartialView(pasajero);
+            return View(tipoDescripcionPaquete);
         }
 
-        // GET: Pasajeros/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: DescripcionesPaquetes/Delete/5
+        public ActionResult Delete(byte? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pasajero pasajero = db.Pasajero.Find(id);
-            if (pasajero == null)
+            TipoDescripcionPaquete tipoDescripcionPaquete = db.TipoDescripcionPaquete.Find(id);
+            if (tipoDescripcionPaquete == null)
             {
                 return HttpNotFound();
             }
-            return PartialView(pasajero);
+            return View(tipoDescripcionPaquete);
         }
 
-        // POST: Pasajeros/Delete/5
+        // POST: DescripcionesPaquetes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(byte id)
         {
-            Pasajero pasajero = db.Pasajero.Find(id);
-            db.Pasajero.Remove(pasajero);
+            TipoDescripcionPaquete tipoDescripcionPaquete = db.TipoDescripcionPaquete.Find(id);
+            db.TipoDescripcionPaquete.Remove(tipoDescripcionPaquete);
             db.SaveChanges();
             return Json(new { ok = "true" });
         }
