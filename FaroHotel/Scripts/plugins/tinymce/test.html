@@ -1,0 +1,35 @@
+<html>
+<head>
+    <script src="tinymce.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Just be careful that you give correct path to your tinymce.min.js file, above is the default example -->
+</head>
+<body>
+     <textarea id="elm1" name="area">asdas</textarea>
+<button onclick="content()">Get content</button>
+<!-- Just be careful that you give correct path to your tinymce.min.js file, above is the default example -->
+<script>
+    tinymce.init({
+        selector: "textarea#elm1",
+        theme: "modern",
+        width: 500,
+        height: 300,
+        plugins: [
+             "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+             "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+             "save table contextmenu directionality emoticons template paste textcolor"
+       ]
+    }); 
+
+function content() {
+$('#elm1').text(tinyMCE.get('elm1').getContent());
+// Get the HTML contents of the currently active editor
+//console.debug(tinyMCE.activeEditor.getContent());
+//method1 getting the content of the active editor
+//alert(tinyMCE.activeEditor.getContent());
+//method2 getting the content by id of a particular textarea
+//alert(tinyMCE.get('elm1').getContent());
+}
+
+</script>  
+</body>
