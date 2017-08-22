@@ -43,7 +43,7 @@
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="FechaInicio">Fecha Inicio:</label>
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @Value = "", @class = "form-control date-picker" } })
+                                @Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @Value = "", @class = "form-control date-picker-sunday" } })
                                 @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="FechaFin">Fecha Fin:</label>
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @Value = "", @class = "form-control date-picker" } })
+                                @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @Value = "", @class = "form-control date-picker-sunday" } })
                                 @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -157,7 +157,7 @@
 
 <script>
     InitModalSubmitAjax();
-    $('.date-picker').datepicker({
+    $('.date-picker-sunday').datepicker({
         firstDay: 0,
         minDate: +1,
         maxDate: '+1Y +6M',

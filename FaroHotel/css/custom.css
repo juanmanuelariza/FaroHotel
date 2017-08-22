@@ -10094,3 +10094,10 @@ ul.notifications {
 }
 
 .btn-group-sm span a{ margin:0px}
+
+select.ui-datepicker-month {
+    color: black;
+}
+select.ui-datepicker-year {
+    color: black;
+}

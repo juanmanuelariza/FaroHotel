@@ -360,7 +360,7 @@ function abrirModal(ruta, accion, titulo) {
 }
 
 function cerrarModal() {
-    $('#myModal').modal('hide')
+    $('#myModal').modal('hide');
     //$('#myModal').on('hidden.bs.modal', function (e) {
     //    $("#contenidoModal").empty();
     //})
@@ -469,6 +469,7 @@ function InitModalSubmitAjax() {
                 }
             });
         }
+        return false;
     });
 
 }

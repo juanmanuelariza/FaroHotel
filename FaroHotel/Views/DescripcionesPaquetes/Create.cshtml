@@ -42,12 +42,14 @@
     $("#btnGuardar").click(function () {
         //debugger
         $('#TextEditor').text(tinyMCE.get('TextEditor').getContent());
+        alert("click");
         $('#contenidoModal form').submit();
     });
 
     //Submit
     $('form').submit(function () {
-        debugger
+        //debugger
+        alert("submit");
         if ($(this).valid()) {
             $.ajax({
                 url: this.action,
@@ -71,6 +73,7 @@
                 }
             });
         }
+        return false;
     });
     tinymce.init({
         selector: "textarea#TextEditor",
