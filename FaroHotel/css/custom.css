@@ -85,9 +85,6 @@
 .nav-sm ul.nav.child_menu li {
   padding: 0 10px; }
 
-.nav-sm ul.nav.child_menu li a {
-  text-align: left !important; }
-
 .nav-sm .profile {
   display: none; }
 
@@ -10100,4 +10097,8 @@ select.ui-datepicker-month {
 }
 select.ui-datepicker-year {
     color: black;
+}
+
+.input-validation-error {
+    border-color: red;
 }

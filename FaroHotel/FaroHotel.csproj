@@ -219,6 +219,7 @@
     </Compile>
     <Compile Include="Models\ClassesVM\MenuVM.cs" />
     <Compile Include="Models\Metadata\PaqueteMetadata.cs" />
+    <Compile Include="Models\Metadata\PasajeroMetadata.cs" />
     <Compile Include="Models\Model_FaroHotel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -276,6 +277,7 @@
     <Content Include="css\custom.css" />
     <Content Include="css\custom.min.css" />
     <Content Include="css\dataTables.bootstrap.css" />
+    <Content Include="css\dataTables.responsive.css" />
     <Content Include="css\daterangepicker.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />

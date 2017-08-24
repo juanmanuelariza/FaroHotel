@@ -20,7 +20,6 @@
             <table id="dtPaquetes" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th style="width:100px">Acciones</th>
                         <th>@Html.DisplayNameFor(model => model.Titulo)</th>
                         <th>@Html.DisplayNameFor(model => model.FechaInicio)</th>
                         <th>@Html.DisplayNameFor(model => model.FechaFin)</th>
@@ -29,19 +28,13 @@
                         <th>Cuotas</th>
                         <th>Noches</th>
                         <th>@Html.DisplayNameFor(model => model.TipoTemporada.Descripcion)</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
-                                <div class="btn-group-sm">
-                                    <span title="Detalle" data-toggle="tooltip"><a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Paquetes/Details/@item.ID','Detalle','Paquetes')"></a></span>
-                                    <span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Paquetes/Edit/@item.ID','Editar','Paquetes')"></a></span>
-                                    @*<span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Paquetes/Delete/@item.ID','Eliminar','Paquetes')"></a></span>*@
-                                </div>
-                            </td>
                             <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
                             <td>@Html.DisplayFor(modelItem => item.FechaInicio)</td>
                             <td>@Html.DisplayFor(modelItem => item.FechaFin)</td>
@@ -50,6 +43,13 @@
                             <td>@Html.DisplayFor(modelItem => item.TipoCuota.Cuotas)</td>
                             <td>@Html.DisplayFor(modelItem => item.TipoNoche.Noches)</td>
                             <td>@Html.DisplayFor(modelItem => item.TipoTemporada.Descripcion)</td>
+                            <td>
+                                <div class="btn-group-sm">
+                                    <span title="Detalle" data-toggle="tooltip"><a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Paquetes/Details/@item.ID','Detalle','Paquetes')"></a></span>
+                                    <span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Paquetes/Edit/@item.ID','Editar','Paquetes')"></a></span>
+                                    @*<span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Paquetes/Delete/@item.ID','Eliminar','Paquetes')"></a></span>*@
+                                </div>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -71,7 +71,8 @@
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "language": DataTableEsp()
+            "language": DataTableEsp(),
+            responsive: true
         });
     });
 </script>

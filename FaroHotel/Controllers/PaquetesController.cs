@@ -79,6 +79,7 @@ namespace FaroHotel.Controllers
                 return Json(new { ok = "true" });
             }
 
+            ViewBag.Ventanillas = db.Ventanilla.ToList();
             ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "Cuotas", paquete.CuotasId);
             ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Titulo", paquete.DescripcionId);
             ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches", paquete.NochesId);
@@ -142,6 +143,8 @@ namespace FaroHotel.Controllers
                 db.SaveChanges();
                 return Json(new { ok = "true" });
             }
+
+            ViewBag.Ventanillas = db.Ventanilla.ToList();
             ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "Cuotas", paquete.CuotasId);
             ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Titulo", paquete.DescripcionId);
             ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches", paquete.NochesId);

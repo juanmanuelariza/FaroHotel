@@ -21,6 +21,7 @@ namespace FaroHotel
                     "~/css/jquery-ui.structure.css",
                     "~/css/font-awesome.min.css",					
                     "~/css/dataTables.bootstrap.css",
+                    "~/css/dataTables.responsive.css",
                     "~/css/jquery.dataTables.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -35,6 +36,7 @@ namespace FaroHotel
                             "~/Scripts/jquery-ui.min.js",
                             "~/Scripts/custom.js",							
  		                    "~/Scripts/jquery.dataTables.js",
+                            "~/Scripts/dataTables.responsive.min.js",                            
                             "~/Scripts/plugins/tinymce/tinymce.min.js",
                             "~/Scripts/dataTables.bootstrap.js"));
 

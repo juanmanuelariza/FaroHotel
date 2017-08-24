@@ -16,17 +16,20 @@
             <button type="button" style="margin-bottom: 15px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DescripcionesPaquetes/Create', 'Agregar', 'Descripción')">
                 <i class="fa fa-plus"></i> Nuevo
             </button>
-            <table id="dtRoles" class="table table-bordered table-striped">
+            <table id="dtDescripcionPaquetes" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th style="width:150px">Acciones</th>
                         <th>Titulo</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Titulo)
+                            </td>
                             <td>
                                 <div class="btn-group-sm">
                                     <div class="btn-group-sm">
@@ -38,9 +41,6 @@
                                         </span>
                                     </div>
                                 </div>
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Titulo)
                             </td>
                         </tr>
                     }
@@ -55,7 +55,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#dtRoles').DataTable({
+        $('#dtDescripcionPaquetes').DataTable({
             "responsive": true,
             "paging": true,
             "lengthChange": true,

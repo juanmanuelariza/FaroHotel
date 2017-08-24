@@ -21,7 +21,6 @@
             <table id="dtPasajeros" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th style="width:100px">Acciones</th>
                         <th>
                             @Html.DisplayNameFor(model => model.Apellido)
                         </th>
@@ -52,19 +51,13 @@
                         <th>
                             Lista Negra
                         </th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
-                                <div class="btn-group-sm">
-                                    <span title="Detalle" data-toggle="tooltip"><a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Details/@item.ID','Detalle','Pasajero')"></a></span>
-                                    <span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Edit/@item.ID','Editar','Pasajero')"></a></span>
-                                    @*<span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Delete/@item.ID','Eliminar','Pasajero')"></a></span>*@
-                                </div>
-                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Apellido)
                             </td>
@@ -95,6 +88,13 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.ListaNegra)
                             </td>
+                            <td>
+                                <div class="btn-group-sm">
+                                    <span title="Detalle" data-toggle="tooltip"><a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Details/@item.ID','Detalle','Pasajero')"></a></span>
+                                    <span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Edit/@item.ID','Editar','Pasajero')"></a></span>
+                                    @*<span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Delete/@item.ID','Eliminar','Pasajero')"></a></span>*@
+                                </div>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -117,7 +117,8 @@
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "language": DataTableEsp()
+            "language": DataTableEsp(),
+            responsive: true
         });
     });
 </script>

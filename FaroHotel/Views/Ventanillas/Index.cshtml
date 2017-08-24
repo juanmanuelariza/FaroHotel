@@ -20,17 +20,21 @@
             <table id="dtVentanillas" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th style="width:100px">Acciones</th>
                         <th>@Html.DisplayNameFor(model => model.Nombre)</th>
                         <th>@Html.DisplayNameFor(model => model.Direccion)</th>
                         <th>@Html.DisplayNameFor(model => model.Telefono)</th>
                         <th>@Html.DisplayNameFor(model => model.Email)</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Direccion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
                             <td>
                                 <div class="btn-group-sm">
                                     <span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Ventanillas/Edit/@item.ID','Editar','Ventanilla')"></a></span>
@@ -38,10 +42,6 @@
                                     @*<span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Ventanillas/Delete/@item.ID','Eliminar','Ventanilla')"></a></span>*@
                                 </div>
                             </td>
-                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Direccion)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
                         </tr>
                     }
                 </tbody>
@@ -63,7 +63,8 @@
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "language": DataTableEsp()
+            "language": DataTableEsp(),
+            responsive: true
         });
     });
 </script>
