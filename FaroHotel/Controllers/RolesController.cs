@@ -191,7 +191,7 @@ namespace FaroHotel.Controllers
 
 
 
-            #region Alimina permisos previamente cargados
+            #region Elimina permisos previamente cargados
             try
             {
                 using (TransactionScope tran = new TransactionScope())
@@ -287,6 +287,7 @@ namespace FaroHotel.Controllers
                                 db.MenuAspNetRolesAccion.Add(itemMenuRolAccion);
                             }
                             db.SaveChanges();
+
                         }
 
                     }

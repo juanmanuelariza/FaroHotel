@@ -41,15 +41,14 @@
     $("#btnGuardar").unbind();
     $("#btnGuardar").click(function () {
         //debugger
-        $('#TextEditor').text(tinyMCE.get('TextEditor').getContent());
-        alert("click");
+        //$('#TextEditor').text(tinyMCE.get('TextEditor').getContent());
+        tinyMCE.triggerSave();
         $('#contenidoModal form').submit();
     });
 
     //Submit
     $('form').submit(function () {
         //debugger
-        alert("submit");
         if ($(this).valid()) {
             $.ajax({
                 url: this.action,

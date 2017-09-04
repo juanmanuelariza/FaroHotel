@@ -39,6 +39,26 @@
 
                     <div class="col-md-12">
                         <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="Contraseña">Contraseña:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="Contraseña">Confirmar contraseña:</label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group row">
                             <label class="control-label col-md-2 col-md-offset-1" for="Nombre">Nombre:</label>
                             <div class="col-md-8">
                                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
