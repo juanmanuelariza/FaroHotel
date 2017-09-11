@@ -74,6 +74,12 @@
         }
         return false;
     });
+
+    var oldEditor = tinyMCE.get('TextEditor');
+    if (oldEditor != undefined) {
+        tinymce.remove(oldEditor);
+    }
+
     tinymce.init({
         selector: "textarea#TextEditor",
         theme: "modern",
