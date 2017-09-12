@@ -1,0 +1,42 @@
+﻿Step3
+
+
+<div class="col-md-12">
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="actionBar">
+                <span id="btnBackStep2" class="buttonPrevious btn btn-success">Atrás</span>
+                <span id="btnGoStep4" class="buttonNext btn btn-primary">Siguiente</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#btnBackStep2').click(function () {
+        $('#Panel_Step3').fadeOut();
+        $('#Panel_Step2').fadeIn();
+        $('body').animate({ scrollTop: 0 }, 500);
+        $('#wizard_step2').attr('class', 'selected');
+        $('#wizard_step3').attr('class', 'disabled');
+    });
+
+    $('#btnGoStep4').click(function () {
+        $('#Panel_Step3').fadeOut();
+        $('#Panel_Step4').fadeIn();
+        $('body').animate({ scrollTop: 0 }, 500);
+        $('#wizard_step3').attr('class', 'done');
+        $('#wizard_step4').attr('class', 'selected');
+
+        var _url = GetPathApp("/Reservas/Step4");
+
+        $.ajax({
+            method: "POST",
+            url: _url,
+            data: { NochesId: $('#NochesId option:selected').val(), __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
+            success: function (result) {
+                $('#Panel_Step4').html(result);
+            }
+        });
+    });
+</script>

@@ -1,0 +1,121 @@
+﻿<div id="divStep2" class="row">
+
+    <button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Create', 'Agregar', 'Pasajeros')">
+        <i class="fa fa-plus"></i> Nuevo Pasajero
+    </button>
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Información de paquetes</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                Listado de paquetes disponibles para la fecha seleccionada
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Pasajero</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="DNI">DNI:</label>
+                        <div class="col-md-8">
+                            <input class="form-control" />
+                            @* @Html.DropDownList("TipoHabitacion", null, "", htmlAttributes: new { @id = "TipoHab", @class = "form-control" })*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="Apellido">Apellido:</label>
+                        <div class="col-md-8">
+                            <input class="form-control disabled" />
+                            @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="Nombre">Nombre:</label>
+                        <div class="col-md-8">
+                            <input class="form-control disabled" />
+                            @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="Paquete">Paquete:</label>
+                        <div class="col-md-8">
+                            <select class="form-control">
+                                <option>1</option>
+                                <option>2</option>
+                            </select>
+                            @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group row">     
+                        <label class="control-label col-md-12" for="Paquete">Bus de ida:</label>                   
+                        <div class="col-md-6">
+                            <span id="btnSelectSeat" class="btn btn-dark">Seleccionar asiento</span>
+                        </div>
+                        <div class="col-md-6">
+                            <span>Asiento seleccionado: </span> 15
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-12" for="Paquete">Bus de vuelta:</label>
+                        <div class="col-md-6">
+                            <span id="btnSelectSeat" class="btn btn-dark">Seleccionar asiento</span>
+                        </div>
+                        <div class="col-md-6">
+                            <span>Asiento seleccionado: </span> 15
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="actionBar">
+                    <span id="btnBackStep1" class="buttonPrevious btn btn-success">Atrás</span>
+                    <span id="btnGoStep3" class="buttonNext btn btn-primary">Siguiente</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#btnBackStep1').click(function () {
+        $('#Panel_Step2').fadeOut();
+        $('#divQuickSearch').fadeIn();
+        $('#Panel_Step1').fadeIn();
+        $('body').animate({ scrollTop: 0 }, 500);
+        $('#wizard_step1').attr('class', 'selected');
+        $('#wizard_step2').attr('class', 'disabled');
+    });
+
+    $('#btnGoStep3').click(function () {
+        $('#Panel_Step2').fadeOut();
+        $('#Panel_Step3').fadeIn();
+        $('body').animate({ scrollTop: 0 }, 500);
+        $('#wizard_step2').attr('class', 'done');
+        $('#wizard_step3').attr('class', 'selected');
+
+        var _url = GetPathApp("/Reservas/Step3");
+
+        $.ajax({
+            method: "POST",
+            url: _url,
+            data: { NochesId: $('#NochesId option:selected').val(), __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
+            success: function (result) {
+                $('#Panel_Step3').html(result);
+            }
+        });
+    });
+</script>

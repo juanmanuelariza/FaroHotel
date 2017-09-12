@@ -203,7 +203,19 @@
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Bus.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnlaceBusPasajero.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnlaceReservaHotelHabitacion.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetPermisosPorNombreDeUsuario_Result.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Habitacion.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -243,10 +255,22 @@
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClassesVM\PasajeroVM.cs" />
+    <Compile Include="Models\ReservaBus.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReservaHotel.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoCuota.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoDescripcionPaquete.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoHabitacion.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoHotel.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoNoche.cs">
@@ -259,6 +283,9 @@
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClassesVM\UsuarioVM.cs" />
+    <Compile Include="Models\TipoTrayecto.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ventanilla.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
@@ -382,6 +409,10 @@
     <Content Include="Views\DescripcionesPaquetes\Details.cshtml" />
     <Content Include="Views\DescripcionesPaquetes\Edit.cshtml" />
     <Content Include="Views\DescripcionesPaquetes\Index.cshtml" />
+    <Content Include="Views\Reservas\_Step1.cshtml" />
+    <Content Include="Views\Reservas\_Step2.cshtml" />
+    <Content Include="Views\Reservas\_Step3.cshtml" />
+    <Content Include="Views\Reservas\_Step4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

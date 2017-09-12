@@ -43,6 +43,15 @@ namespace FaroHotel.Models
         public virtual DbSet<TipoDescripcionPaquete> TipoDescripcionPaquete { get; set; }
         public virtual DbSet<TipoNoche> TipoNoche { get; set; }
         public virtual DbSet<TipoTemporada> TipoTemporada { get; set; }
+        public virtual DbSet<Bus> Bus { get; set; }
+        public virtual DbSet<EnlaceBusPasajero> EnlaceBusPasajero { get; set; }
+        public virtual DbSet<EnlaceReservaHotelHabitacion> EnlaceReservaHotelHabitacion { get; set; }
+        public virtual DbSet<Habitacion> Habitacion { get; set; }
+        public virtual DbSet<ReservaBus> ReservaBus { get; set; }
+        public virtual DbSet<ReservaHotel> ReservaHotel { get; set; }
+        public virtual DbSet<TipoHabitacion> TipoHabitacion { get; set; }
+        public virtual DbSet<TipoHotel> TipoHotel { get; set; }
+        public virtual DbSet<TipoTrayecto> TipoTrayecto { get; set; }
     
         public virtual ObjectResult<GetPermisosPorNombreDeUsuario_Result> GetPermisosPorNombreDeUsuario(string userName)
         {

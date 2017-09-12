@@ -376,6 +376,16 @@ function cerrarWaiting() {
     $("#waiting").remove();
 }
 
+function openSpinner() {
+    var waiting = '<div class="box"><div id="Spinner" class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>';
+
+    $("body").append(waiting);
+}
+
+function closeSpinner() {
+    $("#Spinner").remove();
+}
+
 $('#myModal').on('hidden.bs.modal', function (e) {
     $("#contenidoModal").empty();
 })
@@ -473,3 +483,14 @@ function InitModalSubmitAjax() {
     });
 
 }
+
+
+//$(document).ajaxStart(function () {
+//    //console.log("ajaxStart");
+//    openSpinner();
+//});
+////or...
+//$(document).ajaxComplete(function () {
+//    //console.log("ajaxComplete");
+//    closeSpinner();
+//});

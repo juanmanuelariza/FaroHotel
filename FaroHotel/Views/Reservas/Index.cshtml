@@ -46,7 +46,7 @@
 
 </div>
 
-<div id="div_step1" class="row">
+<div id="divQuickSearch" class="row">
     <div class="col-md-12">
         <div class="x_panel">
             @using (Html.BeginForm("Buscar", "Reservas", FormMethod.Post, new { @id = "formBusqueda" }))
@@ -97,7 +97,10 @@
         </div>
     </div>
 </div>
-<div ID="Panel_Resultados" class="col-md-12"></div>
+<div ID="Panel_Step1"></div>
+<div ID="Panel_Step2"></div>
+<div ID="Panel_Step3"></div>
+<div ID="Panel_Step4"></div>
 
 
 
@@ -114,23 +117,8 @@
                 method: "POST",
                 url: _url,
                 data: { NochesId: $('#NochesId option:selected').val(), __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
-                beforeSend: function (xhr) {
-                    $('#contentMsg').hide();
-                    $('#contenTitulos').empty();
-                },
-                success: function (result) {
-                    //debugger
-                    if (result.ok == "false") {
-
-                        $('#contenTitulos').empty();
-                        $('#contentMsg').show();
-                        $('#contentMsg p').text(result.mensaje);
-                    }
-                    else {
-                        $('#contentMsg').hide();
-                        $('#Panel_Resultados').html(result);
-                    }
-
+                success: function (result) {                    
+                    $('#Panel_Step1').html(result);
                 }
             });
 

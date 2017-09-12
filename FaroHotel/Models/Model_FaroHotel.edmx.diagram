@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4111cbaee88c4cf88d23d6f233eba18f" Name="Diagram1">
+      <Diagram DiagramId="4111cbaee88c4cf88d23d6f233eba18f" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="Model.Accion" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
@@ -37,6 +37,35 @@
         <AssociationConnector Association="Model.FK_Paquete_TipoTemporada" />
         <AssociationConnector Association="Model.EnlacePaqueteVentanilla" />
         <AssociationConnector Association="Model.AspNetMenuAccion" />
+        <EntityTypeShape EntityType="Model.Bus" Width="1.5" PointX="9.625" PointY="17" />
+        <EntityTypeShape EntityType="Model.EnlaceBusPasajero" Width="1.5" PointX="11.875" PointY="4" />
+        <EntityTypeShape EntityType="Model.EnlaceReservaHotelHabitacion" Width="1.5" PointX="14.125" PointY="11.375" />
+        <EntityTypeShape EntityType="Model.Habitacion" Width="1.5" PointX="11.875" PointY="16.25" />
+        <EntityTypeShape EntityType="Model.ReservaBus" Width="1.5" PointX="5.25" PointY="11.75" />
+        <EntityTypeShape EntityType="Model.ReservaHotel" Width="1.5" PointX="11.875" PointY="9.625" />
+        <EntityTypeShape EntityType="Model.TipoHabitacion" Width="1.5" PointX="15" PointY="6.125" />
+        <EntityTypeShape EntityType="Model.TipoHotel" Width="1.5" PointX="9.625" PointY="11.625" />
+        <EntityTypeShape EntityType="Model.TipoTrayecto" Width="1.5" PointX="7.375" PointY="17.25" />
+        <AssociationConnector Association="Model.FK_ReservaBus_AspNetUsers" />
+        <AssociationConnector Association="Model.FK_ReservaBus_AspNetUsers1" />
+        <AssociationConnector Association="Model.FK_ReservaBus_AspNetUsers2" />
+        <AssociationConnector Association="Model.FK_ReservaBus_AspNetUsers3" />
+        <AssociationConnector Association="Model.FK_ReservaHotel_AspNetUsers" />
+        <AssociationConnector Association="Model.FK_ReservaHotel_AspNetUsers1" />
+        <AssociationConnector Association="Model.FK_ReservaHotel_AspNetUsers2" />
+        <AssociationConnector Association="Model.FK_ReservaHotel_AspNetUsers3" />
+        <AssociationConnector Association="Model.FK_Bus_TipoTrayecto" />
+        <AssociationConnector Association="Model.FK_EnlaceBusPasajero_Bus" />
+        <AssociationConnector Association="Model.FK_EnlaceBusPasajero_Pasajero" />
+        <AssociationConnector Association="Model.FK_EnlaceReservaHotelHabitacion_EnlaceReservaHotelHabitacion" />
+        <AssociationConnector Association="Model.FK_EnlaceReservaHotelHabitacion_Habitacion" />
+        <AssociationConnector Association="Model.FK_EnlaceReservaHotelHabitacion_ReservaHotel" />
+        <AssociationConnector Association="Model.FK_Habitacion_TipoHotel" />
+        <AssociationConnector Association="Model.FK_ReservaHotel_Paquete" />
+        <AssociationConnector Association="Model.FK_ReservaHotel_Pasajero" />
+        <AssociationConnector Association="Model.FK_ReservaHotel_TipoHotel" />
+        <AssociationConnector Association="Model.EnlaceReservaHotelPasajero" />
+        <AssociationConnector Association="Model.EnlaceHabitacionTipoHabitacion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

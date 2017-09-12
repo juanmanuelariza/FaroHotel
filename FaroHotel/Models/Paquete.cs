@@ -18,6 +18,7 @@ namespace FaroHotel.Models
         public Paquete()
         {
             this.Ventanilla = new HashSet<Ventanilla>();
+            this.ReservaHotel = new HashSet<ReservaHotel>();
         }
     
         public int ID { get; set; }
@@ -31,6 +32,8 @@ namespace FaroHotel.Models
         public double PrecioDoble { get; set; }
         public byte CuotasId { get; set; }
         public System.DateTime FechaAlta { get; set; }
+        public bool BusIda { get; set; }
+        public bool BusVuelta { get; set; }
     
         public virtual TipoCuota TipoCuota { get; set; }
         public virtual TipoDescripcionPaquete TipoDescripcionPaquete { get; set; }
@@ -38,5 +41,7 @@ namespace FaroHotel.Models
         public virtual TipoTemporada TipoTemporada { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ventanilla> Ventanilla { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReservaHotel> ReservaHotel { get; set; }
     }
 }

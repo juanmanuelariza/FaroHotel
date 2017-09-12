@@ -23,7 +23,34 @@ namespace FaroHotel.Controllers
         public ActionResult Buscar(string NochesId)
         {
 
-            return PartialView("_Busqueda");
+            ViewBag.TipoHabitacion = new SelectList(db.TipoHabitacion.OrderBy(c => c.ID), "ID", "Descripcion");
+            return PartialView("_Step1");
+        }
+
+        // GET: NroHabitaciones
+        [HttpGet]
+        public ActionResult Habitaciones(string ParamTipoHabitacion)
+        {
+            int ArgTipoHabitacion = int.Parse(ParamTipoHabitacion);
+            var prod = from v in db.Habitacion
+                       where v.TipoHabitacion.Any(x => x.ID == ArgTipoHabitacion)
+                       select v;
+            var products = new SelectList(prod, "ID", "Numero");
+            return Json(products, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Step2()
+        {
+            return PartialView("_Step2");
+        }
+        public ActionResult Step3()
+        {
+            return PartialView("_Step3"); 
+
+        }
+        public ActionResult Step4()
+        {
+            return PartialView("_Step4");
         }
     }
 }

@@ -12,35 +12,21 @@ namespace FaroHotel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Pasajero
+    public partial class TipoHotel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Pasajero()
+        public TipoHotel()
         {
-            this.EnlaceBusPasajero = new HashSet<EnlaceBusPasajero>();
+            this.Habitacion = new HashSet<Habitacion>();
             this.ReservaHotel = new HashSet<ReservaHotel>();
-            this.ReservaHotel1 = new HashSet<ReservaHotel>();
         }
     
-        public int ID { get; set; }
-        public long DNI { get; set; }
-        public string Apellido { get; set; }
-        public string Nombre { get; set; }
-        public byte Sexo { get; set; }
-        public System.DateTime FechaNacimiento { get; set; }
-        public string Email { get; set; }
-        public bool Diabetes { get; set; }
-        public bool Celiaquia { get; set; }
-        public bool Motricidad { get; set; }
-        public bool ListaNegra { get; set; }
-        public Nullable<long> Telefono { get; set; }
+        public byte ID { get; set; }
+        public string Descripcion { get; set; }
     
-        public virtual TipoSexo TipoSexo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EnlaceBusPasajero> EnlaceBusPasajero { get; set; }
+        public virtual ICollection<Habitacion> Habitacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReservaHotel> ReservaHotel { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReservaHotel> ReservaHotel1 { get; set; }
     }
 }
