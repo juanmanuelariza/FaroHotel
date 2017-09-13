@@ -1,5 +1,5 @@
 ﻿
-<div id="divStep1" class="row">
+<div id="divStep1" class="row form-horizontal">
 
     <div class="col-md-4">
         <div class="x_panel">
@@ -10,7 +10,7 @@
             <div class="x_content">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group row">
-                        <label class="control-label col-md-4" for="TipoHabitacion">Tipo Habitación:</label>
+                        <label class="control-label col-md-4" for="TipoHabitacion">Tipo:</label>
                         <div class="col-md-8">
                             @Html.DropDownList("TipoHabitacion", null, "", htmlAttributes: new { @id = "TipoHab", @class = "form-control" })
                         </div>
@@ -130,7 +130,7 @@
                     console.log(data);
                     $.each(data, function () {
                         $('#product').append('<option value=' +
-                          this.Value + '>' + this.Text + '</option>');
+                          this.ID + '>' + this.Numero + '</option>');
                     });
                 }).fail(function (jqXHR, textStatus, errorThrown) {
                     alert('Error getting products!');
@@ -143,7 +143,7 @@
                     console.log(data);
                     $.each(data, function () {
                         $('#product2').append('<option value=' +
-                          this.Value + '>' + this.Text + '</option>');
+                          this.ID + '>' + this.Numero + '</option>');
                     });
                 }).fail(function (jqXHR, textStatus, errorThrown) {
                     alert('Error getting products!');
@@ -165,7 +165,7 @@
             $.ajax({
                 method: "POST",
                 url: _url,
-                data: { NochesId: $('#NochesId option:selected').val(), __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
+                data: { __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
                 success: function (result) {
                     $('#Panel_Step2').html(result);
                 }

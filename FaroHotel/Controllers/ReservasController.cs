@@ -32,11 +32,14 @@ namespace FaroHotel.Controllers
         public ActionResult Habitaciones(string ParamTipoHabitacion)
         {
             int ArgTipoHabitacion = int.Parse(ParamTipoHabitacion);
-            var prod = from v in db.Habitacion
-                       where v.TipoHabitacion.Any(x => x.ID == ArgTipoHabitacion)
-                       select v;
-            var products = new SelectList(prod, "ID", "Numero");
-            return Json(products, JsonRequestBehavior.AllowGet);
+            var tmp_room = (from h in db.Habitacion
+                            where h.TipoHabitacion.Any(x => x.ID == ArgTipoHabitacion)
+                            select new
+                            {
+                                ID = h.ID,
+                                Numero = h.Numero
+                            });                        
+            return Json(tmp_room, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Step2()
@@ -52,5 +55,29 @@ namespace FaroHotel.Controllers
         {
             return PartialView("_Step4");
         }
+
+        public ActionResult Bus()
+        {
+            return PartialView("_Busqueda");
+        }
+
+        [HttpGet]
+        public JsonResult BuscarPax(string ParamDNI)
+        {
+            int ArgDNI = int.Parse(ParamDNI);
+            var tmp_Pax = (from p in db.Pasajero
+                           where p.DNI == ArgDNI
+                           select new
+                           {
+                               ID = p.ID,
+                               Apellido = p.Apellido,
+                               Nombre = p.Nombre
+                           });
+
+
+            //db.Pasajero.Where(p => p.DNI == ArgDNI).Select();
+            return Json(tmp_Pax, JsonRequestBehavior.AllowGet);
+        }
+        
     }
 }

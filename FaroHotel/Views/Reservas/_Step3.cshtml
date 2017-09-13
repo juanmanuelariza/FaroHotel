@@ -1,17 +1,46 @@
-﻿Step3
-
-
-<div class="col-md-12">
-    <div class="x_panel">
-        <div class="x_content">
-            <div class="actionBar">
-                <span id="btnBackStep2" class="buttonPrevious btn btn-success">Atrás</span>
-                <span id="btnGoStep4" class="buttonNext btn btn-primary">Siguiente</span>
+﻿<div id="divStep3" class="row">
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Extras</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                Listado de extas
+                <br />
+                <br />
+                Cochera en Faro II
+                <br />
+                Vouchers
+                <br />
+                Cuna
             </div>
         </div>
     </div>
-</div>
 
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Resumen de reserva</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="actionBar">
+                    <span id="btnBackStep2" class="buttonPrevious btn btn-success">Atrás</span>
+                    <span id="btnGoStep4" class="buttonNext btn btn-primary">Solicitar Reserva</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 <script type="text/javascript">
     $('#btnBackStep2').click(function () {
         $('#Panel_Step3').fadeOut();
@@ -33,7 +62,7 @@
         $.ajax({
             method: "POST",
             url: _url,
-            data: { NochesId: $('#NochesId option:selected').val(), __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
+            data: { __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
             success: function (result) {
                 $('#Panel_Step4').html(result);
             }
