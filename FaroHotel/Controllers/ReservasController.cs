@@ -20,9 +20,11 @@ namespace FaroHotel.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Buscar(string NochesId)
+        public ActionResult Buscar(string ParamFecha, int ParamNochesId, int ParamHabitaciones, int ParamPasajeros)
         {
-
+            ViewBag.NochesId = ParamNochesId;
+            ViewBag.CantHabitaciones = ParamHabitaciones;
+            ViewBag.CantPasajeros = ParamPasajeros;
             ViewBag.TipoHabitacion = new SelectList(db.TipoHabitacion.OrderBy(c => c.ID), "ID", "Descripcion");
             return PartialView("_Step1");
         }
@@ -42,8 +44,11 @@ namespace FaroHotel.Controllers
             return Json(tmp_room, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Step2()
+        public ActionResult Step2(string ParamFecha, int ParamNochesId, int ParamHabitaciones, int ParamPasajeros)
         {
+            ViewBag.NochesId = ParamNochesId;
+            ViewBag.CantHabitaciones = ParamHabitaciones;
+            ViewBag.CantPasajeros = ParamPasajeros;
             return PartialView("_Step2");
         }
         public ActionResult Step3()

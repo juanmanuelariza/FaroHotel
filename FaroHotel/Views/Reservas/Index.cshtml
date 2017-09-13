@@ -57,33 +57,48 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <div class="col-md-4 col-sm-4 col-xs-12 form-horizontal">
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-horizontal">
                         <div class="form-group">
                             <input value="" class="form-control date-picker-sunday text-box single-line has-feedback-left" data-val="true" id="FechaEntrada" name="FechaEntrada" type="datetime">
                             <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="form-group">
                             @Html.DropDownList("NochesId", null, "Noches", htmlAttributes: new { @class = "form-control" })
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="col-md-3 col-sm-3col-xs-12">
+                        <div class="form-group">
+                            <select name="DDL_Habitaciones" id="DDL_Habitaciones" class="form-control">
+                                <option selected="selected" value="0">Cantidad de Habitaciones</option>
+                                <option value="1">1 Habitaciones</option>
+                                <option value="2">2 Habitaciones</option>
+                                <option value="3">3 Habitaciones</option>
+                                <option value="4">4 Habitaciones</option>
+                                <option value="5">5 Habitaciones</option>
+                                <option value="6">6 Habitaciones</option>
+                                <option value="7">7 Habitaciones</option>
+                                <option value="8">8 Habitaciones</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3col-xs-12">
                         <div class="form-group">
                             <select name="DDL_Pasajeros" id="DDL_Pasajeros" class="form-control">
                                 <option selected="selected" value="0">Cantidad de Personas</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
+                                <option value="1">1 Persona</option>
+                                <option value="2">2 Personas</option>
+                                <option value="3">3 Personas</option>
+                                <option value="4">4 Personas</option>
+                                <option value="5">5 Personas</option>
+                                <option value="6">6 Personas</option>
+                                <option value="7">7 Personas</option>
+                                <option value="8">8 Personas</option>
+                                <option value="9">9 Personas</option>
+                                <option value="10">10 Personas</option>
+                                <option value="11">11 Personas</option>
+                                <option value="12">12 Personas</option>
                             </select>
                         </div>
                     </div>
@@ -116,7 +131,13 @@
             $.ajax({
                 method: "POST",
                 url: _url,
-                data: { NochesId: $('#NochesId option:selected').val(), __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
+                data: {
+                    ParamFecha: $('#FechaEntrada').text(),
+                    ParamNochesId: $('#NochesId option:selected').val(),
+                    ParamHabitaciones: $('#DDL_Habitaciones option:selected').val(),
+                    ParamPasajeros: $('#DDL_Pasajeros option:selected').val(),
+                    __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
+                },
                 success: function (result) {                    
                     $('#Panel_Step1').html(result);
                 }

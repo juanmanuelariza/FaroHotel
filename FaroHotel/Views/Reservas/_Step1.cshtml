@@ -1,113 +1,34 @@
 ﻿
 <div id="divStep1" class="row form-horizontal">
+    @for (var i = 0; i < ViewBag.CantHabitaciones; i++)
+    {
 
-    <div class="col-md-4">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Habitaciones</h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group row">
-                        <label class="control-label col-md-4" for="TipoHabitacion">Tipo:</label>
-                        <div class="col-md-8">
-                            @Html.DropDownList("TipoHabitacion", null, "", htmlAttributes: new { @id = "TipoHab", @class = "form-control" })
+        <div class="col-md-4">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Habitaciones</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-4" for="TipoHabitacion">Tipo:</label>
+                            <div class="col-md-8">
+                                @Html.DropDownList("TipoHabitacion", null, "", htmlAttributes: new { @id = "TipoHab_@i", @class = "form-control TipoHab", data_boxId = @i })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="control-label col-md-4" for="Numero">Número:</label>
-                        <div class="col-md-8">
-                            <select id="product" class="form-control"></select>
-                            @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
+                        <div class="form-group row">
+                            <label class="control-label col-md-4" for="Numero">Número:</label>
+                            <div class="col-md-8">
+                                <select id="NumHab_@i" class="form-control"></select>
+                                @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Habitaciones</h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group row">
-                        <label class="control-label col-md-4" for="TipoHabitacion">Tipo Habitación:</label>
-                        <div class="col-md-8">
-                            @Html.DropDownList("TipoHabitacion", null, "", htmlAttributes: new { @id = "TipoHab2", @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="control-label col-md-4" for="Numero">Número:</label>
-                        <div class="col-md-8">
-                            <select id="product2" class="form-control"></select>
-                            @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Habitaciones</h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group row">
-                        <label class="control-label col-md-4" for="TipoHabitacion">Tipo Habitación:</label>
-                        <div class="col-md-8">
-                            @Html.DropDownList("TipoHabitacion", null, "", htmlAttributes: new { @id = "TipoHab", @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="control-label col-md-4" for="Numero">Número:</label>
-                        <div class="col-md-8">
-                            <select id="product" class="form-control"></select>
-                            @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Habitaciones</h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group row">
-                        <label class="control-label col-md-4" for="TipoHabitacion">Tipo Habitación:</label>
-                        <div class="col-md-8">
-                            @Html.DropDownList("TipoHabitacion", null, "", htmlAttributes: new { @id = "TipoHab2", @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="control-label col-md-4" for="Numero">Número:</label>
-                        <div class="col-md-8">
-                            <select id="product2" class="form-control"></select>
-                            @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
+    }
     <div class="col-md-12">
         <div class="x_panel">
             <div class="x_content">
@@ -122,31 +43,20 @@
 </div>
 
     <script type="text/javascript">
+        $('#NochesId option:selected').text();
         $(function () {
-            $("#TipoHab").change(function () {
+            $(".TipoHab").change(function () {
                 var selectedItem = $(this).val();
-                $('#product option').remove();
+                var boxId = $(this).attr("data-boxId");
+                $('#NumHab_' + boxId + ' option').remove();
                 $.getJSON('/Reservas/Habitaciones', { ParamTipoHabitacion: selectedItem }, function (data) {
                     console.log(data);
                     $.each(data, function () {
-                        $('#product').append('<option value=' +
+                        $('#NumHab_' + boxId).append('<option value=' +
                           this.ID + '>' + this.Numero + '</option>');
                     });
                 }).fail(function (jqXHR, textStatus, errorThrown) {
-                    alert('Error getting products!');
-                });
-            });
-            $("#TipoHab2").change(function () {
-                var selectedItem = $(this).val();
-                $('#product2 option').remove();
-                $.getJSON('/Reservas/Habitaciones', { ParamTipoHabitacion: selectedItem }, function (data) {
-                    console.log(data);
-                    $.each(data, function () {
-                        $('#product2').append('<option value=' +
-                          this.ID + '>' + this.Numero + '</option>');
-                    });
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    alert('Error getting products!');
+                    alert('Error!');
                 });
             });
         });
@@ -165,10 +75,17 @@
             $.ajax({
                 method: "POST",
                 url: _url,
-                data: { __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
+                data: {
+                    ParamFecha: $('#FechaEntrada').text(),
+                    ParamNochesId: $('#NochesId option:selected').val(),
+                    ParamHabitaciones: $('#DDL_Habitaciones option:selected').val(),
+                    ParamPasajeros: $('#DDL_Pasajeros option:selected').val(),
+                    __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
+                },
                 success: function (result) {
                     $('#Panel_Step2').html(result);
                 }
             });
         });
     </script>
+
