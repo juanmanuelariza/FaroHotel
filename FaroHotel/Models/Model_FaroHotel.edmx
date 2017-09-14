@@ -132,11 +132,6 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HotelId" Type="tinyint" Nullable="false" />
-          <Property Name="DobleSimple" Type="bit" Nullable="false" />
-          <Property Name="DobleMatrimonial" Type="bit" Nullable="false" />
-          <Property Name="TripleSimple" Type="bit" Nullable="false" />
-          <Property Name="TripleMatrimonialSimple" Type="bit" Nullable="false" />
-          <Property Name="CuadrupleMatrimonialSimple" Type="bit" Nullable="false" />
           <Property Name="Piso" Type="tinyint" Nullable="false" />
           <Property Name="Numero" Type="int" Nullable="false" />
         </EntityType>
@@ -1613,11 +1608,6 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="HotelId" Type="Byte" Nullable="false" />
-          <Property Name="DobleSimple" Type="Boolean" Nullable="false" />
-          <Property Name="DobleMatrimonial" Type="Boolean" Nullable="false" />
-          <Property Name="TripleSimple" Type="Boolean" Nullable="false" />
-          <Property Name="TripleMatrimonialSimple" Type="Boolean" Nullable="false" />
-          <Property Name="CuadrupleMatrimonialSimple" Type="Boolean" Nullable="false" />
           <Property Name="Piso" Type="Byte" Nullable="false" />
           <NavigationProperty Name="EnlaceReservaHotelHabitacion" Relationship="Model.FK_EnlaceReservaHotelHabitacion_Habitacion" FromRole="Habitacion" ToRole="EnlaceReservaHotelHabitacion" />
           <NavigationProperty Name="TipoHotel" Relationship="Model.FK_Habitacion_TipoHotel" FromRole="Habitacion" ToRole="TipoHotel" />
@@ -2186,11 +2176,6 @@
               <MappingFragment StoreEntitySet="Habitacion">
                 <ScalarProperty Name="Numero" ColumnName="Numero" />
                 <ScalarProperty Name="Piso" ColumnName="Piso" />
-                <ScalarProperty Name="CuadrupleMatrimonialSimple" ColumnName="CuadrupleMatrimonialSimple" />
-                <ScalarProperty Name="TripleMatrimonialSimple" ColumnName="TripleMatrimonialSimple" />
-                <ScalarProperty Name="TripleSimple" ColumnName="TripleSimple" />
-                <ScalarProperty Name="DobleMatrimonial" ColumnName="DobleMatrimonial" />
-                <ScalarProperty Name="DobleSimple" ColumnName="DobleSimple" />
                 <ScalarProperty Name="HotelId" ColumnName="HotelId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

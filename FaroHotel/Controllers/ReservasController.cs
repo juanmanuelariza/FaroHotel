@@ -65,7 +65,7 @@ namespace FaroHotel.Controllers
         {
             return PartialView("_Busqueda");
         }
-
+        
         [HttpGet]
         public JsonResult BuscarPax(string ParamDNI)
         {

@@ -64,22 +64,24 @@
 
                         <div class="form-group row">
                             <label class="col-md-12" for="Paquete">Bus de ida:</label>
-                            <div class="col-md-6">
-                                <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/Bus', 'Agregar', 'Asientos')">Seleccionar asiento</span>
+                            <div class="col-md-12">
+                                <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento('BusIda_'+@i)">Seleccionar asiento</span>
                             </div>
-                            <div class="col-md-6">
-                                <span>Número de asiento: </span><span id="BusIda_@i" class="BusIda">15</span>
+                            <div class="col-md-12">
+                                <div><img src="/img/6.png">  Asiento seleccionado: <span id="BusIda_@i" class="BusIda"></span></div>  
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-12" for="Paquete">Bus de vuelta:</label>
-                            <div class="col-md-6">
-                                <span id="btnSelectSeat" class="btn btn-dark">Seleccionar asiento</span>
+                            <div class="col-md-12">
+                                <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento('BusVuelta_'+@i)">Seleccionar asiento</span>
                             </div>
-                            <div class="col-md-6">
-                                <span>Número de asiento: </span><span id="BusVuelta_@i" class="BusVuelta">15</span>
+                            <div class="col-md-12">
+                                <div><img src="/img/6.png">  Asiento seleccionado: <span id="BusVuelta_@i" class="BusVuelta"></span></div>
                             </div>
                         </div>
+                        <input type="hidden" id="busCall" value="" />
+                        <input type="hidden" id="busResponse" value="" />
                     </div>
 
                 </div>
@@ -100,6 +102,10 @@
 </div>
 
 <script type="text/javascript">
+    function SeleccionarAsiento(ArgCaller) {
+        $("#busCall").val(ArgCaller);
+        abrirModal('/Reservas/Bus', 'Agregar', 'Asientos');
+    }
     $('#btnBackStep1').click(function () {
         $('#Panel_Step2').fadeOut();
         $('#divQuickSearch').fadeIn();

@@ -23,11 +23,6 @@ namespace FaroHotel.Models
     
         public int ID { get; set; }
         public byte HotelId { get; set; }
-        public bool DobleSimple { get; set; }
-        public bool DobleMatrimonial { get; set; }
-        public bool TripleSimple { get; set; }
-        public bool TripleMatrimonialSimple { get; set; }
-        public bool CuadrupleMatrimonialSimple { get; set; }
         public byte Piso { get; set; }
         public int Numero { get; set; }
     
