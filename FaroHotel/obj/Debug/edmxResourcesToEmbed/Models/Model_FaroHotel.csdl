@@ -612,11 +612,6 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="HotelId" Type="Byte" Nullable="false" />
-    <Property Name="DobleSimple" Type="Boolean" Nullable="false" />
-    <Property Name="DobleMatrimonial" Type="Boolean" Nullable="false" />
-    <Property Name="TripleSimple" Type="Boolean" Nullable="false" />
-    <Property Name="TripleMatrimonialSimple" Type="Boolean" Nullable="false" />
-    <Property Name="CuadrupleMatrimonialSimple" Type="Boolean" Nullable="false" />
     <Property Name="Piso" Type="Byte" Nullable="false" />
     <NavigationProperty Name="EnlaceReservaHotelHabitacion" Relationship="Model.FK_EnlaceReservaHotelHabitacion_Habitacion" FromRole="Habitacion" ToRole="EnlaceReservaHotelHabitacion" />
     <NavigationProperty Name="TipoHotel" Relationship="Model.FK_Habitacion_TipoHotel" FromRole="Habitacion" ToRole="TipoHotel" />

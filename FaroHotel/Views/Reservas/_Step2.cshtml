@@ -1,6 +1,6 @@
 ﻿<div id="divStep2" class="row">
 
-    <button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Create', 'Agregar', 'Pasajeros')">
+    <button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Create2', 'Agregar', 'Pasajeros')">
         <i class="fa fa-plus"></i> Nuevo Pasajero
     </button>
     <div class="col-md-12">
@@ -11,16 +11,15 @@
             </div>
             <div class="x_content">
                 Listado de paquetes disponibles para la fecha seleccionada
+
             </div>
         </div>
     </div>
-
-    @for (var i = 0; i < ViewBag.CantPasajeros; i++)
-    {
-        <div class="col-md-4">
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Pasajero</h2>
+                    <h2>Titular de la reserva</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -29,66 +28,107 @@
                             <input id="PaxID" type="hidden" value="" />
                             <label class="control-label col-md-3" for="DNI">DNI:</label>
                             <div class="col-md-6">
-                                <input id="PaxDNI_@i" class="form-control" />
+                                <input id="PaxDNI_T" class="form-control" />
                                 @* @Html.DropDownList("TipoHabitacion", null, "", htmlAttributes: new { @id = "TipoHab", @class = "form-control" })*@
                             </div>
                             <div class="col-md-3">
-                                <span id="btnSearchPax_@i" class="btn btn-dark btnSearchPax" data-boxId="@i">Buscar</span>
+                                <span id="btnSearchPax_T" class="btn btn-dark btnSearchPax" data-boxId="T">Buscar</span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="Apellido">Apellido:</label>
                             <div class="col-md-9">
-                                <input id="PaxSurname_@i" class="form-control" readonly="readonly" />
+                                <input id="PaxSurname_T" class="form-control" readonly="readonly" />
                                 @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="Nombre">Nombre:</label>
                             <div class="col-md-9">
-                                <input id="PaxName_@i" class="form-control" readonly="readonly" />
+                                <input id="PaxName_T" class="form-control" readonly="readonly" />
                                 @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-3" for="Paquete">Paquete:</label>
-                            <div class="col-md-9">
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                </select>
-                                @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-12" for="Paquete">Bus de ida:</label>
-                            <div class="col-md-12">
-                                <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento('BusIda_'+@i)">Seleccionar asiento</span>
-                            </div>
-                            <div class="col-md-12">
-                                <div><img src="/img/6.png">  Asiento seleccionado: <span id="BusIda_@i" class="BusIda"></span></div>  
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-12" for="Paquete">Bus de vuelta:</label>
-                            <div class="col-md-12">
-                                <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento('BusVuelta_'+@i)">Seleccionar asiento</span>
-                            </div>
-                            <div class="col-md-12">
-                                <div><img src="/img/6.png">  Asiento seleccionado: <span id="BusVuelta_@i" class="BusVuelta"></span></div>
-                            </div>
-                        </div>
-                        <input type="hidden" id="busCall" value="" />
-                        <input type="hidden" id="busResponse" value="" />
                     </div>
 
                 </div>
             </div>
         </div>
-    }
-    
+    </div>
+    <div class="row">
+        @for (var i = 0; i < ViewBag.CantPasajeros; i++)
+        {
+            <div class="col-md-4">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Pasajero</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-horizontal">
+                            <div class="form-group row">
+                                <input id="PaxID" type="hidden" value="" />
+                                <label class="control-label col-md-3" for="DNI">DNI:</label>
+                                <div class="col-md-6">
+                                    <input id="PaxDNI_@i" class="form-control" />
+                                    @* @Html.DropDownList("TipoHabitacion", null, "", htmlAttributes: new { @id = "TipoHab", @class = "form-control" })*@
+                                </div>
+                                <div class="col-md-3">
+                                    <span id="btnSearchPax_@i" class="btn btn-dark btnSearchPax" data-boxId="@i">Buscar</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3" for="Apellido">Apellido:</label>
+                                <div class="col-md-9">
+                                    <input id="PaxSurname_@i" class="form-control" readonly="readonly" />
+                                    @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3" for="Nombre">Nombre:</label>
+                                <div class="col-md-9">
+                                    <input id="PaxName_@i" class="form-control" readonly="readonly" />
+                                    @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="control-label col-md-3" for="Paquete">Paquete:</label>
+                                <div class="col-md-9">
+                                    <select class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                    </select>
+                                    @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-12" for="Paquete">Bus de ida:</label>
+                                <div class="col-md-12">
+                                    <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento('BusIda_'+@i)">Seleccionar asiento</span>
+                                </div>
+                                <div class="col-md-12">
+                                    <div><img src="/img/6.png">  Asiento seleccionado: <span id="BusIda_@i" class="BusIda"></span></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-12" for="Paquete">Bus de vuelta:</label>
+                                <div class="col-md-12">
+                                    <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento('BusVuelta_'+@i)">Seleccionar asiento</span>
+                                </div>
+                                <div class="col-md-12">
+                                    <div><img src="/img/6.png">  Asiento seleccionado: <span id="BusVuelta_@i" class="BusVuelta"></span></div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="busCall" value="" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
     <div class="col-md-12">
         <div class="x_panel">
             <div class="x_content">
@@ -155,5 +195,5 @@
     });
 
 
-    
+
 </script>

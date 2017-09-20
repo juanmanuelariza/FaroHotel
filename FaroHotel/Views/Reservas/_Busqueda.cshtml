@@ -444,13 +444,12 @@
 
 <script>
     function Selectedseat(elm) {
-        debugger
         var existB = $(elm).hasClass('asientoOcupado');
-
+        debugger
         if (existB != true) {
             bus = $(elm).data("bus");
             classs = $(elm).data("class");
-            console.log($(".asientoSeleccionado").size());
+            //console.log($(".asientoSeleccionado").size());
             if ($(".asientoSeleccionado").size() > 0) {
                 $(".asientoSeleccionado").removeClass("asientoSeleccionado");
             }

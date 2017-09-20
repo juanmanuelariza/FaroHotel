@@ -258,11 +258,6 @@
         <MappingFragment StoreEntitySet="Habitacion">
           <ScalarProperty Name="Numero" ColumnName="Numero" />
           <ScalarProperty Name="Piso" ColumnName="Piso" />
-          <ScalarProperty Name="CuadrupleMatrimonialSimple" ColumnName="CuadrupleMatrimonialSimple" />
-          <ScalarProperty Name="TripleMatrimonialSimple" ColumnName="TripleMatrimonialSimple" />
-          <ScalarProperty Name="TripleSimple" ColumnName="TripleSimple" />
-          <ScalarProperty Name="DobleMatrimonial" ColumnName="DobleMatrimonial" />
-          <ScalarProperty Name="DobleSimple" ColumnName="DobleSimple" />
           <ScalarProperty Name="HotelId" ColumnName="HotelId" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>

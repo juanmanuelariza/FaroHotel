@@ -413,6 +413,7 @@
     <Content Include="Views\Reservas\_Step2.cshtml" />
     <Content Include="Views\Reservas\_Step3.cshtml" />
     <Content Include="Views\Reservas\_Step4.cshtml" />
+    <Content Include="Views\Pasajeros\Create2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

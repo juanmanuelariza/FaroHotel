@@ -62,6 +62,33 @@ namespace FaroHotel.Controllers
             return PartialView(pasajero);
         }
 
+        // GET: Pasajeros/Create
+        public ActionResult Create2()
+        {
+            ViewBag.Sexo = new SelectList(db.TipoSexo, "ID", "Descripcion");
+            return PartialView();
+        }
+
+        // POST: Pasajeros/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create2([Bind(Include = "ID,DNI,Apellido,Nombre,Sexo,FechaNacimiento,Telefono,Email,Diabetes,Celiaquia,Motricidad,ListaNegra")] Pasajero pasajero)
+        {
+            if (ModelState.IsValid)
+            {
+                pasajero.ListaNegra = false;
+                db.Pasajero.Add(pasajero);
+                db.SaveChanges();
+                return Json(new { ok = "true" });
+            }
+
+            ViewBag.Sexo = new SelectList(db.TipoSexo, "ID", "Descripcion", pasajero.Sexo);
+            return PartialView(pasajero);
+        }
+
+
         // GET: Pasajeros/Edit/5
         public ActionResult Edit(int? id)
         {

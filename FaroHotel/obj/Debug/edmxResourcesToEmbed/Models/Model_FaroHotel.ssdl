@@ -127,11 +127,6 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="HotelId" Type="tinyint" Nullable="false" />
-    <Property Name="DobleSimple" Type="bit" Nullable="false" />
-    <Property Name="DobleMatrimonial" Type="bit" Nullable="false" />
-    <Property Name="TripleSimple" Type="bit" Nullable="false" />
-    <Property Name="TripleMatrimonialSimple" Type="bit" Nullable="false" />
-    <Property Name="CuadrupleMatrimonialSimple" Type="bit" Nullable="false" />
     <Property Name="Piso" Type="tinyint" Nullable="false" />
     <Property Name="Numero" Type="int" Nullable="false" />
   </EntityType>
