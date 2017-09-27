@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="FaroHotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Accion">
     <Key>
       <PropertyRef Name="ID" />
@@ -120,6 +120,7 @@
     </Key>
     <Property Name="ReservaHotelId" Type="int" Nullable="false" />
     <Property Name="PasajeroId" Type="int" Nullable="false" />
+    <Property Name="PaqueteId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Habitacion">
     <Key>
@@ -229,7 +230,6 @@
     <Property Name="FechaCancelada" Type="datetime" />
     <Property Name="UsuarioCancela" Type="nvarchar" MaxLength="128" />
     <Property Name="Activa" Type="bit" Nullable="false" />
-    <Property Name="PaqueteId" Type="int" />
   </EntityType>
   <EntityType Name="TipoCuota">
     <Key>
@@ -325,6 +325,18 @@
       </Principal>
       <Dependent Role="AspNetMenuAccion">
         <PropertyRef Name="IdMenu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_Ventanilla">
+    <End Role="Ventanilla" Type="Self.Ventanilla" Multiplicity="1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ventanilla">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="VentanillaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -501,6 +513,18 @@
       </Principal>
       <Dependent Role="EnlaceReservaHotelHabitacion">
         <PropertyRef Name="ReservaHotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EnlaceReservaHotelPasajero_Paquete">
+    <End Role="Paquete" Type="Self.Paquete" Multiplicity="1" />
+    <End Role="EnlaceReservaHotelPasajero" Type="Self.EnlaceReservaHotelPasajero" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paquete">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnlaceReservaHotelPasajero">
+        <PropertyRef Name="PaqueteId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -756,18 +780,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ReservaHotel_Paquete">
-    <End Role="Paquete" Type="Self.Paquete" Multiplicity="0..1" />
-    <End Role="ReservaHotel" Type="Self.ReservaHotel" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Paquete">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ReservaHotel">
-        <PropertyRef Name="PaqueteId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ReservaHotel_Pasajero">
     <End Role="Pasajero" Type="Self.Pasajero" Multiplicity="1" />
     <End Role="ReservaHotel" Type="Self.ReservaHotel" Multiplicity="*" />
@@ -792,10 +804,58 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="func_Split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DelimitedString" Type="varchar" Mode="In" />
+    <Parameter Name="Delimiter" Type="varchar" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="ElementID" Type="int" Nullable="false" />
+          <Property Name="Element" Type="varchar" MaxLength="1000" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
   <Function Name="GetPermisosPorNombreDeUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserName" Type="nvarchar" Mode="In" />
   </Function>
-  <EntityContainer Name="ModelStoreContainer">
+  <Function Name="InsertBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TipoHabitacionesIds" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="NroHabitacionesIds" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="PasajerosIds" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="FaroHotelModelStoreContainer">
     <EntitySet Name="Accion" EntityType="Self.Accion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetMenuAccion" EntityType="Self.AspNetMenuAccion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -833,6 +893,10 @@
     <AssociationSet Name="FK_AspNetMenuAccion_Menu" Association="Self.FK_AspNetMenuAccion_Menu">
       <End Role="Menu" EntitySet="Menu" />
       <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_Ventanilla" Association="Self.FK_AspNetUsers_Ventanilla">
+      <End Role="Ventanilla" EntitySet="Ventanilla" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
     <AssociationSet Name="FK_Bus_TipoTrayecto" Association="Self.FK_Bus_TipoTrayecto">
       <End Role="TipoTrayecto" EntitySet="TipoTrayecto" />
@@ -889,6 +953,10 @@
     <AssociationSet Name="FK_EnlaceReservaHotelHabitacion_ReservaHotel" Association="Self.FK_EnlaceReservaHotelHabitacion_ReservaHotel">
       <End Role="ReservaHotel" EntitySet="ReservaHotel" />
       <End Role="EnlaceReservaHotelHabitacion" EntitySet="EnlaceReservaHotelHabitacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnlaceReservaHotelPasajero_Paquete" Association="Self.FK_EnlaceReservaHotelPasajero_Paquete">
+      <End Role="Paquete" EntitySet="Paquete" />
+      <End Role="EnlaceReservaHotelPasajero" EntitySet="EnlaceReservaHotelPasajero" />
     </AssociationSet>
     <AssociationSet Name="FK_EnlaceReservaHotelPasajero_Pasajero" Association="Self.FK_EnlaceReservaHotelPasajero_Pasajero">
       <End Role="Pasajero" EntitySet="Pasajero" />
@@ -972,10 +1040,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_ReservaHotel_AspNetUsers3" Association="Self.FK_ReservaHotel_AspNetUsers3">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="ReservaHotel" EntitySet="ReservaHotel" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ReservaHotel_Paquete" Association="Self.FK_ReservaHotel_Paquete">
-      <End Role="Paquete" EntitySet="Paquete" />
       <End Role="ReservaHotel" EntitySet="ReservaHotel" />
     </AssociationSet>
     <AssociationSet Name="FK_ReservaHotel_Pasajero" Association="Self.FK_ReservaHotel_Pasajero">

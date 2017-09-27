@@ -32,26 +32,41 @@ namespace FaroHotel.Models
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<Menu> Menu { get; set; }
-        public virtual DbSet<MenuAspNetRoles> MenuAspNetRoles { get; set; }
-        public virtual DbSet<MenuAspNetRolesAccion> MenuAspNetRolesAccion { get; set; }
-        public virtual DbSet<Ventanilla> Ventanilla { get; set; }
-        public virtual DbSet<Pasajero> Pasajero { get; set; }
-        public virtual DbSet<TipoSexo> TipoSexo { get; set; }
-        public virtual DbSet<Paquete> Paquete { get; set; }
-        public virtual DbSet<TipoCuota> TipoCuota { get; set; }
-        public virtual DbSet<TipoDescripcionPaquete> TipoDescripcionPaquete { get; set; }
-        public virtual DbSet<TipoNoche> TipoNoche { get; set; }
-        public virtual DbSet<TipoTemporada> TipoTemporada { get; set; }
         public virtual DbSet<Bus> Bus { get; set; }
         public virtual DbSet<EnlaceBusPasajero> EnlaceBusPasajero { get; set; }
         public virtual DbSet<EnlaceReservaHotelHabitacion> EnlaceReservaHotelHabitacion { get; set; }
+        public virtual DbSet<EnlaceReservaHotelPasajero> EnlaceReservaHotelPasajero { get; set; }
         public virtual DbSet<Habitacion> Habitacion { get; set; }
+        public virtual DbSet<Menu> Menu { get; set; }
+        public virtual DbSet<MenuAspNetRoles> MenuAspNetRoles { get; set; }
+        public virtual DbSet<MenuAspNetRolesAccion> MenuAspNetRolesAccion { get; set; }
+        public virtual DbSet<Paquete> Paquete { get; set; }
+        public virtual DbSet<Pasajero> Pasajero { get; set; }
         public virtual DbSet<ReservaBus> ReservaBus { get; set; }
         public virtual DbSet<ReservaHotel> ReservaHotel { get; set; }
+        public virtual DbSet<TipoCuota> TipoCuota { get; set; }
+        public virtual DbSet<TipoDescripcionPaquete> TipoDescripcionPaquete { get; set; }
         public virtual DbSet<TipoHabitacion> TipoHabitacion { get; set; }
         public virtual DbSet<TipoHotel> TipoHotel { get; set; }
+        public virtual DbSet<TipoNoche> TipoNoche { get; set; }
+        public virtual DbSet<TipoSexo> TipoSexo { get; set; }
+        public virtual DbSet<TipoTemporada> TipoTemporada { get; set; }
         public virtual DbSet<TipoTrayecto> TipoTrayecto { get; set; }
+        public virtual DbSet<Ventanilla> Ventanilla { get; set; }
+    
+        [DbFunction("FaroHotelEntities", "func_Split")]
+        public virtual IQueryable<func_Split_Result> func_Split(string delimitedString, string delimiter)
+        {
+            var delimitedStringParameter = delimitedString != null ?
+                new ObjectParameter("DelimitedString", delimitedString) :
+                new ObjectParameter("DelimitedString", typeof(string));
+    
+            var delimiterParameter = delimiter != null ?
+                new ObjectParameter("Delimiter", delimiter) :
+                new ObjectParameter("Delimiter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<func_Split_Result>("[FaroHotelEntities].[func_Split](@DelimitedString, @Delimiter)", delimitedStringParameter, delimiterParameter);
+        }
     
         public virtual ObjectResult<GetPermisosPorNombreDeUsuario_Result> GetPermisosPorNombreDeUsuario(string userName)
         {
@@ -60,6 +75,126 @@ namespace FaroHotel.Models
                 new ObjectParameter("UserName", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPermisosPorNombreDeUsuario_Result>("GetPermisosPorNombreDeUsuario", userNameParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> InsertBooking(string tipoHabitacionesIds, string nroHabitacionesIds, string pasajerosIds)
+        {
+            var tipoHabitacionesIdsParameter = tipoHabitacionesIds != null ?
+                new ObjectParameter("TipoHabitacionesIds", tipoHabitacionesIds) :
+                new ObjectParameter("TipoHabitacionesIds", typeof(string));
+    
+            var nroHabitacionesIdsParameter = nroHabitacionesIds != null ?
+                new ObjectParameter("NroHabitacionesIds", nroHabitacionesIds) :
+                new ObjectParameter("NroHabitacionesIds", typeof(string));
+    
+            var pasajerosIdsParameter = pasajerosIds != null ?
+                new ObjectParameter("PasajerosIds", pasajerosIds) :
+                new ObjectParameter("PasajerosIds", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertBooking", tipoHabitacionesIdsParameter, nroHabitacionesIdsParameter, pasajerosIdsParameter);
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     }
 }

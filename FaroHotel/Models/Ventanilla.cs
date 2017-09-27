@@ -17,8 +17,8 @@ namespace FaroHotel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ventanilla()
         {
-            this.AspNetUsers = new HashSet<AspNetUsers>();
             this.Paquete = new HashSet<Paquete>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
         }
     
         public int ID { get; set; }
@@ -29,8 +29,8 @@ namespace FaroHotel.Models
         public System.DateTime FechaAlta { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Paquete> Paquete { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

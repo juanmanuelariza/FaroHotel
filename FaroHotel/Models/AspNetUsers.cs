@@ -19,7 +19,6 @@ namespace FaroHotel.Models
         {
             this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
-            this.AspNetRoles = new HashSet<AspNetRoles>();
             this.ReservaBus = new HashSet<ReservaBus>();
             this.ReservaBus1 = new HashSet<ReservaBus>();
             this.ReservaBus2 = new HashSet<ReservaBus>();
@@ -28,6 +27,7 @@ namespace FaroHotel.Models
             this.ReservaHotel1 = new HashSet<ReservaHotel>();
             this.ReservaHotel2 = new HashSet<ReservaHotel>();
             this.ReservaHotel3 = new HashSet<ReservaHotel>();
+            this.AspNetRoles = new HashSet<AspNetRoles>();
         }
     
         public string Id { get; set; }
@@ -51,9 +51,6 @@ namespace FaroHotel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
-        public virtual Ventanilla Ventanilla { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReservaBus> ReservaBus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReservaBus> ReservaBus1 { get; set; }
@@ -69,5 +66,8 @@ namespace FaroHotel.Models
         public virtual ICollection<ReservaHotel> ReservaHotel2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReservaHotel> ReservaHotel3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        public virtual Ventanilla Ventanilla { get; set; }
     }
 }

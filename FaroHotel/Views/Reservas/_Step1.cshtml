@@ -14,13 +14,13 @@
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="TipoHabitacion">Tipo:</label>
                             <div class="col-md-9">
-                                @Html.DropDownList("TipoHabitacion", null, "", htmlAttributes: new { @id = "TipoHab_@i", @class = "form-control TipoHab", data_boxId = @i })
+                                @Html.DropDownList("SelectTipoHabitacion", null, "", htmlAttributes: new { @id = "TipoHab_" + @i, @class = "form-control SelectTipoHabitacion", data_boxId = @i })
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="Numero">Número:</label>
                             <div class="col-md-9">
-                                <select id="NumHab_@i" class="form-control"></select>
+                                <select id="SelectNumHababitacion_@i" class="form-control SelectNroHabitacion"></select>
                                 @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
                             </div>
                         </div>
@@ -45,14 +45,13 @@
     <script type="text/javascript">
         $('#NochesId option:selected').text();
         $(function () {
-            $(".TipoHab").change(function () {
+            $(".SelectTipoHabitacion").change(function () {
                 var selectedItem = $(this).val();
                 var boxId = $(this).attr("data-boxId");
-                $('#NumHab_' + boxId + ' option').remove();
+                $('#SelectNumHababitacion_' + boxId + ' option').remove();
                 $.getJSON('/Reservas/Habitaciones', { ParamTipoHabitacion: selectedItem }, function (data) {
-                    console.log(data);
                     $.each(data, function () {
-                        $('#NumHab_' + boxId).append('<option value=' +
+                        $('#SelectNumHababitacion_' + boxId).append('<option value=' +
                           this.ID + '>' + this.Numero + '</option>');
                     });
                 }).fail(function (jqXHR, textStatus, errorThrown) {

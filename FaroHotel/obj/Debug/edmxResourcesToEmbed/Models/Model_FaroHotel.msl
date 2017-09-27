@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="FaroHotelEntities">
+  <EntityContainerMapping StorageEntityContainer="FaroHotelModelStoreContainer" CdmEntityContainer="FaroHotelEntities">
     <EntitySetMapping Name="Accion">
-      <EntityTypeMapping TypeName="Model.Accion">
+      <EntityTypeMapping TypeName="FaroHotelModel.Accion">
         <MappingFragment StoreEntitySet="Accion">
-          <ScalarProperty Name="Icono" ColumnName="Icono" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Icono" ColumnName="Icono" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetRoles">
-      <EntityTypeMapping TypeName="Model.AspNetRoles">
+      <EntityTypeMapping TypeName="FaroHotelModel.AspNetRoles">
         <MappingFragment StoreEntitySet="AspNetRoles">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -20,7 +20,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUserClaims">
-      <EntityTypeMapping TypeName="Model.AspNetUserClaims">
+      <EntityTypeMapping TypeName="FaroHotelModel.AspNetUserClaims">
         <MappingFragment StoreEntitySet="AspNetUserClaims">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -30,7 +30,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUserLogins">
-      <EntityTypeMapping TypeName="Model.AspNetUserLogins">
+      <EntityTypeMapping TypeName="FaroHotelModel.AspNetUserLogins">
         <MappingFragment StoreEntitySet="AspNetUserLogins">
           <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
           <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -39,11 +39,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUsers">
-      <EntityTypeMapping TypeName="Model.AspNetUsers">
+      <EntityTypeMapping TypeName="FaroHotelModel.AspNetUsers">
         <MappingFragment StoreEntitySet="AspNetUsers">
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="VentanillaId" ColumnName="VentanillaId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
@@ -56,11 +53,60 @@
           <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
           <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="VentanillaId" ColumnName="VentanillaId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bus">
+      <EntityTypeMapping TypeName="FaroHotelModel.Bus">
+        <MappingFragment StoreEntitySet="Bus">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="TrayectoId" ColumnName="TrayectoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnlaceBusPasajero">
+      <EntityTypeMapping TypeName="FaroHotelModel.EnlaceBusPasajero">
+        <MappingFragment StoreEntitySet="EnlaceBusPasajero">
+          <ScalarProperty Name="BusId" ColumnName="BusId" />
+          <ScalarProperty Name="PasajeroId" ColumnName="PasajeroId" />
+          <ScalarProperty Name="NroButaca" ColumnName="NroButaca" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnlaceReservaHotelHabitacion">
+      <EntityTypeMapping TypeName="FaroHotelModel.EnlaceReservaHotelHabitacion">
+        <MappingFragment StoreEntitySet="EnlaceReservaHotelHabitacion">
+          <ScalarProperty Name="ReservaHotelId" ColumnName="ReservaHotelId" />
+          <ScalarProperty Name="HabitacionId" ColumnName="HabitacionId" />
+          <ScalarProperty Name="TipoHabitacionId" ColumnName="TipoHabitacionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnlaceReservaHotelPasajero">
+      <EntityTypeMapping TypeName="FaroHotelModel.EnlaceReservaHotelPasajero">
+        <MappingFragment StoreEntitySet="EnlaceReservaHotelPasajero">
+          <ScalarProperty Name="ReservaHotelId" ColumnName="ReservaHotelId" />
+          <ScalarProperty Name="PasajeroId" ColumnName="PasajeroId" />
+          <ScalarProperty Name="PaqueteId" ColumnName="PaqueteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Habitacion">
+      <EntityTypeMapping TypeName="FaroHotelModel.Habitacion">
+        <MappingFragment StoreEntitySet="Habitacion">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+          <ScalarProperty Name="Piso" ColumnName="Piso" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Menu">
-      <EntityTypeMapping TypeName="Model.Menu">
+      <EntityTypeMapping TypeName="FaroHotelModel.Menu">
         <MappingFragment StoreEntitySet="Menu">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="PadreID" ColumnName="PadreID" />
@@ -75,7 +121,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MenuAspNetRoles">
-      <EntityTypeMapping TypeName="Model.MenuAspNetRoles">
+      <EntityTypeMapping TypeName="FaroHotelModel.MenuAspNetRoles">
         <MappingFragment StoreEntitySet="MenuAspNetRoles">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="MenuId" ColumnName="MenuId" />
@@ -84,7 +130,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MenuAspNetRolesAccion">
-      <EntityTypeMapping TypeName="Model.MenuAspNetRolesAccion">
+      <EntityTypeMapping TypeName="FaroHotelModel.MenuAspNetRolesAccion">
         <MappingFragment StoreEntitySet="MenuAspNetRolesAccion">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="AccionId" ColumnName="AccionId" />
@@ -92,7 +138,171 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+    <EntitySetMapping Name="Paquete">
+      <EntityTypeMapping TypeName="FaroHotelModel.Paquete">
+        <MappingFragment StoreEntitySet="Paquete">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="DescripcionId" ColumnName="DescripcionId" />
+          <ScalarProperty Name="TemporadaId" ColumnName="TemporadaId" />
+          <ScalarProperty Name="NochesId" ColumnName="NochesId" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+          <ScalarProperty Name="PrecioSingle" ColumnName="PrecioSingle" />
+          <ScalarProperty Name="PrecioDoble" ColumnName="PrecioDoble" />
+          <ScalarProperty Name="CuotasId" ColumnName="CuotasId" />
+          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+          <ScalarProperty Name="BusIda" ColumnName="BusIda" />
+          <ScalarProperty Name="BusVuelta" ColumnName="BusVuelta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pasajero">
+      <EntityTypeMapping TypeName="FaroHotelModel.Pasajero">
+        <MappingFragment StoreEntitySet="Pasajero">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Diabetes" ColumnName="Diabetes" />
+          <ScalarProperty Name="Celiaquia" ColumnName="Celiaquia" />
+          <ScalarProperty Name="Motricidad" ColumnName="Motricidad" />
+          <ScalarProperty Name="ListaNegra" ColumnName="ListaNegra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReservaBus">
+      <EntityTypeMapping TypeName="FaroHotelModel.ReservaBus">
+        <MappingFragment StoreEntitySet="ReservaBus">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+          <ScalarProperty Name="UsuarioAlta" ColumnName="UsuarioAlta" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+          <ScalarProperty Name="Confirmada" ColumnName="Confirmada" />
+          <ScalarProperty Name="FechaComfirmada" ColumnName="FechaComfirmada" />
+          <ScalarProperty Name="UsuarioConfirma" ColumnName="UsuarioConfirma" />
+          <ScalarProperty Name="FechaCancelada" ColumnName="FechaCancelada" />
+          <ScalarProperty Name="UsuarioCancela" ColumnName="UsuarioCancela" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReservaHotel">
+      <EntityTypeMapping TypeName="FaroHotelModel.ReservaHotel">
+        <MappingFragment StoreEntitySet="ReservaHotel">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TitularId" ColumnName="TitularId" />
+          <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
+          <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+          <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+          <ScalarProperty Name="UsuarioAlta" ColumnName="UsuarioAlta" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+          <ScalarProperty Name="Confirmada" ColumnName="Confirmada" />
+          <ScalarProperty Name="FechaComfirmada" ColumnName="FechaComfirmada" />
+          <ScalarProperty Name="UsuarioConfirma" ColumnName="UsuarioConfirma" />
+          <ScalarProperty Name="FechaCancelada" ColumnName="FechaCancelada" />
+          <ScalarProperty Name="UsuarioCancela" ColumnName="UsuarioCancela" />
+          <ScalarProperty Name="Activa" ColumnName="Activa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoCuota">
+      <EntityTypeMapping TypeName="FaroHotelModel.TipoCuota">
+        <MappingFragment StoreEntitySet="TipoCuota">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
+          <ScalarProperty Name="Activa" ColumnName="Activa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDescripcionPaquete">
+      <EntityTypeMapping TypeName="FaroHotelModel.TipoDescripcionPaquete">
+        <MappingFragment StoreEntitySet="TipoDescripcionPaquete">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+          <ScalarProperty Name="Activa" ColumnName="Activa" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoHabitacion">
+      <EntityTypeMapping TypeName="FaroHotelModel.TipoHabitacion">
+        <MappingFragment StoreEntitySet="TipoHabitacion">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoHotel">
+      <EntityTypeMapping TypeName="FaroHotelModel.TipoHotel">
+        <MappingFragment StoreEntitySet="TipoHotel">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoNoche">
+      <EntityTypeMapping TypeName="FaroHotelModel.TipoNoche">
+        <MappingFragment StoreEntitySet="TipoNoche">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Noches" ColumnName="Noches" />
+          <ScalarProperty Name="Activa" ColumnName="Activa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoSexo">
+      <EntityTypeMapping TypeName="FaroHotelModel.TipoSexo">
+        <MappingFragment StoreEntitySet="TipoSexo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Activa" ColumnName="Activa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoTemporada">
+      <EntityTypeMapping TypeName="FaroHotelModel.TipoTemporada">
+        <MappingFragment StoreEntitySet="TipoTemporada">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoTrayecto">
+      <EntityTypeMapping TypeName="FaroHotelModel.TipoTrayecto">
+        <MappingFragment StoreEntitySet="TipoTrayecto">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ventanilla">
+      <EntityTypeMapping TypeName="FaroHotelModel.Ventanilla">
+        <MappingFragment StoreEntitySet="Ventanilla">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetMenuAccion" TypeName="FaroHotelModel.AspNetMenuAccion" StoreEntitySet="AspNetMenuAccion">
+      <EndProperty Name="Accion">
+        <ScalarProperty Name="ID" ColumnName="IdAccion" />
+      </EndProperty>
+      <EndProperty Name="Menu">
+        <ScalarProperty Name="ID" ColumnName="IdMenu" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="FaroHotelModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
       <EndProperty Name="AspNetRoles">
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
@@ -100,9 +310,33 @@
         <ScalarProperty Name="Id" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="GetPermisosPorNombreDeUsuario" FunctionName="Model.Store.GetPermisosPorNombreDeUsuario">
+    <AssociationSetMapping Name="EnlaceHabitacionTipoHabitacion" TypeName="FaroHotelModel.EnlaceHabitacionTipoHabitacion" StoreEntitySet="EnlaceHabitacionTipoHabitacion">
+      <EndProperty Name="Habitacion">
+        <ScalarProperty Name="ID" ColumnName="HabitacionId" />
+      </EndProperty>
+      <EndProperty Name="TipoHabitacion">
+        <ScalarProperty Name="ID" ColumnName="TipoHabitacionId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EnlacePaqueteVentanilla" TypeName="FaroHotelModel.EnlacePaqueteVentanilla" StoreEntitySet="EnlacePaqueteVentanilla">
+      <EndProperty Name="Paquete">
+        <ScalarProperty Name="ID" ColumnName="PaqueteId" />
+      </EndProperty>
+      <EndProperty Name="Ventanilla">
+        <ScalarProperty Name="ID" ColumnName="VentanillaId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionName="FaroHotelModel.Store.func_Split" FunctionImportName="func_Split">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="Model.GetPermisosPorNombreDeUsuario_Result">
+        <ComplexTypeMapping TypeName="FaroHotelModel.func_Split_Result">
+          <ScalarProperty Name="ElementID" ColumnName="ElementID" />
+          <ScalarProperty Name="Element" ColumnName="Element" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetPermisosPorNombreDeUsuario" FunctionName="FaroHotelModel.Store.GetPermisosPorNombreDeUsuario">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FaroHotelModel.GetPermisosPorNombreDeUsuario_Result">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="PadreID" ColumnName="PadreID" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -115,231 +349,30 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="Ventanilla">
-      <EntityTypeMapping TypeName="Model.Ventanilla">
-        <MappingFragment StoreEntitySet="Ventanilla">
-          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+    <FunctionImportMapping FunctionImportName="InsertBooking" FunctionName="FaroHotelModel.Store.InsertBooking" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="FaroHotelModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="FaroHotelModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="FaroHotelModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="FaroHotelModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FaroHotelModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="FaroHotelModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FaroHotelModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Pasajero">
-      <EntityTypeMapping TypeName="Model.Pasajero">
-        <MappingFragment StoreEntitySet="Pasajero">
-          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-          <ScalarProperty Name="ListaNegra" ColumnName="ListaNegra" />
-          <ScalarProperty Name="Motricidad" ColumnName="Motricidad" />
-          <ScalarProperty Name="Celiaquia" ColumnName="Celiaquia" />
-          <ScalarProperty Name="Diabetes" ColumnName="Diabetes" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-          <ScalarProperty Name="DNI" ColumnName="DNI" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TipoSexo">
-      <EntityTypeMapping TypeName="Model.TipoSexo">
-        <MappingFragment StoreEntitySet="TipoSexo">
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Activa" ColumnName="Activa" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Paquete">
-      <EntityTypeMapping TypeName="Model.Paquete">
-        <MappingFragment StoreEntitySet="Paquete">
-          <ScalarProperty Name="BusVuelta" ColumnName="BusVuelta" />
-          <ScalarProperty Name="BusIda" ColumnName="BusIda" />
-          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-          <ScalarProperty Name="CuotasId" ColumnName="CuotasId" />
-          <ScalarProperty Name="PrecioDoble" ColumnName="PrecioDoble" />
-          <ScalarProperty Name="PrecioSingle" ColumnName="PrecioSingle" />
-          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-          <ScalarProperty Name="NochesId" ColumnName="NochesId" />
-          <ScalarProperty Name="TemporadaId" ColumnName="TemporadaId" />
-          <ScalarProperty Name="DescripcionId" ColumnName="DescripcionId" />
-          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TipoCuota">
-      <EntityTypeMapping TypeName="Model.TipoCuota">
-        <MappingFragment StoreEntitySet="TipoCuota">
-          <ScalarProperty Name="Activa" ColumnName="Activa" />
-          <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TipoDescripcionPaquete">
-      <EntityTypeMapping TypeName="Model.TipoDescripcionPaquete">
-        <MappingFragment StoreEntitySet="TipoDescripcionPaquete">
-          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-          <ScalarProperty Name="Activa" ColumnName="Activa" />
-          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TipoNoche">
-      <EntityTypeMapping TypeName="Model.TipoNoche">
-        <MappingFragment StoreEntitySet="TipoNoche">
-          <ScalarProperty Name="Activa" ColumnName="Activa" />
-          <ScalarProperty Name="Noches" ColumnName="Noches" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TipoTemporada">
-      <EntityTypeMapping TypeName="Model.TipoTemporada">
-        <MappingFragment StoreEntitySet="TipoTemporada">
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="EnlacePaqueteVentanilla" TypeName="Model.EnlacePaqueteVentanilla" StoreEntitySet="EnlacePaqueteVentanilla">
-      <EndProperty Name="Ventanilla">
-        <ScalarProperty Name="ID" ColumnName="VentanillaId" />
-      </EndProperty>
-      <EndProperty Name="Paquete">
-        <ScalarProperty Name="ID" ColumnName="PaqueteId" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="AspNetMenuAccion" TypeName="Model.AspNetMenuAccion" StoreEntitySet="AspNetMenuAccion">
-      <EndProperty Name="Menu">
-        <ScalarProperty Name="ID" ColumnName="IdMenu" />
-      </EndProperty>
-      <EndProperty Name="Accion">
-        <ScalarProperty Name="ID" ColumnName="IdAccion" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <EntitySetMapping Name="Bus">
-      <EntityTypeMapping TypeName="Model.Bus">
-        <MappingFragment StoreEntitySet="Bus">
-          <ScalarProperty Name="TrayectoId" ColumnName="TrayectoId" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EnlaceBusPasajero">
-      <EntityTypeMapping TypeName="Model.EnlaceBusPasajero">
-        <MappingFragment StoreEntitySet="EnlaceBusPasajero">
-          <ScalarProperty Name="NroButaca" ColumnName="NroButaca" />
-          <ScalarProperty Name="PasajeroId" ColumnName="PasajeroId" />
-          <ScalarProperty Name="BusId" ColumnName="BusId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EnlaceReservaHotelHabitacion">
-      <EntityTypeMapping TypeName="Model.EnlaceReservaHotelHabitacion">
-        <MappingFragment StoreEntitySet="EnlaceReservaHotelHabitacion">
-          <ScalarProperty Name="TipoHabitacionId" ColumnName="TipoHabitacionId" />
-          <ScalarProperty Name="HabitacionId" ColumnName="HabitacionId" />
-          <ScalarProperty Name="ReservaHotelId" ColumnName="ReservaHotelId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Habitacion">
-      <EntityTypeMapping TypeName="Model.Habitacion">
-        <MappingFragment StoreEntitySet="Habitacion">
-          <ScalarProperty Name="Numero" ColumnName="Numero" />
-          <ScalarProperty Name="Piso" ColumnName="Piso" />
-          <ScalarProperty Name="HotelId" ColumnName="HotelId" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ReservaBus">
-      <EntityTypeMapping TypeName="Model.ReservaBus">
-        <MappingFragment StoreEntitySet="ReservaBus">
-          <ScalarProperty Name="UsuarioCancela" ColumnName="UsuarioCancela" />
-          <ScalarProperty Name="FechaCancelada" ColumnName="FechaCancelada" />
-          <ScalarProperty Name="UsuarioConfirma" ColumnName="UsuarioConfirma" />
-          <ScalarProperty Name="FechaComfirmada" ColumnName="FechaComfirmada" />
-          <ScalarProperty Name="Confirmada" ColumnName="Confirmada" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioAlta" ColumnName="UsuarioAlta" />
-          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ReservaHotel">
-      <EntityTypeMapping TypeName="Model.ReservaHotel">
-        <MappingFragment StoreEntitySet="ReservaHotel">
-          <ScalarProperty Name="PaqueteId" ColumnName="PaqueteId" />
-          <ScalarProperty Name="Activa" ColumnName="Activa" />
-          <ScalarProperty Name="UsuarioCancela" ColumnName="UsuarioCancela" />
-          <ScalarProperty Name="FechaCancelada" ColumnName="FechaCancelada" />
-          <ScalarProperty Name="UsuarioConfirma" ColumnName="UsuarioConfirma" />
-          <ScalarProperty Name="FechaComfirmada" ColumnName="FechaComfirmada" />
-          <ScalarProperty Name="Confirmada" ColumnName="Confirmada" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioAlta" ColumnName="UsuarioAlta" />
-          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-          <ScalarProperty Name="HotelId" ColumnName="HotelId" />
-          <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
-          <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
-          <ScalarProperty Name="TitularId" ColumnName="TitularId" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TipoHabitacion">
-      <EntityTypeMapping TypeName="Model.TipoHabitacion">
-        <MappingFragment StoreEntitySet="TipoHabitacion">
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TipoHotel">
-      <EntityTypeMapping TypeName="Model.TipoHotel">
-        <MappingFragment StoreEntitySet="TipoHotel">
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TipoTrayecto">
-      <EntityTypeMapping TypeName="Model.TipoTrayecto">
-        <MappingFragment StoreEntitySet="TipoTrayecto">
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="EnlaceReservaHotelPasajero" TypeName="Model.EnlaceReservaHotelPasajero" StoreEntitySet="EnlaceReservaHotelPasajero">
-      <EndProperty Name="ReservaHotel">
-        <ScalarProperty Name="ID" ColumnName="ReservaHotelId" />
-      </EndProperty>
-      <EndProperty Name="Pasajero">
-        <ScalarProperty Name="ID" ColumnName="PasajeroId" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="EnlaceHabitacionTipoHabitacion" TypeName="Model.EnlaceHabitacionTipoHabitacion" StoreEntitySet="EnlaceHabitacionTipoHabitacion">
-      <EndProperty Name="TipoHabitacion">
-        <ScalarProperty Name="ID" ColumnName="TipoHabitacionId" />
-      </EndProperty>
-      <EndProperty Name="Habitacion">
-        <ScalarProperty Name="ID" ColumnName="HabitacionId" />
-      </EndProperty>
-    </AssociationSetMapping>
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="FaroHotelModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="FaroHotelModel.Store.sp_upgraddiagrams" />
   </EntityContainerMapping>
 </Mapping>

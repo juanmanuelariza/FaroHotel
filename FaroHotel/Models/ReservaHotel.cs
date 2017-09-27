@@ -18,7 +18,7 @@ namespace FaroHotel.Models
         public ReservaHotel()
         {
             this.EnlaceReservaHotelHabitacion = new HashSet<EnlaceReservaHotelHabitacion>();
-            this.Pasajero1 = new HashSet<Pasajero>();
+            this.EnlaceReservaHotelPasajero = new HashSet<EnlaceReservaHotelPasajero>();
         }
     
         public int ID { get; set; }
@@ -36,7 +36,6 @@ namespace FaroHotel.Models
         public Nullable<System.DateTime> FechaCancelada { get; set; }
         public string UsuarioCancela { get; set; }
         public bool Activa { get; set; }
-        public Nullable<int> PaqueteId { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual AspNetUsers AspNetUsers1 { get; set; }
@@ -44,10 +43,9 @@ namespace FaroHotel.Models
         public virtual AspNetUsers AspNetUsers3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EnlaceReservaHotelHabitacion> EnlaceReservaHotelHabitacion { get; set; }
-        public virtual Paquete Paquete { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EnlaceReservaHotelPasajero> EnlaceReservaHotelPasajero { get; set; }
         public virtual Pasajero Pasajero { get; set; }
         public virtual TipoHotel TipoHotel { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pasajero> Pasajero1 { get; set; }
     }
 }

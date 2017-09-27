@@ -51,6 +51,45 @@
     });
 
     $('#btnGoStep4').click(function () {
+        //HAGO RESERVA
+        var ParamFecha = '';
+        var ParamHotelId = '';
+        var ParamNoches = '';
+        var ParamTitularId = '';
+
+
+        var ParamTipoHabitacionesIds = [];
+        $(".SelectTipoHabitacion").each(function () {
+            ParamTipoHabitacionesIds.push($(this).val());            
+        });
+        console.log(ParamTipoHabitacionesIds.join());
+
+        var ParamNroHabitacionesIds = [];
+        $(".SelectNroHabitacion").each(function () {
+            ParamNroHabitacionesIds.push($(this).val());
+        });
+        console.log(ParamNroHabitacionesIds.join());
+
+        var ParamPaxIds = [];
+        $(".PaxIds").each(function () {
+            ParamPaxIds.push($(this).val());
+        });
+        console.log(ParamPaxIds.join());
+
+        var ParamPaquetesIds = [];
+        $(".SelectPaquetes").each(function () {
+            ParamPaquetesIds.push($(this).val());
+        });
+        console.log(ParamPaquetesIds.join());
+
+
+
+
+
+
+
+
+        //PASO DE AGRADECIMIENTO
         $('#Panel_Step3').fadeOut();
         $('#Panel_Step4').fadeIn();
         $('body').animate({ scrollTop: 0 }, 500);

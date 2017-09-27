@@ -17,8 +17,8 @@ namespace FaroHotel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Paquete()
         {
+            this.EnlaceReservaHotelPasajero = new HashSet<EnlaceReservaHotelPasajero>();
             this.Ventanilla = new HashSet<Ventanilla>();
-            this.ReservaHotel = new HashSet<ReservaHotel>();
         }
     
         public int ID { get; set; }
@@ -35,13 +35,13 @@ namespace FaroHotel.Models
         public bool BusIda { get; set; }
         public bool BusVuelta { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EnlaceReservaHotelPasajero> EnlaceReservaHotelPasajero { get; set; }
         public virtual TipoCuota TipoCuota { get; set; }
         public virtual TipoDescripcionPaquete TipoDescripcionPaquete { get; set; }
         public virtual TipoNoche TipoNoche { get; set; }
         public virtual TipoTemporada TipoTemporada { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ventanilla> Ventanilla { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReservaHotel> ReservaHotel { get; set; }
     }
 }
