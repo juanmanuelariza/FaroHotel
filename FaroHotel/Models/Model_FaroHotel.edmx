@@ -826,9 +826,15 @@
           <Parameter Name="UserName" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="InsertBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Fecha" Type="date" Mode="In" />
+          <Parameter Name="HotelId" Type="int" Mode="In" />
+          <Parameter Name="Noches" Type="int" Mode="In" />
+          <Parameter Name="TitularId" Type="int" Mode="In" />
           <Parameter Name="TipoHabitacionesIds" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="NroHabitacionesIds" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="PasajerosIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="PaquetesIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UsuarioAlta" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -1993,9 +1999,15 @@
           <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="InsertBooking" ReturnType="Collection(Int32)">
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="HotelId" Mode="In" Type="Int32" />
+            <Parameter Name="Noches" Mode="In" Type="Int32" />
+            <Parameter Name="TitularId" Mode="In" Type="Int32" />
             <Parameter Name="TipoHabitacionesIds" Mode="In" Type="String" />
             <Parameter Name="NroHabitacionesIds" Mode="In" Type="String" />
             <Parameter Name="PasajerosIds" Mode="In" Type="String" />
+            <Parameter Name="PaquetesIds" Mode="In" Type="String" />
+            <Parameter Name="UsuarioAlta" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />

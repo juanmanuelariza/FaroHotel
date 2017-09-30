@@ -933,9 +933,15 @@
       <Parameter Name="UserName" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="InsertBooking" ReturnType="Collection(Int32)">
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+      <Parameter Name="HotelId" Mode="In" Type="Int32" />
+      <Parameter Name="Noches" Mode="In" Type="Int32" />
+      <Parameter Name="TitularId" Mode="In" Type="Int32" />
       <Parameter Name="TipoHabitacionesIds" Mode="In" Type="String" />
       <Parameter Name="NroHabitacionesIds" Mode="In" Type="String" />
       <Parameter Name="PasajerosIds" Mode="In" Type="String" />
+      <Parameter Name="PaquetesIds" Mode="In" Type="String" />
+      <Parameter Name="UsuarioAlta" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_alterdiagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />

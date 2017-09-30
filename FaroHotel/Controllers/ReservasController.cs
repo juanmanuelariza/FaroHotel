@@ -1,4 +1,5 @@
 ﻿using FaroHotel.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,33 @@ namespace FaroHotel.Controllers
             ViewBag.NochesId = ParamNochesId;
             ViewBag.CantHabitaciones = ParamHabitaciones;
             ViewBag.CantPasajeros = ParamPasajeros;
-            ViewBag.TipoHabitacion = new SelectList(db.TipoHabitacion.OrderBy(c => c.ID), "ID", "Descripcion");
+            ViewBag.SelectTipoHabitacion = new SelectList(db.TipoHabitacion.OrderBy(c => c.ID), "ID", "Descripcion");
             return PartialView("_Step1");
+        }
+
+
+        public ActionResult Step2(DateTime ParamFecha, int ParamNochesId, int ParamHabitaciones, int ParamPasajeros)
+        {
+            ViewBag.NochesId = ParamNochesId;
+            ViewBag.CantHabitaciones = ParamHabitaciones;
+            ViewBag.CantPasajeros = ParamPasajeros;
+            ViewBag.SelectPaquetesDisponibles = new SelectList(db.Paquete.Where(p => p.FechaInicio <= ParamFecha && p.FechaFin >= ParamFecha) , "ID", "Titulo");
+            return PartialView("_Step2");
+        }
+        public ActionResult Step3()
+        {
+            return PartialView("_Step3"); 
+
+        }
+        public ActionResult Step4(DateTime ParamFecha, int ParamHotelId, int ParamNochesId, int ParamTitularId, string ParamTipoHabitacionesIds, string ParamNroHabitacionesIds, string ParamPasajerosIds, string ParamPaquetesIds)
+        {
+            db.InsertBooking(ParamFecha, ParamHotelId, ParamNochesId, ParamTitularId, ParamTipoHabitacionesIds, ParamNroHabitacionesIds, ParamPasajerosIds, ParamPaquetesIds, User.Identity.GetUserId());
+            return PartialView("_Step4");
+        }
+
+        public ActionResult Bus()
+        {
+            return PartialView("_Busqueda");
         }
 
         // GET: NroHabitaciones
@@ -40,32 +66,10 @@ namespace FaroHotel.Controllers
                             {
                                 ID = h.ID,
                                 Numero = h.Numero
-                            });                        
+                            });
             return Json(tmp_room, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Step2(string ParamFecha, int ParamNochesId, int ParamHabitaciones, int ParamPasajeros)
-        {
-            ViewBag.NochesId = ParamNochesId;
-            ViewBag.CantHabitaciones = ParamHabitaciones;
-            ViewBag.CantPasajeros = ParamPasajeros;
-            return PartialView("_Step2");
-        }
-        public ActionResult Step3()
-        {
-            return PartialView("_Step3"); 
-
-        }
-        public ActionResult Step4()
-        {
-            return PartialView("_Step4");
-        }
-
-        public ActionResult Bus()
-        {
-            return PartialView("_Busqueda");
-        }
-        
         [HttpGet]
         public JsonResult BuscarPax(string ParamDNI)
         {
@@ -83,6 +87,19 @@ namespace FaroHotel.Controllers
             //db.Pasajero.Where(p => p.DNI == ArgDNI).Select();
             return Json(tmp_Pax, JsonRequestBehavior.AllowGet);
         }
-        
+
+        // GET: NroHabitaciones
+        [HttpGet]
+        public ActionResult Paquetes(int ParamPaqueteId)
+        {
+            var tmp_paquete = (from p in db.Paquete
+                            where p.ID == ParamPaqueteId
+                            select new
+                            {
+                                BusIda = p.BusIda,
+                                BusVuelta = p.BusVuelta
+                            });
+            return Json(tmp_paquete, JsonRequestBehavior.AllowGet);
+        }
     }
 }

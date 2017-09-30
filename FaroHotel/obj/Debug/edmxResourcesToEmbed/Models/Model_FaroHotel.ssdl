@@ -821,9 +821,15 @@
     <Parameter Name="UserName" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="InsertBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Fecha" Type="date" Mode="In" />
+    <Parameter Name="HotelId" Type="int" Mode="In" />
+    <Parameter Name="Noches" Type="int" Mode="In" />
+    <Parameter Name="TitularId" Type="int" Mode="In" />
     <Parameter Name="TipoHabitacionesIds" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="NroHabitacionesIds" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="PasajerosIds" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="PaquetesIds" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UsuarioAlta" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />

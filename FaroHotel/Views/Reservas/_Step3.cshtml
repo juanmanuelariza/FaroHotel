@@ -52,12 +52,6 @@
 
     $('#btnGoStep4').click(function () {
         //HAGO RESERVA
-        var ParamFecha = '';
-        var ParamHotelId = '';
-        var ParamNoches = '';
-        var ParamTitularId = '';
-
-
         var ParamTipoHabitacionesIds = [];
         $(".SelectTipoHabitacion").each(function () {
             ParamTipoHabitacionesIds.push($(this).val());            
@@ -86,11 +80,11 @@
 
 
 
-
+        debugger
 
 
         //PASO DE AGRADECIMIENTO
-        $('#Panel_Step3').fadeOut();
+        //$('#Panel_Step3').fadeOut();
         $('#Panel_Step4').fadeIn();
         $('body').animate({ scrollTop: 0 }, 500);
         $('#wizard_step3').attr('class', 'done');
@@ -101,7 +95,17 @@
         $.ajax({
             method: "POST",
             url: _url,
-            data: { __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
+            data: {                
+                ParamFecha: $('#FechaEntrada').val(),
+                ParamHotelId: $('#DDL_Hotel option:selected').val(),
+                ParamNochesId: $('#NochesId option:selected').val(),
+                ParamTitularId: $('#PaxID_0').val(), //CAMBIAR POR EL CORRECTO
+                ParamTipoHabitacionesIds: ParamTipoHabitacionesIds.join(),
+                ParamNroHabitacionesIds: ParamNroHabitacionesIds.join(),
+                ParamPasajerosIds: ParamPaxIds.join(),
+                ParamPaquetesIds: ParamPaquetesIds.join(),
+                __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
+            },
             success: function (result) {
                 $('#Panel_Step4').html(result);
             }

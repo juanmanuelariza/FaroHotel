@@ -77,8 +77,24 @@ namespace FaroHotel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPermisosPorNombreDeUsuario_Result>("GetPermisosPorNombreDeUsuario", userNameParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> InsertBooking(string tipoHabitacionesIds, string nroHabitacionesIds, string pasajerosIds)
+        public virtual ObjectResult<Nullable<int>> InsertBooking(Nullable<System.DateTime> fecha, Nullable<int> hotelId, Nullable<int> noches, Nullable<int> titularId, string tipoHabitacionesIds, string nroHabitacionesIds, string pasajerosIds, string paquetesIds, string usuarioAlta)
         {
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("Fecha", fecha) :
+                new ObjectParameter("Fecha", typeof(System.DateTime));
+    
+            var hotelIdParameter = hotelId.HasValue ?
+                new ObjectParameter("HotelId", hotelId) :
+                new ObjectParameter("HotelId", typeof(int));
+    
+            var nochesParameter = noches.HasValue ?
+                new ObjectParameter("Noches", noches) :
+                new ObjectParameter("Noches", typeof(int));
+    
+            var titularIdParameter = titularId.HasValue ?
+                new ObjectParameter("TitularId", titularId) :
+                new ObjectParameter("TitularId", typeof(int));
+    
             var tipoHabitacionesIdsParameter = tipoHabitacionesIds != null ?
                 new ObjectParameter("TipoHabitacionesIds", tipoHabitacionesIds) :
                 new ObjectParameter("TipoHabitacionesIds", typeof(string));
@@ -91,7 +107,15 @@ namespace FaroHotel.Models
                 new ObjectParameter("PasajerosIds", pasajerosIds) :
                 new ObjectParameter("PasajerosIds", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertBooking", tipoHabitacionesIdsParameter, nroHabitacionesIdsParameter, pasajerosIdsParameter);
+            var paquetesIdsParameter = paquetesIds != null ?
+                new ObjectParameter("PaquetesIds", paquetesIds) :
+                new ObjectParameter("PaquetesIds", typeof(string));
+    
+            var usuarioAltaParameter = usuarioAlta != null ?
+                new ObjectParameter("UsuarioAlta", usuarioAlta) :
+                new ObjectParameter("UsuarioAlta", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertBooking", fechaParameter, hotelIdParameter, nochesParameter, titularIdParameter, tipoHabitacionesIdsParameter, nroHabitacionesIdsParameter, pasajerosIdsParameter, paquetesIdsParameter, usuarioAltaParameter);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
