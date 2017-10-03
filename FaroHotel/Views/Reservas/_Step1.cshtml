@@ -33,7 +33,6 @@
         <div class="x_panel">
             <div class="x_content">
                 <div class="actionBar">
-                    <span id="btnBackStep0" class="buttonPrevious btn btn-success">Atrás</span>
                     <span id="btnGoStep2" class="buttonNext btn btn-primary">Siguiente</span>
                 </div>
             </div>
@@ -43,22 +42,29 @@
 </div>
 
     <script type="text/javascript">
-        $(function () {
-            $(".SelectTipoHabitacion").change(function () {
-                var selectedItem = $(this).val();
-                var boxId = $(this).attr("data-boxId");
-                $('#SelectNumHababitacion_' + boxId + ' option').remove();
-                $.getJSON('/Reservas/Habitaciones', { ParamTipoHabitacion: selectedItem }, function (data) {
+        $(".SelectTipoHabitacion").change(function () {
+            var selectedItem = $(this).val();
+            var boxId = $(this).attr("data-boxId");
+            $('#SelectNumHababitacion_' + boxId + ' option').remove();
+
+            var _url = GetPathApp("/Reservas/Habitaciones");
+            $.ajax({
+                method: "POST",
+                url: _url,
+                data: {
+                    ParamFecha: $('#FechaEntrada').val(),
+                    ParamHotelId: $('#DDL_Hotel option:selected').val(),
+                    ParamTipoHabitacion: selectedItem,
+                    __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
+                },
+                success: function (data) {
                     $.each(data, function () {
                         $('#SelectNumHababitacion_' + boxId).append('<option value=' +
-                          this.ID + '>' + this.Numero + '</option>');
+                            this.ID + '>' + this.Numero + '</option>');
                     });
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    alert('Error!');
-                });
+                }
             });
         });
-
 
         $('#btnGoStep2').click(function () {
             $('#Panel_Step1').fadeOut();
@@ -67,9 +73,9 @@
             $('body').animate({ scrollTop: 0 }, 500);
             $('#wizard_step1').attr('class', 'done');
             $('#wizard_step2').attr('class', 'selected');
-            console
             var _url = GetPathApp("/Reservas/Step2");
 
+            console.log($('#FechaEntrada').val());
             $.ajax({
                 method: "POST",
                 url: _url,

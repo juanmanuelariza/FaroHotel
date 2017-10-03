@@ -337,7 +337,6 @@ function abrirModal(ruta, accion, titulo) {
     setTituloModal(accion, titulo);
     setBotonesModal(accion);
 
-
     $.ajax({
         type: "GET",
         url: ruta,
@@ -359,6 +358,32 @@ function abrirModal(ruta, accion, titulo) {
 
 }
 
+function abrirModalPost(ruta, accion, titulo, data) {
+    ruta = GetPathApp(ruta);
+
+    setTituloModal(accion, titulo);
+    setBotonesModal(accion);
+
+    $.ajax({
+        type: "POST",
+        url: ruta,
+        data: data,
+        beforeSend: function (xhr) {
+            abrirWaiting();
+        },
+        success: function (result) {
+            debugger
+            $("#contenidoModal").html(result);
+            cerrarWaiting();
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            alert(thrownError);
+        }
+    });
+
+
+}
 function cerrarModal() {
     $('#myModal').modal('hide');
     //$('#myModal').on('hidden.bs.modal', function (e) {

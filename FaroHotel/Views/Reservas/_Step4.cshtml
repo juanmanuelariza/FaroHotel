@@ -6,15 +6,24 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                La solicitud sera evaluada por el administrador, la reserva esta sujeta a cambios.
-                <br />
-                Su número de solicutud de reserva es: 123456
+
+
+                @if (ViewBag.NroReserva > 0)
+                {
+                    <span>La solicitud sera evaluada por el administrador, la reserva esta sujeta a cambios.</span>
+                    <br />
+                    <span>Su número de solicutud de reserva es: 123456</span>
+                }
+                else
+                {
+                    <span>Ha ocurrido un error al solicitar la reserva.</span>
+                    <br />
+                    <span>Por favor comuniquese con el administrador</span>
+                }
+
             </div>
         </div>
     </div>
-
-
-
     <div class="col-md-12">
         <div class="x_panel">
             <div class="x_content">

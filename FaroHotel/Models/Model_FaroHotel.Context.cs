@@ -42,7 +42,6 @@ namespace FaroHotel.Models
         public virtual DbSet<MenuAspNetRolesAccion> MenuAspNetRolesAccion { get; set; }
         public virtual DbSet<Paquete> Paquete { get; set; }
         public virtual DbSet<Pasajero> Pasajero { get; set; }
-        public virtual DbSet<ReservaBus> ReservaBus { get; set; }
         public virtual DbSet<ReservaHotel> ReservaHotel { get; set; }
         public virtual DbSet<TipoCuota> TipoCuota { get; set; }
         public virtual DbSet<TipoDescripcionPaquete> TipoDescripcionPaquete { get; set; }
@@ -77,7 +76,7 @@ namespace FaroHotel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPermisosPorNombreDeUsuario_Result>("GetPermisosPorNombreDeUsuario", userNameParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> InsertBooking(Nullable<System.DateTime> fecha, Nullable<int> hotelId, Nullable<int> noches, Nullable<int> titularId, string tipoHabitacionesIds, string nroHabitacionesIds, string pasajerosIds, string paquetesIds, string usuarioAlta)
+        public virtual ObjectResult<InsertBooking_Result> InsertBooking(Nullable<System.DateTime> fecha, Nullable<int> hotelId, Nullable<int> noches, Nullable<int> titularId, string tipoHabitacionesIds, string nroHabitacionesIds, string pasajerosIds, string paquetesIds, string usuarioAlta, string busesIdaIds, string asientosIdaIds, string busesVueltaIds, string asientosVueltaIds)
         {
             var fechaParameter = fecha.HasValue ?
                 new ObjectParameter("Fecha", fecha) :
@@ -115,7 +114,23 @@ namespace FaroHotel.Models
                 new ObjectParameter("UsuarioAlta", usuarioAlta) :
                 new ObjectParameter("UsuarioAlta", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertBooking", fechaParameter, hotelIdParameter, nochesParameter, titularIdParameter, tipoHabitacionesIdsParameter, nroHabitacionesIdsParameter, pasajerosIdsParameter, paquetesIdsParameter, usuarioAltaParameter);
+            var busesIdaIdsParameter = busesIdaIds != null ?
+                new ObjectParameter("BusesIdaIds", busesIdaIds) :
+                new ObjectParameter("BusesIdaIds", typeof(string));
+    
+            var asientosIdaIdsParameter = asientosIdaIds != null ?
+                new ObjectParameter("AsientosIdaIds", asientosIdaIds) :
+                new ObjectParameter("AsientosIdaIds", typeof(string));
+    
+            var busesVueltaIdsParameter = busesVueltaIds != null ?
+                new ObjectParameter("BusesVueltaIds", busesVueltaIds) :
+                new ObjectParameter("BusesVueltaIds", typeof(string));
+    
+            var asientosVueltaIdsParameter = asientosVueltaIds != null ?
+                new ObjectParameter("AsientosVueltaIds", asientosVueltaIds) :
+                new ObjectParameter("AsientosVueltaIds", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertBooking_Result>("InsertBooking", fechaParameter, hotelIdParameter, nochesParameter, titularIdParameter, tipoHabitacionesIdsParameter, nroHabitacionesIdsParameter, pasajerosIdsParameter, paquetesIdsParameter, usuarioAltaParameter, busesIdaIdsParameter, asientosIdaIdsParameter, busesVueltaIdsParameter, asientosVueltaIdsParameter);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
@@ -219,6 +234,23 @@ namespace FaroHotel.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<GetHabitacionesDisponibles_Result> GetHabitacionesDisponibles(Nullable<System.DateTime> fecha, Nullable<int> hotelId, Nullable<int> tipoHabitacion)
+        {
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("Fecha", fecha) :
+                new ObjectParameter("Fecha", typeof(System.DateTime));
+    
+            var hotelIdParameter = hotelId.HasValue ?
+                new ObjectParameter("HotelId", hotelId) :
+                new ObjectParameter("HotelId", typeof(int));
+    
+            var tipoHabitacionParameter = tipoHabitacion.HasValue ?
+                new ObjectParameter("TipoHabitacion", tipoHabitacion) :
+                new ObjectParameter("TipoHabitacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetHabitacionesDisponibles_Result>("GetHabitacionesDisponibles", fechaParameter, hotelIdParameter, tipoHabitacionParameter);
         }
     }
 }

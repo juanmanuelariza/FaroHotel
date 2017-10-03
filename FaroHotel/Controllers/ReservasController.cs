@@ -32,7 +32,7 @@ namespace FaroHotel.Controllers
 
 
         public ActionResult Step2(DateTime ParamFecha, int ParamNochesId, int ParamHabitaciones, int ParamPasajeros)
-        {
+        {            
             ViewBag.NochesId = ParamNochesId;
             ViewBag.CantHabitaciones = ParamHabitaciones;
             ViewBag.CantPasajeros = ParamPasajeros;
@@ -44,30 +44,34 @@ namespace FaroHotel.Controllers
             return PartialView("_Step3"); 
 
         }
-        public ActionResult Step4(DateTime ParamFecha, int ParamHotelId, int ParamNochesId, int ParamTitularId, string ParamTipoHabitacionesIds, string ParamNroHabitacionesIds, string ParamPasajerosIds, string ParamPaquetesIds)
+        public ActionResult Step4(DateTime ParamFecha, int ParamHotelId, int ParamNochesId, int ParamTitularId, int[] ParamTipoHabitacionesIds, int[] ParamNroHabitacionesIds, int[] ParamPasajerosIds, int[] ParamPaquetesIds, int[] ParamBusIdaIds, int[] ParamAsientosIdaIds, int[] ParamBusVueltaIds, int[] ParamAsientosVueltaIds)        
         {
-            db.InsertBooking(ParamFecha, ParamHotelId, ParamNochesId, ParamTitularId, ParamTipoHabitacionesIds, ParamNroHabitacionesIds, ParamPasajerosIds, ParamPaquetesIds, User.Identity.GetUserId());
+            InsertBooking_Result result = db.InsertBooking(ParamFecha, ParamHotelId, ParamNochesId, ParamTitularId, 
+                string.Join(",", ParamTipoHabitacionesIds) , string.Join(",", ParamNroHabitacionesIds), 
+                string.Join(",", ParamPasajerosIds), string.Join(",", ParamPaquetesIds), 
+                User.Identity.GetUserId(), string.Join(",", ParamBusIdaIds), string.Join(",", ParamAsientosIdaIds), 
+                string.Join(",", ParamBusVueltaIds), string.Join(",", ParamAsientosVueltaIds)).FirstOrDefault();
+            ViewBag.NroReserva = result.ReservaHotelID;
             return PartialView("_Step4");
         }
 
-        public ActionResult Bus()
+        public ActionResult Bus(DateTime ParamFecha)
         {
-            return PartialView("_Busqueda");
+            var buses = from b in db.Bus where b.Fecha == ParamFecha
+                        select b.ID;
+            ViewBag.BusesIds = buses.ToList();
+            return PartialView("_Bus");
         }
 
         // GET: NroHabitaciones
-        [HttpGet]
-        public ActionResult Habitaciones(string ParamTipoHabitacion)
-        {
-            int ArgTipoHabitacion = int.Parse(ParamTipoHabitacion);
-            var tmp_room = (from h in db.Habitacion
-                            where h.TipoHabitacion.Any(x => x.ID == ArgTipoHabitacion)
-                            select new
-                            {
-                                ID = h.ID,
-                                Numero = h.Numero
-                            });
-            return Json(tmp_room, JsonRequestBehavior.AllowGet);
+        [HttpPost]
+        public ActionResult Habitaciones(DateTime ParamFecha, int ParamHotelId, int ParamTipoHabitacion)
+        {   
+            var rslt = db.GetHabitacionesDisponibles(ParamFecha, ParamHotelId, ParamTipoHabitacion).Select(h => new {
+                ID = h.ID,
+                Numero = h.Numero
+            }).ToList();
+            return Json(rslt);
         }
 
         [HttpGet]
@@ -87,6 +91,21 @@ namespace FaroHotel.Controllers
             //db.Pasajero.Where(p => p.DNI == ArgDNI).Select();
             return Json(tmp_Pax, JsonRequestBehavior.AllowGet);
         }
+
+        // Post: NroHabitaciones
+        [HttpPost]
+        public ActionResult OcupacionBus(int[] ParamBusesIds)
+        {
+            var rslt = from ob in db.EnlaceBusPasajero
+                       where ParamBusesIds.Contains(ob.BusId)
+                       select new {
+                           BusId = ob.BusId,
+                           NroButaca = ob.NroButaca
+                       };
+            return Json(rslt);
+        }
+
+        
 
         // GET: NroHabitaciones
         [HttpGet]

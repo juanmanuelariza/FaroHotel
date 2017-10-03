@@ -218,6 +218,9 @@
     <Compile Include="Models\func_Split_Result.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetHabitacionesDisponibles_Result.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetPermisosPorNombreDeUsuario_Result.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
@@ -225,6 +228,9 @@
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InsertBooking_Result.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ClassesVM\MenuVM.cs" />
     <Compile Include="Models\Menu.cs">
@@ -261,9 +267,6 @@
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pasajero.cs">
-      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ReservaBus.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReservaHotel.cs">
@@ -402,7 +405,7 @@
     <Content Include="Views\Paquetes\Edit.cshtml" />
     <Content Include="Views\Paquetes\Index.cshtml" />
     <Content Include="Views\Reservas\Index.cshtml" />
-    <Content Include="Views\Reservas\_Busqueda.cshtml" />
+    <Content Include="Views\Reservas\_Bus.cshtml" />
     <Content Include="Views\Usuarios\Create.cshtml" />
     <Content Include="Views\Usuarios\Delete.cshtml" />
     <Content Include="Views\Usuarios\Details.cshtml" />

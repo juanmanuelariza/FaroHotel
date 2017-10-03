@@ -175,22 +175,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ReservaBus">
-      <EntityTypeMapping TypeName="FaroHotelModel.ReservaBus">
-        <MappingFragment StoreEntitySet="ReservaBus">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-          <ScalarProperty Name="UsuarioAlta" ColumnName="UsuarioAlta" />
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="Confirmada" ColumnName="Confirmada" />
-          <ScalarProperty Name="FechaComfirmada" ColumnName="FechaComfirmada" />
-          <ScalarProperty Name="UsuarioConfirma" ColumnName="UsuarioConfirma" />
-          <ScalarProperty Name="FechaCancelada" ColumnName="FechaCancelada" />
-          <ScalarProperty Name="UsuarioCancela" ColumnName="UsuarioCancela" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ReservaHotel">
       <EntityTypeMapping TypeName="FaroHotelModel.ReservaHotel">
         <MappingFragment StoreEntitySet="ReservaHotel">
@@ -349,7 +333,13 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="InsertBooking" FunctionName="FaroHotelModel.Store.InsertBooking" />
+    <FunctionImportMapping FunctionImportName="InsertBooking" FunctionName="FaroHotelModel.Store.InsertBooking">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FaroHotelModel.InsertBooking_Result">
+          <ScalarProperty Name="ReservaHotelID" ColumnName="ReservaHotelID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="FaroHotelModel.Store.sp_alterdiagram" />
     <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="FaroHotelModel.Store.sp_creatediagram" />
     <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="FaroHotelModel.Store.sp_dropdiagram" />
@@ -374,5 +364,21 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="FaroHotelModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="FaroHotelModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="GetHabitacionesDisponibles" FunctionName="FaroHotelModel.Store.GetHabitacionesDisponibles">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FaroHotelModel.GetHabitacionesDisponibles_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <AssociationSetMapping Name="EnlaceReservaHotelBus" TypeName="FaroHotelModel.EnlaceReservaHotelBus" StoreEntitySet="EnlaceReservaHotelBus">
+      <EndProperty Name="ReservaHotel">
+        <ScalarProperty Name="ID" ColumnName="ReservaHotelId" />
+      </EndProperty>
+      <EndProperty Name="Bus">
+        <ScalarProperty Name="ID" ColumnName="BusId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

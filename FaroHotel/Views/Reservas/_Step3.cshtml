@@ -5,15 +5,37 @@
                 <h2>Extras</h2>
                 <div class="clearfix"></div>
             </div>
-            <div class="x_content">
-                Listado de extas
-                <br />
-                <br />
-                Cochera en Faro II
-                <br />
-                Vouchers
-                <br />
-                Cuna
+            <div class="x_content">                
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width:10%">#</th>
+                            <th style="width:40%">Extra</th>
+                            <th style="width:40%">Cantidad</th>
+                            <th style="width:10%">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Cochera en Faro II</td>
+                            <td>asd</td>
+                            <td>$333</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Vouchers</td>
+                            <td>asd</td>
+                            <td>$444</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Cuna</td>
+                            <td>asd</td>
+                            <td>$555</td>
+                        </tr>
+                    </tbody>
+                </table>             
             </div>
         </div>
     </div>
@@ -25,6 +47,26 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
+                <table id="tablaPasajeros" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width:10%">#</th>
+                            <th style="width:40%">Pasajero</th>
+                            <th style="width:40%">Paquete</th>
+                            <th style="width:10%">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_content" style="text-align: right; padding-right: 2vw;">
+                <h2>TOTAL A PAGAR: $10000</h2>
             </div>
         </div>
     </div>
@@ -50,38 +92,97 @@
         $('#wizard_step3').attr('class', 'disabled');
     });
 
+    $(document).ready(function () {
+        //Completar tablas
+        //Tabla Pasajeros
+        
+        var ArrayPaxApellidoyNombre = [];
+        var ArrayPaquetes = [];
+        $(".PaxApellidoyNombre").each(function () { ArrayPaxApellidoyNombre.push($(this).val()); });
+        $(".SelectPaquetesDisponibles option:selected").each(function () { ArrayPaquetes.push($(this).text()); });
+        var d = '';
+        for (var i = 0; i < ArrayPaxApellidoyNombre.length; i++) {
+            d += '<tr>' +
+            '<th scope="row">' + (i + 1) + '</th>' +
+            '<td>' + ArrayPaxApellidoyNombre[i] + '</td>' +
+            '<td>' + ArrayPaquetes[i] + '</td>' +
+            '<td>$1000</td>' +
+            '</tr>';
+        }
+        $("#tablaPasajeros tbody").append(d);
+    });
+
     $('#btnGoStep4').click(function () {
         //HAGO RESERVA
         var ParamTipoHabitacionesIds = [];
-        $(".SelectTipoHabitacion").each(function () {
-            ParamTipoHabitacionesIds.push($(this).val());            
-        });
-        console.log(ParamTipoHabitacionesIds.join());
-
         var ParamNroHabitacionesIds = [];
-        $(".SelectNroHabitacion").each(function () {
-            ParamNroHabitacionesIds.push($(this).val());
-        });
-        console.log(ParamNroHabitacionesIds.join());
-
         var ParamPaxIds = [];
-        $(".PaxIds").each(function () {
-            ParamPaxIds.push($(this).val());
-        });
-        console.log(ParamPaxIds.join());
-
         var ParamPaquetesIds = [];
-        $(".SelectPaquetes").each(function () {
-            ParamPaquetesIds.push($(this).val());
+        var ParamBusIdaIds = [];
+        var ParamAsientosIdaIds = [];
+        var ParamBusVueltaIds = [];
+        var ParamAsientosVueltaIds = [];
+        
+        $(".SelectTipoHabitacion").each(function () { ParamTipoHabitacionesIds.push($(this).val()); });
+        $(".SelectNroHabitacion").each(function () { ParamNroHabitacionesIds.push($(this).val()); });
+        $(".PaxIds").each(function () { ParamPaxIds.push($(this).val()); });
+        $(".SelectPaquetesDisponibles").each(function () { ParamPaquetesIds.push($(this).val()); });
+        $(".BusIdaIds").each(function () {
+            if ($(this).val() == "") {
+                ParamBusIdaIds.push("0");
+            }
+            else {
+                ParamBusIdaIds.push($(this).val());
+            }
         });
-        console.log(ParamPaquetesIds.join());
+        $(".ButacaBusIda").each(function () {
+            if ($(this).text() == "") {
+                ParamAsientosIdaIds.push("0");
+            }
+            else {
+                ParamAsientosIdaIds.push($(this).text());
+            }
+        });
+        $(".BusVueltaIds").each(function () {
+            if ($(this).val() == "") {
+                ParamBusVueltaIds.push("0");
+            }
+            else {
+                ParamBusVueltaIds.push($(this).val());
+            }
+        });
+        $(".ButacaBusVuelta").each(function () {
+            if ($(this).text() == "") {
+                ParamAsientosVueltaIds.push("0");
+            }
+            else {
+                ParamAsientosVueltaIds.push($(this).text());
+            }
+        });
 
-
-
-
-
-        debugger
-
+        var _url = GetPathApp("/Reservas/Step4");        
+        $.ajax({
+            method: "POST",
+            url: _url,
+            data: {                
+                ParamFecha: $('#FechaEntrada').val(),
+                ParamHotelId: $('#DDL_Hotel option:selected').val(),
+                ParamNochesId: $('#NochesId option:selected').text(),
+                ParamTitularId: $('#PaxID_0').val(), //CAMBIAR POR EL CORRECTO
+                ParamTipoHabitacionesIds: ParamTipoHabitacionesIds,
+                ParamNroHabitacionesIds: ParamNroHabitacionesIds,
+                ParamPasajerosIds: ParamPaxIds,
+                ParamPaquetesIds: ParamPaquetesIds,
+                ParamBusIdaIds: ParamBusIdaIds,
+                ParamAsientosIdaIds: ParamAsientosIdaIds,
+                ParamBusVueltaIds: ParamBusVueltaIds,
+                ParamAsientosVueltaIds: ParamAsientosVueltaIds,
+                __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
+            },
+            success: function (result) {
+                $('#Panel_Step4').html(result);
+            }
+        });
 
         //PASO DE AGRADECIMIENTO
         //$('#Panel_Step3').fadeOut();
@@ -89,26 +190,5 @@
         $('body').animate({ scrollTop: 0 }, 500);
         $('#wizard_step3').attr('class', 'done');
         $('#wizard_step4').attr('class', 'selected');
-
-        var _url = GetPathApp("/Reservas/Step4");
-
-        $.ajax({
-            method: "POST",
-            url: _url,
-            data: {                
-                ParamFecha: $('#FechaEntrada').val(),
-                ParamHotelId: $('#DDL_Hotel option:selected').val(),
-                ParamNochesId: $('#NochesId option:selected').val(),
-                ParamTitularId: $('#PaxID_0').val(), //CAMBIAR POR EL CORRECTO
-                ParamTipoHabitacionesIds: ParamTipoHabitacionesIds.join(),
-                ParamNroHabitacionesIds: ParamNroHabitacionesIds.join(),
-                ParamPasajerosIds: ParamPaxIds.join(),
-                ParamPaquetesIds: ParamPaquetesIds.join(),
-                __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
-            },
-            success: function (result) {
-                $('#Panel_Step4').html(result);
-            }
-        });
     });
 </script>

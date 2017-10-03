@@ -66,10 +66,6 @@
     <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
     <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-    <NavigationProperty Name="ReservaBus" Relationship="Self.FK_ReservaBus_AspNetUsers" FromRole="AspNetUsers" ToRole="ReservaBus" />
-    <NavigationProperty Name="ReservaBus1" Relationship="Self.FK_ReservaBus_AspNetUsers1" FromRole="AspNetUsers" ToRole="ReservaBus" />
-    <NavigationProperty Name="ReservaBus2" Relationship="Self.FK_ReservaBus_AspNetUsers2" FromRole="AspNetUsers" ToRole="ReservaBus" />
-    <NavigationProperty Name="ReservaBus3" Relationship="Self.FK_ReservaBus_AspNetUsers3" FromRole="AspNetUsers" ToRole="ReservaBus" />
     <NavigationProperty Name="ReservaHotel" Relationship="Self.FK_ReservaHotel_AspNetUsers" FromRole="AspNetUsers" ToRole="ReservaHotel" />
     <NavigationProperty Name="ReservaHotel1" Relationship="Self.FK_ReservaHotel_AspNetUsers1" FromRole="AspNetUsers" ToRole="ReservaHotel" />
     <NavigationProperty Name="ReservaHotel2" Relationship="Self.FK_ReservaHotel_AspNetUsers2" FromRole="AspNetUsers" ToRole="ReservaHotel" />
@@ -86,6 +82,7 @@
     <Property Name="TrayectoId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="TipoTrayecto" Relationship="Self.FK_Bus_TipoTrayecto" FromRole="Bus" ToRole="TipoTrayecto" />
     <NavigationProperty Name="EnlaceBusPasajero" Relationship="Self.FK_EnlaceBusPasajero_Bus" FromRole="Bus" ToRole="EnlaceBusPasajero" />
+    <NavigationProperty Name="ReservaHotel" Relationship="FaroHotelModel.EnlaceReservaHotelBus" FromRole="Bus" ToRole="ReservaHotel" />
   </EntityType>
   <EntityType Name="EnlaceBusPasajero">
     <Key>
@@ -218,25 +215,6 @@
     <NavigationProperty Name="TipoSexo" Relationship="Self.FK_Pasajero_TipoSexo" FromRole="Pasajero" ToRole="TipoSexo" />
     <NavigationProperty Name="ReservaHotel" Relationship="Self.FK_ReservaHotel_Pasajero" FromRole="Pasajero" ToRole="ReservaHotel" />
   </EntityType>
-  <EntityType Name="ReservaBus">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="UsuarioAlta" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-    <Property Name="UsuarioModificacion" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Confirmada" Type="Boolean" Nullable="false" />
-    <Property Name="FechaComfirmada" Type="DateTime" Precision="3" />
-    <Property Name="UsuarioConfirma" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="FechaCancelada" Type="DateTime" Precision="3" />
-    <Property Name="UsuarioCancela" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_ReservaBus_AspNetUsers" FromRole="ReservaBus" ToRole="AspNetUsers" />
-    <NavigationProperty Name="AspNetUsers1" Relationship="Self.FK_ReservaBus_AspNetUsers1" FromRole="ReservaBus" ToRole="AspNetUsers" />
-    <NavigationProperty Name="AspNetUsers2" Relationship="Self.FK_ReservaBus_AspNetUsers2" FromRole="ReservaBus" ToRole="AspNetUsers" />
-    <NavigationProperty Name="AspNetUsers3" Relationship="Self.FK_ReservaBus_AspNetUsers3" FromRole="ReservaBus" ToRole="AspNetUsers" />
-  </EntityType>
   <EntityType Name="ReservaHotel">
     <Key>
       <PropertyRef Name="ID" />
@@ -264,6 +242,7 @@
     <NavigationProperty Name="EnlaceReservaHotelPasajero" Relationship="Self.FK_EnlaceReservaHotelPasajero_ReservaHotel" FromRole="ReservaHotel" ToRole="EnlaceReservaHotelPasajero" />
     <NavigationProperty Name="Pasajero" Relationship="Self.FK_ReservaHotel_Pasajero" FromRole="ReservaHotel" ToRole="Pasajero" />
     <NavigationProperty Name="TipoHotel" Relationship="Self.FK_ReservaHotel_TipoHotel" FromRole="ReservaHotel" ToRole="TipoHotel" />
+    <NavigationProperty Name="Bus" Relationship="FaroHotelModel.EnlaceReservaHotelBus" FromRole="ReservaHotel" ToRole="Bus" />
   </EntityType>
   <EntityType Name="TipoCuota">
     <Key>
@@ -399,54 +378,6 @@
       </Principal>
       <Dependent Role="AspNetUserLogins">
         <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ReservaBus_AspNetUsers">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-    <End Role="ReservaBus" Type="Self.ReservaBus" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ReservaBus">
-        <PropertyRef Name="UsuarioAlta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ReservaBus_AspNetUsers1">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-    <End Role="ReservaBus" Type="Self.ReservaBus" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ReservaBus">
-        <PropertyRef Name="UsuarioCancela" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ReservaBus_AspNetUsers2">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-    <End Role="ReservaBus" Type="Self.ReservaBus" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ReservaBus">
-        <PropertyRef Name="UsuarioConfirma" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ReservaBus_AspNetUsers3">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-    <End Role="ReservaBus" Type="Self.ReservaBus" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ReservaBus">
-        <PropertyRef Name="UsuarioModificacion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -770,7 +701,6 @@
     <EntitySet Name="MenuAspNetRolesAccion" EntityType="Self.MenuAspNetRolesAccion" />
     <EntitySet Name="Paquete" EntityType="Self.Paquete" />
     <EntitySet Name="Pasajero" EntityType="Self.Pasajero" />
-    <EntitySet Name="ReservaBus" EntityType="Self.ReservaBus" />
     <EntitySet Name="ReservaHotel" EntityType="Self.ReservaHotel" />
     <EntitySet Name="TipoCuota" EntityType="Self.TipoCuota" />
     <EntitySet Name="TipoDescripcionPaquete" EntityType="Self.TipoDescripcionPaquete" />
@@ -796,22 +726,6 @@
     <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ReservaBus_AspNetUsers" Association="Self.FK_ReservaBus_AspNetUsers">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="ReservaBus" EntitySet="ReservaBus" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ReservaBus_AspNetUsers1" Association="Self.FK_ReservaBus_AspNetUsers1">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="ReservaBus" EntitySet="ReservaBus" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ReservaBus_AspNetUsers2" Association="Self.FK_ReservaBus_AspNetUsers2">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="ReservaBus" EntitySet="ReservaBus" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ReservaBus_AspNetUsers3" Association="Self.FK_ReservaBus_AspNetUsers3">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="ReservaBus" EntitySet="ReservaBus" />
     </AssociationSet>
     <AssociationSet Name="FK_ReservaHotel_AspNetUsers" Association="Self.FK_ReservaHotel_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -932,7 +846,7 @@
     <FunctionImport Name="GetPermisosPorNombreDeUsuario" ReturnType="Collection(FaroHotelModel.GetPermisosPorNombreDeUsuario_Result)">
       <Parameter Name="UserName" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="InsertBooking" ReturnType="Collection(Int32)">
+    <FunctionImport Name="InsertBooking" ReturnType="Collection(FaroHotelModel.InsertBooking_Result)">
       <Parameter Name="Fecha" Mode="In" Type="DateTime" />
       <Parameter Name="HotelId" Mode="In" Type="Int32" />
       <Parameter Name="Noches" Mode="In" Type="Int32" />
@@ -942,6 +856,10 @@
       <Parameter Name="PasajerosIds" Mode="In" Type="String" />
       <Parameter Name="PaquetesIds" Mode="In" Type="String" />
       <Parameter Name="UsuarioAlta" Mode="In" Type="String" />
+      <Parameter Name="BusesIdaIds" Mode="In" Type="String" />
+      <Parameter Name="AsientosIdaIds" Mode="In" Type="String" />
+      <Parameter Name="BusesVueltaIds" Mode="In" Type="String" />
+      <Parameter Name="AsientosVueltaIds" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_alterdiagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -977,6 +895,15 @@
       <End Role="Ventanilla" EntitySet="Ventanilla" />
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
+    <FunctionImport Name="GetHabitacionesDisponibles" ReturnType="Collection(FaroHotelModel.GetHabitacionesDisponibles_Result)">
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+      <Parameter Name="HotelId" Mode="In" Type="Int32" />
+      <Parameter Name="TipoHabitacion" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <AssociationSet Name="EnlaceReservaHotelBus" Association="FaroHotelModel.EnlaceReservaHotelBus">
+      <End Role="Bus" EntitySet="Bus" />
+      <End Role="ReservaHotel" EntitySet="ReservaHotel" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1011,5 +938,16 @@
         <PropertyRef Name="VentanillaId" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="InsertBooking_Result">
+    <Property Type="Int32" Name="ReservaHotelID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetHabitacionesDisponibles_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="Numero" Nullable="false" />
+  </ComplexType>
+  <Association Name="EnlaceReservaHotelBus">
+    <End Type="FaroHotelModel.Bus" Role="Bus" Multiplicity="*" />
+    <End Type="FaroHotelModel.ReservaHotel" Role="ReservaHotel" Multiplicity="*" />
   </Association>
 </Schema>

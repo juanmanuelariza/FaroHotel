@@ -16,62 +16,25 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-offset-4 col-md-4">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Titular de la reserva</h2>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <div class="col-md-12 col-sm-12 col-xs-12 form-horizontal">
-                        <div class="form-group row">
-                            <input id="PaxID" type="hidden" value="" />
-                            <label class="control-label col-md-3" for="DNI">DNI:</label>
-                            <div class="col-md-6">
-                                <input id="PaxDNI_T" class="form-control" />
-                                @* @Html.DropDownList("TipoHabitacion", null, "", htmlAttributes: new { @id = "TipoHab", @class = "form-control" })*@
-                            </div>
-                            <div class="col-md-3">
-                                <span id="btnSearchPax_T" class="btn btn-dark btnSearchPax" data-boxId="T">Buscar</span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-md-3" for="Apellido">Apellido:</label>
-                            <div class="col-md-9">
-                                <input id="PaxSurname_T" class="form-control" readonly="readonly" />
-                                @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-md-3" for="Nombre">Nombre:</label>
-                            <div class="col-md-9">
-                                <input id="PaxName_T" class="form-control" readonly="readonly" />
-                                @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        @for (var i = 0; i < ViewBag.CantPasajeros; i++)
+        @for (var i = 1; i <= ViewBag.CantPasajeros; i++)
         {
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Pasajero</h2>
+                        <h2>Pasajero @i </h2>
+                        <div class="clearfix"></div>
+                        <div class="radio">
+                            <label><input type="radio" name="radioTitular" data-boxId="@i">Titular de la Reserva</label>
+                        </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <div class="col-md-12 col-sm-12 col-xs-12 form-horizontal">
+                        <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
                             <div class="form-group row">
                                 <input id="PaxID_@i" type="hidden" class="PaxIds" value="" />
                                 <label class="control-label col-md-3" for="DNI">DNI:</label>
                                 <div class="col-md-6">
                                     <input id="PaxDNI_@i" class="form-control" />
-                                    @* @Html.DropDownList("TipoHabitacion", null, "", htmlAttributes: new { @id = "TipoHab", @class = "form-control" })*@
                                 </div>
                                 <div class="col-md-3">
                                     <span id="btnSearchPax_@i" class="btn btn-dark btnSearchPax" data-boxId="@i">Buscar</span>
@@ -81,50 +44,100 @@
                                 <label class="control-label col-md-3" for="Apellido">Apellido:</label>
                                 <div class="col-md-9">
                                     <input id="PaxSurname_@i" class="form-control" readonly="readonly" />
-                                    @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3" for="Nombre">Nombre:</label>
                                 <div class="col-md-9">
                                     <input id="PaxName_@i" class="form-control" readonly="readonly" />
-                                    @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
                                 </div>
                             </div>
-
+                            <input id="PaxApellidoyNombre_@i" class="PaxApellidoyNombre" type="hidden" value=""/>
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
                             <div class="form-group row">
                                 <label class="control-label col-md-3" for="Paquete">Paquete:</label>
                                 <div class="col-md-9">
                                     @Html.DropDownList("SelectPaquetesDisponibles", null, "", htmlAttributes: new { @id = "SelectPaquete_" + @i, @class = "form-control SelectPaquetesDisponibles", data_boxId = @i })
-                                    
+
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label class="control-label col-md-3" for="Nombre">Precio:</label>
+                                <div class="col-md-9">
+                                    <input id="Price_@i" class="form-control" readonly="readonly" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
                             <div id="Panel_BusIda_@i" class="form-group row" style="display:none">
                                 <label class="col-md-12" for="Paquete">Bus de ida:</label>
                                 <div class="col-md-12">
-                                    <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento('BusIda_'+@i)">Seleccionar asiento</span>
+                                    <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento(@i,'Ida')">Seleccionar asiento</span>
                                 </div>
                                 <div class="col-md-12">
-                                    <div><img src="/img/6.png">  Asiento seleccionado: <span id="BusIda_@i" class="BusIda"></span></div>
+                                    <div><img src="/img/6.png">  Asiento seleccionado: <span id="ButacaBusIda_@i" class="ButacaBusIda"></span></div>
                                 </div>
+                                <input type="hidden" id="BusIdaId_@i" class="BusIdaIds" value="" />
                             </div>
-                            <div  id="Panel_BusVuelta_@i" class="form-group row" style="display:none">
+                            <div id="Panel_BusVuelta_@i" class="form-group row" style="display:none">
                                 <label class="col-md-12" for="Paquete">Bus de vuelta:</label>
                                 <div class="col-md-12">
-                                    <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento('BusVuelta_'+@i)">Seleccionar asiento</span>
+                                    <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento(@i,'Vuelta')">Seleccionar asiento</span>
                                 </div>
                                 <div class="col-md-12">
-                                    <div><img src="/img/6.png">  Asiento seleccionado: <span id="BusVuelta_@i" class="BusVuelta"></span></div>
+                                    <div><img src="/img/6.png">  Asiento seleccionado: <span id="ButacaBusVuelta_@i" class="ButacaBusVuelta"></span></div>
                                 </div>
+                                <input type="hidden" id="BusVueltaId_@i" class="BusVueltaIds" value="" />
                             </div>
-                            <input type="hidden" id="busCall" value="" />
                         </div>
-
                     </div>
                 </div>
             </div>
         }
+        <input type="hidden" id="BoxId" value="" />
+        <input type="hidden" id="BoxTrayecto" value="" />
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Si el titular no viaja</h2>
+                    <div class="clearfix"></div>
+                    <div class="radio">
+                        <label><input type="radio" name="radioTitular" data-boxId="0">Clic aquí</label>
+                    </div>
+                </div>
+                <div class="x_content">
+                    <div class="col-md-12 col-sm-12 col-xs-12 form-horizontal">
+                        <div class="form-group row">
+                            <input id="PaxID" type="hidden" value="" />
+                            <label class="control-label col-md-3" for="DNI">DNI:</label>
+                            <div class="col-md-6">
+                                <input id="PaxDNI_T" class="form-control" />                                
+                            </div>
+                            <div class="col-md-3">
+                                <span id="btnSearchPax_T" class="btn btn-dark btnSearchPax" data-boxId="T">Buscar</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Apellido">Apellido:</label>
+                            <div class="col-md-9">
+                                <input id="PaxSurname_T" class="form-control" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Nombre">Nombre:</label>
+                            <div class="col-md-9">
+                                <input id="PaxName_T" class="form-control" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-md-12">
         <div class="x_panel">
@@ -139,9 +152,12 @@
 </div>
 
 <script type="text/javascript">
-    function SeleccionarAsiento(ArgCaller) {
-        $("#busCall").val(ArgCaller);
-        abrirModal('/Reservas/Bus', 'Agregar', 'Asientos');
+    function SeleccionarAsiento(ArgId,ArgTrayecto) {
+        $("#BoxId").val(ArgId);
+        $("#BoxTrayecto").val(ArgTrayecto);
+        var data = {};
+        data["ParamFecha"] = $('#FechaEntrada').val();
+        abrirModalPost('/Reservas/Bus', 'Agregar', 'Asientos', data);
     }
     $('#btnBackStep1').click(function () {
         $('#Panel_Step2').fadeOut();
@@ -186,6 +202,7 @@
                     $('#PaxID_' + boxId).val(result[0].ID);
                     $('#PaxSurname_' + boxId).val(result[0].Apellido);
                     $('#PaxName_' + boxId).val(result[0].Nombre);
+                    $('#PaxApellidoyNombre_' + boxId).val(result[0].Apellido + ', ' + result[0].Nombre);
                 }
             }
         });

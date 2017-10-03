@@ -18,6 +18,7 @@ namespace FaroHotel.Models
         public Bus()
         {
             this.EnlaceBusPasajero = new HashSet<EnlaceBusPasajero>();
+            this.ReservaHotel = new HashSet<ReservaHotel>();
         }
     
         public int ID { get; set; }
@@ -27,5 +28,7 @@ namespace FaroHotel.Models
         public virtual TipoTrayecto TipoTrayecto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EnlaceBusPasajero> EnlaceBusPasajero { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReservaHotel> ReservaHotel { get; set; }
     }
 }
