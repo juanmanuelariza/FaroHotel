@@ -172,6 +172,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BusesController.cs" />
     <Compile Include="Controllers\DescripcionesPaquetesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Menu\MenuController.cs" />
@@ -224,6 +225,9 @@
     <Compile Include="Models\GetPermisosPorNombreDeUsuario_Result.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetReservaHabitaciones_Result.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Habitacion.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
@@ -242,12 +246,14 @@
     <Compile Include="Models\MenuAspNetRolesAccion.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metadata\BusMetadata.cs" />
     <Compile Include="Models\Metadata\PaqueteMetadata.cs" />
     <Compile Include="Models\Metadata\PasajeroMetadata.cs" />
     <Compile Include="Models\ClassesVM\PartialClasses.cs" />
     <Compile Include="Models\ClassesVM\PasajeroVM.cs" />
     <Compile Include="Models\ClassesVM\UsuarioVM.cs" />
     <Compile Include="Models\ClassesVM\VentanillaVM.cs" />
+    <Compile Include="Models\Metadata\ReservaHotelMetadata.cs" />
     <Compile Include="Models\Model_FaroHotel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -429,6 +435,13 @@
     <Content Include="Views\Reservas\_Step3.cshtml" />
     <Content Include="Views\Reservas\_Step4.cshtml" />
     <Content Include="Views\Pasajeros\Create2.cshtml" />
+    <Content Include="Views\Reservas\Confirmar.cshtml" />
+    <Content Include="Views\Reservas\Detalle.cshtml" />
+    <Content Include="Views\Buses\Create.cshtml" />
+    <Content Include="Views\Buses\Delete.cshtml" />
+    <Content Include="Views\Buses\Details.cshtml" />
+    <Content Include="Views\Buses\Edit.cshtml" />
+    <Content Include="Views\Buses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

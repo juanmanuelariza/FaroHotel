@@ -168,7 +168,7 @@
                 ParamFecha: $('#FechaEntrada').val(),
                 ParamHotelId: $('#DDL_Hotel option:selected').val(),
                 ParamNochesId: $('#NochesId option:selected').text(),
-                ParamTitularId: $('#PaxID_0').val(), //CAMBIAR POR EL CORRECTO
+                ParamTitularId: $('#PaxID_1').val(), //CAMBIAR POR EL CORRECTO
                 ParamTipoHabitacionesIds: ParamTipoHabitacionesIds,
                 ParamNroHabitacionesIds: ParamNroHabitacionesIds,
                 ParamPasajerosIds: ParamPaxIds,
@@ -181,6 +181,9 @@
             },
             success: function (result) {
                 $('#Panel_Step4').html(result);
+            },
+            error: function () {
+                alert("Error al procesar la solicitud de reserva. Por favor contactese con el administrador");
             }
         });
 

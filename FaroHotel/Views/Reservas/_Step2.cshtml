@@ -155,8 +155,13 @@
     function SeleccionarAsiento(ArgId,ArgTrayecto) {
         $("#BoxId").val(ArgId);
         $("#BoxTrayecto").val(ArgTrayecto);
+        var tmp_TrayectoId;
+        if (ArgTrayecto == 'Ida'){tmp_TrayectoId = 1}
+        else{tmp_TrayectoId = 2}
         var data = {};
         data["ParamFecha"] = $('#FechaEntrada').val();
+        data["ParamTrayectoId"] = tmp_TrayectoId;
+        data["ParamDias"] = $('#NochesId  option:selected').text();
         abrirModalPost('/Reservas/Bus', 'Agregar', 'Asientos', data);
     }
     $('#btnBackStep1').click(function () {

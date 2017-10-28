@@ -20,7 +20,7 @@
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="Numero">Número:</label>
                             <div class="col-md-9">
-                                <select id="SelectNumHababitacion_@i" class="form-control SelectNroHabitacion"></select>
+                                <select id="SelectNumHabitacion_@i" class="form-control SelectNroHabitacion"></select>
                                 @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
                             </div>
                         </div>
@@ -45,7 +45,7 @@
         $(".SelectTipoHabitacion").change(function () {
             var selectedItem = $(this).val();
             var boxId = $(this).attr("data-boxId");
-            $('#SelectNumHababitacion_' + boxId + ' option').remove();
+            $('#SelectNumHabitacion_' + boxId + ' option').remove();
 
             var _url = GetPathApp("/Reservas/Habitaciones");
             $.ajax({
@@ -59,7 +59,7 @@
                 },
                 success: function (data) {
                     $.each(data, function () {
-                        $('#SelectNumHababitacion_' + boxId).append('<option value=' +
+                        $('#SelectNumHabitacion_' + boxId).append('<option value=' +
                             this.ID + '>' + this.Numero + '</option>');
                     });
                 }

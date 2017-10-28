@@ -380,5 +380,14 @@
         <ScalarProperty Name="ID" ColumnName="BusId" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="GetReservaHabitaciones" FunctionName="FaroHotelModel.Store.GetReservaHabitaciones">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FaroHotelModel.GetReservaHabitaciones_Result">
+          <ScalarProperty Name="NombreHotel" ColumnName="NombreHotel" />
+          <ScalarProperty Name="TipoHabitacion" ColumnName="TipoHabitacion" />
+          <ScalarProperty Name="NumeroHabitacion" ColumnName="NumeroHabitacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

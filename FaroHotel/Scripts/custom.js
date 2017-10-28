@@ -416,6 +416,7 @@ $('#myModal').on('hidden.bs.modal', function (e) {
 })
 $('#myModal').on('shown.bs.modal', function (e) {
     //debugger
+    $('#myModal').scrollTop(0);
     $(".modal-backdrop").appendTo("body");
 })
 

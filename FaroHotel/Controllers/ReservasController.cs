@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -32,32 +33,38 @@ namespace FaroHotel.Controllers
 
 
         public ActionResult Step2(DateTime ParamFecha, int ParamNochesId, int ParamHabitaciones, int ParamPasajeros)
-        {            
+        {
             ViewBag.NochesId = ParamNochesId;
             ViewBag.CantHabitaciones = ParamHabitaciones;
             ViewBag.CantPasajeros = ParamPasajeros;
-            ViewBag.SelectPaquetesDisponibles = new SelectList(db.Paquete.Where(p => p.FechaInicio <= ParamFecha && p.FechaFin >= ParamFecha) , "ID", "Titulo");
+            ViewBag.SelectPaquetesDisponibles = new SelectList(db.Paquete.Where(p => p.FechaInicio <= ParamFecha && p.FechaFin >= ParamFecha), "ID", "Titulo");
             return PartialView("_Step2");
         }
         public ActionResult Step3()
         {
-            return PartialView("_Step3"); 
+            return PartialView("_Step3");
 
         }
-        public ActionResult Step4(DateTime ParamFecha, int ParamHotelId, int ParamNochesId, int ParamTitularId, int[] ParamTipoHabitacionesIds, int[] ParamNroHabitacionesIds, int[] ParamPasajerosIds, int[] ParamPaquetesIds, int[] ParamBusIdaIds, int[] ParamAsientosIdaIds, int[] ParamBusVueltaIds, int[] ParamAsientosVueltaIds)        
+        public ActionResult Step4(DateTime ParamFecha, int ParamHotelId, int ParamNochesId, int ParamTitularId, int[] ParamTipoHabitacionesIds, int[] ParamNroHabitacionesIds, int[] ParamPasajerosIds, int[] ParamPaquetesIds, int[] ParamBusIdaIds, int[] ParamAsientosIdaIds, int[] ParamBusVueltaIds, int[] ParamAsientosVueltaIds)
         {
-            InsertBooking_Result result = db.InsertBooking(ParamFecha, ParamHotelId, ParamNochesId, ParamTitularId, 
-                string.Join(",", ParamTipoHabitacionesIds) , string.Join(",", ParamNroHabitacionesIds), 
-                string.Join(",", ParamPasajerosIds), string.Join(",", ParamPaquetesIds), 
-                User.Identity.GetUserId(), string.Join(",", ParamBusIdaIds), string.Join(",", ParamAsientosIdaIds), 
+            InsertBooking_Result result = db.InsertBooking(ParamFecha, ParamHotelId, ParamNochesId, ParamTitularId,
+                string.Join(",", ParamTipoHabitacionesIds), string.Join(",", ParamNroHabitacionesIds),
+                string.Join(",", ParamPasajerosIds), string.Join(",", ParamPaquetesIds),
+                User.Identity.GetUserId(), string.Join(",", ParamBusIdaIds), string.Join(",", ParamAsientosIdaIds),
                 string.Join(",", ParamBusVueltaIds), string.Join(",", ParamAsientosVueltaIds)).FirstOrDefault();
             ViewBag.NroReserva = result.ReservaHotelID;
             return PartialView("_Step4");
         }
 
-        public ActionResult Bus(DateTime ParamFecha)
+        public ActionResult Bus(DateTime ParamFecha, int ParamTrayectoId, int ParamDias)
         {
-            var buses = from b in db.Bus where b.Fecha == ParamFecha
+            //Si es Trayecto de vuelta, sumo los dias del paquete más uno
+            if (ParamTrayectoId == 2) 
+            {
+                ParamFecha = ParamFecha.AddDays(ParamDias + 1);
+            }
+            var buses = from b in db.Bus
+                        where b.Fecha == ParamFecha && b.TrayectoId == ParamTrayectoId
                         select b.ID;
             ViewBag.BusesIds = buses.ToList();
             return PartialView("_Bus");
@@ -66,8 +73,9 @@ namespace FaroHotel.Controllers
         // GET: NroHabitaciones
         [HttpPost]
         public ActionResult Habitaciones(DateTime ParamFecha, int ParamHotelId, int ParamTipoHabitacion)
-        {   
-            var rslt = db.GetHabitacionesDisponibles(ParamFecha, ParamHotelId, ParamTipoHabitacion).Select(h => new {
+        {
+            var rslt = db.GetHabitacionesDisponibles(ParamFecha, ParamHotelId, ParamTipoHabitacion).Select(h => new
+            {
                 ID = h.ID,
                 Numero = h.Numero
             }).ToList();
@@ -98,27 +106,47 @@ namespace FaroHotel.Controllers
         {
             var rslt = from ob in db.EnlaceBusPasajero
                        where ParamBusesIds.Contains(ob.BusId)
-                       select new {
+                       select new
+                       {
                            BusId = ob.BusId,
                            NroButaca = ob.NroButaca
-                       };
+                       }; 
             return Json(rslt);
         }
 
-        
+
 
         // GET: NroHabitaciones
         [HttpGet]
         public ActionResult Paquetes(int ParamPaqueteId)
         {
             var tmp_paquete = (from p in db.Paquete
-                            where p.ID == ParamPaqueteId
-                            select new
-                            {
-                                BusIda = p.BusIda,
-                                BusVuelta = p.BusVuelta
-                            });
+                               where p.ID == ParamPaqueteId
+                               select new
+                               {
+                                   BusIda = p.BusIda,
+                                   BusVuelta = p.BusVuelta
+                               });
             return Json(tmp_paquete, JsonRequestBehavior.AllowGet);
         }
-    }
+
+        //Reservas/Confirmar
+        public ActionResult Confirmar()
+        {
+            var reservas = db.ReservaHotel.Where(r => r.Confirmada == false);
+            return View(reservas.ToList());
+        }
+
+        public ActionResult Detalle(int? Id)
+        {
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ReservaHotel reserva = db.ReservaHotel.Find(Id);
+            ViewBag.HabitacionesReservadas = db.GetReservaHabitaciones(Id);
+
+            return View();
+        }
+    }            
 }

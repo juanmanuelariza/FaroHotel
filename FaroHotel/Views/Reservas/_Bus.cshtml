@@ -467,6 +467,54 @@
                 });
             }
         });
+        //Asientos seleccionados durante la venta
+        var ParamBusIdaIds = [];
+        var ParamAsientosIdaIds = [];
+        var ParamBusVueltaIds = [];
+        var ParamAsientosVueltaIds = [];
+        $(".BusIdaIds").each(function () {
+            if ($(this).val() == "") {
+                ParamBusIdaIds.push("0");
+            }
+            else {
+                ParamBusIdaIds.push($(this).val());
+            }
+        });
+        $(".ButacaBusIda").each(function () {
+            if ($(this).text() == "") {
+                ParamAsientosIdaIds.push("0");
+            }
+            else {
+                ParamAsientosIdaIds.push($(this).text());
+            }
+        });
+        $(".BusVueltaIds").each(function () {
+            if ($(this).val() == "") {
+                ParamBusVueltaIds.push("0");
+            }
+            else {
+                ParamBusVueltaIds.push($(this).val());
+            }
+        });
+        $(".ButacaBusVuelta").each(function () {
+            if ($(this).text() == "") {
+                ParamAsientosVueltaIds.push("0");
+            }
+            else {
+                ParamAsientosVueltaIds.push($(this).text());
+            }
+        });
+        for (i = 0; i < ParamAsientosIdaIds.length; i++) { 
+            if (ParamBusIdaIds[i] > 0){
+                $("#BusId_" + ParamBusIdaIds[i]).find("[data-seat='" + ParamAsientosIdaIds[i] + "']").addClass('asientoOcupado').removeClass('asientoLibre');
+            }
+        }
+        for (i = 0; i < ParamAsientosVueltaIds.length; i++) { 
+            if (ParamBusIdaIds[i] > 0){
+                $("#BusId_" + ParamBusVueltaIds[i]).find("[data-seat='" + ParamAsientosVueltaIds[i] + "']").addClass('asientoOcupado').removeClass('asientoLibre');
+            }
+        }
+
     });
 
     function Selectedseat(elm) {

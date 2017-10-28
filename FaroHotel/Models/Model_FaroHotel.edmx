@@ -799,6 +799,9 @@
         <Function Name="GetPermisosPorNombreDeUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetReservaHabitaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReservaId" Type="int" Mode="In" />
+        </Function>
         <Function Name="InsertBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Fecha" Type="date" Mode="In" />
           <Parameter Name="HotelId" Type="int" Mode="In" />
@@ -1940,6 +1943,9 @@
             <End Role="Bus" EntitySet="Bus" />
             <End Role="ReservaHotel" EntitySet="ReservaHotel" />
           </AssociationSet>
+          <FunctionImport Name="GetReservaHabitaciones" ReturnType="Collection(FaroHotelModel.GetReservaHabitaciones_Result)">
+            <Parameter Name="ReservaId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1986,6 +1992,11 @@
           <End Type="FaroHotelModel.Bus" Role="Bus" Multiplicity="*" />
           <End Type="FaroHotelModel.ReservaHotel" Role="ReservaHotel" Multiplicity="*" />
         </Association>
+        <ComplexType Name="GetReservaHabitaciones_Result">
+          <Property Type="String" Name="NombreHotel" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TipoHabitacion" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="NumeroHabitacion" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2371,6 +2382,15 @@
               <ScalarProperty Name="ID" ColumnName="BusId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="GetReservaHabitaciones" FunctionName="FaroHotelModel.Store.GetReservaHabitaciones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FaroHotelModel.GetReservaHabitaciones_Result">
+                <ScalarProperty Name="NombreHotel" ColumnName="NombreHotel" />
+                <ScalarProperty Name="TipoHabitacion" ColumnName="TipoHabitacion" />
+                <ScalarProperty Name="NumeroHabitacion" ColumnName="NumeroHabitacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

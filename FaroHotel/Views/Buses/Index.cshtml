@@ -1,0 +1,76 @@
+﻿@model IEnumerable<FaroHotel.Models.Bus>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">Listado de Buses</h2>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.box-header -->
+        <div class="x_content">
+            <!-- Button trigger modal -->
+            <button type="button" style="margin-bottom: 15px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Buses/Create', 'Agregar', 'Bus')">
+                <i class="fa fa-plus"></i> Nuevo
+            </button>
+            @*<div class="table-responsive">*@
+            <table id="dtBuses" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fecha)
+                        </th>
+                        <th>
+                            Trayecto
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Fecha)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TipoTrayecto.Descripcion)
+                            </td>                           
+                            <td>
+                                <div class="btn-group-sm">
+                                    <span title="Detalle" data-toggle="tooltip"><a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Buses/Details/@item.ID','Detalle','Bus')"></a></span>
+                                    <span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Buses/Edit/@item.ID','Editar','Bus')"></a></span>
+                                    @*<span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Buses/Delete/@item.ID','Eliminar','Bus')"></a></span>*@
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        @*</div>*@
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dtBuses').DataTable({
+            "responsive": true,
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": DataTableEsp(),
+            responsive: true
+        });
+    });
+</script>

@@ -252,5 +252,14 @@ namespace FaroHotel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetHabitacionesDisponibles_Result>("GetHabitacionesDisponibles", fechaParameter, hotelIdParameter, tipoHabitacionParameter);
         }
+    
+        public virtual ObjectResult<GetReservaHabitaciones_Result> GetReservaHabitaciones(Nullable<int> reservaId)
+        {
+            var reservaIdParameter = reservaId.HasValue ?
+                new ObjectParameter("ReservaId", reservaId) :
+                new ObjectParameter("ReservaId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetReservaHabitaciones_Result>("GetReservaHabitaciones", reservaIdParameter);
+        }
     }
 }

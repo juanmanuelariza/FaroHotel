@@ -904,6 +904,9 @@
       <End Role="Bus" EntitySet="Bus" />
       <End Role="ReservaHotel" EntitySet="ReservaHotel" />
     </AssociationSet>
+    <FunctionImport Name="GetReservaHabitaciones" ReturnType="Collection(FaroHotelModel.GetReservaHabitaciones_Result)">
+      <Parameter Name="ReservaId" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -950,4 +953,9 @@
     <End Type="FaroHotelModel.Bus" Role="Bus" Multiplicity="*" />
     <End Type="FaroHotelModel.ReservaHotel" Role="ReservaHotel" Multiplicity="*" />
   </Association>
+  <ComplexType Name="GetReservaHabitaciones_Result">
+    <Property Type="String" Name="NombreHotel" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="TipoHabitacion" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="NumeroHabitacion" Nullable="false" />
+  </ComplexType>
 </Schema>

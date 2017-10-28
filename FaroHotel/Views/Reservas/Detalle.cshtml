@@ -1,0 +1,66 @@
+﻿<section class="content">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">Listado de habitaciones</h2>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.box-header -->
+        <div class="x_content">
+            <div id="divHabitaciones" class="row form-horizontal">
+                <table id="dtReservas" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Hotel</th>
+                            <th>Habitación</th>
+                            <th>Tipo Habitación</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+@foreach (FaroHotel.Models.GetReservaHabitaciones_Result item in ViewBag.HabitacionesReservadas)
+{
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NombreHotel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NumeroHabitacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TipoHabitacion)
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+        @*</div>*@
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+
+
+    <script type="text/javascript">
+        //$(function () {
+        //    $('#dtReservas').DataTable({
+        //        "responsive": true,
+        //        "paging": true,
+        //        "lengthChange": true,
+        //        "searching": true,
+        //        "ordering": true,
+        //        "info": true,
+        //        "autoWidth": false,
+        //        "language": DataTableEsp(),
+        //        responsive: true
+        //    });
+        //});
+    </script>
+
+</section>
