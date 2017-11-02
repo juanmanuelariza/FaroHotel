@@ -10,8 +10,9 @@
                     <thead>
                         <tr>
                             <th style="width:10%">#</th>
-                            <th style="width:40%">Extra</th>
-                            <th style="width:40%">Cantidad</th>
+                            <th style="width:50%">Extra</th>
+                            <th style="width:20%">Cantidad</th>
+                            <th style="width:10%"></th>
                             <th style="width:10%">Total</th>
                         </tr>
                     </thead>
@@ -19,20 +20,60 @@
                         <tr>
                             <th scope="row">1</th>
                             <td>Cochera en Faro II</td>
-                            <td>asd</td>
-                            <td>$333</td>
+                            <td>
+                                <select id="SelectCocheraFaroII" class="form-control">
+                                    <option value="0" selected="selected">NO</option>
+                                    <option value="1">SI</option>
+                                </select>
+                            </td>
+                            <td></td>
+                            <td><span id="TotalCocheraFaroII" class="colorGray">$ 0</span></td>
                         </tr>
                         <tr>
                             <th scope="row">2</th>
                             <td>Vouchers</td>
-                            <td>asd</td>
-                            <td>$444</td>
+                            <td>
+                                <select id="SelectVouchers" class="form-control">
+                                    <option value="0" selected="selected">NO</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                </select>
+                            </td>
+                            <td></td>
+                            <td><span id="TotalVouchers" class="colorGray">$ 0</span></td>
                         </tr>
                         <tr>
                             <th scope="row">3</th>
                             <td>Cuna</td>
-                            <td>asd</td>
-                            <td>$555</td>
+                            <td>
+                                <select id="SelectCunas" class="form-control">
+                                    <option value="0" selected="selected">NO</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </td>
+                            <td></td>
+                            <td><span id="TotalCunas" class="colorGray">$ 0</span></td>
                         </tr>
                     </tbody>
                 </table>             
@@ -51,9 +92,10 @@
                     <thead>
                         <tr>
                             <th style="width:10%">#</th>
-                            <th style="width:40%">Pasajero</th>
-                            <th style="width:40%">Paquete</th>
-                            <th style="width:10%">Total</th>
+                            <th style="width:35%">Pasajero</th>
+                            <th style="width:30%">Paquete</th>
+                            <th style="width:15%">Base</th>
+                            <th style="width:20%">Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,7 +108,7 @@
     <div class="col-md-12">
         <div class="x_panel">
             <div class="x_content" style="text-align: right; padding-right: 2vw;">
-                <h2>TOTAL A PAGAR: $10000</h2>
+                <h2>TOTAL A PAGAR: <span id="TotalReserva"></span></h2>
             </div>
         </div>
     </div>
@@ -95,21 +137,27 @@
     $(document).ready(function () {
         //Completar tablas
         //Tabla Pasajeros
-        
+
         var ArrayPaxApellidoyNombre = [];
         var ArrayPaquetes = [];
+        var ArrayBases = [];
+        var ArrayPaxPrecios = [];
         $(".PaxApellidoyNombre").each(function () { ArrayPaxApellidoyNombre.push($(this).val()); });
         $(".SelectPaquetesDisponibles option:selected").each(function () { ArrayPaquetes.push($(this).text()); });
+        $(".SelectBase option:selected").each(function () { ArrayBases.push($(this).text()); });
+        $(".PaxPrice").each(function () { ArrayPaxPrecios.push($(this).val()); });
         var d = '';
         for (var i = 0; i < ArrayPaxApellidoyNombre.length; i++) {
             d += '<tr>' +
             '<th scope="row">' + (i + 1) + '</th>' +
             '<td>' + ArrayPaxApellidoyNombre[i] + '</td>' +
             '<td>' + ArrayPaquetes[i] + '</td>' +
-            '<td>$1000</td>' +
+            '<td>' + ArrayBases[i] + '</td>' +
+            '<td>' + ArrayPaxPrecios[i] + '</td>' +
             '</tr>';
         }
         $("#tablaPasajeros tbody").append(d);
+        calcularTotal();
     });
 
     $('#btnGoStep4').click(function () {
@@ -118,6 +166,7 @@
         var ParamNroHabitacionesIds = [];
         var ParamPaxIds = [];
         var ParamPaquetesIds = [];
+        var ParamBaseIds = [];
         var ParamBusIdaIds = [];
         var ParamAsientosIdaIds = [];
         var ParamBusVueltaIds = [];
@@ -127,6 +176,7 @@
         $(".SelectNroHabitacion").each(function () { ParamNroHabitacionesIds.push($(this).val()); });
         $(".PaxIds").each(function () { ParamPaxIds.push($(this).val()); });
         $(".SelectPaquetesDisponibles").each(function () { ParamPaquetesIds.push($(this).val()); });
+        $(".SelectBase").each(function () { ParamBaseIds.push($(this).val()); });
         $(".BusIdaIds").each(function () {
             if ($(this).val() == "") {
                 ParamBusIdaIds.push("0");
@@ -168,11 +218,12 @@
                 ParamFecha: $('#FechaEntrada').val(),
                 ParamHotelId: $('#DDL_Hotel option:selected').val(),
                 ParamNochesId: $('#NochesId option:selected').text(),
-                ParamTitularId: $('#PaxID_1').val(), //CAMBIAR POR EL CORRECTO
+                ParamTitularId: $('#PaxID_' + $('input[name=radioTitular]:checked').val()).val(),
                 ParamTipoHabitacionesIds: ParamTipoHabitacionesIds,
                 ParamNroHabitacionesIds: ParamNroHabitacionesIds,
                 ParamPasajerosIds: ParamPaxIds,
                 ParamPaquetesIds: ParamPaquetesIds,
+                ParamBaseIds: ParamBaseIds,
                 ParamBusIdaIds: ParamBusIdaIds,
                 ParamAsientosIdaIds: ParamAsientosIdaIds,
                 ParamBusVueltaIds: ParamBusVueltaIds,
@@ -188,10 +239,70 @@
         });
 
         //PASO DE AGRADECIMIENTO
-        //$('#Panel_Step3').fadeOut();
+        $('#Panel_Step3').fadeOut();
         $('#Panel_Step4').fadeIn();
         $('body').animate({ scrollTop: 0 }, 500);
         $('#wizard_step3').attr('class', 'done');
         $('#wizard_step4').attr('class', 'selected');
     });
+
+    
+    $("#SelectCocheraFaroII").change(function () {
+        var selectedItem = $(this).val();
+        if (selectedItem > 0) {
+            $('#TotalCocheraFaroII').attr('class', 'colorBlack');
+            $('#TotalCocheraFaroII').text("$ " + $(this).val() * 300);
+        }
+        else {
+            $('#TotalCocheraFaroII').attr('class', 'colorGray');
+            $('#TotalCocheraFaroII').text("$ 0");
+        }
+        calcularTotal();
+    });
+    $("#SelectVouchers").change(function () {
+        var selectedItem = $(this).val();
+        if (selectedItem > 0) {
+            $('#TotalVouchers').attr('class', 'colorBlack');
+            $('#TotalVouchers').text("$ " + $(this).val() * 150);
+        }
+        else {
+            $('#TotalVouchers').attr('class', 'colorGray');
+            $('#TotalVouchers').text("$ 0");
+        }
+        calcularTotal();
+    });
+    $("#SelectCunas").change(function () {
+        var selectedItem = $(this).val();
+        if (selectedItem > 0) {
+            $('#TotalCunas').attr('class', 'colorBlack');
+            $('#TotalCunas').text("$ " + $(this).val() * 100);
+        }
+        else {
+            $('#TotalCunas').attr('class', 'colorGray');
+            $('#TotalCunas').text("$ 0");
+        }
+        calcularTotal();
+    });
+
+    function calcularTotal() {
+        var SumTotal = 0;
+        var SumPax = 0;
+        var PrecioCochera = 0;
+        var PrecioVouchers = 0
+        var PrecioCunas = 0;
+       
+        var ArrayPaxPrecios = [];
+        $(".PaxPrice").each(function () { ArrayPaxPrecios.push($(this).val()); });
+        debugger
+        for (var i = 0; i < ArrayPaxPrecios.length; i++) {
+            SumPax = SumPax + parseFloat(ArrayPaxPrecios[i].replace("$ ", ""));
+        }
+
+        PrecioCochera = parseFloat($('#TotalCocheraFaroII').text().replace("$ ", ""));
+        PrecioVouchers = parseFloat($('#TotalVouchers').text().replace("$ ", ""));
+        PrecioCunas = parseFloat($('#TotalCunas').text().replace("$ ", ""));
+        SumTotal = SumPax + PrecioCochera + PrecioVouchers + PrecioCunas;
+
+        $("#TotalReserva").text("$ " + SumTotal);
+    }
 </script>

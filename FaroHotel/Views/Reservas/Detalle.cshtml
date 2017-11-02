@@ -1,51 +1,151 @@
 ﻿<section class="content">
     <div class="x_panel">
         <div class="x_title">
-            <h2 class="box-title">Listado de habitaciones</h2>
+@if (ViewBag.Confirmada == false)
+{
+    <h2 class="box-title">Detalles de solicitud de reserva</h2>
+}
+else
+{
+    <h2 class="box-title">Detalles de Reserva</h2>
+}
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.box-header -->
+        <div class="x_content">
+            <div id="DivReserva" class="row form-horizontal">
+                @foreach (FaroHotel.Models.GetReserva_Result item in ViewBag.DatosReserva)
+                {
+                    <div class="col-md-6">
+                        <h4><strong>Información de la reserva</strong></h4>
+                        <strong>ID de reserva:</strong> <span id="SpanIdReserva">@item.ID</span><br />
+                        <strong>Usuario alta:</strong> <span id="SpanUsuarioAlta">@item.UserName (@item.NombreVentanilla)</span><br />
+                        <strong>Fecha de alta:</strong> <span id="SpanFechaAlta">@item.FechaAlta</span><br />
+                        <strong>Hotel:</strong> <span id="SpanHotel">@item.Hotel</span><br />
+                        <strong>Fecha de entrada:</strong> <span id="SpanFechaEntrada">@item.FechaEntrada</span><br />
+                        <strong>Fecha de salida:</strong> <span id="SpanFechaSalida">@item.FechaSalida</span><br />
+                        <strong>Confirmada:</strong> <span id="SpanConfirmada">@item.Confirmada</span>
+                    </div>
+                    <div class="col-md-6">
+                        <h4><strong>Información del titular</strong></h4>
+                        <strong>DNI:</strong> <span id="SpanDniTitular">@item.DNI</span><br />
+                        <strong>Apellido:</strong> <span id="SpanApellidoTitular">@item.Apellido</span><br />
+                        <strong>Nombre:</strong> <span id="SpanNombreTitular">@item.Nombre</span><br />
+                        <strong>Edad:</strong> <span id="SpanEdadTitular">@item.Edad</span><br />
+                        <strong>Teléfono:</strong> <span id="SpanTelefonoTitular">@item.Telefono</span><br />
+                        <strong>Email:</strong> <span id="SpanEmailTitular">@item.Email</span>
+                    </div>
+                }
+
+            </div>
+
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">Información de habitaciones</h2>
             <div class="clearfix"></div>
         </div>
         <!-- /.box-header -->
         <div class="x_content">
             <div id="divHabitaciones" class="row form-horizontal">
-                <table id="dtReservas" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Hotel</th>
-                            <th>Habitación</th>
-                            <th>Tipo Habitación</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-@foreach (FaroHotel.Models.GetReservaHabitaciones_Result item in ViewBag.HabitacionesReservadas)
-{
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NombreHotel)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NumeroHabitacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TipoHabitacion)
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-}
-                    </tbody>
-                </table>
+                <div class="col-md-12">
+                    <table id="dtReservas" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Hotel</th>
+                                <th>Número de Habitación</th>
+                                <th>Tipo Habitación</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (FaroHotel.Models.GetReservaHabitaciones_Result item in ViewBag.HabitacionesReservadas)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NombreHotel)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NumeroHabitacion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TipoHabitacion)
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-
-
         </div>
-        @*</div>*@
         <!-- /.box-body -->
     </div>
-    <!-- /.box -->
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">Información de pasajeros</h2>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.box-header -->
+        <div class="x_content">
+            <div id="DivPasajeros" class="row form-horizontal">
+                @foreach (FaroHotel.Models.GetReservaPasajeros_Result item in ViewBag.PasajerosReserva)
+                {
+                    <div class="rowPasajero">
+                        <div class="col-md-12">
+                            <h4><strong>@item.Apellido, @item.Nombre</strong></h4>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>DNI:</strong> <span>@item.DNI</span><br />
+                            <strong>Edad:</strong> <span>@item.Edad</span><br />
+                            <strong>Teléfono:</strong> <span>@item.Telefono</span><br />
+                            <strong>Email:</strong> <span>@item.Email</span>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Paquete:</strong> <span>@item.Titulo</span><br />
+                            <strong>Base:</strong> <span>@item.Base</span><br />
+                            <strong>Precio:</strong> <span>$ @item.Precio</span>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Fecha Bus ida:</strong> <span>@item.FechaBusIda</span><br />
+                            <strong>Bus:</strong> <span>@item.NroBusIda</span>, <strong>Asiento:</strong> <span>@item.NroButacaIda</span><br />
+                            <strong>Fecha Bus Vuelta:</strong> <span>@item.FechaBusVuelta</span><br />
+                            <strong>Bus:</strong> <span>@item.NroBusVuelta</span>, <strong>Asiento:</strong> <span>@item.NroButacaVuelta</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">Pagos</h2>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.box-header -->
+        <div class="x_content">
 
+        </div>
+        <!-- /.box-body -->
+    </div>
+
+
+    @if (ViewBag.Confirmada == false)
+    {
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="actionBar">
+                    <a class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/Confirmar/@ViewBag.ReservaId','Confirmar','Reserva')">Confirmar Reserva</a>                    
+                </div>
+            </div>
+        </div>
+
+    }
 
     <script type="text/javascript">
         //$(function () {

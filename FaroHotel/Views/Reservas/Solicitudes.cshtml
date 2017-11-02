@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<FaroHotel.Models.ReservaHotel>
 
-
-
 <section class="content">
     <div class="x_panel">
         <div class="x_title">
-            <h2 class="box-title">Listado de reservas sin confirmar</h2>
+            <h2 class="box-title">Listado de solicitudes pendientes</h2>
             <div class="clearfix"></div>
         </div>
         <!-- /.box-header -->
@@ -18,19 +16,19 @@
                             @Html.DisplayNameFor(model => model.Pasajero.Apellido)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+                            @Html.DisplayNameFor(model => model.Pasajero.Nombre)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.TipoHotel.Descripcion)
+                            Hotel
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.FechaEntrada)
+                            Fecha Entrada
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.FechaSalida)
+                            Fecha Salida
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.FechaAlta)
+                            Fecha Alta
                         </th>
                         <th>Acciones</th>
                     </tr>
@@ -43,7 +41,7 @@
                                 @Html.DisplayFor(modelItem => item.Pasajero.Apellido)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+                                @Html.DisplayFor(modelItem => item.Pasajero.Nombre)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.TipoHotel.Descripcion)
@@ -59,8 +57,12 @@
                             </td>
                             <td>
                                 <div class="btn-group-sm">
-                                    <span title="Detalle" data-toggle="tooltip"><a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Details/@item.ID','Detalle','Pasajero')"></a></span>
-                                    <span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Edit/@item.ID','Editar','Pasajero')"></a></span>
+                                    <span title="Detalle" data-toggle="tooltip"><a class="btn btn-default fa fa-file-text-o" href="/Reservas/Detalle/@item.ID"></a></span>
+                                    @if (item.Confirmada == false)
+                                    {
+                                        <span title="Confirmar reserva" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Edit/@item.ID','Editar','Pasajero')"></a></span>
+                                    }
+                                    @*<span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Edit/@item.ID','Editar','Pasajero')"></a></span>*@
                                     @*<span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Delete/@item.ID','Eliminar','Pasajero')"></a></span>*@
                                 </div>
                             </td>

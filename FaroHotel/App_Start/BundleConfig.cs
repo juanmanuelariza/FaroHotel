@@ -11,7 +11,7 @@ namespace FaroHotel
 
             bundles.Add(new StyleBundle("~/bundles/styles").Include(
                     "~/css/styles.css",
-                    "~/css/bootstrap.min.css",
+                    "~/css/bootstrap.css",
                     "~/css/select2.min.css",  
                     "~/css/select2-bootstrap.css",
                     "~/css/daterangepicker.css",

@@ -228,6 +228,12 @@
     <Compile Include="Models\GetReservaHabitaciones_Result.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetReservaPasajeros_Result.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetReserva_Result.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Habitacion.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
@@ -247,6 +253,8 @@
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Metadata\BusMetadata.cs" />
+    <Compile Include="Models\Metadata\GetReserva_ResultMetadata.cs" />
+    <Compile Include="Models\Metadata\GetReservaPasajeros_ResultMetadata.cs" />
     <Compile Include="Models\Metadata\PaqueteMetadata.cs" />
     <Compile Include="Models\Metadata\PasajeroMetadata.cs" />
     <Compile Include="Models\ClassesVM\PartialClasses.cs" />
@@ -282,6 +290,9 @@
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoBase.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoCuota.cs">
@@ -435,13 +446,15 @@
     <Content Include="Views\Reservas\_Step3.cshtml" />
     <Content Include="Views\Reservas\_Step4.cshtml" />
     <Content Include="Views\Pasajeros\Create2.cshtml" />
-    <Content Include="Views\Reservas\Confirmar.cshtml" />
+    <Content Include="Views\Reservas\Listado.cshtml" />
     <Content Include="Views\Reservas\Detalle.cshtml" />
     <Content Include="Views\Buses\Create.cshtml" />
     <Content Include="Views\Buses\Delete.cshtml" />
     <Content Include="Views\Buses\Details.cshtml" />
     <Content Include="Views\Buses\Edit.cshtml" />
     <Content Include="Views\Buses\Index.cshtml" />
+    <Content Include="Views\Reservas\Solicitudes.cshtml" />
+    <Content Include="Views\Reservas\_Confirmar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

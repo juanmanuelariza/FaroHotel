@@ -62,6 +62,7 @@
     <EntitySetMapping Name="Bus">
       <EntityTypeMapping TypeName="FaroHotelModel.Bus">
         <MappingFragment StoreEntitySet="Bus">
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Fecha" ColumnName="Fecha" />
           <ScalarProperty Name="TrayectoId" ColumnName="TrayectoId" />
@@ -89,6 +90,7 @@
     <EntitySetMapping Name="EnlaceReservaHotelPasajero">
       <EntityTypeMapping TypeName="FaroHotelModel.EnlaceReservaHotelPasajero">
         <MappingFragment StoreEntitySet="EnlaceReservaHotelPasajero">
+          <ScalarProperty Name="BaseId" ColumnName="BaseId" />
           <ScalarProperty Name="ReservaHotelId" ColumnName="ReservaHotelId" />
           <ScalarProperty Name="PasajeroId" ColumnName="PasajeroId" />
           <ScalarProperty Name="PaqueteId" ColumnName="PaqueteId" />
@@ -386,6 +388,55 @@
           <ScalarProperty Name="NombreHotel" ColumnName="NombreHotel" />
           <ScalarProperty Name="TipoHabitacion" ColumnName="TipoHabitacion" />
           <ScalarProperty Name="NumeroHabitacion" ColumnName="NumeroHabitacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="TipoBase">
+      <EntityTypeMapping TypeName="FaroHotelModel.TipoBase">
+        <MappingFragment StoreEntitySet="TipoBase">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetReservaPasajeros" FunctionName="FaroHotelModel.Store.GetReservaPasajeros">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FaroHotelModel.GetReservaPasajeros_Result">
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="NroButacaIda" ColumnName="NroButacaIda" />
+          <ScalarProperty Name="FechaBusIda" ColumnName="FechaBusIda" />
+          <ScalarProperty Name="NroButacaVuelta" ColumnName="NroButacaVuelta" />
+          <ScalarProperty Name="FechaBusVuelta" ColumnName="FechaBusVuelta" />
+          <ScalarProperty Name="Edad" ColumnName="Edad" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Base" ColumnName="Base" />
+          <ScalarProperty Name="NroBusIda" ColumnName="NroBusIda" />
+          <ScalarProperty Name="NroBusVuelta" ColumnName="NroBusVuelta" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetReserva" FunctionName="FaroHotelModel.Store.GetReserva">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FaroHotelModel.GetReserva_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
+          <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+          <ScalarProperty Name="Hotel" ColumnName="Hotel" />
+          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+          <ScalarProperty Name="Confirmada" ColumnName="Confirmada" />
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Edad" ColumnName="Edad" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="NombreVentanilla" ColumnName="NombreVentanilla" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

@@ -12,24 +12,18 @@ namespace FaroHotel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Bus
+    public partial class TipoBase
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Bus()
+        public TipoBase()
         {
-            this.EnlaceBusPasajero = new HashSet<EnlaceBusPasajero>();
-            this.ReservaHotel = new HashSet<ReservaHotel>();
+            this.EnlaceReservaHotelPasajero = new HashSet<EnlaceReservaHotelPasajero>();
         }
     
-        public int ID { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public int TrayectoId { get; set; }
-        public Nullable<byte> Numero { get; set; }
+        public byte ID { get; set; }
+        public string Descripcion { get; set; }
     
-        public virtual TipoTrayecto TipoTrayecto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EnlaceBusPasajero> EnlaceBusPasajero { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReservaHotel> ReservaHotel { get; set; }
+        public virtual ICollection<EnlaceReservaHotelPasajero> EnlaceReservaHotelPasajero { get; set; }
     }
 }

@@ -1,0 +1,35 @@
+﻿<div class="alert alert-success alert-dismissible">
+    <h4><i class="icon fa fa-check-circle"></i> Atencion!</h4>
+    ¿Esta seguro que desea confirmar la reserva?
+</div>
+
+<script>
+    //Click "Guardar"
+    $("#btnGuardar").unbind();
+    $("#btnGuardar").click(function () {
+        var data = {};
+        data["id"] = @ViewBag.ReservaId;
+        data["__RequestVerificationToken"] = $("input[name='__RequestVerificationToken']").val();
+        $.ajax({
+            url: "/Reservas/Confirmar",
+            type: "POST",
+            data: data,
+            beforeSend: function (xhr) {
+                abrirWaiting();
+            },
+            success: function (result) {
+                cerrarWaiting();
+                if (result.ok) {
+                    cerrarModal();
+                    window.location.href = window.location.href;
+                    return;
+                }
+                $('#contenidoModal').html(result);
+            },
+            error: function () {
+                cerrarWaiting();
+            }
+        });
+    });
+
+</script>

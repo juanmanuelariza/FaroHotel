@@ -41,7 +41,7 @@
                         <div class="form-group row">
                             <label class="control-label col-md-2 col-md-offset-1" for="Direccion">Trayecto:</label>
                             <div class="col-md-8">
-                                @Html.DropDownList("TrayectoId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("TrayectoId", null, "", htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.TrayectoId, "", new { @class = "text-danger" })
                             </div>
                         </div>

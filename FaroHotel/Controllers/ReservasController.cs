@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -45,11 +46,11 @@ namespace FaroHotel.Controllers
             return PartialView("_Step3");
 
         }
-        public ActionResult Step4(DateTime ParamFecha, int ParamHotelId, int ParamNochesId, int ParamTitularId, int[] ParamTipoHabitacionesIds, int[] ParamNroHabitacionesIds, int[] ParamPasajerosIds, int[] ParamPaquetesIds, int[] ParamBusIdaIds, int[] ParamAsientosIdaIds, int[] ParamBusVueltaIds, int[] ParamAsientosVueltaIds)
+        public ActionResult Step4(DateTime ParamFecha, int ParamHotelId, int ParamNochesId, int ParamTitularId, int[] ParamTipoHabitacionesIds, int[] ParamNroHabitacionesIds, int[] ParamPasajerosIds, int[] ParamPaquetesIds, int[] ParamBaseIds, int[] ParamBusIdaIds, int[] ParamAsientosIdaIds, int[] ParamBusVueltaIds, int[] ParamAsientosVueltaIds)
         {
             InsertBooking_Result result = db.InsertBooking(ParamFecha, ParamHotelId, ParamNochesId, ParamTitularId,
                 string.Join(",", ParamTipoHabitacionesIds), string.Join(",", ParamNroHabitacionesIds),
-                string.Join(",", ParamPasajerosIds), string.Join(",", ParamPaquetesIds),
+                string.Join(",", ParamPasajerosIds), string.Join(",", ParamPaquetesIds), string.Join(",", ParamBaseIds),
                 User.Identity.GetUserId(), string.Join(",", ParamBusIdaIds), string.Join(",", ParamAsientosIdaIds),
                 string.Join(",", ParamBusVueltaIds), string.Join(",", ParamAsientosVueltaIds)).FirstOrDefault();
             ViewBag.NroReserva = result.ReservaHotelID;
@@ -63,10 +64,13 @@ namespace FaroHotel.Controllers
             {
                 ParamFecha = ParamFecha.AddDays(ParamDias + 1);
             }
-            var buses = from b in db.Bus
-                        where b.Fecha == ParamFecha && b.TrayectoId == ParamTrayectoId
-                        select b.ID;
-            ViewBag.BusesIds = buses.ToList();
+            //var buses = from b in db.Bus
+            //            where b.Fecha == ParamFecha && b.TrayectoId == ParamTrayectoId
+            //            select b;
+            //ViewBag.Buses = buses.ToList();
+            ViewBag.Buses = from b in db.Bus
+                            where b.Fecha == ParamFecha && b.TrayectoId == ParamTrayectoId
+                            select b;
             return PartialView("_Bus");
         }
 
@@ -125,13 +129,22 @@ namespace FaroHotel.Controllers
                                select new
                                {
                                    BusIda = p.BusIda,
-                                   BusVuelta = p.BusVuelta
+                                   BusVuelta = p.BusVuelta,
+                                   PrecioSingle = p.PrecioSingle,
+                                   PrecioDoble = p.PrecioDoble
+
                                });
             return Json(tmp_paquete, JsonRequestBehavior.AllowGet);
         }
 
         //Reservas/Confirmar
-        public ActionResult Confirmar()
+        public ActionResult Listado()
+        {
+            var reservas = db.ReservaHotel.Where(r => r.Confirmada == true);
+            return View(reservas.ToList());
+        }
+
+        public ActionResult Solicitudes()
         {
             var reservas = db.ReservaHotel.Where(r => r.Confirmada == false);
             return View(reservas.ToList());
@@ -144,9 +157,38 @@ namespace FaroHotel.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ReservaHotel reserva = db.ReservaHotel.Find(Id);
+            ViewBag.ReservaId = reserva.ID;
+            ViewBag.Confirmada = reserva.Confirmada;
+            ViewBag.DatosReserva = db.GetReserva(Id);
             ViewBag.HabitacionesReservadas = db.GetReservaHabitaciones(Id);
+            ViewBag.PasajerosReserva = db.GetReservaPasajeros(Id);
 
             return View();
+        }
+
+        public ActionResult Confirmar(int? id)
+        {
+            ViewBag.ReservaId = id;
+            return PartialView("_Confirmar");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Confirmar(int id)
+        {
+            try
+            {
+                ReservaHotel reserva = db.ReservaHotel.Find(id);
+                reserva.Confirmada = true;
+                reserva.UsuarioConfirma = User.Identity.GetUserId();
+                db.Entry(reserva).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json(new { ok = "true" });
+            }
+            catch
+            {
+                return Json(new { ok = "false" });
+            }
+                     
         }
     }            
 }

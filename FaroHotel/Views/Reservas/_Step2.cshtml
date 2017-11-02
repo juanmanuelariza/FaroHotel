@@ -24,7 +24,7 @@
                         <h2>Pasajero @i </h2>
                         <div class="clearfix"></div>
                         <div class="radio">
-                            <label><input type="radio" name="radioTitular" data-boxId="@i">Titular de la Reserva</label>
+                            <label><input type="radio" name="radioTitular" value="@i">Titular de la Reserva</label>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -34,7 +34,7 @@
                                 <input id="PaxID_@i" type="hidden" class="PaxIds" value="" />
                                 <label class="control-label col-md-3" for="DNI">DNI:</label>
                                 <div class="col-md-6">
-                                    <input id="PaxDNI_@i" class="form-control" />
+                                    <input id="PaxDNI_@i" type="text" class="form-control" />
                                 </div>
                                 <div class="col-md-3">
                                     <span id="btnSearchPax_@i" class="btn btn-dark btnSearchPax" data-boxId="@i">Buscar</span>
@@ -59,14 +59,22 @@
                                 <label class="control-label col-md-3" for="Paquete">Paquete:</label>
                                 <div class="col-md-9">
                                     @Html.DropDownList("SelectPaquetesDisponibles", null, "", htmlAttributes: new { @id = "SelectPaquete_" + @i, @class = "form-control SelectPaquetesDisponibles", data_boxId = @i })
-
                                 </div>
                             </div>
-
+                            <div class="form-group row">
+                                <label class="control-label col-md-3" for="Paquete">Base:</label>
+                                <div class="col-md-9">
+                                    <select name="SelectBase_@i" id="SelectBase_@i" class="form-control SelectBase" data-boxId="@i" disabled="disabled">
+                                        <option selected="selected" value="0"></option>
+                                        <option  value="1">Base Simple</option>
+                                        <option value="2">Base Doble</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3" for="Nombre">Precio:</label>
                                 <div class="col-md-9">
-                                    <input id="Price_@i" class="form-control" readonly="readonly" />
+                                    <input id="PaxPrice_@i" class="form-control PaxPrice" readonly="readonly" />
                                 </div>
                             </div>
                         </div>
@@ -106,31 +114,31 @@
                     <h2>Si el titular no viaja</h2>
                     <div class="clearfix"></div>
                     <div class="radio">
-                        <label><input type="radio" name="radioTitular" data-boxId="0">Clic aquí</label>
+                        <label><input type="radio" name="radioTitular" value="0">Clic aquí</label>
                     </div>
                 </div>
                 <div class="x_content">
                     <div class="col-md-12 col-sm-12 col-xs-12 form-horizontal">
                         <div class="form-group row">
-                            <input id="PaxID" type="hidden" value="" />
+                            <input id="PaxID_0" type="hidden" value="" />
                             <label class="control-label col-md-3" for="DNI">DNI:</label>
                             <div class="col-md-6">
-                                <input id="PaxDNI_T" class="form-control" />                                
+                                <input id="PaxDNI_0" class="form-control" />                                
                             </div>
                             <div class="col-md-3">
-                                <span id="btnSearchPax_T" class="btn btn-dark btnSearchPax" data-boxId="T">Buscar</span>
+                                <span id="btnSearchPax_0" class="btn btn-dark btnSearchPax" data-boxId="0">Buscar</span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="Apellido">Apellido:</label>
                             <div class="col-md-9">
-                                <input id="PaxSurname_T" class="form-control" readonly="readonly" />
+                                <input id="PaxSurname_0" class="form-control" readonly="readonly" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="Nombre">Nombre:</label>
                             <div class="col-md-9">
-                                <input id="PaxName_T" class="form-control" readonly="readonly" />
+                                <input id="PaxName_0" class="form-control" readonly="readonly" />
                             </div>
                         </div>
                     </div>
@@ -216,24 +224,52 @@
     
     $(".SelectPaquetesDisponibles").change(function () {
         var selectedItem = $(this).val();
-        var boxId = $(this).attr("data-boxId");
-        $.getJSON('/Reservas/Paquetes', { ParamPaqueteId: selectedItem }, function (data) {
-            if(data[0].BusIda){
-                $("#Panel_BusIda_" + boxId).show();
-            }
-            else{
-                $("#Panel_BusIda_" + boxId).hide();
-            }
+        var boxId = $(this).attr("data-boxId");  
+        if (selectedItem > 0){          
+            $.getJSON('/Reservas/Paquetes', { ParamPaqueteId: selectedItem }, function (data) {
+                if(data[0].BusIda){
+                    $("#Panel_BusIda_" + boxId).show();
+                }
+                else{
+                    $("#Panel_BusIda_" + boxId).hide();
+                }
 
-            if(data[0].BusVuelta){
-                $("#Panel_BusVuelta_" + boxId).show();
-            }
-            else{
-                $("#Panel_BusVuelta_" + boxId).hide();
-            }
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            alert('Error!');
-        });
+                if(data[0].BusVuelta){
+                    $("#Panel_BusVuelta_" + boxId).show();
+                }
+                else{
+                    $("#Panel_BusVuelta_" + boxId).hide();
+                }
+                //BORRAR SELECCION DEL OTRO SELECT Y BORRAR PRECIO
+                $("#SelectBase_" + boxId).prop('disabled', false);
+                $("#SelectBase_" + boxId).val(0);
+                $("#PaxPrice_" + boxId).val("");
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert('Error!');
+            });
+        }
+        else{
+            $("#SelectBase_" + boxId).prop('disabled', 'disabled');
+        }
     });
-
+    $(".SelectBase").change(function () {        
+        var selectedItem = $(this).val();
+        var boxId = $(this).attr("data-boxId");
+        if (selectedItem > 0){
+            var selectedPaq = $("#SelectPaquete_" + boxId + " option:selected").val();
+            $.getJSON('/Reservas/Paquetes', { ParamPaqueteId: selectedPaq }, function (data) {     
+                if(selectedItem == "1"){                
+                    $("#PaxPrice_" + boxId).val("$ " + data[0].PrecioSingle);
+                }
+                else{
+                    $("#PaxPrice_" + boxId).val("$ " + data[0].PrecioDoble);
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert('Error!');
+            });
+        }
+        else{
+            $("#PaxPrice_" + boxId).val("");
+        }
+    });
 </script>

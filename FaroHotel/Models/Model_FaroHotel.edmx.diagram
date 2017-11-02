@@ -64,6 +64,8 @@
         <AssociationConnector Association="FaroHotelModel.EnlacePaqueteVentanilla" ManuallyRouted="false" />
         <AssociationConnector Association="FaroHotelModel.FK_AspNetUsers_Ventanilla" />
         <AssociationConnector Association="FaroHotelModel.EnlaceReservaHotelBus" />
+        <EntityTypeShape EntityType="FaroHotelModel.TipoBase" Width="1.5" PointX="10.375" PointY="0.875" />
+        <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelPasajero_TipoBase" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

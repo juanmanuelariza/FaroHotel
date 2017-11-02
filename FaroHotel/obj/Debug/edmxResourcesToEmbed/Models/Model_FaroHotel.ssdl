@@ -78,6 +78,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Fecha" Type="datetime" Nullable="false" />
     <Property Name="TrayectoId" Type="int" Nullable="false" />
+    <Property Name="Numero" Type="tinyint" />
   </EntityType>
   <EntityType Name="EnlaceBusPasajero">
     <Key>
@@ -129,6 +130,7 @@
     <Property Name="ReservaHotelId" Type="int" Nullable="false" />
     <Property Name="PasajeroId" Type="int" Nullable="false" />
     <Property Name="PaqueteId" Type="int" Nullable="false" />
+    <Property Name="BaseId" Type="tinyint" Nullable="false" />
   </EntityType>
   <EntityType Name="Habitacion">
     <Key>
@@ -223,6 +225,13 @@
     <Property Name="FechaCancelada" Type="datetime" />
     <Property Name="UsuarioCancela" Type="nvarchar" MaxLength="128" />
     <Property Name="Activa" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoBase">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="TipoCuota">
     <Key>
@@ -569,6 +578,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_EnlaceReservaHotelPasajero_TipoBase">
+    <End Role="TipoBase" Type="Self.TipoBase" Multiplicity="1" />
+    <End Role="EnlaceReservaHotelPasajero" Type="Self.EnlaceReservaHotelPasajero" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoBase">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnlaceReservaHotelPasajero">
+        <PropertyRef Name="BaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Habitacion_TipoHotel">
     <End Role="TipoHotel" Type="Self.TipoHotel" Multiplicity="1" />
     <End Role="Habitacion" Type="Self.Habitacion" Multiplicity="*" />
@@ -794,7 +815,13 @@
   <Function Name="GetPermisosPorNombreDeUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserName" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="GetReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ReservaId" Type="int" Mode="In" />
+  </Function>
   <Function Name="GetReservaHabitaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ReservaId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetReservaPasajeros" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ReservaId" Type="int" Mode="In" />
   </Function>
   <Function Name="InsertBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -806,6 +833,7 @@
     <Parameter Name="NroHabitacionesIds" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="PasajerosIds" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="PaquetesIds" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="BaseIds" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="UsuarioAlta" Type="nvarchar" Mode="In" />
     <Parameter Name="BusesIdaIds" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="AsientosIdaIds" Type="nvarchar(max)" Mode="In" />
@@ -864,6 +892,7 @@
     <EntitySet Name="Paquete" EntityType="Self.Paquete" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pasajero" EntityType="Self.Pasajero" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReservaHotel" EntityType="Self.ReservaHotel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoBase" EntityType="Self.TipoBase" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoCuota" EntityType="Self.TipoCuota" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoDescripcionPaquete" EntityType="Self.TipoDescripcionPaquete" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoHabitacion" EntityType="Self.TipoHabitacion" Schema="dbo" store:Type="Tables" />
@@ -959,6 +988,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_EnlaceReservaHotelPasajero_ReservaHotel" Association="Self.FK_EnlaceReservaHotelPasajero_ReservaHotel">
       <End Role="ReservaHotel" EntitySet="ReservaHotel" />
+      <End Role="EnlaceReservaHotelPasajero" EntitySet="EnlaceReservaHotelPasajero" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnlaceReservaHotelPasajero_TipoBase" Association="Self.FK_EnlaceReservaHotelPasajero_TipoBase">
+      <End Role="TipoBase" EntitySet="TipoBase" />
       <End Role="EnlaceReservaHotelPasajero" EntitySet="EnlaceReservaHotelPasajero" />
     </AssociationSet>
     <AssociationSet Name="FK_Habitacion_TipoHotel" Association="Self.FK_Habitacion_TipoHotel">

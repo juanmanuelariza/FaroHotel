@@ -475,7 +475,7 @@ function InitModalSubmitAjax() {
     //Click "Guardar"
     $("#btnGuardar").unbind();
     $("#btnGuardar").click(function () {
-        //debugger
+        debugger
         $('#contenidoModal form').submit();
     });
 

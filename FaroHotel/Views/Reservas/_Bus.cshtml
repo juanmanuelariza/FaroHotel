@@ -111,11 +111,12 @@
     }
 </style>
 
-@foreach (var BusId in (IEnumerable<int>)ViewBag.BusesIds)
+@foreach (FaroHotel.Models.Bus Bus in ViewBag.Buses)
 {
     <div class="row">
         <div class="x_panel">
-            <div class="col-md-12" id="BusId_@BusId">
+            <strong>Bus Número @Bus.Numero</strong> 
+            <div class="col-md-12" id="BusId_@Bus.ID">
                 <div class="busfloor">
                     <div class="busrow">
                         <div class="asiento_vacio">
@@ -125,19 +126,19 @@
                         <div class="asiento_vacio">
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="47" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="47" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>47</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="51" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="51" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>51</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="55" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="55" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>55</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="59" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="59" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>59</span>
                         </div>
                     </div>
@@ -150,19 +151,19 @@
                         <div class="asiento_vacio">
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="48" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="48" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>48</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="52" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="52" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>52</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="56" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="56" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>56</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="60" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="60" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>60</span>
                         </div>
                     </div>
@@ -177,19 +178,19 @@
                         <div class="asiento_vacio">
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="49" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="49" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>49</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="53" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="53" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>53</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="57" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="57" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>57</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="61" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="61" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>61</span>
                         </div>
                     </div>
@@ -202,19 +203,19 @@
                         <div class="asiento_vacio">
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="50" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="50" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>50</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="54" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="54" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>54</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="58" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="58" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>58</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="62" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="62" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>62</span>
                         </div>
                     </div>
@@ -224,7 +225,7 @@
                         <div class="asiento_vacio">
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="1" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="1" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>1</span>
                         </div>
                         <div class="asiento_vacio">
@@ -232,39 +233,39 @@
                         <div class="asiento_vacio fa fa-coffee fa-2x">
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="11" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="11" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>11</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="15" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="15" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>15</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="19" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="19" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>19</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="23" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="23" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>23</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="27" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="27" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>27</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="31" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="31" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>31</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="35" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="35" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>35</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="39" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="39" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>39</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="43" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="43" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>43</span>
                         </div>
                     </div>
@@ -273,7 +274,7 @@
                         <div class="asiento_vacio">
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="2" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="2" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>2</span>
                         </div>
                         <div class="asiento_vacio">
@@ -281,39 +282,39 @@
                         <div class="asiento_vacio fa fa-coffee fa-2x">
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="12" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="12" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>12</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="16" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="16" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>16</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="20" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="20" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>20</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="24" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="24" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>24</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="28" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="28" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>28</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="32" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="32" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>32</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="36" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="36" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>36</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="40" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="40" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>40</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="44" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="44" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>44</span>
                         </div>
                     </div>
@@ -324,51 +325,51 @@
                         <div class="asiento_vacio">
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="3" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="3" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>3</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="5" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="5" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>5</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="7" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="7" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>7</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="13" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="13" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>13</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="17" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="17" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>17</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="21" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="21" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>21</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="25" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="25" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>25</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="29" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="29" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>29</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="33" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="33" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>33</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="37" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="37" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>37</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="41" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="41" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>41</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="45" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="45" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>45</span>
                         </div>
 
@@ -379,51 +380,51 @@
                         <div class="asiento_vacio">
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="4" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="4" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>4</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="6" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="6" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>6</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="8" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="8" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>8</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="14" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="14" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>14</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="18" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="18" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>18</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="22" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="22" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>22</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="26" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="26" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>26</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="30" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="30" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>30</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="34" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="34" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>34</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="38" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="38" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>38</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="42" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="42" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>42</span>
                         </div>
                         <div class="asiento">
-                            <div data-class="asientoLibre" data-bus="@BusId" data-seat="46" onclick="Selectedseat(this)" class="asientoLibre"></div>
+                            <div data-class="asientoLibre" data-bus="@Bus.ID" data-seat="46" onclick="Selectedseat(this)" class="asientoLibre"></div>
                             <span>46</span>
                         </div>
                     </div>
@@ -433,7 +434,7 @@
                     <div class="seat_arragement_inner1">
                         <div class="ac-lft-main">
                             <div class="ac-lft-list order">
-                                <div class="order_cnct_detail"><img src="/img/6.png">  Asiento seleccionado: <span id="span_ButacaSel_@BusId" class="seat_no"></span></div>
+                                <div class="order_cnct_detail"><img src="/img/6.png">  Asiento seleccionado: <span id="span_ButacaSel_@Bus.ID" class="seat_no"></span></div>
                             </div>
                         </div>
                     </div>
