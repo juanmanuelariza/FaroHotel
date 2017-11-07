@@ -88,8 +88,41 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="datosExtra">Datos extra:</label>
+                            <div class="col-lg-offset-3 col-md-8">
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.Diabetes)
+                                        Diabetes
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.Celiaquia)
+                                        Celiaquia
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.Motricidad)
+                                        Motricidad
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.ListaNegra)
+                                        Lista Negra
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @*<div class="col-md-12">
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="Diabetes">Diabetes:</label>
                             <div class="col-md-8">
@@ -132,7 +165,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </fieldset>
         </div>
     </div>

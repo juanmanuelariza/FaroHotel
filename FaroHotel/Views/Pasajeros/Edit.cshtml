@@ -91,48 +91,36 @@
 
                     <div class="col-md-12">
                         <div class="form-group row">
-                            <label class="control-label col-md-3" for="Diabetes">Diabetes:</label>
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.Diabetes)
-                                @Html.ValidationMessageFor(model => model.Diabetes, "", new { @class = "text-danger" })
+                            <label class="control-label col-md-3" for="datosExtra">Datos extra:</label>
+                            <div class="col-lg-offset-3 col-md-8">
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.Diabetes)
+                                        Diabetes
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.Celiaquia)
+                                        Celiaquia
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.Motricidad)
+                                        Motricidad
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.ListaNegra)
+                                        Lista Negra
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group row">
-                            <label class="control-label col-md-3" for="Celiaquia">Celiaquia:</label>
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.Celiaquia)
-                                @Html.ValidationMessageFor(model => model.Celiaquia, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="form-group row">
-                            <label class="control-label col-md-3" for="Motricidad">Motricidad:</label>
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.Motricidad)
-                                @Html.ValidationMessageFor(model => model.Motricidad, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group row">
-                            <label class="control-label col-md-3" for="ListaNegra">Lista Negra:</label>
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.ListaNegra)
-                                @Html.ValidationMessageFor(model => model.ListaNegra, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </fieldset>
         </div>
     </div>

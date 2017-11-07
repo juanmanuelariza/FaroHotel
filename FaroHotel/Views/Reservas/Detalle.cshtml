@@ -46,11 +46,15 @@ else
     <div class="x_panel">
         <div class="x_title">
             <h2 class="box-title">Información de habitaciones</h2>
+            <button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/AgregarHabitacion/@ViewBag.ReservaId', 'Agregar', 'Habitación')">
+                <i class="fa fa-plus"></i> Agregar
+            </button>
             <div class="clearfix"></div>
         </div>
         <!-- /.box-header -->
         <div class="x_content">
             <div id="divHabitaciones" class="row form-horizontal">
+                
                 <div class="col-md-12">
                     <table id="dtReservas" class="table table-bordered table-striped">
                         <thead>

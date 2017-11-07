@@ -91,20 +91,26 @@
 
                     <div class="col-md-12">
                         <div class="form-group row">
-                            <label class="control-label col-md-3" for="PrecioSingle">Precio Simple:</label>
+                            <label class="control-label col-md-3" for="PrecioSingle">Precio base simple:</label>
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.PrecioSingle, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.PrecioSingle, "", new { @class = "text-danger" })
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    @Html.EditorFor(model => model.PrecioSingle, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PrecioSingle, "", new { @class = "text-danger" })
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-12">
                         <div class="form-group row">
-                            <label class="control-label col-md-3" for="PrecioDoble">Precio Doble:</label>
+                            <label class="control-label col-md-3" for="PrecioDoble">Precio base doble:</label>
                             <div class="col-md-8">
-                                @Html.EditorFor(model => model.PrecioDoble, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.PrecioDoble, "", new { @class = "text-danger" })
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    @Html.EditorFor(model => model.PrecioDoble, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PrecioDoble, "", new { @class = "text-danger" })
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -118,6 +124,26 @@
                         </div>
                     </div>
 
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Buses">Buses:</label>
+                            <div class="col-lg-offset-3 col-md-8">
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.BusIda)
+                                        Bus Ida
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.BusVuelta)
+                                        Bus Vuelta
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="col-md-12">
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="Ventanillas">Ventanillas:</label>
@@ -161,9 +187,9 @@
         firstDay: 0,
         minDate: +1,
         maxDate: '+1Y +6M',
-        beforeShowDay: function (date) {
-            return [date.getDay() === 0, ''];
-        }
+        //beforeShowDay: function (date) {
+        //    return [date.getDay() === 0, ''];
+        //}
     });
 </script>
 

@@ -132,7 +132,10 @@ namespace FaroHotel.Controllers
                 paqueteOriginal.PrecioSingle = paquete.PrecioSingle;
                 paqueteOriginal.PrecioDoble = paquete.PrecioDoble;
                 paqueteOriginal.CuotasId = paquete.CuotasId;
-                
+                paqueteOriginal.BusIda = paquete.BusIda;
+                paqueteOriginal.BusVuelta = paquete.BusVuelta;
+
+
                 paqueteOriginal.Ventanilla.Clear();                                
                 if (paquete.VentanillaIds != null)
                 {

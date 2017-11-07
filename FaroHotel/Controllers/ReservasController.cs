@@ -71,6 +71,11 @@ namespace FaroHotel.Controllers
             ViewBag.Buses = from b in db.Bus
                             where b.Fecha == ParamFecha && b.TrayectoId == ParamTrayectoId
                             select b;
+
+            ViewBag.BusesIds = from b in db.Bus
+                            where b.Fecha == ParamFecha && b.TrayectoId == ParamTrayectoId
+                            select b.ID;
+
             return PartialView("_Bus");
         }
 
@@ -171,6 +176,7 @@ namespace FaroHotel.Controllers
             ViewBag.ReservaId = id;
             return PartialView("_Confirmar");
         }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Confirmar(int id)
@@ -189,6 +195,68 @@ namespace FaroHotel.Controllers
                 return Json(new { ok = "false" });
             }
                      
+        }
+
+        public ActionResult AgregarHabitacion(int? Id)
+        {
+            ReservaHotel reserva = db.ReservaHotel.Find(Id);
+            ViewBag.ReservaId = Id;
+            ViewBag.Fecha = reserva.FechaEntrada;
+            ViewBag.HotelId = reserva.HotelId;
+            ViewBag.SelectTipoHabitacion = new SelectList(db.TipoHabitacion.OrderBy(c => c.ID), "ID", "Descripcion");
+            return PartialView("_AgregarHabitacion");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AgregarHabitacion(int id, int TipoHabitacion, int NumHabitacion)
+        {
+            try
+            {
+                EnlaceReservaHotelHabitacion habitacion = new EnlaceReservaHotelHabitacion();
+                habitacion.ReservaHotelId = id;
+                habitacion.TipoHabitacionId = TipoHabitacion;
+                habitacion.HabitacionId = NumHabitacion;
+                db.EnlaceReservaHotelHabitacion.Add(habitacion);
+                db.SaveChanges();
+                return Json(new { ok = "true" });
+            }
+            catch
+            {
+                return Json(new { ok = "false" });
+            }
+
+        }
+        public ActionResult EditarHabitacion(int? Id)
+        {
+            ReservaHotel reserva = db.ReservaHotel.Find(Id);
+            ViewBag.ReservaId = Id;
+            ViewBag.Fecha = reserva.FechaEntrada;
+            ViewBag.HotelId = reserva.HotelId;
+            ViewBag.SelectTipoHabitacion = new SelectList(db.TipoHabitacion.OrderBy(c => c.ID), "ID", "Descripcion");
+            ViewBag.SelectNumHabitacion = new SelectList(db.TipoHabitacion.OrderBy(c => c.ID), "ID", "Descripcion");
+            return PartialView("_AgregarHabitacion");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarHabitacion(int id, int TipoHabitacion, int NumHabitacion)
+        {
+            try
+            {
+                EnlaceReservaHotelHabitacion habitacion = new EnlaceReservaHotelHabitacion();
+                habitacion.ReservaHotelId = id;
+                habitacion.TipoHabitacionId = TipoHabitacion;
+                habitacion.HabitacionId = NumHabitacion;
+                db.EnlaceReservaHotelHabitacion.Add(habitacion);
+                db.SaveChanges();
+                return Json(new { ok = "true" });
+            }
+            catch
+            {
+                return Json(new { ok = "false" });
+            }
+
         }
     }            
 }

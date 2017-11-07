@@ -455,6 +455,9 @@
     <Content Include="Views\Buses\Index.cshtml" />
     <Content Include="Views\Reservas\Solicitudes.cshtml" />
     <Content Include="Views\Reservas\_Confirmar.cshtml" />
+    <Content Include="Views\Reservas\_AgregarHabitacion.cshtml" />
+    <Content Include="Views\Reservas\_AgregarPasajero.cshtml" />
+    <Content Include="Views\Reservas\_EditarHabitacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
