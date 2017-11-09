@@ -40,7 +40,7 @@
     //Click "Guardar"
     $("#btnGuardar").unbind();
     $("#btnGuardar").click(function () {
-        //debugger
+        
         //$('#TextEditor').text(tinyMCE.get('TextEditor').getContent());
         tinyMCE.triggerSave();
         $('#contenidoModal form').submit();
@@ -48,7 +48,7 @@
 
     //Submit
     $('form').submit(function () {
-        //debugger
+        
         if ($(this).valid()) {
             $.ajax({
                 url: this.action,
@@ -58,7 +58,7 @@
                     abrirWaiting();
                 },
                 success: function (result) {
-                    debugger
+                    
                     cerrarWaiting();
                     if (result.ok) {
                         cerrarModal();

@@ -32,7 +32,7 @@
         });
 
         var roles = [@foreach (var item in Model.AspNetRoles.Select(r => r.Name).ToArray()){<text>"@item",</text>}];
-        //debugger
+        
 
 
        $("#RolesID").val(roles).trigger("change");
@@ -44,13 +44,13 @@
     //Click "Guardar"
     $("#btnGuardar").unbind("click");
     $("#btnGuardar").click(function () {
-        //debugger
+        
         $('#contenidoModal form').submit()
     });
 
     //Submit
     $('form').submit(function () {
-        //debugger
+        
         var _data = {
             __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val(),
             userId: $("#Id").val(),
@@ -68,7 +68,7 @@
                     abrirWaiting();
                 },
                 success: function (result) {
-                    //debugger
+                    
                     cerrarWaiting();
                     if (result.ok) {
                         $('#contenProfesionales').html(result.data);

@@ -3,18 +3,6 @@
     <button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Create2', 'Agregar', 'Pasajeros')">
         <i class="fa fa-plus"></i> Nuevo Pasajero
     </button>
-    <div class="col-md-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Información de paquetes</h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                Listado de paquetes disponibles para la fecha seleccionada
-
-            </div>
-        </div>
-    </div>
     <div class="row">
         @for (var i = 1; i <= ViewBag.CantPasajeros; i++)
         {
@@ -31,7 +19,7 @@
                     <div class="x_content">
                         <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
                             <div class="form-group row">
-                                <input id="PaxID_@i" type="hidden" class="PaxIds" value="" />
+                                <input id="PaxID_@i" type="hidden" class="PaxIds" data-boxId="@i" value="" />
                                 <label class="control-label col-md-3" for="DNI">DNI:</label>
                                 <div class="col-md-6">
                                     <input id="PaxDNI_@i" type="text" class="form-control PaxDNI" data-boxId="@i" />
@@ -85,7 +73,7 @@
                                     <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento(@i,'Ida')">Seleccionar asiento</span>
                                 </div>
                                 <div class="col-md-12">
-                                    <div><img src="/img/6.png">  Asiento seleccionado: <span id="ButacaBusIda_@i" class="ButacaBusIda"></span></div>
+                                    <div><img src="/img/6.png">  Asiento seleccionado: <span id="ButacaBusIda_@i" data-boxId="@i" class="ButacaBusIda"></span></div>
                                 </div>
                                 <input type="hidden" id="BusIdaId_@i" class="BusIdaIds" value="" />
                             </div>
@@ -95,7 +83,7 @@
                                     <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento(@i,'Vuelta')">Seleccionar asiento</span>
                                 </div>
                                 <div class="col-md-12">
-                                    <div><img src="/img/6.png">  Asiento seleccionado: <span id="ButacaBusVuelta_@i" class="ButacaBusVuelta"></span></div>
+                                    <div><img src="/img/6.png">  Asiento seleccionado: <span id="ButacaBusVuelta_@i" data-boxId="@i" class="ButacaBusVuelta"></span></div>
                                 </div>
                                 <input type="hidden" id="BusVueltaId_@i" class="BusVueltaIds" value="" />
                             </div>
@@ -189,22 +177,24 @@
     });
 
     $('#btnGoStep3').click(function () {
-        $('#Panel_Step2').fadeOut();
-        $('#Panel_Step3').fadeIn();
-        $('body').animate({ scrollTop: 0 }, 500);
-        $('#wizard_step2').attr('class', 'done');
-        $('#wizard_step3').attr('class', 'selected');
+        if(ValidarFormularioStep2()){
+            $('#Panel_Step2').fadeOut();
+            $('#Panel_Step3').fadeIn();
+            $('body').animate({ scrollTop: 0 }, 500);
+            $('#wizard_step2').attr('class', 'done');
+            $('#wizard_step3').attr('class', 'selected');
 
-        var _url = GetPathApp("/Reservas/Step3");
+            var _url = GetPathApp("/Reservas/Step3");
 
-        $.ajax({
-            method: "POST",
-            url: _url,
-            data: { __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
-            success: function (result) {
-                $('#Panel_Step3').html(result);
-            }
-        });
+            $.ajax({
+                method: "POST",
+                url: _url,
+                data: { __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
+                success: function (result) {
+                    $('#Panel_Step3').html(result);
+                }
+            });
+        }
     });
 
 
@@ -228,6 +218,10 @@
                     $('#PaxName_' + boxId).val(result[0].Nombre);
                     $('#PaxApellidoyNombre_' + boxId).val(result[0].Apellido + ', ' + result[0].Nombre);
                 }
+                
+                if (BanValidaStep2) {
+                    ValidarFormularioStep2();
+                } 
             }
         });
     });
@@ -282,5 +276,67 @@
         else{
             $("#PaxPrice_" + boxId).val("");
         }
+    });
+
+    var BanValidaStep2 = false;
+    function ValidarFormularioStep2() {
+        var rslt = true;
+        var selectedItem;
+        $(".input-validation-error").removeClass("input-validation-error");
+        $(".colorRed").removeClass("colorRed");        
+        $(".PaxIds").each(function(){
+            var boxId = $(this).attr("data-boxId");
+            if(boxId > 0){
+                selectedItem = $(this).val();
+                if (selectedItem == "") {
+                    rslt = false;
+                    $("#PaxDNI_" + boxId).addClass("input-validation-error");
+                }
+            }
+        });
+        $(".SelectPaquetesDisponibles, .SelectBase").each(function () {
+            selectedItem = $(this).val();
+            if (selectedItem == 0) {
+                rslt = false;
+                $(this).addClass("input-validation-error");
+            }
+        });
+        
+        $(".ButacaBusIda").each(function(){
+            var boxId = $(this).attr("data-boxId");
+            if($("#Panel_BusIda_" + boxId).is(':visible'))
+            {
+                selectedItem = $(this).text();
+                if (selectedItem == "") {
+                    rslt = false;
+                    $(this).parent().addClass("colorRed");
+                }
+            }
+        });
+        
+        $(".ButacaBusVuelta").each(function(){
+            var boxId = $(this).attr("data-boxId");
+            if($("#Panel_BusVuelta_" + boxId).is(':visible'))
+            {
+                selectedItem = $(this).text();
+                if (selectedItem == "") {
+                    rslt = false;
+                    $(this).parent().addClass("colorRed");
+                }
+            }
+        });
+
+        if($('input[name=radioTitular]:checked').val() == undefined){
+            $( "input[name='radioTitular']").parent().addClass("colorRed");
+            rslt = false;
+        }        
+        BanValidaStep2 = true;
+        return rslt;
+    }
+
+    $("#divStep2 .form-control").focusout(function () {
+        if (BanValidaStep2) {
+            ValidarFormularioStep2();
+        }            
     });
 </script>

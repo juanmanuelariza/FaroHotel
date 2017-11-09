@@ -329,7 +329,7 @@ function DataTableEsp() {
 }
 
 function abrirModal(ruta, accion, titulo) {
-    //debugger
+    
     //var rootUrl = window.location.origin;
     //ruta = rootUrl + ruta;
     ruta = GetPathApp(ruta);
@@ -344,7 +344,7 @@ function abrirModal(ruta, accion, titulo) {
             abrirWaiting();
         },        
         success: function (result) {
-            //debugger
+            
             $("#contenidoModal").html(result);
             
             cerrarWaiting();
@@ -372,7 +372,7 @@ function abrirModalPost(ruta, accion, titulo, data) {
             abrirWaiting();
         },
         success: function (result) {
-            debugger
+            
             $("#contenidoModal").html(result);
             cerrarWaiting();
         },
@@ -415,7 +415,7 @@ $('#myModal').on('hidden.bs.modal', function (e) {
     $("#contenidoModal").empty();
 })
 $('#myModal').on('shown.bs.modal', function (e) {
-    //debugger
+    
     $('#myModal').scrollTop(0);
     $(".modal-backdrop").appendTo("body");
 })
@@ -427,7 +427,7 @@ function setTituloModal(accion, titulo)
 
 
 function setBotonesModal(accion) {
-    //debugger    
+        
     switch (accion) {
         case "Agregar": {
             $('#btnGuardar').show();
@@ -454,7 +454,7 @@ function setBotonesModal(accion) {
 
 
 function GetPathApp(url) {
-    //debugger
+    
     var fullPathApp = window.location.origin;
     //fullPathApp = fullPathApp.toLowerCase().replace('home/index', '');
     return fullPathApp + url;
@@ -475,13 +475,13 @@ function InitModalSubmitAjax() {
     //Click "Guardar"
     $("#btnGuardar").unbind();
     $("#btnGuardar").click(function () {
-        debugger
+        
         $('#contenidoModal form').submit();
     });
 
     //Submit
     $('form').submit(function () {
-        debugger
+        
         if ($(this).valid()) {
             $.ajax({
                 url: this.action,
@@ -491,7 +491,7 @@ function InitModalSubmitAjax() {
                     abrirWaiting();
                 },
                 success: function (result) {
-                    debugger
+                    
                     cerrarWaiting();
                     if (result.ok) {
                         cerrarModal();

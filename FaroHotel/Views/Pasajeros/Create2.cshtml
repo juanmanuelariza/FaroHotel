@@ -126,13 +126,13 @@
     //Click "Guardar"
     $("#btnGuardar").unbind();
     $("#btnGuardar").click(function () {
-        //debugger
+        
         $('#contenidoModal form').submit();
     });
 
     //Submit
     $('form').submit(function () {
-        debugger
+        
         if ($(this).valid()) {
             $.ajax({
                 url: this.action,
@@ -142,7 +142,7 @@
                     abrirWaiting();
                 },
                 success: function (result) {
-                    debugger
+                    
                     cerrarWaiting();
                     if (result.ok) {
                         cerrarModal();

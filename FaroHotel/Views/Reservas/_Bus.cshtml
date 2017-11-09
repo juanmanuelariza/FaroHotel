@@ -462,8 +462,7 @@
                 ParamBusesIds: dataArray,
                 __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
             },
-            success: function (result) {       
-                console.log(result);
+            success: function (result) {    
                 $.each(result, function () {
                     $("#BusId_" + this.BusId).find("[data-seat='" + this.NroButaca + "']").addClass('asientoOcupado').removeClass('asientoLibre');
                 });

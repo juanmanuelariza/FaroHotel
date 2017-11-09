@@ -66,30 +66,60 @@
             });
         });
 
-        $('#btnGoStep2').click(function () {
-            $('#Panel_Step1').fadeOut();
-            $('#divQuickSearch').fadeOut();
-            $('#Panel_Step2').fadeIn();
-            $('body').animate({ scrollTop: 0 }, 500);
-            $('#wizard_step1').attr('class', 'done');
-            $('#wizard_step2').attr('class', 'selected');
-            var _url = GetPathApp("/Reservas/Step2");
+        $('#btnGoStep2').click(function () {            
+            if (ValidarFormularioStep1()) {
+                $('#Panel_Step1').fadeOut();
+                $('#divQuickSearch').fadeOut();
+                $('#Panel_Step2').fadeIn();
+                $('body').animate({ scrollTop: 0 }, 500);
+                $('#wizard_step1').attr('class', 'done');
+                $('#wizard_step2').attr('class', 'selected');
+                var _url = GetPathApp("/Reservas/Step2");
 
-            console.log($('#FechaEntrada').val());
-            $.ajax({
-                method: "POST",
-                url: _url,
-                data: {
-                    ParamFecha: $('#FechaEntrada').val(),
-                    ParamNochesId: $('#NochesId option:selected').val(),
-                    ParamHabitaciones: $('#DDL_Habitaciones option:selected').val(),
-                    ParamPasajeros: $('#DDL_Pasajeros option:selected').val(),
-                    __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
-                },
-                success: function (result) {
-                    $('#Panel_Step2').html(result);
+                $.ajax({
+                    method: "POST",
+                    url: _url,
+                    data: {
+                        ParamFecha: $('#FechaEntrada').val(),
+                        ParamNochesId: $('#NochesId option:selected').val(),
+                        ParamHabitaciones: $('#DDL_Habitaciones option:selected').val(),
+                        ParamPasajeros: $('#DDL_Pasajeros option:selected').val(),
+                        __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
+                    },
+                    success: function (result) {
+                        $('#Panel_Step2').html(result);
+                    }
+                });
+            }            
+        });
+
+        var BanValidaStep1 = false;
+        function ValidarFormularioStep1() {
+            var rslt = true;
+            var selectedItem;
+            $(".input-validation-error").removeClass("input-validation-error");
+            $(".SelectTipoHabitacion").each(function(){
+                selectedItem = $(this).val();
+                if (selectedItem == "") {
+                    rslt = false;
+                    $(this).addClass("input-validation-error");
                 }
             });
+            $(".SelectNroHabitacion").each(function () {
+                selectedItem = $(this).val();
+                if (selectedItem == null) {
+                    rslt = false;
+                    $(this).addClass("input-validation-error");
+                }
+            });
+            BanValidaStep1 = true;
+            return rslt;
+        }
+
+        $("#divStep1 .form-control").focusout(function () {
+            if (BanValidaStep1) {
+                ValidarFormularioStep1();
+            }            
         });
     </script>
 

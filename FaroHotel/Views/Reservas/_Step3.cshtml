@@ -293,7 +293,7 @@
        
         var ArrayPaxPrecios = [];
         $(".PaxPrice").each(function () { ArrayPaxPrecios.push($(this).val()); });
-        debugger
+        
         for (var i = 0; i < ArrayPaxPrecios.length; i++) {
             SumPax = SumPax + parseFloat(ArrayPaxPrecios[i].replace("$ ", ""));
         }

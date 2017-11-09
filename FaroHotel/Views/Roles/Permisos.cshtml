@@ -46,7 +46,7 @@
 
             // 7 bind to events triggered on the tree
             $('#jstree').on("changed.jstree", function (e, data) {
-                //debugger
+                
                 console.log(data.selected);
             });
 
@@ -56,7 +56,7 @@
         //Click "Guardar"
         $("#btnGuardar").unbind("click");
         $("#btnGuardar").click(function () {
-            //debugger
+            
 
             $('#contenidoModal form').submit()
 
@@ -65,7 +65,7 @@
 
         //Submit
         $('form').submit(function () {
-            //debugger
+            
 
             var _data = {
                 __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
@@ -82,7 +82,7 @@
                         abrirWaiting();
                     },
                     success: function (result) {
-                        //debugger
+                        
                         cerrarWaiting();
 
                         //if (result.ok == "true") {
@@ -105,7 +105,7 @@
 
         //GetPermisosRol
         function GetPermisosRol(idRol) {
-            //debugger
+            
             var _url = GetPathApp("/Roles/GetPermisosRol/" + idRol);
 
             $.ajax({
@@ -116,7 +116,7 @@
                     abrirWaiting();
                 },
                 success: function (result) {
-                    //debugger
+                    
                     cerrarWaiting();
                     $('#jstree').jstree().select_node(result)
                     //alert(result);

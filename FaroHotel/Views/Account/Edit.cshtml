@@ -77,7 +77,7 @@
 <script>
     //Click "Guardar"
     $("#btnGuardar").click(function () {
-        //debugger
+        
         $('#contenidoModal form').submit()
     });
 
@@ -96,7 +96,7 @@
                         abrirWaiting();
                     },
                     success: function (result) {
-                        //debugger
+                        
                         cerrarWaiting();
                         if (result.ok) {
                             cerrarModal();

@@ -64,7 +64,7 @@ namespace FaroHotel.Controllers
         // GET: Usuarios/Create
         public ActionResult Create()
         {
-            ViewBag.Ventanilla = new SelectList(db.Ventanilla, "ID", "Nombre");
+            ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre");
             return PartialView();
         }
 
@@ -77,7 +77,7 @@ namespace FaroHotel.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, VentanillaId = model.VentanillaId, FirstName = model.FirstName, LastName = model.LastName };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber, VentanillaId = model.VentanillaId, FirstName = model.FirstName, LastName = model.LastName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -87,7 +87,7 @@ namespace FaroHotel.Controllers
                 //AddErrors(result);
             }
 
-            ViewBag.Ventanilla = new SelectList(db.Ventanilla, "ID", "Nombre", model.VentanillaId);
+            ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre", model.VentanillaId);
             return PartialView(model);
         }
 
@@ -113,7 +113,7 @@ namespace FaroHotel.Controllers
             user.PhoneNumber = appUser.PhoneNumber;
             user.Email = appUser.Email;
             user.VentanillaId = appUser.VentanillaId;
-            ViewBag.Ventanilla = new SelectList(db.Ventanilla, "ID", "Nombre");
+            ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre");
             return View(user);
         }
 
@@ -122,7 +122,7 @@ namespace FaroHotel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Email,UserName,FirstName,LastName")] AspNetUsers model)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Email,UserName,FirstName,LastName,VentanillaId,PhoneNumber")] AspNetUsers model)
         {
             if (ModelState.IsValid)
             {
@@ -136,6 +136,8 @@ namespace FaroHotel.Controllers
                     currentUser.FirstName = model.FirstName;
                     currentUser.LastName = model.LastName;
                     currentUser.Email = model.Email;
+                    currentUser.PhoneNumber = model.PhoneNumber;
+                    currentUser.VentanillaId = model.VentanillaId;
                     await UserManager.UpdateAsync(currentUser);
 
                     var ctx = store.Context;
