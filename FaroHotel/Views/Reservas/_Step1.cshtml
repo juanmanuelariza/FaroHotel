@@ -71,7 +71,7 @@
                 $('#Panel_Step1').fadeOut();
                 $('#divQuickSearch').fadeOut();
                 $('#Panel_Step2').fadeIn();
-                $('body').animate({ scrollTop: 0 }, 500);
+                $("html, body").animate({ scrollTop: 0 }, 500);
                 $('#wizard_step1').attr('class', 'done');
                 $('#wizard_step2').attr('class', 'selected');
                 var _url = GetPathApp("/Reservas/Step2");
@@ -94,6 +94,7 @@
         });
 
         var BanValidaStep1 = false;
+        var NroHabitacionesIds = [];
         function ValidarFormularioStep1() {
             var rslt = true;
             var selectedItem;
@@ -105,14 +106,19 @@
                     $(this).addClass("input-validation-error");
                 }
             });
+            NroHabitacionesIds = []
             $(".SelectNroHabitacion").each(function () {
+                debugger
                 selectedItem = $(this).val();
-                if (selectedItem == null) {
+                console.log(NroHabitacionesIds);
+                if (selectedItem == null || NroHabitacionesIds.indexOf(selectedItem) > -1) {
                     rslt = false;
                     $(this).addClass("input-validation-error");
                 }
+                NroHabitacionesIds.push($(this).val());
             });
             BanValidaStep1 = true;
+            $("html, body").animate({ scrollTop: 0 }, 500);
             return rslt;
         }
 

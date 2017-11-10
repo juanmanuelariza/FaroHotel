@@ -53,6 +53,9 @@ namespace FaroHotel.Models
         public virtual DbSet<TipoTrayecto> TipoTrayecto { get; set; }
         public virtual DbSet<Ventanilla> Ventanilla { get; set; }
         public virtual DbSet<TipoBase> TipoBase { get; set; }
+        public virtual DbSet<EnlaceReservaHotelExtra> EnlaceReservaHotelExtra { get; set; }
+        public virtual DbSet<Extra> Extra { get; set; }
+        public virtual DbSet<TipoExtra> TipoExtra { get; set; }
     
         [DbFunction("FaroHotelEntities", "func_Split")]
         public virtual IQueryable<func_Split_Result> func_Split(string delimitedString, string delimiter)
@@ -77,7 +80,7 @@ namespace FaroHotel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPermisosPorNombreDeUsuario_Result>("GetPermisosPorNombreDeUsuario", userNameParameter);
         }
     
-        public virtual ObjectResult<InsertBooking_Result> InsertBooking(Nullable<System.DateTime> fecha, Nullable<int> hotelId, Nullable<int> noches, Nullable<int> titularId, string tipoHabitacionesIds, string nroHabitacionesIds, string pasajerosIds, string paquetesIds, string baseIds, string usuarioAlta, string busesIdaIds, string asientosIdaIds, string busesVueltaIds, string asientosVueltaIds)
+        public virtual ObjectResult<InsertBooking_Result> InsertBooking(Nullable<System.DateTime> fecha, Nullable<int> hotelId, Nullable<int> noches, Nullable<int> titularId, string tipoHabitacionesIds, string nroHabitacionesIds, string pasajerosIds, string paquetesIds, string baseIds, string usuarioAlta, string busesIdaIds, string asientosIdaIds, string busesVueltaIds, string asientosVueltaIds, string extrasIds, string extrasCantidad)
         {
             var fechaParameter = fecha.HasValue ?
                 new ObjectParameter("Fecha", fecha) :
@@ -135,7 +138,15 @@ namespace FaroHotel.Models
                 new ObjectParameter("AsientosVueltaIds", asientosVueltaIds) :
                 new ObjectParameter("AsientosVueltaIds", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertBooking_Result>("InsertBooking", fechaParameter, hotelIdParameter, nochesParameter, titularIdParameter, tipoHabitacionesIdsParameter, nroHabitacionesIdsParameter, pasajerosIdsParameter, paquetesIdsParameter, baseIdsParameter, usuarioAltaParameter, busesIdaIdsParameter, asientosIdaIdsParameter, busesVueltaIdsParameter, asientosVueltaIdsParameter);
+            var extrasIdsParameter = extrasIds != null ?
+                new ObjectParameter("ExtrasIds", extrasIds) :
+                new ObjectParameter("ExtrasIds", typeof(string));
+    
+            var extrasCantidadParameter = extrasCantidad != null ?
+                new ObjectParameter("ExtrasCantidad", extrasCantidad) :
+                new ObjectParameter("ExtrasCantidad", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertBooking_Result>("InsertBooking", fechaParameter, hotelIdParameter, nochesParameter, titularIdParameter, tipoHabitacionesIdsParameter, nroHabitacionesIdsParameter, pasajerosIdsParameter, paquetesIdsParameter, baseIdsParameter, usuarioAltaParameter, busesIdaIdsParameter, asientosIdaIdsParameter, busesVueltaIdsParameter, asientosVueltaIdsParameter, extrasIdsParameter, extrasCantidadParameter);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)

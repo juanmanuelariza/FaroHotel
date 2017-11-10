@@ -440,5 +440,33 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="EnlaceReservaHotelExtra">
+      <EntityTypeMapping TypeName="FaroHotelModel.EnlaceReservaHotelExtra">
+        <MappingFragment StoreEntitySet="EnlaceReservaHotelExtra">
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="ExtraId" ColumnName="ExtraId" />
+          <ScalarProperty Name="ReservaHotelId" ColumnName="ReservaHotelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Extra">
+      <EntityTypeMapping TypeName="FaroHotelModel.Extra">
+        <MappingFragment StoreEntitySet="Extra">
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+          <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+          <ScalarProperty Name="TipoExtraId" ColumnName="TipoExtraId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoExtra">
+      <EntityTypeMapping TypeName="FaroHotelModel.TipoExtra">
+        <MappingFragment StoreEntitySet="TipoExtra">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -10114,6 +10114,10 @@ select.ui-datepicker-year {
     color: red;
 }
 
+.h1Reserva{
+    text-align: center;
+    color: #1ABB9C;
+}
 .rowPasajero{
     padding: 5px 0px 15px 0px;
 }

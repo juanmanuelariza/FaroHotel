@@ -510,6 +510,16 @@ function InitModalSubmitAjax() {
 
 }
 
+function printDiv(ArgDivId) {
+    var divToPrint = document.getElementById(ArgDivId) //$('#' + ArgDivId);
+    var newWin = window.open('', 'Print-Window');
+    newWin.document.open();
+    newWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+    newWin.document.close();
+    setTimeout(function () {
+        newWin.close();
+    }, 10);
+}
 
 //$(document).ajaxStart(function () {
 //    //console.log("ajaxStart");

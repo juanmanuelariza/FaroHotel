@@ -66,6 +66,12 @@
         <AssociationConnector Association="FaroHotelModel.EnlaceReservaHotelBus" />
         <EntityTypeShape EntityType="FaroHotelModel.TipoBase" Width="1.5" PointX="10.375" PointY="0.875" />
         <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelPasajero_TipoBase" />
+        <EntityTypeShape EntityType="FaroHotelModel.EnlaceReservaHotelExtra" Width="1.5" PointX="16.875" PointY="7.375" />
+        <EntityTypeShape EntityType="FaroHotelModel.Extra" Width="1.5" PointX="14.625" PointY="1" />
+        <EntityTypeShape EntityType="FaroHotelModel.TipoExtra" Width="1.5" PointX="12.375" PointY="1.375" />
+        <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelExtra_Extra" />
+        <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelExtra_ReservaHotel" />
+        <AssociationConnector Association="FaroHotelModel.FK_Extra_TipoExtra" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

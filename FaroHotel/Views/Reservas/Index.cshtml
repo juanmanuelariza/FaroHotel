@@ -113,7 +113,7 @@
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-12">
                         <div class="form-group text-center">
-                            <button id="btnBuscar" class="btn btn-primary">Buscar</button>
+                            <span id="btnBuscar" class="btn btn-primary">Buscar</span>
                         </div>
                     </div>
                 </div>
@@ -131,12 +131,9 @@
 
 
 <script type="text/javascript">
-    $(function () {
-        $('#formBusqueda').submit(function (e) {
-            //$('#btnBusca').click(function (e) {
-            
+    $('#btnBuscar').click(function () {
+        if (ValidarFormularioQuickSearch()) {
             var _url = GetPathApp("/Reservas/Buscar");
-
             $.ajax({
                 method: "POST",
                 url: _url,
@@ -147,13 +144,11 @@
                     ParamPasajeros: $('#DDL_Pasajeros option:selected').val(),
                     __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
                 },
-                success: function (result) {                    
+                success: function (result) {
                     $('#Panel_Step1').html(result);
                 }
             });
-
-            e.preventDefault();
-        });//Fin "submit"
+        }
     });
     $(document).ready(function () {       
         $('.date-picker-sunday').datepicker({
@@ -166,4 +161,35 @@
         });
     });
 
+    var BanValidaQuickSearch = false;
+    function ValidarFormularioQuickSearch() {
+        var rslt = true;
+        var selectedItem;
+        $(".input-validation-error").removeClass("input-validation-error");
+        if ($('#FechaEntrada').val() == "") {
+            rslt = false;
+            $('#FechaEntrada').addClass("input-validation-error");
+        }
+        if ($('#NochesId option:selected').val() == 0) {
+            rslt = false;
+            $('#NochesId').addClass("input-validation-error");
+        }
+        if ($('#DDL_Habitaciones option:selected').val() == 0) {
+            rslt = false;
+            $('#DDL_Habitaciones').addClass("input-validation-error");
+        }
+        if ($('#DDL_Pasajeros option:selected').val() == 0) {
+            rslt = false;
+            $('#DDL_Pasajeros').addClass("input-validation-error");
+        }
+        BanValidaQuickSearch = true;
+        $("html, body").animate({ scrollTop: 0 }, 500);
+        return rslt;
+    }
+
+    $("#divQuickSearch .form-control").focusout(function () {
+        if (BanValidaQuickSearch) {
+            ValidarFormularioQuickSearch();
+        }
+    });
 </script>

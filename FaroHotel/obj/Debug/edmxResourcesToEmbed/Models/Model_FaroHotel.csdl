@@ -246,6 +246,7 @@
     <NavigationProperty Name="Pasajero" Relationship="Self.FK_ReservaHotel_Pasajero" FromRole="ReservaHotel" ToRole="Pasajero" />
     <NavigationProperty Name="TipoHotel" Relationship="Self.FK_ReservaHotel_TipoHotel" FromRole="ReservaHotel" ToRole="TipoHotel" />
     <NavigationProperty Name="Bus" Relationship="FaroHotelModel.EnlaceReservaHotelBus" FromRole="ReservaHotel" ToRole="Bus" />
+    <NavigationProperty Name="EnlaceReservaHotelExtra" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_ReservaHotel" FromRole="ReservaHotel" ToRole="EnlaceReservaHotelExtra" />
   </EntityType>
   <EntityType Name="TipoCuota">
     <Key>
@@ -864,6 +865,8 @@
       <Parameter Name="AsientosIdaIds" Mode="In" Type="String" />
       <Parameter Name="BusesVueltaIds" Mode="In" Type="String" />
       <Parameter Name="AsientosVueltaIds" Mode="In" Type="String" />
+      <Parameter Name="ExtrasIds" Mode="In" Type="String" />
+      <Parameter Name="ExtrasCantidad" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_alterdiagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -922,6 +925,21 @@
     <FunctionImport Name="GetReserva" ReturnType="Collection(FaroHotelModel.GetReserva_Result)">
       <Parameter Name="ReservaId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="EnlaceReservaHotelExtra" EntityType="FaroHotelModel.EnlaceReservaHotelExtra" />
+    <EntitySet Name="Extra" EntityType="FaroHotelModel.Extra" />
+    <EntitySet Name="TipoExtra" EntityType="FaroHotelModel.TipoExtra" />
+    <AssociationSet Name="FK_EnlaceReservaHotelExtra_Extra" Association="FaroHotelModel.FK_EnlaceReservaHotelExtra_Extra">
+      <End Role="Extra" EntitySet="Extra" />
+      <End Role="EnlaceReservaHotelExtra" EntitySet="EnlaceReservaHotelExtra" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnlaceReservaHotelExtra_ReservaHotel" Association="FaroHotelModel.FK_EnlaceReservaHotelExtra_ReservaHotel">
+      <End Role="ReservaHotel" EntitySet="ReservaHotel" />
+      <End Role="EnlaceReservaHotelExtra" EntitySet="EnlaceReservaHotelExtra" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Extra_TipoExtra" Association="FaroHotelModel.FK_Extra_TipoExtra">
+      <End Role="TipoExtra" EntitySet="TipoExtra" />
+      <End Role="Extra" EntitySet="Extra" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1026,4 +1044,71 @@
     <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
     <Property Type="String" Name="NombreVentanilla" Nullable="false" MaxLength="100" />
   </ComplexType>
+  <EntityType Name="EnlaceReservaHotelExtra">
+    <Key>
+      <PropertyRef Name="ReservaHotelId" />
+      <PropertyRef Name="ExtraId" />
+    </Key>
+    <Property Name="ReservaHotelId" Type="Int32" Nullable="false" />
+    <Property Name="ExtraId" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Extra" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_Extra" FromRole="EnlaceReservaHotelExtra" ToRole="Extra" />
+    <NavigationProperty Name="ReservaHotel" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_ReservaHotel" FromRole="EnlaceReservaHotelExtra" ToRole="ReservaHotel" />
+  </EntityType>
+  <EntityType Name="Extra">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoExtraId" Type="Byte" Nullable="false" />
+    <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Precio" Type="Double" Nullable="false" />
+    <NavigationProperty Name="EnlaceReservaHotelExtra" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_Extra" FromRole="Extra" ToRole="EnlaceReservaHotelExtra" />
+    <NavigationProperty Name="TipoExtra" Relationship="FaroHotelModel.FK_Extra_TipoExtra" FromRole="Extra" ToRole="TipoExtra" />
+  </EntityType>
+  <EntityType Name="TipoExtra">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Extra" Relationship="FaroHotelModel.FK_Extra_TipoExtra" FromRole="TipoExtra" ToRole="Extra" />
+  </EntityType>
+  <Association Name="FK_EnlaceReservaHotelExtra_Extra">
+    <End Type="FaroHotelModel.Extra" Role="Extra" Multiplicity="1" />
+    <End Type="FaroHotelModel.EnlaceReservaHotelExtra" Role="EnlaceReservaHotelExtra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Extra">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnlaceReservaHotelExtra">
+        <PropertyRef Name="ExtraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EnlaceReservaHotelExtra_ReservaHotel">
+    <End Type="FaroHotelModel.ReservaHotel" Role="ReservaHotel" Multiplicity="1" />
+    <End Type="FaroHotelModel.EnlaceReservaHotelExtra" Role="EnlaceReservaHotelExtra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReservaHotel">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnlaceReservaHotelExtra">
+        <PropertyRef Name="ReservaHotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Extra_TipoExtra">
+    <End Type="FaroHotelModel.TipoExtra" Role="TipoExtra" Multiplicity="1" />
+    <End Type="FaroHotelModel.Extra" Role="Extra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoExtra">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Extra">
+        <PropertyRef Name="TipoExtraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

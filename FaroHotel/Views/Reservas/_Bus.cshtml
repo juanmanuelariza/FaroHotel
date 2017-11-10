@@ -453,7 +453,7 @@
 
 <script>
     $(document).ready(function () {
-        var dataArray = @Html.Raw(Json.Encode(@ViewBag.BusesIds));
+        var dataArray = @Html.Raw(Json.Encode(@ViewBag.BusesIdaYVueltaIds));
         var _url = GetPathApp("/Reservas/OcupacionBus");
         $.ajax({
             method: "POST",
@@ -467,7 +467,7 @@
                     $("#BusId_" + this.BusId).find("[data-seat='" + this.NroButaca + "']").addClass('asientoOcupado').removeClass('asientoLibre');
                 });
             }
-        });
+        }); 
         //Asientos seleccionados durante la venta
         var ParamBusIdaIds = [];
         var ParamAsientosIdaIds = [];

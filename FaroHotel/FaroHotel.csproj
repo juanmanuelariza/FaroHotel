@@ -210,10 +210,16 @@
     <Compile Include="Models\EnlaceBusPasajero.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EnlaceReservaHotelExtra.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EnlaceReservaHotelHabitacion.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EnlaceReservaHotelPasajero.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Extra.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\func_Split_Result.cs">
@@ -299,6 +305,9 @@
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoDescripcionPaquete.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoExtra.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoHabitacion.cs">

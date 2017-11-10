@@ -171,6 +171,8 @@
         var ParamAsientosIdaIds = [];
         var ParamBusVueltaIds = [];
         var ParamAsientosVueltaIds = [];
+        var ParamExtrasIds = [1,2,3];
+        var ParamExtrasCantidad = [];
         
         $(".SelectTipoHabitacion").each(function () { ParamTipoHabitacionesIds.push($(this).val()); });
         $(".SelectNroHabitacion").each(function () { ParamNroHabitacionesIds.push($(this).val()); });
@@ -209,7 +211,11 @@
                 ParamAsientosVueltaIds.push($(this).text());
             }
         });
-
+                
+        ParamExtrasCantidad.push($('#SelectVouchers option:selected').val());
+        ParamExtrasCantidad.push($('#SelectCunas option:selected').val());
+        ParamExtrasCantidad.push($('#SelectCocheraFaroII option:selected').val());
+        
         var _url = GetPathApp("/Reservas/Step4");        
         $.ajax({
             method: "POST",
@@ -228,6 +234,8 @@
                 ParamAsientosIdaIds: ParamAsientosIdaIds,
                 ParamBusVueltaIds: ParamBusVueltaIds,
                 ParamAsientosVueltaIds: ParamAsientosVueltaIds,
+                ParamExtrasIds: ParamExtrasIds,
+                ParamExtrasCantidad: ParamExtrasCantidad,
                 __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
             },
             success: function (result) {
@@ -241,7 +249,7 @@
         //PASO DE AGRADECIMIENTO
         $('#Panel_Step3').fadeOut();
         $('#Panel_Step4').fadeIn();
-        $('body').animate({ scrollTop: 0 }, 500);
+        $("html, body").animate({ scrollTop: 0 }, 500);
         $('#wizard_step3').attr('class', 'done');
         $('#wizard_step4').attr('class', 'selected');
     });
@@ -251,7 +259,7 @@
         var selectedItem = $(this).val();
         if (selectedItem > 0) {
             $('#TotalCocheraFaroII').attr('class', 'colorBlack');
-            $('#TotalCocheraFaroII').text("$ " + $(this).val() * 300);
+            $('#TotalCocheraFaroII').text("$ " + $(this).val() * @ViewBag.PrecioCocheraFaroII);
         }
         else {
             $('#TotalCocheraFaroII').attr('class', 'colorGray');
@@ -263,7 +271,7 @@
         var selectedItem = $(this).val();
         if (selectedItem > 0) {
             $('#TotalVouchers').attr('class', 'colorBlack');
-            $('#TotalVouchers').text("$ " + $(this).val() * 150);
+            $('#TotalVouchers').text("$ " + $(this).val() * @ViewBag.PrecioVouchers);
         }
         else {
             $('#TotalVouchers').attr('class', 'colorGray');
@@ -275,7 +283,7 @@
         var selectedItem = $(this).val();
         if (selectedItem > 0) {
             $('#TotalCunas').attr('class', 'colorBlack');
-            $('#TotalCunas').text("$ " + $(this).val() * 100);
+            $('#TotalCunas').text("$ " + $(this).val() * @ViewBag.PrecioCuna);
         }
         else {
             $('#TotalCunas').attr('class', 'colorGray');

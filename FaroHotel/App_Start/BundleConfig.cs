@@ -19,10 +19,9 @@ namespace FaroHotel
                     "~/css/animate.min.css",
                     "~/css/jquery-ui.theme.css",
                     "~/css/jquery-ui.structure.css",
-                    "~/css/font-awesome.min.css",					
-                    "~/css/dataTables.bootstrap.css",
-                    "~/css/dataTables.responsive.css",
-                    "~/css/jquery.dataTables.css"));
+                    "~/css/font-awesome.min.css",
+                    "~/css/dataTables.responsive.css",					
+                    "~/css/dataTables.bootstrap.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));

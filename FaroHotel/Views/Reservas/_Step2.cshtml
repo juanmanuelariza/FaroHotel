@@ -68,16 +68,19 @@
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
                             <div id="Panel_BusIda_@i" class="form-group row" style="display:none">
-                                <label class="col-md-12" for="Paquete">Bus de ida:</label>
+                                <label class="col-md-12" for="Paquete">Bus de ida y vuelta:</label>
                                 <div class="col-md-12">
                                     <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento(@i,'Ida')">Seleccionar asiento</span>
                                 </div>
                                 <div class="col-md-12">
-                                    <div><img src="/img/6.png">  Asiento seleccionado: <span id="ButacaBusIda_@i" data-boxId="@i" class="ButacaBusIda"></span></div>
+                                    <div><img src="/img/6.png">  Asiento Ida: <span id="ButacaBusIda_@i" data-boxId="@i" class="ButacaBusIda"></span></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div><img src="/img/6.png">  Asiento Vuelta: <span id="ButacaBusVuelta_@i" data-boxId="@i" class="ButacaBusVuelta"></span></div>
                                 </div>
                                 <input type="hidden" id="BusIdaId_@i" class="BusIdaIds" value="" />
                             </div>
-                            <div id="Panel_BusVuelta_@i" class="form-group row" style="display:none">
+                            @*<div id="Panel_BusVuelta_@i" class="form-group row" style="display:none">
                                 <label class="col-md-12" for="Paquete">Bus de vuelta:</label>
                                 <div class="col-md-12">
                                     <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento(@i,'Vuelta')">Seleccionar asiento</span>
@@ -86,7 +89,7 @@
                                     <div><img src="/img/6.png">  Asiento seleccionado: <span id="ButacaBusVuelta_@i" data-boxId="@i" class="ButacaBusVuelta"></span></div>
                                 </div>
                                 <input type="hidden" id="BusVueltaId_@i" class="BusVueltaIds" value="" />
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 </div>
@@ -180,7 +183,7 @@
         if(ValidarFormularioStep2()){
             $('#Panel_Step2').fadeOut();
             $('#Panel_Step3').fadeIn();
-            $('body').animate({ scrollTop: 0 }, 500);
+            $("html, body").animate({ scrollTop: 0 }, 500);
             $('#wizard_step2').attr('class', 'done');
             $('#wizard_step3').attr('class', 'selected');
 
@@ -189,7 +192,9 @@
             $.ajax({
                 method: "POST",
                 url: _url,
-                data: { __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
+                data: { 
+                    ParamFecha: $('#FechaEntrada').val(), 
+                    __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
                 success: function (result) {
                     $('#Panel_Step3').html(result);
                 }
@@ -331,6 +336,7 @@
             rslt = false;
         }        
         BanValidaStep2 = true;
+        $("html, body").animate({ scrollTop: 0 }, 500);
         return rslt;
     }
 
