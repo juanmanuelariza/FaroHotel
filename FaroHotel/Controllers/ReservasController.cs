@@ -78,26 +78,29 @@ namespace FaroHotel.Controllers
             return PartialView("_Step4");
         }
 
-        public ActionResult Bus(DateTime ParamFecha, int ParamTrayectoId, int ParamDias)
+        public ActionResult Bus(DateTime ParamFecha, int ParamTrayectoId, int ParamNoches)
         {
             //Si es Trayecto de vuelta, sumo los dias del paquete más uno
-            if (ParamTrayectoId == 2) 
-            {
-                ParamFecha = ParamFecha.AddDays(ParamDias + 1);
-            }
-            ViewBag.Buses = from b in db.Bus
-                            where b.Fecha == ParamFecha && b.TrayectoId == ParamTrayectoId
-                            select b;
-
-            ViewBag.BusesIds = from b in db.Bus
-                            where b.Fecha == ParamFecha && b.TrayectoId == ParamTrayectoId
-                            select b.ID;
+            //if (ParamTrayectoId == 2) 
+            //{
+            //    ParamFecha = ParamFecha.AddDays(ParamNoches + 1);
+            //}
+            //ViewBag.Buses = from b in db.Bus
+            //                where b.Fecha == ParamFecha && b.TrayectoId == ParamTrayectoId
+            //                select b;
+            List<GetBuses_Result> buses = db.GetBuses(ParamFecha, ParamNoches).ToList();
             
+            ViewBag.Buses = buses;
+
+            //ViewBag.BusesIds = from b in db.Bus
+            //                where b.Fecha == ParamFecha && b.TrayectoId == ParamTrayectoId
+            //                select b.ID;
+
+            DateTime FechaVuelta = ParamFecha.AddDays(ParamNoches + 1);
+
             ViewBag.BusesIdaYVueltaIds = from b in db.Bus
-                               where b.Fecha == ParamFecha || b.Fecha == ParamFecha.AddDays(ParamDias + 1)
-                               select b.ID;
-
-
+                                         where b.Fecha == ParamFecha || b.Fecha == FechaVuelta
+                                         select b.ID;
 
             return PartialView("_Bus");
         }
@@ -132,7 +135,7 @@ namespace FaroHotel.Controllers
             return Json(tmp_Pax, JsonRequestBehavior.AllowGet);
         }
 
-        // Post: NroHabitaciones
+        // Post: OcupacionBus
         [HttpPost]
         public ActionResult OcupacionBus(int[] ParamBusesIds)
         {
@@ -141,14 +144,24 @@ namespace FaroHotel.Controllers
                        select new
                        {
                            BusId = ob.BusId,
-                           NroButaca = ob.NroButaca
+                           NroButaca = ob.NroButaca,
+                           Numero = ob.Bus.Numero
                        }; 
             return Json(rslt);
         }
 
+        //[HttpPost]
+        //public ActionResult OcupacionBus(DateTime ParamFecha, int ParamNoches)
+        //{
+        //    List<GetBuses_Result> buses = db.GetBuses(ParamFecha, ParamNoches).ToList();
+
+        //    return Json(rslt);
+        //}
 
 
-        // GET: NroHabitaciones
+
+
+        // GET: Paquetes
         [HttpGet]
         public ActionResult Paquetes(int ParamPaqueteId)
         {

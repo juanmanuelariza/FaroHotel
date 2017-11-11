@@ -225,6 +225,9 @@
     <Compile Include="Models\func_Split_Result.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetBuses_Result.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetHabitacionesDisponibles_Result.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>

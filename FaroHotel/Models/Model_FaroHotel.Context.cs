@@ -295,5 +295,18 @@ namespace FaroHotel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetReserva_Result>("GetReserva", reservaIdParameter);
         }
+    
+        public virtual ObjectResult<GetBuses_Result> GetBuses(Nullable<System.DateTime> fecha, Nullable<int> noches)
+        {
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("Fecha", fecha) :
+                new ObjectParameter("Fecha", typeof(System.DateTime));
+    
+            var nochesParameter = noches.HasValue ?
+                new ObjectParameter("Noches", noches) :
+                new ObjectParameter("Noches", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBuses_Result>("GetBuses", fechaParameter, nochesParameter);
+        }
     }
 }

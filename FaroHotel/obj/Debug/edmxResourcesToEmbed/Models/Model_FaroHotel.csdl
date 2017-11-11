@@ -940,6 +940,10 @@
       <End Role="TipoExtra" EntitySet="TipoExtra" />
       <End Role="Extra" EntitySet="Extra" />
     </AssociationSet>
+    <FunctionImport Name="GetBuses" ReturnType="Collection(FaroHotelModel.GetBuses_Result)">
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+      <Parameter Name="Noches" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1111,4 +1115,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="GetBuses_Result">
+    <Property Type="Int32" Name="BusIdaId" Nullable="false" />
+    <Property Type="DateTime" Name="FechaIda" Nullable="false" Precision="23" />
+    <Property Type="Byte" Name="NumeroIda" Nullable="true" />
+    <Property Type="Int32" Name="BusVueltaId" Nullable="false" />
+    <Property Type="DateTime" Name="FechaVuelta" Nullable="false" Precision="23" />
+    <Property Type="Byte" Name="NumeroVuelta" Nullable="true" />
+  </ComplexType>
 </Schema>

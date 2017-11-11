@@ -1,7 +1,7 @@
 ﻿<div id="divStep2" class="row">
 
     <button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Create2', 'Agregar', 'Pasajeros')">
-        <i class="fa fa-plus"></i> Nuevo Pasajero
+        <i class="fa fa-plus"></i> Agregar Persona al Sistema
     </button>
     <div class="row">
         @for (var i = 1; i <= ViewBag.CantPasajeros; i++)
@@ -79,6 +79,7 @@
                                     <div><img src="/img/6.png">  Asiento Vuelta: <span id="ButacaBusVuelta_@i" data-boxId="@i" class="ButacaBusVuelta"></span></div>
                                 </div>
                                 <input type="hidden" id="BusIdaId_@i" class="BusIdaIds" value="" />
+                                <input type="hidden" id="BusVueltaId_@i" class="BusVueltaIds" value="" />
                             </div>
                             @*<div id="Panel_BusVuelta_@i" class="form-group row" style="display:none">
                                 <label class="col-md-12" for="Paquete">Bus de vuelta:</label>
@@ -167,7 +168,7 @@
         var data = {};
         data["ParamFecha"] = $('#FechaEntrada').val();
         data["ParamTrayectoId"] = tmp_TrayectoId;
-        data["ParamDias"] = $('#NochesId  option:selected').text();
+        data["ParamNoches"] = $('#NochesId  option:selected').text();
         abrirModalPost('/Reservas/Bus', 'Agregar', 'Asientos', data);
     }
     $('#btnBackStep1').click(function () {

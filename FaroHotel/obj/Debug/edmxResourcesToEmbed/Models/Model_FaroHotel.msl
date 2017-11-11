@@ -468,5 +468,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetBuses" FunctionName="FaroHotelModel.Store.GetBuses">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FaroHotelModel.GetBuses_Result">
+          <ScalarProperty Name="BusIdaId" ColumnName="BusIdaId" />
+          <ScalarProperty Name="FechaIda" ColumnName="FechaIda" />
+          <ScalarProperty Name="NumeroIda" ColumnName="NumeroIda" />
+          <ScalarProperty Name="BusVueltaId" ColumnName="BusVueltaId" />
+          <ScalarProperty Name="FechaVuelta" ColumnName="FechaVuelta" />
+          <ScalarProperty Name="NumeroVuelta" ColumnName="NumeroVuelta" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
