@@ -20,11 +20,14 @@ namespace FaroHotel
                     "~/css/jquery-ui.theme.css",
                     "~/css/jquery-ui.structure.css",
                     "~/css/font-awesome.min.css",
-                    "~/css/dataTables.responsive.css",					
-                    "~/css/dataTables.bootstrap.css"));
+                    "~/css/jquery.dataTables.min.css",
+                    "~/css/buttons.dataTables.min.css",
+                    "~/css/dataTables.responsive.css"));
+            //"~/css/dataTables.bootstrap.css"
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.dataTables.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
                             "~/Scripts/jquery.validate*",
@@ -33,11 +36,14 @@ namespace FaroHotel
                             "~/Scripts/respond.js",
                             "~/Scripts/moment.min.js",
                             "~/Scripts/jquery-ui.min.js",
-                            "~/Scripts/custom.js",							
- 		                    "~/Scripts/jquery.dataTables.js",
-                            "~/Scripts/dataTables.responsive.min.js",                            
-                            "~/Scripts/plugins/tinymce/tinymce.min.js",
-                            "~/Scripts/dataTables.bootstrap.js"));
+                            "~/Scripts/custom.js",					
+                            "~/Scripts/dataTables.responsive.min.js",
+                            "~/Scripts/dataTables.buttons.min.js",
+                            "~/Scripts/jszip.min.js",
+                            "~/Scripts/buttons.html5.min.js",
+                            "~/Scripts/buttons.print.min.js",                  
+                            "~/Scripts/plugins/tinymce/tinymce.min.js"));
+            //"~/Scripts/dataTables.bootstrap.js"));
 
             BundleTable.EnableOptimizations = false;
         }

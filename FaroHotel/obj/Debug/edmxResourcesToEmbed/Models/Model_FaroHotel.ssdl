@@ -878,6 +878,9 @@
     <Parameter Name="HotelId" Type="int" Mode="In" />
     <Parameter Name="TipoHabitacion" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetOcupacionBuses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RFecha" Type="date" Mode="In" />
+  </Function>
   <Function Name="GetPermisosPorNombreDeUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserName" Type="nvarchar" Mode="In" />
   </Function>

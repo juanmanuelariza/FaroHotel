@@ -883,6 +883,9 @@
           <Parameter Name="HotelId" Type="int" Mode="In" />
           <Parameter Name="TipoHabitacion" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetOcupacionBuses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RFecha" Type="date" Mode="In" />
+        </Function>
         <Function Name="GetPermisosPorNombreDeUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="nvarchar" Mode="In" />
         </Function>
@@ -2099,6 +2102,9 @@
             <Parameter Name="Fecha" Mode="In" Type="DateTime" />
             <Parameter Name="Noches" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetOcupacionBuses" ReturnType="Collection(FaroHotelModel.GetOcupacionBuses_Result)">
+          <Parameter Name="RFecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -2277,6 +2283,18 @@
           <Property Type="Int32" Name="BusVueltaId" Nullable="false" />
           <Property Type="DateTime" Name="FechaVuelta" Nullable="false" Precision="23" />
           <Property Type="Byte" Name="NumeroVuelta" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetOcupacionBuses_Result">
+          <Property Type="String" Name="Hotel" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int64" Name="DNI" Nullable="false" />
+          <Property Type="Int32" Name="NroButaca" Nullable="true" />
+          <Property Type="Byte" Name="Numero" Nullable="true" />
+          <Property Type="Boolean" Name="Celiaquia" Nullable="false" />
+          <Property Type="Boolean" Name="Motricidad" Nullable="false" />
+          <Property Type="Boolean" Name="Diabetes" Nullable="false" />
+          <Property Type="Byte" Name="HotelId" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2760,6 +2778,22 @@
                 <ScalarProperty Name="BusVueltaId" ColumnName="BusVueltaId" />
                 <ScalarProperty Name="FechaVuelta" ColumnName="FechaVuelta" />
                 <ScalarProperty Name="NumeroVuelta" ColumnName="NumeroVuelta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetOcupacionBuses" FunctionName="FaroHotelModel.Store.GetOcupacionBuses">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FaroHotelModel.GetOcupacionBuses_Result">
+                <ScalarProperty Name="Hotel" ColumnName="Hotel" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="NroButaca" ColumnName="NroButaca" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Celiaquia" ColumnName="Celiaquia" />
+                <ScalarProperty Name="Motricidad" ColumnName="Motricidad" />
+                <ScalarProperty Name="Diabetes" ColumnName="Diabetes" />
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

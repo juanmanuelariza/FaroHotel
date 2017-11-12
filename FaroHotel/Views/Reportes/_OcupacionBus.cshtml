@@ -1,0 +1,210 @@
+﻿
+@if (ViewBag.pasajerosBus1Count > 0)
+{
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">Listado de pasajeros Bus 1</h2>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.box-header -->
+        <div class="x_content">
+            <div id="DivPasajeros" class="row form-horizontal">
+                <div class="col-md-12">
+                    <table id="dtPasajeros1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Hotel</th>
+                                <th>Apellido</th>
+                                <th>Nombre</th>
+                                <th>DNI</th>
+                                <th>Butaca</th>
+                                <th>Observaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (FaroHotel.Models.GetOcupacionBuses_Result item in ViewBag.pasajerosBus1)
+                            {
+                                if (item.Numero == 1)
+                                {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Hotel)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Apellido)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DNI)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NroButaca)
+                                </td>
+                                <td>
+                                    @if (item.Celiaquia)
+                                            {
+                                            @Html.Raw("Celiaquia")
+                                            }
+                                    @if (item.Diabetes)
+                                            {
+                                            @Html.Raw("Diabetes")
+                                            }
+                                    @if (item.Motricidad) {
+                                            @Html.Raw("Motricidad")
+                                            }
+                                </td>
+                            </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+}
+
+@if (ViewBag.pasajerosBus2Count > 0)
+{
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">Listado de pasajeros Bus 2</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div id="DivPasajeros2" class="row form-horizontal">
+                <div class="col-md-12">
+                    <table id="dtPasajeros2" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Hotel</th>
+                                <th>Apellido</th>
+                                <th>Nombre</th>
+                                <th>DNI</th>
+                                <th>Butaca</th>
+                                <th>Observaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (FaroHotel.Models.GetOcupacionBuses_Result item in ViewBag.pasajerosBus2)
+                            {
+                                if (item.Numero == 2)
+                                {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Hotel)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Apellido)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DNI)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NroButaca)
+                                </td>
+                                <td>
+                                    @if (item.Celiaquia)
+                                            {
+                                            @Html.Raw("Celiaquia")
+                                            }
+                                    @if (item.Diabetes)
+                                            {
+                                            @Html.Raw("Diabetes")
+                                            }
+                                    @if (item.Motricidad)
+                                            {
+                                            @Html.Raw("Motricidad")
+                                            }
+                                </td>
+                            </tr>
+
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<script>
+    $(document).ready(function () {        
+        $("#dtPasajeros1").DataTable({
+            "responsive": true,
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": DataTableEsp(),
+            responsive: true,
+            "dom": "Bfrtip",
+            "buttons": [
+                {
+                    extend: 'excel',
+                    text: '<i class="fa fa-file-excel-o"></i> Exportar a Excel',
+                    title: 'Bus 1. Fecha de Salida: ' + $('#FechaEntrada').val(),
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fa fa-print"></i> Imprimir',
+                    title: 'Bus 1. Fecha de Salida: ' + $('#FechaEntrada').val(),
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '10pt')
+                        $(win.document.body).find('h1')
+                            .css('display', 'none')
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }
+            ]
+        });
+        $("#dtPasajeros2").DataTable({
+            "responsive": true,
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": DataTableEsp(),
+            responsive: true,
+            "dom": "Bfrtip",
+            "buttons": [
+                {
+                    extend: 'excel',
+                    text: '<i class="fa fa-file-excel-o"></i> Exportar a Excel',
+                    title: 'Bus 1. Fecha de Salida: ' + $('#FechaEntrada').val(),
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fa fa-print"></i> Imprimir',
+                    title: 'Bus 2. Fecha: ' + $('#FechaEntrada').val(),
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '10pt')
+                        $(win.document.body).find('h1')
+                            .css('display', 'none')
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }
+            ]
+        });
+    });
+
+</script>

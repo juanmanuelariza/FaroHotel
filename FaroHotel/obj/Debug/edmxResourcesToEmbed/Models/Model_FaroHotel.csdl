@@ -944,6 +944,9 @@
       <Parameter Name="Fecha" Mode="In" Type="DateTime" />
       <Parameter Name="Noches" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="GetOcupacionBuses" ReturnType="Collection(FaroHotelModel.GetOcupacionBuses_Result)">
+      <Parameter Name="RFecha" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1122,5 +1125,17 @@
     <Property Type="Int32" Name="BusVueltaId" Nullable="false" />
     <Property Type="DateTime" Name="FechaVuelta" Nullable="false" Precision="23" />
     <Property Type="Byte" Name="NumeroVuelta" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetOcupacionBuses_Result">
+    <Property Type="String" Name="Hotel" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Apellido" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+    <Property Type="Int64" Name="DNI" Nullable="false" />
+    <Property Type="Int32" Name="NroButaca" Nullable="true" />
+    <Property Type="Byte" Name="Numero" Nullable="true" />
+    <Property Type="Boolean" Name="Celiaquia" Nullable="false" />
+    <Property Type="Boolean" Name="Motricidad" Nullable="false" />
+    <Property Type="Boolean" Name="Diabetes" Nullable="false" />
+    <Property Type="Byte" Name="HotelId" Nullable="false" />
   </ComplexType>
 </Schema>
