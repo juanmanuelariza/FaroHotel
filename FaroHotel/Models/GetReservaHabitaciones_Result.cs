@@ -16,5 +16,6 @@ namespace FaroHotel.Models
         public string NombreHotel { get; set; }
         public string TipoHabitacion { get; set; }
         public int NumeroHabitacion { get; set; }
+        public int ID { get; set; }
     }
 }

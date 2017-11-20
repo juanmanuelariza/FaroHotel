@@ -46,7 +46,6 @@
             var selectedItem = $(this).val();
             var boxId = $(this).attr("data-boxId");
             $('#SelectNumHabitacion_' + boxId + ' option').remove();
-
             var _url = GetPathApp("/Reservas/Habitaciones");
             $.ajax({
                 method: "POST",
@@ -94,7 +93,7 @@
         });
 
         var BanValidaStep1 = false;
-        var NroHabitacionesIds = [];
+        var HabitacionesIds = [];
         function ValidarFormularioStep1() {
             var rslt = true;
             var selectedItem;
@@ -106,16 +105,15 @@
                     $(this).addClass("input-validation-error");
                 }
             });
-            NroHabitacionesIds = []
+            HabitacionesIds = []
             $(".SelectNroHabitacion").each(function () {
-                debugger
                 selectedItem = $(this).val();
-                console.log(NroHabitacionesIds);
-                if (selectedItem == null || NroHabitacionesIds.indexOf(selectedItem) > -1) {
+                console.log(HabitacionesIds);
+                if (selectedItem == null || HabitacionesIds.indexOf(selectedItem) > -1) {
                     rslt = false;
                     $(this).addClass("input-validation-error");
                 }
-                NroHabitacionesIds.push($(this).val());
+                HabitacionesIds.push($(this).val());
             });
             BanValidaStep1 = true;
             $("html, body").animate({ scrollTop: 0 }, 500);

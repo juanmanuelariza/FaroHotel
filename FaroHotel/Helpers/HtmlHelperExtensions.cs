@@ -53,9 +53,9 @@ namespace FaroHotel.Helpers
                             string accion = string.IsNullOrEmpty(item.Accion) ? "" : item.Accion;
                             string url = "";
 
-#if (DEBUG == false)
-                            url = "/SRProf";
-#endif
+//#if (DEBUG == false)
+//                            url = "/SRProf";
+//#endif
                             url += "/" + item.Controlador + "/" + (accion=="Index"?String.Empty:accion);
                             string c = string.Format(@"<li><a href=""{1}""><i class=""{2}""></i> {0} </a></li>", item.Nombre, url, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o": item.Icono);
                             output += c;
@@ -131,9 +131,9 @@ namespace FaroHotel.Helpers
                             //string accion = string.IsNullOrEmpty(item.Accion) ? "" : item.Accion;
                             //string url = "";
 
-                        #if (DEBUG == false)
-                            url = "/SRProf";
-                        #endif
+                        //#if (DEBUG == false)
+                        //    url = "/SRProf";
+                        //#endif
 
                             //url += "/" + item.Controlador + "/" + (accion == "Index" ? String.Empty : accion);
                             //string c = string.Format(@"<li> {0} </li>", item.Nombre);

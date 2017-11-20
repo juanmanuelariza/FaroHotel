@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -38,7 +39,10 @@ namespace FaroHotel.Controllers
             ViewBag.NochesId = ParamNochesId;
             ViewBag.CantHabitaciones = ParamHabitaciones;
             ViewBag.CantPasajeros = ParamPasajeros;
-            ViewBag.SelectPaquetesDisponibles = new SelectList(db.Paquete.Where(p => p.FechaInicio <= ParamFecha && p.FechaFin >= ParamFecha), "ID", "Titulo");
+
+            AspNetUsers usuario = db.AspNetUsers.Find(User.Identity.GetUserId());
+            List<Paquete> paquetes = db.Paquete.Where(p => p.FechaInicio <= ParamFecha && p.FechaFin >= ParamFecha && p.Ventanilla.Any(v => v.ID == usuario.VentanillaId)).ToList();       
+            ViewBag.SelectPaquetesDisponibles = new SelectList(paquetes, "ID", "Titulo");
             return PartialView("_Step2");
         }
         public ActionResult Step3(DateTime ParamFecha)
@@ -66,17 +70,34 @@ namespace FaroHotel.Controllers
             return PartialView("_Step3");
 
         }
-        public ActionResult Step4(DateTime ParamFecha, int ParamHotelId, int ParamNochesId, int ParamTitularId, int[] ParamTipoHabitacionesIds, int[] ParamNroHabitacionesIds, int[] ParamPasajerosIds, int[] ParamPaquetesIds, int[] ParamBaseIds, int[] ParamBusIdaIds, int[] ParamAsientosIdaIds, int[] ParamBusVueltaIds, int[] ParamAsientosVueltaIds, int[] ParamExtrasIds, int[] ParamExtrasCantidad)
+        public ActionResult Step4(DateTime ParamFecha, int ParamHotelId, int ParamNochesId, int ParamTitularId, int[] ParamTipoHabitacionesIds, int[] ParamHabitacionesIds, int[] ParamPasajerosIds, int[] ParamPaquetesIds, int[] ParamBaseIds, int[] ParamBusIdaIds, int[] ParamAsientosIdaIds, int[] ParamBusVueltaIds, int[] ParamAsientosVueltaIds, int[] ParamExtrasIds, int[] ParamExtrasCantidad)
         {
             InsertBooking_Result result = db.InsertBooking(ParamFecha, ParamHotelId, ParamNochesId, ParamTitularId,
-                string.Join(",", ParamTipoHabitacionesIds), string.Join(",", ParamNroHabitacionesIds),
+                string.Join(",", ParamTipoHabitacionesIds), string.Join(",", ParamHabitacionesIds),
                 string.Join(",", ParamPasajerosIds), string.Join(",", ParamPaquetesIds), string.Join(",", ParamBaseIds),
                 User.Identity.GetUserId(), string.Join(",", ParamBusIdaIds), string.Join(",", ParamAsientosIdaIds),
                 string.Join(",", ParamBusVueltaIds), string.Join(",", ParamAsientosVueltaIds), 
                 string.Join(",", ParamExtrasIds), string.Join(",", ParamExtrasCantidad)).FirstOrDefault();
             ViewBag.NroReserva = result.ReservaHotelID;
+
+            try
+            {
+                //Envio Mail
+                SendMail mail = new SendMail();
+                mail.Destinatario = "juanma.ariza23@gmail.com";
+                mail.Asunto = "Test2";
+                mail.Mensaje = "Nueva reserva!!";
+                mail.Send();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
             return PartialView("_Step4");
-        }
+        }       
+
 
         public ActionResult Bus(DateTime ParamFecha, int ParamTrayectoId, int ParamNoches)
         {
@@ -101,8 +122,20 @@ namespace FaroHotel.Controllers
             ViewBag.BusesIdaYVueltaIds = from b in db.Bus
                                          where b.Fecha == ParamFecha || b.Fecha == FechaVuelta
                                          select b.ID;
-
-            return PartialView("_Bus");
+            string swResult = "";
+            switch (buses.First().TipoBusId)
+            {
+                case 1: //Bus60-2017
+                    swResult = "_Bus60-2017";
+                    break;
+                case 2: //Bus62-2017
+                    swResult = "_Bus62-2017";
+                    break;
+                default:
+                    swResult = "_Bus62-2017";
+                    break;
+            }
+            return PartialView(swResult);
         }
 
         // GET: NroHabitaciones
@@ -203,6 +236,13 @@ namespace FaroHotel.Controllers
             ViewBag.DatosReserva = db.GetReserva(Id);
             ViewBag.HabitacionesReservadas = db.GetReservaHabitaciones(Id);
             ViewBag.PasajerosReserva = db.GetReservaPasajeros(Id);
+            ViewBag.Fecha = reserva.FechaEntrada.ToShortDateString();
+            ViewBag.Noches = (reserva.FechaSalida - reserva.FechaEntrada).Days;
+
+            AspNetUsers usuario = db.AspNetUsers.Find(User.Identity.GetUserId());
+            List<Paquete> paquetes = db.Paquete.Where(p => p.FechaInicio <= reserva.FechaEntrada && p.FechaFin >= reserva.FechaEntrada && p.Ventanilla.Any(v => v.ID == usuario.VentanillaId)).ToList();
+            ViewBag.SelectPaquetesDisponibles = new SelectList(paquetes, "ID", "Titulo");
+
 
             return View();
         }
@@ -245,14 +285,14 @@ namespace FaroHotel.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AgregarHabitacion(int id, int TipoHabitacion, int NumHabitacion)
+        public ActionResult AgregarHabitacion(int id, int TipoHabitacionId, int HabitacionId)
         {
             try
             {
                 EnlaceReservaHotelHabitacion habitacion = new EnlaceReservaHotelHabitacion();
                 habitacion.ReservaHotelId = id;
-                habitacion.TipoHabitacionId = TipoHabitacion;
-                habitacion.HabitacionId = NumHabitacion;
+                habitacion.TipoHabitacionId = TipoHabitacionId;
+                habitacion.HabitacionId = HabitacionId;
                 db.EnlaceReservaHotelHabitacion.Add(habitacion);
                 db.SaveChanges();
                 return Json(new { ok = "true" });
@@ -263,28 +303,40 @@ namespace FaroHotel.Controllers
             }
 
         }
+
         public ActionResult EditarHabitacion(int? Id)
         {
-            ReservaHotel reserva = db.ReservaHotel.Find(Id);
-            ViewBag.ReservaId = Id;
-            ViewBag.Fecha = reserva.FechaEntrada;
-            ViewBag.HotelId = reserva.HotelId;
+            EnlaceReservaHotelHabitacion habitacion = db.EnlaceReservaHotelHabitacion.Where(h => h.ID == Id).First();            
+            ViewBag.Id = habitacion.ID;
+            ViewBag.Fecha = habitacion.ReservaHotel.FechaEntrada;
+            ViewBag.HotelId = habitacion.ReservaHotel.HotelId;
             ViewBag.SelectTipoHabitacion = new SelectList(db.TipoHabitacion.OrderBy(c => c.ID), "ID", "Descripcion");
-            ViewBag.SelectNumHabitacion = new SelectList(db.TipoHabitacion.OrderBy(c => c.ID), "ID", "Descripcion");
-            return PartialView("_AgregarHabitacion");
+
+            //var habitacionesDisponibles = db.GetHabitacionesDisponibles(habitacion.ReservaHotel.FechaEntrada, habitacion.ReservaHotel.HotelId, habitacion.TipoHabitacionId).Select(h => new
+            //{
+            //    ID = h.ID,
+            //    Numero = h.Numero
+            //}).ToList();
+
+            //ViewBag.SelectNumHabitacion = new SelectList(habitacionesDisponibles, "ID", "Descripcion");
+            return PartialView("_EditarHabitacion");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditarHabitacion(int id, int TipoHabitacion, int NumHabitacion)
+        public ActionResult EditarHabitacion(int id, int TipoHabitacionId, int HabitacionId)
         {
             try
             {
-                EnlaceReservaHotelHabitacion habitacion = new EnlaceReservaHotelHabitacion();
-                habitacion.ReservaHotelId = id;
-                habitacion.TipoHabitacionId = TipoHabitacion;
-                habitacion.HabitacionId = NumHabitacion;
-                db.EnlaceReservaHotelHabitacion.Add(habitacion);
+                EnlaceReservaHotelHabitacion habitacion = db.EnlaceReservaHotelHabitacion.Where(h => h.ID == id).First();
+                EnlaceReservaHotelHabitacion habitacionNueva = new EnlaceReservaHotelHabitacion();
+                //Copio objeto
+                habitacionNueva.ReservaHotelId = habitacion.ReservaHotelId;
+                habitacionNueva.TipoHabitacionId = TipoHabitacionId;
+                habitacionNueva.HabitacionId = HabitacionId;
+                //Elimino objeto viejo y creo el nuevo
+                db.EnlaceReservaHotelHabitacion.Remove(habitacion);
+                db.EnlaceReservaHotelHabitacion.Add(habitacionNueva);
                 db.SaveChanges();
                 return Json(new { ok = "true" });
             }
@@ -292,7 +344,82 @@ namespace FaroHotel.Controllers
             {
                 return Json(new { ok = "false" });
             }
-
         }
-    }            
+
+        public ActionResult EliminarHabitacion(int? Id)
+        {
+            ViewBag.HabitacionId = Id;
+            return PartialView("_EliminarHabitacion");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EliminarHabitacion(int id)
+        {
+            try
+            {
+                EnlaceReservaHotelHabitacion habitacion = db.EnlaceReservaHotelHabitacion.Where(h => h.ID == id).First();
+                db.EnlaceReservaHotelHabitacion.Remove(habitacion);
+                db.SaveChanges();
+                return Json(new { ok = "true" });
+            }
+            catch (Exception)
+            {
+                return Json(new { ok = "false" });
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AgregarPasajero(int ParamReservaId, int paramPasajeroId, int paramPaqueteId, int paramBaseId, int paramBusIdaId, int paramAsientoIda, int paramBusVueltaId, int paramAsientoVuelta)
+        {
+            try
+            {
+                AgregarPasajeroAReserva_Result respuesta = db.AgregarPasajeroAReserva(ParamReservaId, paramPasajeroId, paramPaqueteId, paramBaseId, paramBusIdaId, paramAsientoIda, paramBusVueltaId, paramAsientoVuelta).FirstOrDefault();
+                if (respuesta.Resultado == 0)
+                {
+                    return Json(new { ok = "false" });
+                }
+                else
+                {
+                    return Json(new { ok = "true" });
+                }
+            }
+            catch (Exception)
+            {
+                return Json(new { ok = "false" });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EliminarPasajero(int ParamReservaId, int ParamPasajeroId)
+        {
+            //Recibo Id de reserva
+            ViewBag.ReservaId = ParamReservaId;
+            ViewBag.PasajeroId = ParamPasajeroId;
+            return PartialView("_EliminarPasajero");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EliminarPasajeroConfirmado(int ParamReservaId, int ParamPasajeroId)
+        {
+            try
+            {
+                EliminarPasajeroDeReserva_Result respuesta = db.EliminarPasajeroDeReserva(ParamReservaId, ParamPasajeroId).FirstOrDefault();
+                if (respuesta.Resultado == 0)
+                {
+                    return Json(new { ok = "false" });
+                }
+                else
+                {
+                    return Json(new { ok = "true" });
+                }
+            }
+            catch (Exception)
+            {
+                return Json(new { ok = "false" });
+            }
+        }
+    }
 }

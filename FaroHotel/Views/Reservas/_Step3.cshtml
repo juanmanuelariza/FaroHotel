@@ -163,7 +163,7 @@
     $('#btnGoStep4').click(function () {
         //HAGO RESERVA
         var ParamTipoHabitacionesIds = [];
-        var ParamNroHabitacionesIds = [];
+        var ParamHabitacionesIds = [];
         var ParamPaxIds = [];
         var ParamPaquetesIds = [];
         var ParamBaseIds = [];
@@ -175,7 +175,7 @@
         var ParamExtrasCantidad = [];
         
         $(".SelectTipoHabitacion").each(function () { ParamTipoHabitacionesIds.push($(this).val()); });
-        $(".SelectNroHabitacion").each(function () { ParamNroHabitacionesIds.push($(this).val()); });
+        $(".SelectNroHabitacion").each(function () { ParamHabitacionesIds.push($(this).val()); });
         $(".PaxIds").each(function () { ParamPaxIds.push($(this).val()); });
         $(".SelectPaquetesDisponibles").each(function () { ParamPaquetesIds.push($(this).val()); });
         $(".SelectBase").each(function () { ParamBaseIds.push($(this).val()); });
@@ -226,7 +226,7 @@
                 ParamNochesId: $('#NochesId option:selected').text(),
                 ParamTitularId: $('#PaxID_' + $('input[name=radioTitular]:checked').val()).val(),
                 ParamTipoHabitacionesIds: ParamTipoHabitacionesIds,
-                ParamNroHabitacionesIds: ParamNroHabitacionesIds,
+                ParamHabitacionesIds: ParamHabitacionesIds,
                 ParamPasajerosIds: ParamPaxIds,
                 ParamPaquetesIds: ParamPaquetesIds,
                 ParamBaseIds: ParamBaseIds,

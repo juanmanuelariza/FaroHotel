@@ -1,0 +1,1015 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\Juan Manuel\Documents\Sistemas\Publicaciones\FaroHotel</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>10/08/2017 23:14:57</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>11/19/2017 21:54:22</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>11/19/2017 21:54:22</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>10/08/2017 23:14:58</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>10/08/2017 23:14:58</publishTime>
+    </File>
+    <File Include="bin/FaroHotel.dll">
+      <publishTime>11/19/2017 21:51:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
+      <publishTime>10/08/2017 23:14:58</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.EntityFramework.dll">
+      <publishTime>10/08/2017 23:14:58</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.Owin.dll">
+      <publishTime>10/08/2017 23:14:58</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>10/16/2017 14:14:32</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>10/08/2017 23:14:59</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>10/08/2017 23:14:59</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Cookies.dll">
+      <publishTime>10/08/2017 23:15:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.dll">
+      <publishTime>10/08/2017 23:14:59</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Facebook.dll">
+      <publishTime>10/08/2017 23:15:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Google.dll">
+      <publishTime>10/08/2017 23:15:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.MicrosoftAccount.dll">
+      <publishTime>10/08/2017 23:15:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.OAuth.dll">
+      <publishTime>10/08/2017 23:15:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Twitter.dll">
+      <publishTime>10/08/2017 23:15:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>10/08/2017 23:15:00</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>10/08/2017 23:15:00</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>10/08/2017 23:15:00</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe.config">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.rsp">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.rsp">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.AppContext.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe.config">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.rsp">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>06/27/2016 14:50:24</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>10/08/2017 23:14:59</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>10/08/2017 23:14:58</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>10/08/2017 23:14:59</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>10/08/2017 23:14:58</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>10/08/2017 23:14:59</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>10/08/2017 23:14:59</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>10/08/2017 23:14:59</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>10/08/2017 23:15:00</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>10/08/2017 23:14:50</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>10/08/2017 23:14:50</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>10/08/2017 23:14:50</publishTime>
+    </File>
+    <File Include="css/animate.min.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/bootstrap-theme.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/bootstrap-theme.css.map">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/bootstrap-theme.min.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/bootstrap-theme.min.css.map">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/bootstrap.css">
+      <publishTime>10/30/2017 18:31:41</publishTime>
+    </File>
+    <File Include="css/bootstrap.css.map">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/bootstrap.min.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/bootstrap.min.css.map">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/buttons.dataTables.min.css">
+      <publishTime>11/11/2017 21:19:20</publishTime>
+    </File>
+    <File Include="css/custom.css">
+      <publishTime>11/11/2017 13:10:02</publishTime>
+    </File>
+    <File Include="css/custom.min.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/dataTables.bootstrap.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/dataTables.responsive.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/daterangepicker.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/editor.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/font-awesome.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/font-awesome.css.map">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/font-awesome.min.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/jquery-ui.structure.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/jquery-ui.theme.css">
+      <publishTime>11/11/2017 21:23:03</publishTime>
+    </File>
+    <File Include="css/jquery.dataTables.css">
+      <publishTime>11/11/2017 21:23:13</publishTime>
+    </File>
+    <File Include="css/jquery.dataTables.min.css">
+      <publishTime>11/11/2017 21:18:46</publishTime>
+    </File>
+    <File Include="css/pace.min.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/parsley.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/select2-bootstrap.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/select2.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/select2.min.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="css/styles.css">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.eot">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.svg">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.ttf">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.woff">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.woff2">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="fonts/FontAwesome.otf">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="fonts/ionicons.ttf">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>10/08/2017 23:14:51</publishTime>
+    </File>
+    <File Include="images/4.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/42.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/5 - copia.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/5.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/6.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/62.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/sort_asc.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/sort_asc_disabled.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/sort_both.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/sort_desc.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/sort_desc_disabled.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/ui/ui-bg_glass_75_d0e5f5_1x400.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/ui/ui-bg_glass_85_dfeffc_1x400.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/ui/ui-bg_glass_95_fef1ec_1x400.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/ui/ui-bg_gloss-wave_55_5c9ccc_500x100.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/ui/ui-bg_inset-hard_100_f5f8f9_1x100.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/ui/ui-bg_inset-hard_100_fcfdfd_1x100.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/ui/ui-icons_217bc0_256x240.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/ui/ui-icons_2e83ff_256x240.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/ui/ui-icons_469bdd_256x240.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/ui/ui-icons_6da8d5_256x240.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/ui/ui-icons_cd0a0a_256x240.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/ui/ui-icons_d8e7f3_256x240.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/ui/ui-icons_f9bd01_256x240.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="images/user.png">
+      <publishTime>10/08/2017 23:14:56</publishTime>
+    </File>
+    <File Include="Models/Model_FaroHotel.edmx.diagram">
+      <publishTime>11/17/2017 21:44:15</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>11/14/2017 22:52:23</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>11/19/2017 21:54:18</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap - copia.js">
+      <publishTime>10/08/2017 23:14:51</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>10/16/2017 20:43:10</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>10/08/2017 23:14:51</publishTime>
+    </File>
+    <File Include="Scripts/buttons.html5.min.js">
+      <publishTime>11/11/2017 21:16:06</publishTime>
+    </File>
+    <File Include="Scripts/buttons.print.min.js">
+      <publishTime>11/11/2017 21:16:42</publishTime>
+    </File>
+    <File Include="Scripts/custom.js">
+      <publishTime>11/19/2017 20:01:57</publishTime>
+    </File>
+    <File Include="Scripts/custom.min.js">
+      <publishTime>10/08/2017 23:14:51</publishTime>
+    </File>
+    <File Include="Scripts/dataTables.bootstrap.js">
+      <publishTime>10/08/2017 23:14:51</publishTime>
+    </File>
+    <File Include="Scripts/dataTables.buttons.min.js">
+      <publishTime>11/11/2017 21:18:10</publishTime>
+    </File>
+    <File Include="Scripts/dataTables.responsive.min.js">
+      <publishTime>11/10/2017 17:27:09</publishTime>
+    </File>
+    <File Include="Scripts/daterangepicker.js">
+      <publishTime>10/08/2017 23:14:51</publishTime>
+    </File>
+    <File Include="Scripts/editor.js">
+      <publishTime>10/08/2017 23:14:51</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.js">
+      <publishTime>10/08/2017 23:14:51</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.js">
+      <publishTime>10/08/2017 23:14:51</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.map">
+      <publishTime>10/08/2017 23:14:51</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui.min.js">
+      <publishTime>10/08/2017 23:14:51</publishTime>
+    </File>
+    <File Include="Scripts/jquery.dataTables.js">
+      <publishTime>11/11/2017 21:06:57</publishTime>
+    </File>
+    <File Include="Scripts/jquery.inputmask.min.js">
+      <publishTime>10/08/2017 23:14:51</publishTime>
+    </File>
+    <File Include="Scripts/jquery.js">
+      <publishTime>10/08/2017 23:14:51</publishTime>
+    </File>
+    <File Include="Scripts/jquery.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/jquery.min.map">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/jquery.smartWizard.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/jszip.min.js">
+      <publishTime>11/11/2017 21:17:12</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/moment.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/npm.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/pace.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/parsley.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/parsley.min.js.map">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/jsTree/jstree.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/jsTree/jstree.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/jsTree/themes/default-dark/32px.png">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/jsTree/themes/default-dark/40px.png">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/jsTree/themes/default-dark/style.css">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/jsTree/themes/default-dark/style.min.css">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/jsTree/themes/default-dark/throbber.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/jsTree/themes/default/32px.png">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/jsTree/themes/default/40px.png">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/jsTree/themes/default/style.css">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/jsTree/themes/default/style.min.css">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/jsTree/themes/default/throbber.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/jquery.tinymce.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/langs/readme.md">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/license.txt">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/advlist/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/anchor/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/autolink/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/autoresize/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/autosave/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/bbcode/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/charmap/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/code/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/codesample/css/prism.css">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/codesample/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/colorpicker/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/contextmenu/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/directionality/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-cool.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-cry.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-embarassed.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-foot-in-mouth.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-frown.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-innocent.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-kiss.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-laughing.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-money-mouth.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-sealed.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-smile.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-surprised.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-tongue-out.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-undecided.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-wink.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/img/smiley-yell.gif">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/emoticons/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/fullpage/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/fullscreen/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/help/img/logo.png">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/help/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/hr/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/image/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/imagetools/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/importcss/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/insertdatetime/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/legacyoutput/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/link/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/lists/plugin.min.js">
+      <publishTime>10/08/2017 23:14:52</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/media/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/nonbreaking/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/noneditable/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/pagebreak/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/paste/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/preview/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/print/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/save/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/searchreplace/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/spellchecker/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/tabfocus/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/table/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/template/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/textcolor/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/textpattern/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/toc/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/visualblocks/css/visualblocks.css">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/visualblocks/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/visualchars/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/plugins/wordcount/plugin.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/content.inline.min.css">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/content.min.css">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/fonts/tinymce-small.eot">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/fonts/tinymce-small.svg">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/fonts/tinymce-small.ttf">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/fonts/tinymce-small.woff">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/fonts/tinymce.eot">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/fonts/tinymce.svg">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/fonts/tinymce.ttf">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/fonts/tinymce.woff">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/img/anchor.gif">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/img/loader.gif">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/img/object.gif">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/img/trans.gif">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/skins/lightgray/skin.min.css">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/test.html">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/themes/inlite/theme.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/themes/modern/theme.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/plugins/tinymce/tinymce.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/respond.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/respond.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/select2.full.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Scripts/select2.full.min.js">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Views/Account/Edit.cshtml">
+      <publishTime>11/08/2017 23:18:40</publishTime>
+    </File>
+    <File Include="Views/Account/Login.cshtml">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Views/Account/Register.cshtml">
+      <publishTime>11/08/2017 23:18:40</publishTime>
+    </File>
+    <File Include="Views/Buses/Create.cshtml">
+      <publishTime>11/12/2017 19:19:33</publishTime>
+    </File>
+    <File Include="Views/Buses/Delete.cshtml">
+      <publishTime>10/28/2017 12:46:57</publishTime>
+    </File>
+    <File Include="Views/Buses/Details.cshtml">
+      <publishTime>11/12/2017 19:19:52</publishTime>
+    </File>
+    <File Include="Views/Buses/Edit.cshtml">
+      <publishTime>11/12/2017 19:19:30</publishTime>
+    </File>
+    <File Include="Views/Buses/Index.cshtml">
+      <publishTime>11/12/2017 19:36:57</publishTime>
+    </File>
+    <File Include="Views/DescripcionesPaquetes/Create.cshtml">
+      <publishTime>11/08/2017 23:18:55</publishTime>
+    </File>
+    <File Include="Views/DescripcionesPaquetes/Delete.cshtml">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Views/DescripcionesPaquetes/Details.cshtml">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Views/DescripcionesPaquetes/Edit.cshtml">
+      <publishTime>11/08/2017 23:18:55</publishTime>
+    </File>
+    <File Include="Views/DescripcionesPaquetes/Index.cshtml">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Views/Home/About.cshtml">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Views/Home/Contact.cshtml">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Views/Paquetes/Create.cshtml">
+      <publishTime>11/02/2017 19:49:27</publishTime>
+    </File>
+    <File Include="Views/Paquetes/Delete.cshtml">
+      <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Views/Paquetes/Details.cshtml">
+      <publishTime>11/02/2017 18:56:40</publishTime>
+    </File>
+    <File Include="Views/Paquetes/Edit.cshtml">
+      <publishTime>11/02/2017 19:49:59</publishTime>
+    </File>
+    <File Include="Views/Paquetes/Index.cshtml">
+      <publishTime>11/12/2017 19:38:25</publishTime>
+    </File>
+    <File Include="Views/Pasajeros/Create.cshtml">
+      <publishTime>11/02/2017 19:06:59</publishTime>
+    </File>
+    <File Include="Views/Pasajeros/Create2.cshtml">
+      <publishTime>11/08/2017 23:18:55</publishTime>
+    </File>
+    <File Include="Views/Pasajeros/Delete.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Pasajeros/Details.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Pasajeros/Edit.cshtml">
+      <publishTime>11/02/2017 19:07:16</publishTime>
+    </File>
+    <File Include="Views/Pasajeros/Index.cshtml">
+      <publishTime>11/12/2017 19:38:43</publishTime>
+    </File>
+    <File Include="Views/Reportes/OcupacionBus.cshtml">
+      <publishTime>11/15/2017 18:20:06</publishTime>
+    </File>
+    <File Include="Views/Reportes/OcupacionHotel.cshtml">
+      <publishTime>11/15/2017 18:20:12</publishTime>
+    </File>
+    <File Include="Views/Reportes/_OcupacionBus.cshtml">
+      <publishTime>11/13/2017 11:51:23</publishTime>
+    </File>
+    <File Include="Views/Reportes/_OcupacionHotel.cshtml">
+      <publishTime>11/12/2017 18:49:29</publishTime>
+    </File>
+    <File Include="Views/Reservas/Detalle.cshtml">
+      <publishTime>11/19/2017 21:54:06</publishTime>
+    </File>
+    <File Include="Views/Reservas/Index.cshtml">
+      <publishTime>11/15/2017 19:34:03</publishTime>
+    </File>
+    <File Include="Views/Reservas/Listado.cshtml">
+      <publishTime>11/12/2017 19:39:33</publishTime>
+    </File>
+    <File Include="Views/Reservas/Solicitudes.cshtml">
+      <publishTime>11/12/2017 19:40:44</publishTime>
+    </File>
+    <File Include="Views/Reservas/_AgregarHabitacion.cshtml">
+      <publishTime>11/17/2017 22:16:11</publishTime>
+    </File>
+    <File Include="Views/Reservas/_AgregarPasajero.cshtml">
+      <publishTime>11/02/2017 19:55:14</publishTime>
+    </File>
+    <File Include="Views/Reservas/_Bus60-2017.cshtml">
+      <publishTime>11/19/2017 19:52:38</publishTime>
+    </File>
+    <File Include="Views/Reservas/_Bus62-2017.cshtml">
+      <publishTime>11/19/2017 19:52:14</publishTime>
+    </File>
+    <File Include="Views/Reservas/_Confirmar.cshtml">
+      <publishTime>10/31/2017 21:03:51</publishTime>
+    </File>
+    <File Include="Views/Reservas/_EditarHabitacion.cshtml">
+      <publishTime>11/17/2017 22:36:27</publishTime>
+    </File>
+    <File Include="Views/Reservas/_EliminarHabitacion.cshtml">
+      <publishTime>11/17/2017 22:04:33</publishTime>
+    </File>
+    <File Include="Views/Reservas/_EliminarPasajero.cshtml">
+      <publishTime>11/19/2017 21:40:57</publishTime>
+    </File>
+    <File Include="Views/Reservas/_Step1.cshtml">
+      <publishTime>11/17/2017 21:29:12</publishTime>
+    </File>
+    <File Include="Views/Reservas/_Step2.cshtml">
+      <publishTime>11/11/2017 21:23:13</publishTime>
+    </File>
+    <File Include="Views/Reservas/_Step3.cshtml">
+      <publishTime>11/17/2017 21:42:49</publishTime>
+    </File>
+    <File Include="Views/Reservas/_Step4.cshtml">
+      <publishTime>11/12/2017 19:21:46</publishTime>
+    </File>
+    <File Include="Views/Roles/Create.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Roles/Delete.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Roles/Details.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Roles/Edit.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Roles/Index.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Roles/Permisos.cshtml">
+      <publishTime>11/08/2017 23:18:41</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>11/16/2017 20:57:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_LoginLayout.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Shared/_LoginPartial.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Shared/_MenuPartial.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Usuarios/Create.cshtml">
+      <publishTime>11/08/2017 23:07:03</publishTime>
+    </File>
+    <File Include="Views/Usuarios/Delete.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Usuarios/Details.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Usuarios/Edit.cshtml">
+      <publishTime>11/08/2017 23:09:59</publishTime>
+    </File>
+    <File Include="Views/Usuarios/Index.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Usuarios/ResetPassword.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Usuarios/SetRoles.cshtml">
+      <publishTime>11/08/2017 23:18:41</publishTime>
+    </File>
+    <File Include="Views/Ventanillas/Create.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Ventanillas/Delete.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Ventanillas/Edit.cshtml">
+      <publishTime>10/28/2017 12:46:26</publishTime>
+    </File>
+    <File Include="Views/Ventanillas/Index.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>10/08/2017 23:14:54</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>11/14/2017 23:15:30</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

@@ -11,8 +11,7 @@
                 <div class="form-group row">
                     <label class="control-label col-md-3" for="Numero">Número:</label>
                     <div class="col-md-9">
-                        <select id="SelectNumHabitacion" class="form-control SelectNroHabitacion"></select>
-                        @*@Html.DropDownList("NumeroHabitacion", null, "", htmlAttributes: new { @class = "form-control" })*@
+                        <select id="SelectNumHabitacion" class="form-control SelectNroHabitacion"></select>                       
                     </div>
                 </div>
             </div>
@@ -20,7 +19,7 @@
     </div>
 </div>
 <div class="clearfix"></div>
-<input type="hidden" id="InputReservaId" value="@ViewBag.ReservaId" />
+<input type="hidden" id="InputId" value="@ViewBag.Id" />
 <input type="hidden" id="InputFecha" value="@ViewBag.Fecha" />
 <input type="hidden" id="InputHotelId" value="@ViewBag.HotelId" />
 <script type="text/javascript">
@@ -50,11 +49,11 @@
     //Click "Guardar"
     $("#btnGuardar").unbind();
     $("#btnGuardar").click(function () {
-        
+
         var data = {};
-        data["id"] = $('#InputReservaId').val();
-        data["TipoHabitacion"] = $('#SelectTipoHabitacion option:selected').val();
-        data["NumHabitacion"] = $('#SelectNumHabitacion option:selected').val();
+        data["id"] = $('#InputId').val();
+        data["TipoHabitacionId"] = $('#SelectTipoHabitacion option:selected').val();
+        data["HabitacionId"] = $('#SelectNumHabitacion option:selected').val();
         data["__RequestVerificationToken"] = $("input[name='__RequestVerificationToken']").val();
         $.ajax({
             url: "/Reservas/EditarHabitacion",

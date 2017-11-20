@@ -18,6 +18,7 @@ namespace FaroHotel.Models
         public int PasajeroId { get; set; }
         public int PaqueteId { get; set; }
         public byte BaseId { get; set; }
+        public int ID { get; set; }
     
         public virtual Paquete Paquete { get; set; }
         public virtual Pasajero Pasajero { get; set; }

@@ -17,6 +17,7 @@ namespace FaroHotel.Models
         public int ReservaHotelId { get; set; }
         public int HabitacionId { get; set; }
         public int TipoHabitacionId { get; set; }
+        public int ID { get; set; }
     
         public virtual TipoHabitacion TipoHabitacion { get; set; }
         public virtual Habitacion Habitacion { get; set; }

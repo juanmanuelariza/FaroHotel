@@ -46,13 +46,13 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.TipoHotel.Descripcion)
                             </td>
-                            <td>
+                            <td data-order="@item.FechaEntrada.Ticks">
                                 @Html.DisplayFor(modelItem => item.FechaEntrada)
                             </td>
-                            <td>
+                            <td data-order="@item.FechaSalida.Ticks">
                                 @Html.DisplayFor(modelItem => item.FechaSalida)
                             </td>
-                            <td>
+                            <td data-order="@item.FechaAlta.Ticks">
                                 @Html.DisplayFor(modelItem => item.FechaAlta)
                             </td>
                             <td>

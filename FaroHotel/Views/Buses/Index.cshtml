@@ -27,6 +27,9 @@
                         <th>
                             Trayecto
                         </th>
+                        <th>
+                            Tipo
+                        </th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -34,11 +37,14 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
+                            <td data-order="@item.Fecha.Ticks">
                                 @Html.DisplayFor(modelItem => item.Fecha)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.TipoTrayecto.Descripcion)
+                            </td>   
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TipoBus.Descripcion)
                             </td>                           
                             <td>
                                 <div class="btn-group-sm">

@@ -1,0 +1,196 @@
+﻿
+@if (ViewBag.HotelFaroICount > 0)
+{
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">Ocupación de habitaciones FARO I</h2>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.box-header -->
+        <div class="x_content">
+            <div id="DivFaroI" class="row form-horizontal">
+                <div class="col-md-12">
+                    <table id="dtFaroI" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Número de Habitación</th>
+                                <th>Tipo de Habitación</th>
+                                <th>Apellido Titular</th>
+                                <th>Nombre Titular</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (FaroHotel.Models.GetOcupacionHoteles_Result item in ViewBag.HotelFaroI)
+                            {
+                                if (item.HotelId == 1)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NumeroHabitacion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TipoHabitacion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Apellido)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nombre)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+}
+else
+{
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">FARO I</h2>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.box-header -->
+        <div class="x_content">            
+            No hay reservas para la fecha seleccionada en Hotel FARO I
+        </div>
+    </div>
+}
+
+@if (ViewBag.HotelFaroIICount > 0)
+{
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">Ocupación de habitaciones FARO II</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div id="DivFaroII" class="row form-horizontal">
+                <div class="col-md-12">
+                    <table id="dtFaroII" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Número de Habitación</th>
+                                <th>Tipo de Habitación</th>
+                                <th>Apellido Titular</th>
+                                <th>Nombre Titular</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (FaroHotel.Models.GetOcupacionHoteles_Result item in ViewBag.HotelFaroII)
+                            {
+                                if (item.HotelId == 2)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NumeroHabitacion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TipoHabitacion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Apellido)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nombre)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">FARO II</h2>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.box-header -->
+        <div class="x_content">
+            No hay reservas para la fecha seleccionada en Hotel FARO II
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $("#dtFaroI").DataTable({
+            "responsive": true,
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": DataTableEsp(),
+            responsive: true,
+            "dom": "Bfrtip",
+            "buttons": [
+                {
+                    extend: 'excel',
+                    text: '<i class="fa fa-file-excel-o"></i> Exportar a Excel',
+                    title: 'Ocupación hotel FARO I para el día: ' + $('#FechaEntrada').val(),
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fa fa-print"></i> Imprimir',
+                    title: 'Ocupación hotel FARO I para el día: ' + $('#FechaEntrada').val(),
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '10pt')
+                        $(win.document.body).find('h1')
+                            .css('display', 'none')
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }
+            ]
+        });
+        $("#dtFaroII").DataTable({
+            "responsive": true,
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": DataTableEsp(),
+            responsive: true,
+            "dom": "Bfrtip",
+            "buttons": [
+                {
+                    extend: 'excel',
+                    text: '<i class="fa fa-file-excel-o"></i> Exportar a Excel',
+                    title: 'Ocupación hotel FARO II para el día: ' + $('#FechaEntrada').val(),
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fa fa-print"></i> Imprimir',
+                    title: 'Ocupación hotel FARO II para el día: ' + $('#FechaEntrada').val(),
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '10pt')
+                        $(win.document.body).find('h1')
+                            .css('display', 'none')
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }
+            ]
+        });
+    });
+
+</script>

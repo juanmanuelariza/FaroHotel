@@ -25,11 +25,13 @@ namespace FaroHotel.Models
         public System.DateTime Fecha { get; set; }
         public int TrayectoId { get; set; }
         public Nullable<byte> Numero { get; set; }
+        public int TipoBusId { get; set; }
     
         public virtual TipoTrayecto TipoTrayecto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EnlaceBusPasajero> EnlaceBusPasajero { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReservaHotel> ReservaHotel { get; set; }
+        public virtual TipoBus TipoBus { get; set; }
     }
 }

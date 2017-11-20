@@ -84,6 +84,8 @@
     <NavigationProperty Name="EnlaceBusPasajero" Relationship="Self.FK_EnlaceBusPasajero_Bus" FromRole="Bus" ToRole="EnlaceBusPasajero" />
     <NavigationProperty Name="ReservaHotel" Relationship="FaroHotelModel.EnlaceReservaHotelBus" FromRole="Bus" ToRole="ReservaHotel" />
     <Property Name="Numero" Type="Byte" />
+    <Property Name="TipoBusId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TipoBus" Relationship="FaroHotelModel.FK_Bus_TipoBus" FromRole="Bus" ToRole="TipoBus" />
   </EntityType>
   <EntityType Name="EnlaceBusPasajero">
     <Key>
@@ -107,6 +109,7 @@
     <NavigationProperty Name="TipoHabitacion" Relationship="Self.FK_EnlaceReservaHotelHabitacion_EnlaceReservaHotelHabitacion" FromRole="EnlaceReservaHotelHabitacion" ToRole="TipoHabitacion" />
     <NavigationProperty Name="Habitacion" Relationship="Self.FK_EnlaceReservaHotelHabitacion_Habitacion" FromRole="EnlaceReservaHotelHabitacion" ToRole="Habitacion" />
     <NavigationProperty Name="ReservaHotel" Relationship="Self.FK_EnlaceReservaHotelHabitacion_ReservaHotel" FromRole="EnlaceReservaHotelHabitacion" ToRole="ReservaHotel" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="EnlaceReservaHotelPasajero">
     <Key>
@@ -121,6 +124,7 @@
     <NavigationProperty Name="ReservaHotel" Relationship="Self.FK_EnlaceReservaHotelPasajero_ReservaHotel" FromRole="EnlaceReservaHotelPasajero" ToRole="ReservaHotel" />
     <Property Name="BaseId" Type="Byte" Nullable="false" />
     <NavigationProperty Name="TipoBase" Relationship="FaroHotelModel.FK_EnlaceReservaHotelPasajero_TipoBase" FromRole="EnlaceReservaHotelPasajero" ToRole="TipoBase" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="Habitacion">
     <Key>
@@ -856,7 +860,7 @@
       <Parameter Name="Noches" Mode="In" Type="Int32" />
       <Parameter Name="TitularId" Mode="In" Type="Int32" />
       <Parameter Name="TipoHabitacionesIds" Mode="In" Type="String" />
-      <Parameter Name="NroHabitacionesIds" Mode="In" Type="String" />
+      <Parameter Name="HabitacionesIds" Mode="In" Type="String" />
       <Parameter Name="PasajerosIds" Mode="In" Type="String" />
       <Parameter Name="PaquetesIds" Mode="In" Type="String" />
       <Parameter Name="BaseIds" Mode="In" Type="String" />
@@ -945,7 +949,29 @@
       <Parameter Name="Noches" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="GetOcupacionBuses" ReturnType="Collection(FaroHotelModel.GetOcupacionBuses_Result)">
-      <Parameter Name="RFecha" Mode="In" Type="DateTime" />
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="TipoBus" EntityType="FaroHotelModel.TipoBus" />
+    <AssociationSet Name="FK_Bus_TipoBus" Association="FaroHotelModel.FK_Bus_TipoBus">
+      <End Role="TipoBus" EntitySet="TipoBus" />
+      <End Role="Bus" EntitySet="Bus" />
+    </AssociationSet>
+    <FunctionImport Name="GetOcupacionHoteles" ReturnType="Collection(FaroHotelModel.GetOcupacionHoteles_Result)">
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="AgregarPasajeroAReserva" ReturnType="Collection(FaroHotelModel.AgregarPasajeroAReserva_Result)">
+      <Parameter Name="ReservaId" Mode="In" Type="Int32" />
+      <Parameter Name="PasajeroId" Mode="In" Type="Int32" />
+      <Parameter Name="PaqueteId" Mode="In" Type="Int32" />
+      <Parameter Name="BaseId" Mode="In" Type="Int32" />
+      <Parameter Name="BusIdaId" Mode="In" Type="Int32" />
+      <Parameter Name="AsientoIdaId" Mode="In" Type="Int32" />
+      <Parameter Name="BusVueltaId" Mode="In" Type="Int32" />
+      <Parameter Name="AsientoVueltaId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarPasajeroDeReserva" ReturnType="Collection(FaroHotelModel.EliminarPasajeroDeReserva_Result)">
+      <Parameter Name="ReservaId" Mode="In" Type="Int32" />
+      <Parameter Name="PasajeroId" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
@@ -997,6 +1023,7 @@
     <Property Type="String" Name="NombreHotel" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="TipoHabitacion" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="NumeroHabitacion" Nullable="false" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
   </ComplexType>
   <EntityType Name="TipoBase">
     <Key>
@@ -1034,6 +1061,7 @@
     <Property Type="String" Name="Base" Nullable="false" MaxLength="50" />
     <Property Type="Byte" Name="NroBusIda" Nullable="true" />
     <Property Type="Byte" Name="NroBusVuelta" Nullable="true" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
   </ComplexType>
   <ComplexType Name="GetReserva_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1061,6 +1089,7 @@
     <Property Name="Cantidad" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Extra" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_Extra" FromRole="EnlaceReservaHotelExtra" ToRole="Extra" />
     <NavigationProperty Name="ReservaHotel" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_ReservaHotel" FromRole="EnlaceReservaHotelExtra" ToRole="ReservaHotel" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="Extra">
     <Key>
@@ -1125,6 +1154,7 @@
     <Property Type="Int32" Name="BusVueltaId" Nullable="false" />
     <Property Type="DateTime" Name="FechaVuelta" Nullable="false" Precision="23" />
     <Property Type="Byte" Name="NumeroVuelta" Nullable="true" />
+    <Property Type="Int32" Name="TipoBusId" Nullable="false" />
   </ComplexType>
   <ComplexType Name="GetOcupacionBuses_Result">
     <Property Type="String" Name="Hotel" Nullable="false" MaxLength="50" />
@@ -1137,5 +1167,39 @@
     <Property Type="Boolean" Name="Motricidad" Nullable="false" />
     <Property Type="Boolean" Name="Diabetes" Nullable="false" />
     <Property Type="Byte" Name="HotelId" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="TipoBus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CantButacas" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bus" Relationship="FaroHotelModel.FK_Bus_TipoBus" FromRole="TipoBus" ToRole="Bus" />
+  </EntityType>
+  <Association Name="FK_Bus_TipoBus">
+    <End Type="FaroHotelModel.TipoBus" Role="TipoBus" Multiplicity="1" />
+    <End Type="FaroHotelModel.Bus" Role="Bus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoBus">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bus">
+        <PropertyRef Name="TipoBusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetOcupacionHoteles_Result">
+    <Property Type="String" Name="Apellido" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="NumeroHabitacion" Nullable="false" />
+    <Property Type="String" Name="TipoHabitacion" Nullable="false" MaxLength="50" />
+    <Property Type="Byte" Name="HotelId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="AgregarPasajeroAReserva_Result">
+    <Property Type="Int32" Name="Resultado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="EliminarPasajeroDeReserva_Result">
+    <Property Type="Int32" Name="Resultado" Nullable="false" />
   </ComplexType>
 </Schema>

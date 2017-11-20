@@ -56,6 +56,7 @@ namespace FaroHotel.Models
         public virtual DbSet<EnlaceReservaHotelExtra> EnlaceReservaHotelExtra { get; set; }
         public virtual DbSet<Extra> Extra { get; set; }
         public virtual DbSet<TipoExtra> TipoExtra { get; set; }
+        public virtual DbSet<TipoBus> TipoBus { get; set; }
     
         [DbFunction("FaroHotelEntities", "func_Split")]
         public virtual IQueryable<func_Split_Result> func_Split(string delimitedString, string delimiter)
@@ -80,7 +81,7 @@ namespace FaroHotel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPermisosPorNombreDeUsuario_Result>("GetPermisosPorNombreDeUsuario", userNameParameter);
         }
     
-        public virtual ObjectResult<InsertBooking_Result> InsertBooking(Nullable<System.DateTime> fecha, Nullable<int> hotelId, Nullable<int> noches, Nullable<int> titularId, string tipoHabitacionesIds, string nroHabitacionesIds, string pasajerosIds, string paquetesIds, string baseIds, string usuarioAlta, string busesIdaIds, string asientosIdaIds, string busesVueltaIds, string asientosVueltaIds, string extrasIds, string extrasCantidad)
+        public virtual ObjectResult<InsertBooking_Result> InsertBooking(Nullable<System.DateTime> fecha, Nullable<int> hotelId, Nullable<int> noches, Nullable<int> titularId, string tipoHabitacionesIds, string habitacionesIds, string pasajerosIds, string paquetesIds, string baseIds, string usuarioAlta, string busesIdaIds, string asientosIdaIds, string busesVueltaIds, string asientosVueltaIds, string extrasIds, string extrasCantidad)
         {
             var fechaParameter = fecha.HasValue ?
                 new ObjectParameter("Fecha", fecha) :
@@ -102,9 +103,9 @@ namespace FaroHotel.Models
                 new ObjectParameter("TipoHabitacionesIds", tipoHabitacionesIds) :
                 new ObjectParameter("TipoHabitacionesIds", typeof(string));
     
-            var nroHabitacionesIdsParameter = nroHabitacionesIds != null ?
-                new ObjectParameter("NroHabitacionesIds", nroHabitacionesIds) :
-                new ObjectParameter("NroHabitacionesIds", typeof(string));
+            var habitacionesIdsParameter = habitacionesIds != null ?
+                new ObjectParameter("HabitacionesIds", habitacionesIds) :
+                new ObjectParameter("HabitacionesIds", typeof(string));
     
             var pasajerosIdsParameter = pasajerosIds != null ?
                 new ObjectParameter("PasajerosIds", pasajerosIds) :
@@ -146,7 +147,7 @@ namespace FaroHotel.Models
                 new ObjectParameter("ExtrasCantidad", extrasCantidad) :
                 new ObjectParameter("ExtrasCantidad", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertBooking_Result>("InsertBooking", fechaParameter, hotelIdParameter, nochesParameter, titularIdParameter, tipoHabitacionesIdsParameter, nroHabitacionesIdsParameter, pasajerosIdsParameter, paquetesIdsParameter, baseIdsParameter, usuarioAltaParameter, busesIdaIdsParameter, asientosIdaIdsParameter, busesVueltaIdsParameter, asientosVueltaIdsParameter, extrasIdsParameter, extrasCantidadParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertBooking_Result>("InsertBooking", fechaParameter, hotelIdParameter, nochesParameter, titularIdParameter, tipoHabitacionesIdsParameter, habitacionesIdsParameter, pasajerosIdsParameter, paquetesIdsParameter, baseIdsParameter, usuarioAltaParameter, busesIdaIdsParameter, asientosIdaIdsParameter, busesVueltaIdsParameter, asientosVueltaIdsParameter, extrasIdsParameter, extrasCantidadParameter);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
@@ -309,13 +310,72 @@ namespace FaroHotel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBuses_Result>("GetBuses", fechaParameter, nochesParameter);
         }
     
-        public virtual ObjectResult<GetOcupacionBuses_Result> GetOcupacionBuses(Nullable<System.DateTime> rFecha)
+        public virtual ObjectResult<GetOcupacionBuses_Result> GetOcupacionBuses(Nullable<System.DateTime> fecha)
         {
-            var rFechaParameter = rFecha.HasValue ?
-                new ObjectParameter("RFecha", rFecha) :
-                new ObjectParameter("RFecha", typeof(System.DateTime));
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("Fecha", fecha) :
+                new ObjectParameter("Fecha", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetOcupacionBuses_Result>("GetOcupacionBuses", rFechaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetOcupacionBuses_Result>("GetOcupacionBuses", fechaParameter);
+        }
+    
+        public virtual ObjectResult<GetOcupacionHoteles_Result> GetOcupacionHoteles(Nullable<System.DateTime> fecha)
+        {
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("Fecha", fecha) :
+                new ObjectParameter("Fecha", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetOcupacionHoteles_Result>("GetOcupacionHoteles", fechaParameter);
+        }
+    
+        public virtual ObjectResult<AgregarPasajeroAReserva_Result> AgregarPasajeroAReserva(Nullable<int> reservaId, Nullable<int> pasajeroId, Nullable<int> paqueteId, Nullable<int> baseId, Nullable<int> busIdaId, Nullable<int> asientoIdaId, Nullable<int> busVueltaId, Nullable<int> asientoVueltaId)
+        {
+            var reservaIdParameter = reservaId.HasValue ?
+                new ObjectParameter("ReservaId", reservaId) :
+                new ObjectParameter("ReservaId", typeof(int));
+    
+            var pasajeroIdParameter = pasajeroId.HasValue ?
+                new ObjectParameter("PasajeroId", pasajeroId) :
+                new ObjectParameter("PasajeroId", typeof(int));
+    
+            var paqueteIdParameter = paqueteId.HasValue ?
+                new ObjectParameter("PaqueteId", paqueteId) :
+                new ObjectParameter("PaqueteId", typeof(int));
+    
+            var baseIdParameter = baseId.HasValue ?
+                new ObjectParameter("BaseId", baseId) :
+                new ObjectParameter("BaseId", typeof(int));
+    
+            var busIdaIdParameter = busIdaId.HasValue ?
+                new ObjectParameter("BusIdaId", busIdaId) :
+                new ObjectParameter("BusIdaId", typeof(int));
+    
+            var asientoIdaIdParameter = asientoIdaId.HasValue ?
+                new ObjectParameter("AsientoIdaId", asientoIdaId) :
+                new ObjectParameter("AsientoIdaId", typeof(int));
+    
+            var busVueltaIdParameter = busVueltaId.HasValue ?
+                new ObjectParameter("BusVueltaId", busVueltaId) :
+                new ObjectParameter("BusVueltaId", typeof(int));
+    
+            var asientoVueltaIdParameter = asientoVueltaId.HasValue ?
+                new ObjectParameter("AsientoVueltaId", asientoVueltaId) :
+                new ObjectParameter("AsientoVueltaId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AgregarPasajeroAReserva_Result>("AgregarPasajeroAReserva", reservaIdParameter, pasajeroIdParameter, paqueteIdParameter, baseIdParameter, busIdaIdParameter, asientoIdaIdParameter, busVueltaIdParameter, asientoVueltaIdParameter);
+        }
+    
+        public virtual ObjectResult<EliminarPasajeroDeReserva_Result> EliminarPasajeroDeReserva(Nullable<int> reservaId, Nullable<int> pasajeroId)
+        {
+            var reservaIdParameter = reservaId.HasValue ?
+                new ObjectParameter("ReservaId", reservaId) :
+                new ObjectParameter("ReservaId", typeof(int));
+    
+            var pasajeroIdParameter = pasajeroId.HasValue ?
+                new ObjectParameter("PasajeroId", pasajeroId) :
+                new ObjectParameter("PasajeroId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EliminarPasajeroDeReserva_Result>("EliminarPasajeroDeReserva", reservaIdParameter, pasajeroIdParameter);
         }
     }
 }

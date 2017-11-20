@@ -28,5 +28,6 @@ namespace FaroHotel.Models
         public string Base { get; set; }
         public Nullable<byte> NroBusIda { get; set; }
         public Nullable<byte> NroBusVuelta { get; set; }
+        public int ID { get; set; }
     }
 }

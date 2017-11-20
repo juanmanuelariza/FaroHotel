@@ -78,7 +78,10 @@ else
                                     <td>
                                         @Html.DisplayFor(modelItem => item.TipoHabitacion)
                                     </td>
-                                    <td></td>
+                                    <td>
+                                        <span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarHabitacion/@item.ID','Editar','Habitacion')"></a></span>
+                                        <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EliminarHabitacion/@item.ID','Eliminar','Habitacion')"></a></span>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -91,6 +94,9 @@ else
     <div class="x_panel">
         <div class="x_title">
             <h2 class="box-title">Información de pasajeros</h2>
+            <button type="button" class="btn btn-primary btn-md pull-right" onclick="nuevoPasajero()">
+                <i class="fa fa-plus"></i> Agregar
+            </button>
             <div class="clearfix"></div>
         </div>
         <!-- /.box-header -->
@@ -100,7 +106,10 @@ else
                 {
                     <div class="rowPasajero">
                         <div class="col-md-12">
-                            <h4><strong>@item.Apellido, @item.Nombre</strong></h4>
+                            <h4><strong>@item.Apellido, @item.Nombre</strong>
+                                <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger pull-right fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="eliminarPasajero(@item.ID)"></a></span>                        
+                                @*<span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarHabitacion/@item.ID','Editar','Habitacion')"></a></span>*@
+                            </h4>
                         </div>
                         <div class="col-md-4">
                             <strong>DNI:</strong> <span>@item.DNI</span><br />
@@ -122,6 +131,77 @@ else
                         <div class="clearfix"></div>
                     </div>
                 }
+            </div>
+
+            <div id="DivNuevoPasajero" style="display:none">
+                <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
+                    <div class="form-group row">
+                        <input id="PaxID_1" type="hidden" class="PaxIds" data-boxId="1" value="" />
+                        <label class="control-label col-md-3" for="DNI">DNI:</label>
+                        <div class="col-md-6">
+                            <input id="PaxDNI_1" type="text" class="form-control PaxDNI" data-boxId="1" />
+                        </div>
+                        <div class="col-md-3">
+                            <span id="btnSearchPax_1" class="btn btn-dark btnSearchPax" data-boxId="1">Buscar</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3" for="Apellido">Apellido:</label>
+                        <div class="col-md-9">
+                            <input id="PaxSurname_1" class="form-control" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3" for="Nombre">Nombre:</label>
+                        <div class="col-md-9">
+                            <input id="PaxName_1" class="form-control" readonly="readonly" />
+                        </div>
+                    </div>
+                    <input id="PaxApellidoyNombre_1" class="PaxApellidoyNombre" type="hidden" value="" />
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3" for="Paquete">Paquete:</label>
+                        <div class="col-md-9">
+                            @Html.DropDownList("SelectPaquetesDisponibles", null, "", htmlAttributes: new { @id = "SelectPaquete_1", @class = "form-control SelectPaquetesDisponibles", data_boxId = 1 })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3" for="Paquete">Base:</label>
+                        <div class="col-md-9">
+                            <select name="SelectBase_1" id="SelectBase_1" class="form-control SelectBase" data-boxId="1" disabled="disabled">
+                                <option selected="selected" value="0"></option>
+                                <option value="1">Base Simple</option>
+                                <option value="2">Base Doble</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3" for="Nombre">Precio:</label>
+                        <div class="col-md-9">
+                            <input id="PaxPrice_1" class="form-control PaxPrice" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
+                    <div id="Panel_BusIda_1" class="form-group row" style="display:none">
+                        <label class="col-md-12" for="Paquete">Bus de ida y vuelta:</label>
+                        <div class="col-md-12">
+                            <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento(1,'Ida')">Seleccionar asiento</span>
+                        </div>
+                        <div class="col-md-12">
+                            <div><img src="/images/6.png">  Asiento Ida: <span id="ButacaBusIda_1" data-boxId="1" class="ButacaBusIda"></span></div>
+                        </div>
+                        <div class="col-md-12">
+                            <div><img src="/images/6.png">  Asiento Vuelta: <span id="ButacaBusVuelta_1" data-boxId="1" class="ButacaBusVuelta"></span></div>
+                        </div>
+                        <input type="hidden" id="BusIdaId_1" class="BusIdaIds" value="" />
+                        <input type="hidden" id="BusVueltaId_1" class="BusVueltaIds" value="" />
+                    </div>
+                    <input type="hidden" id="BoxId" value="" />
+                    <input type="hidden" id="BoxTrayecto" value="" />
+                </div>
+                <span id="btnGuardarPasajero" class="btn btn-primary btn-md pull-right" data-boxId="1">Guardar</span>
             </div>
         </div>
         <!-- /.box-body -->
@@ -152,19 +232,160 @@ else
     }
 
     <script type="text/javascript">
-        //$(function () {
-        //    $('#dtReservas').DataTable({
-        //        "responsive": true,
-        //        "paging": true,
-        //        "lengthChange": true,
-        //        "searching": true,
-        //        "ordering": true,
-        //        "info": true,
-        //        "autoWidth": false,
-        //        "language": DataTableEsp(),
-        //        responsive: true
-        //    });
-        //});
+        function nuevoPasajero() {
+            $("#DivNuevoPasajero").show();
+            scrollToElement('#DivNuevoPasajero', 500);
+        }
+
+        $('.PaxDNI').keyup(function (e) {
+            if (e.keyCode == 13) {
+                var boxId = $(this).attr("data-boxId");
+                $("#btnSearchPax_" + boxId).click();
+            }
+        });
+
+        function SeleccionarAsiento(ArgId, ArgTrayecto) {
+            $("#BoxId").val(ArgId);
+            $("#BoxTrayecto").val(ArgTrayecto);
+            var tmp_TrayectoId;
+            if (ArgTrayecto == 'Ida') { tmp_TrayectoId = 1 }
+            else { tmp_TrayectoId = 2 }
+            var data = {};
+            data["ParamFecha"] = '@ViewBag.Fecha';
+            data["ParamTrayectoId"] = tmp_TrayectoId;
+            data["ParamNoches"] = '@ViewBag.Noches';
+            abrirModalPost('/Reservas/Bus', 'Agregar', 'Asientos', data);
+        }
+
+        $('.btnSearchPax').click(function () {
+            var _url = GetPathApp("/Reservas/BuscarPax");
+            var boxId = $(this).attr("data-boxId");
+            $.ajax({
+                method: "GET",
+                url: _url,
+                data: { paramDNI: $('#PaxDNI_' + boxId).val() },
+                success: function (result) {
+                    if (result == "") {
+                        alert("El pasajero no existe, por favor crearlo antes de continuar.");
+                        $('#PaxID_' + boxId).val("");
+                        $('#PaxSurname_' + boxId).val("");
+                        $('#PaxName_' + boxId).val("");
+                        $('#PaxApellidoyNombre_' + boxId).val("");
+                    } else {
+                        $('#PaxID_' + boxId).val(result[0].ID);
+                        $('#PaxSurname_' + boxId).val(result[0].Apellido);
+                        $('#PaxName_' + boxId).val(result[0].Nombre);
+                        $('#PaxApellidoyNombre_' + boxId).val(result[0].Apellido + ', ' + result[0].Nombre);
+                    }
+                }
+            });
+        });
+
+        $('#btnGuardarPasajero').click(function () {
+            var _url = GetPathApp("/Reservas/AgregarPasajero");
+            var boxId = $(this).attr("data-boxId");
+
+            var paramBusIdaId = $('#BusIdaId_' + boxId).val();
+            var paramAsientoIda = $('#ButacaBusIda_' + boxId).text();
+            var paramBusVueltaId = $('#BusVueltaId_' + boxId).val();
+            var paramAsientoVuelta = $('#ButacaBusIda_' + boxId).text();
+
+            debugger
+            if(!$.isNumeric(paramBusIdaId)){
+                paramBusIdaId = 0;
+            }
+            if(!$.isNumeric(paramAsientoIda)){
+                paramAsientoIda = 0;
+            }
+            if(!$.isNumeric(paramBusVueltaId)){
+                paramBusVueltaId = 0;
+            }
+            if(!$.isNumeric(paramAsientoVuelta)){
+                paramAsientoVuelta = 0;
+            }
+            $.ajax({
+                method: "POST",
+                url: _url,
+                data: {
+                    ParamReservaId: @ViewBag.ReservaId,
+                    paramPasajeroId: $('#PaxID_' + boxId).val(),
+                    paramPaqueteId: $('#SelectPaquete_' + boxId).val(),
+                    paramBaseId: $('#SelectBase_' + boxId).val(),
+                    paramBusIdaId: paramBusIdaId,
+                    paramAsientoIda: paramAsientoIda,
+                    paramBusVueltaId: paramBusVueltaId,
+                    paramAsientoVuelta: paramAsientoVuelta,
+                    __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
+                },
+                success: function (result) {
+                    if (result.ok) {
+                        window.location.href = window.location.href;
+                        return;
+                    }
+                }
+            });
+        });
+
+
+        $(".SelectPaquetesDisponibles").change(function () {
+            var selectedItem = $(this).val();
+            var boxId = $(this).attr("data-boxId");
+            if (selectedItem > 0) {
+                $.getJSON('/Reservas/Paquetes', { ParamPaqueteId: selectedItem }, function (data) {
+                    if (data[0].BusIda) {
+                        $("#Panel_BusIda_" + boxId).show();
+                    }
+                    else {
+                        $("#Panel_BusIda_" + boxId).hide();
+                    }
+
+                    if (data[0].BusVuelta) {
+                        $("#Panel_BusVuelta_" + boxId).show();
+                    }
+                    else {
+                        $("#Panel_BusVuelta_" + boxId).hide();
+                    }
+                    //BORRAR SELECCION DEL OTRO SELECT Y BORRAR PRECIO
+                    $("#SelectBase_" + boxId).prop('disabled', false);
+                    $("#SelectBase_" + boxId).val(0);
+                    $("#PaxPrice_" + boxId).val("");
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert('Error!');
+                });
+            }
+            else {
+                $("#SelectBase_" + boxId).prop('disabled', 'disabled');
+            }
+        });
+        $(".SelectBase").change(function () {
+            var selectedItem = $(this).val();
+            var boxId = $(this).attr("data-boxId");
+            if (selectedItem > 0) {
+                var selectedPaq = $("#SelectPaquete_" + boxId + " option:selected").val();
+                $.getJSON('/Reservas/Paquetes', { ParamPaqueteId: selectedPaq }, function (data) {
+                    if (selectedItem == "1") {
+                        $("#PaxPrice_" + boxId).val("$ " + data[0].PrecioSingle);
+                    }
+                    else {
+                        $("#PaxPrice_" + boxId).val("$ " + data[0].PrecioDoble);
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert('Error!');
+                });
+            }
+            else {
+                $("#PaxPrice_" + boxId).val("");
+            }
+        });
+
+
+        function eliminarPasajero(pasajeroId){
+            var data = {};
+            data["ParamReservaId"] = @ViewBag.ReservaId;
+            data["ParamPasajeroId"] = pasajeroId;
+            abrirModalPost('/Reservas/EliminarPasajero', 'Eliminar', 'Asientos', data);
+        }
+
     </script>
 
 </section>

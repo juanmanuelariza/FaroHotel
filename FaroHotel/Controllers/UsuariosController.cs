@@ -113,7 +113,7 @@ namespace FaroHotel.Controllers
             user.PhoneNumber = appUser.PhoneNumber;
             user.Email = appUser.Email;
             user.VentanillaId = appUser.VentanillaId;
-            ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre");
+            ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre", user.VentanillaId);
             return View(user);
         }
 

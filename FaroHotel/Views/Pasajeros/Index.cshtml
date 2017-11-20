@@ -67,7 +67,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.TipoSexo.Descripcion)
                             </td>
-                            <td>
+                            <td data-order="@item.FechaNacimiento.Ticks">
                                 @Html.DisplayFor(modelItem => item.FechaNacimiento)
                             </td>
                             <td>

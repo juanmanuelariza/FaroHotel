@@ -14,7 +14,6 @@ namespace FaroHotel
                     "~/css/bootstrap.css",
                     "~/css/select2.min.css",  
                     "~/css/select2-bootstrap.css",
-                    "~/css/daterangepicker.css",
                     "~/css/custom.css",
                     "~/css/animate.min.css",
                     "~/css/jquery-ui.theme.css",
@@ -44,8 +43,11 @@ namespace FaroHotel
                             "~/Scripts/buttons.print.min.js",                  
                             "~/Scripts/plugins/tinymce/tinymce.min.js"));
             //"~/Scripts/dataTables.bootstrap.js"));
-
+#if (DEBUG == false)
+            BundleTable.EnableOptimizations = true;
+#else
             BundleTable.EnableOptimizations = false;
+#endif
         }
     }
 }

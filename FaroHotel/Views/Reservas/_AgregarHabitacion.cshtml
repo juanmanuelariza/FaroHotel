@@ -53,8 +53,8 @@
         
         var data = {};
         data["id"] = $('#InputReservaId').val();
-        data["TipoHabitacion"] = $('#SelectTipoHabitacion option:selected').val();
-        data["NumHabitacion"] = $('#SelectNumHabitacion option:selected').val();
+        data["TipoHabitacionId"] = $('#SelectTipoHabitacion option:selected').val();
+        data["HabitacionId"] = $('#SelectNumHabitacion option:selected').val();
         data["__RequestVerificationToken"] = $("input[name='__RequestVerificationToken']").val();
         $.ajax({
             url: "/Reservas/AgregarHabitacion",

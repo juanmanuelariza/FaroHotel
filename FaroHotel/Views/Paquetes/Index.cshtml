@@ -36,8 +36,8 @@
                     {
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
-                            <td>@Html.DisplayFor(modelItem => item.FechaInicio)</td>
-                            <td>@Html.DisplayFor(modelItem => item.FechaFin)</td>
+                            <td data-order="@item.FechaInicio.Ticks">@Html.DisplayFor(modelItem => item.FechaInicio)</td>
+                            <td data-order="@item.FechaFin.Ticks">@Html.DisplayFor(modelItem => item.FechaFin)</td>
                             <td>@Html.DisplayFor(modelItem => item.PrecioDoble)</td>
                             <td>@Html.DisplayFor(modelItem => item.PrecioSingle)</td>
                             <td>@Html.DisplayFor(modelItem => item.TipoCuota.Cuotas)</td>

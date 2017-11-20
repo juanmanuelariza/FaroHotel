@@ -1,0 +1,50 @@
+﻿
+<div id="divBusqueda" class="row">
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Buscar Ocupación de Hoteles</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="col-md-2 col-sm-2 col-xs-12 form-horizontal">
+                    <div class="form-group">
+                        <input value="" class="form-control date-picker text-box single-line has-feedback-left" data-val="true" id="FechaEntrada" name="FechaEntrada" type="datetime">
+                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="form-group text-center">
+                        <span id="btnBuscar" class="btn btn-primary">Buscar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="Panel_Reporte"></div>
+
+
+
+<script type="text/javascript">
+    $('#btnBuscar').click(function () {
+        var _url = GetPathApp("/Reportes/OcupacionHotel");
+        $.ajax({
+            method: "POST",
+            url: _url,
+            data: {
+                ParamFecha: $('#FechaEntrada').val()
+            },
+            success: function (result) {
+                $('#Panel_Reporte').html(result);
+            }
+        });
+    });
+    $(document).ready(function () {
+        $('.date-picker').datepicker({
+            firstDay: 0,
+            maxDate: '+1Y +6M',
+        });
+    });
+</script>

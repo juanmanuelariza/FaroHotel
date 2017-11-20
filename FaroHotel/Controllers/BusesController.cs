@@ -40,6 +40,7 @@ namespace FaroHotel.Controllers
         public ActionResult Create()
         {
             ViewBag.TrayectoId = new SelectList(db.TipoTrayecto, "ID", "Descripcion");
+            ViewBag.TipoBusId = new SelectList(db.TipoBus, "ID", "Descripcion");
             return PartialView();
         }
 
@@ -48,7 +49,7 @@ namespace FaroHotel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Fecha,TrayectoId")] Bus bus)
+        public ActionResult Create([Bind(Include = "ID,Fecha,TrayectoId,TipoBusId")] Bus bus)
         {
             if (ModelState.IsValid)
             {
@@ -58,6 +59,7 @@ namespace FaroHotel.Controllers
             }
 
             ViewBag.TrayectoId = new SelectList(db.TipoTrayecto, "ID", "Descripcion", bus.TrayectoId);
+            ViewBag.TipoBusId = new SelectList(db.TipoBus, "ID", "Descripcion");
             return PartialView(bus);
         }
 
@@ -74,6 +76,7 @@ namespace FaroHotel.Controllers
                 return HttpNotFound();
             }
             ViewBag.TrayectoId = new SelectList(db.TipoTrayecto, "ID", "Descripcion", bus.TrayectoId);
+            ViewBag.TipoBusId = new SelectList(db.TipoBus, "ID", "Descripcion", bus.TipoBusId);
             return PartialView(bus);
         }
 
@@ -82,7 +85,7 @@ namespace FaroHotel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Fecha,TrayectoId")] Bus bus)
+        public ActionResult Edit([Bind(Include = "ID,Fecha,TrayectoId,TipoBusId")] Bus bus)
         {
             if (ModelState.IsValid)
             {
@@ -91,6 +94,7 @@ namespace FaroHotel.Controllers
                 return Json(new { ok = "true" });
             }
             ViewBag.TrayectoId = new SelectList(db.TipoTrayecto, "ID", "Descripcion", bus.TrayectoId);
+            ViewBag.TipoBusId = new SelectList(db.TipoBus, "ID", "Descripcion", bus.TipoBusId);
             return PartialView(bus);
         }
 

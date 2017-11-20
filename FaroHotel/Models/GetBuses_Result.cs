@@ -19,5 +19,6 @@ namespace FaroHotel.Models
         public int BusVueltaId { get; set; }
         public System.DateTime FechaVuelta { get; set; }
         public Nullable<byte> NumeroVuelta { get; set; }
+        public int TipoBusId { get; set; }
     }
 }

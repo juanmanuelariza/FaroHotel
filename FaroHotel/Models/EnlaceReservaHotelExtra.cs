@@ -17,6 +17,7 @@ namespace FaroHotel.Models
         public int ReservaHotelId { get; set; }
         public int ExtraId { get; set; }
         public int Cantidad { get; set; }
+        public int ID { get; set; }
     
         public virtual Extra Extra { get; set; }
         public virtual ReservaHotel ReservaHotel { get; set; }

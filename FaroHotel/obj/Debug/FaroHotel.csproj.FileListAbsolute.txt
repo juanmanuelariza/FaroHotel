@@ -67,21 +67,35 @@ D:\Sistemas\FaroHotel\FaroHotel\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\Sistemas\FaroHotel\FaroHotel\obj\Debug\FaroHotel.dll
 D:\Sistemas\FaroHotel\FaroHotel\obj\Debug\FaroHotel.pdb
 D:\Sistemas\FaroHotel\FaroHotel\obj\Debug\FaroHotel.csprojResolveAssemblyReference.cache
-C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\csc.exe
-C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\Microsoft.VisualBasic.Core.targets
-C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\vbc.exe
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\VBCSCompiler.exe
-C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\FaroHotel.dll.config
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\FaroHotel.dll
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\FaroHotel.pdb
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\csc.exe
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\csc.exe.config
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\csc.rsp
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\csi.exe
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\csi.rsp
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\System.AppContext.dll
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\vbc.exe
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\vbc.exe.config
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\vbc.rsp
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\Antlr3.Runtime.dll
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\EntityFramework.dll
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\EntityFramework.SqlServer.dll

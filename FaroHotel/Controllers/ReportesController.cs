@@ -19,13 +19,6 @@ namespace FaroHotel.Controllers
         [HttpPost]
         public ActionResult OcupacionBus(DateTime ParamFecha)
         {
-            //ViewBag.pasajeros = from b in db.Bus
-            //                    join ebp in db.EnlaceBusPasajero on b.ID equals ebp.BusId
-            //                    join p in db.Pasajero on ebp.PasajeroId equals p.ID
-            //                    where b.Fecha == ParamFecha
-            //                    select new {
-
-            //                    };
             List<GetOcupacionBuses_Result> Ocupacion = db.GetOcupacionBuses(ParamFecha).ToList();
             ViewBag.pasajerosBus1 = Ocupacion.Where(o => o.Numero == 1);
             ViewBag.pasajerosBus2 = Ocupacion.Where(o => o.Numero == 2);
@@ -33,6 +26,23 @@ namespace FaroHotel.Controllers
             ViewBag.pasajerosBus2Count = Ocupacion.Where(o => o.Numero == 2).Count();
 
             return PartialView("_OcupacionBus");
+        }
+
+        public ActionResult OcupacionHotel()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult OcupacionHotel(DateTime ParamFecha)
+        {
+            List<GetOcupacionHoteles_Result> Ocupacion = db.GetOcupacionHoteles(ParamFecha).ToList();
+            ViewBag.HotelFaroI = Ocupacion.Where(h => h.HotelId == 1);
+            ViewBag.HotelFaroII = Ocupacion.Where(h => h.HotelId == 2);
+            ViewBag.HotelFaroICount = Ocupacion.Where(h => h.HotelId == 1).Count();
+            ViewBag.HotelFaroIICount = Ocupacion.Where(h => h.HotelId == 2).Count();
+
+            return PartialView("_OcupacionHotel");
         }
     }
 }
