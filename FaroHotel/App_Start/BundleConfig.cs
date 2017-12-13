@@ -35,6 +35,7 @@ namespace FaroHotel
                             "~/Scripts/respond.js",
                             "~/Scripts/moment.min.js",
                             "~/Scripts/jquery-ui.min.js",
+                            "~/Scripts/jquery.maskMoney.js",
                             "~/Scripts/custom.js",					
                             "~/Scripts/dataTables.responsive.min.js",
                             "~/Scripts/dataTables.buttons.min.js",

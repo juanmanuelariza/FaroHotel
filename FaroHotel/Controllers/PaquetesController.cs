@@ -46,7 +46,7 @@ namespace FaroHotel.Controllers
         {
             ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "Cuotas");
             ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Titulo");
-            ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches");
+            ViewBag.NochesId = new SelectList(db.TipoNoche.Where(tp => tp.Activa == true).OrderBy(c => c.Noches), "ID", "Noches");
             ViewBag.TemporadaId = new SelectList(db.TipoTemporada, "ID", "Descripcion");
 
             Paquete paquete = new Paquete
@@ -82,7 +82,7 @@ namespace FaroHotel.Controllers
             ViewBag.Ventanillas = db.Ventanilla.ToList();
             ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "Cuotas", paquete.CuotasId);
             ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Titulo", paquete.DescripcionId);
-            ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches", paquete.NochesId);
+            ViewBag.NochesId = new SelectList(db.TipoNoche.Where(tp => tp.Activa == true).OrderBy(c => c.Noches), "ID", "Noches", paquete.NochesId);
             ViewBag.TemporadaId = new SelectList(db.TipoTemporada, "ID", "Descripcion", paquete.TemporadaId);
             return PartialView(paquete);
         }
@@ -101,7 +101,7 @@ namespace FaroHotel.Controllers
             }
             ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "Cuotas", paquete.CuotasId);
             ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Titulo", paquete.DescripcionId);
-            ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches", paquete.NochesId);
+            ViewBag.NochesId = new SelectList(db.TipoNoche.Where(tp => tp.Activa == true).OrderBy(c => c.Noches), "ID", "Noches", paquete.NochesId);
             ViewBag.TemporadaId = new SelectList(db.TipoTemporada, "ID", "Descripcion", paquete.TemporadaId);
 
             ViewBag.Ventanillas = db.Ventanilla.ToList();
@@ -150,7 +150,7 @@ namespace FaroHotel.Controllers
             ViewBag.Ventanillas = db.Ventanilla.ToList();
             ViewBag.CuotasId = new SelectList(db.TipoCuota, "ID", "Cuotas", paquete.CuotasId);
             ViewBag.DescripcionId = new SelectList(db.TipoDescripcionPaquete, "ID", "Titulo", paquete.DescripcionId);
-            ViewBag.NochesId = new SelectList(db.TipoNoche, "ID", "Noches", paquete.NochesId);
+            ViewBag.NochesId = new SelectList(db.TipoNoche.Where(tp => tp.Activa == true).OrderBy(c => c.Noches), "ID", "Noches", paquete.NochesId);
             ViewBag.TemporadaId = new SelectList(db.TipoTemporada, "ID", "Descripcion", paquete.TemporadaId);
             return PartialView(paquete);
         }

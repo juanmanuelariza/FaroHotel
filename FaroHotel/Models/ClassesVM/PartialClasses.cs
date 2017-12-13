@@ -9,4 +9,9 @@ namespace FaroHotel.Models
     {
         public int[] VentanillaIds { get; set; }
     }
+
+    public partial class Habitacion
+    {
+        public int[] TipoHabitacionIds { get; set; }
+    }
 }

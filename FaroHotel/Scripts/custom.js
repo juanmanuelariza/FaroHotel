@@ -498,6 +498,9 @@ function InitModalSubmitAjax() {
                         window.location.href = window.location.href;
                         return;
                     }
+                    //else {
+                    //    alert("Error");
+                    //}
                     $('#contenidoModal').html(result);
                 },
                 error: function () {

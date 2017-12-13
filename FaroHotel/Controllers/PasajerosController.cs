@@ -53,6 +53,11 @@ namespace FaroHotel.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<Pasajero> pasajeroEnBD = db.Pasajero.Where(p => p.DNI == pasajero.DNI).ToList();
+                if (pasajeroEnBD.Count > 0)
+                {
+                    return Json(new { ok = "false" });
+                }
                 db.Pasajero.Add(pasajero);
                 db.SaveChanges();
                 return Json(new { ok = "true" });
@@ -78,6 +83,11 @@ namespace FaroHotel.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<Pasajero> pasajeroEnBD = db.Pasajero.Where(p => p.DNI == pasajero.DNI).ToList();
+                if (pasajeroEnBD.Count > 0)
+                {
+                    return Json(new { ok = "false" });
+                }
                 pasajero.ListaNegra = false;
                 db.Pasajero.Add(pasajero);
                 db.SaveChanges();

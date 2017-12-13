@@ -174,6 +174,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BusesController.cs" />
     <Compile Include="Controllers\DescripcionesPaquetesController.cs" />
+    <Compile Include="Controllers\HabitacionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Menu\MenuController.cs" />
     <Compile Include="Controllers\PaquetesController.cs" />
@@ -218,10 +219,16 @@
     <Compile Include="Models\EnlaceBusPasajero.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EnlaceReservaHotelDescuento.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EnlaceReservaHotelExtra.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EnlaceReservaHotelHabitacion.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnlaceReservaHotelPago.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EnlaceReservaHotelPasajero.cs">
@@ -328,6 +335,9 @@
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoExtra.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoFormaDePago.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoHabitacion.cs">
@@ -441,6 +451,7 @@
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.maskMoney.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jszip.min.js" />
@@ -621,6 +632,17 @@
     <Content Include="Scripts\plugins\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Scripts\plugins\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Views\Reservas\_EditarHabitacion.cshtml" />
+    <Content Include="Views\Habitaciones\Create.cshtml" />
+    <Content Include="Views\Habitaciones\Delete.cshtml" />
+    <Content Include="Views\Habitaciones\Details.cshtml" />
+    <Content Include="Views\Habitaciones\Edit.cshtml" />
+    <Content Include="Views\Habitaciones\Index.cshtml" />
+    <Content Include="Views\Reservas\_BusInterno840-2018.cshtml" />
+    <Content Include="Views\Reservas\_ErrorAlBuscar.cshtml" />
+    <Content Include="Views\Reservas\_AgregarPago.cshtml" />
+    <Content Include="Views\Reservas\_AgregarDescuento.cshtml" />
+    <Content Include="Views\Reservas\_EliminarPago.cshtml" />
+    <Content Include="Views\Reservas\_EliminarDescuento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

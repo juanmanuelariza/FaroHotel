@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0f71be95b0444b1499554b6ead5acd91" Name="Diagram1" ZoomLevel="82">
+      <Diagram DiagramId="0f71be95b0444b1499554b6ead5acd91" Name="Diagram1" ZoomLevel="52">
         <EntityTypeShape EntityType="FaroHotelModel.Accion" Width="1.5" PointX="1.5" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FaroHotelModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FaroHotelModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
@@ -74,7 +74,14 @@
         <AssociationConnector Association="FaroHotelModel.FK_Extra_TipoExtra" />
         <EntityTypeShape EntityType="FaroHotelModel.TipoBus" Width="1.5" PointX="12.375" PointY="4.75" />
         <AssociationConnector Association="FaroHotelModel.FK_Bus_TipoBus" />
-      </Diagram>
+        <EntityTypeShape EntityType="FaroHotelModel.TipoFormaDePago" Width="1.5" PointX="15.375" PointY="11.125" />
+        <AssociationConnector Association="FaroHotelModel.FK_ReservaHotel_TipoFormaDePago" />
+        <EntityTypeShape EntityType="FaroHotelModel.EnlaceReservaHotelDescuento" Width="1.5" PointX="10.5" PointY="15.375" />
+        <EntityTypeShape EntityType="FaroHotelModel.EnlaceReservaHotelPago" Width="1.5" PointX="17.625" PointY="12.125" />
+        <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelDescuento_ReservaHotel" />
+        <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelPago_ReservaHotel" />
+        <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelPago_TipoFormaDePago" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

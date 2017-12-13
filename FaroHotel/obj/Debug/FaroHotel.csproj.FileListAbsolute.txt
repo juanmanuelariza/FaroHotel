@@ -147,6 +147,6 @@ C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\Microsoft.Owin.S
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\obj\Debug\FaroHotel.csprojResolveAssemblyReference.cache
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\obj\Debug\FaroHotel.dll
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\obj\Debug\FaroHotel.pdb
+C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\obj\Debug\FaroHotel.csprojResolveAssemblyReference.cache

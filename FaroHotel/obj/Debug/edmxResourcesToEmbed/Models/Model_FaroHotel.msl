@@ -183,6 +183,8 @@
     <EntitySetMapping Name="ReservaHotel">
       <EntityTypeMapping TypeName="FaroHotelModel.ReservaHotel">
         <MappingFragment StoreEntitySet="ReservaHotel">
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="FormaDePagoId" ColumnName="FormaDePagoId" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="TitularId" ColumnName="TitularId" />
           <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
@@ -537,5 +539,34 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="TipoFormaDePago">
+      <EntityTypeMapping TypeName="FaroHotelModel.TipoFormaDePago">
+        <MappingFragment StoreEntitySet="TipoFormaDePago">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnlaceReservaHotelDescuento">
+      <EntityTypeMapping TypeName="FaroHotelModel.EnlaceReservaHotelDescuento">
+        <MappingFragment StoreEntitySet="EnlaceReservaHotelDescuento">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="ReservaHotelId" ColumnName="ReservaHotelId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnlaceReservaHotelPago">
+      <EntityTypeMapping TypeName="FaroHotelModel.EnlaceReservaHotelPago">
+        <MappingFragment StoreEntitySet="EnlaceReservaHotelPago">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="TipoFormaDePagoId" ColumnName="TipoFormaDePagoId" />
+          <ScalarProperty Name="ReservaHotelId" ColumnName="ReservaHotelId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -62,7 +62,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3" for="Nombre">Precio:</label>
                                 <div class="col-md-9">
-                                    <input id="PaxPrice_@i" class="form-control PaxPrice" readonly="readonly" />
+                                    <input id="PaxPrice_@i" class="form-control PaxPrice currencyFormat" readonly="readonly" />
                                 </div>
                             </div>
                         </div>
@@ -175,7 +175,7 @@
         $('#Panel_Step2').fadeOut();
         $('#divQuickSearch').fadeIn();
         $('#Panel_Step1').fadeIn();
-        $('body').animate({ scrollTop: 0 }, 500);
+        $("html, body").animate({ scrollTop: 0 }, 500);
         $('#wizard_step1').attr('class', 'selected');
         $('#wizard_step2').attr('class', 'disabled');
     });
@@ -194,7 +194,8 @@
                 method: "POST",
                 url: _url,
                 data: { 
-                    ParamFecha: $('#FechaEntrada').val(), 
+                    ParamFecha: $('#FechaEntrada').val(),
+                    ParamPaqueteId: $("#SelectPaquete_1 option:selected").val(), //Se calculan las cuotas con el paquete del primer pasajero
                     __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val() },
                 success: function (result) {
                     $('#Panel_Step3').html(result);

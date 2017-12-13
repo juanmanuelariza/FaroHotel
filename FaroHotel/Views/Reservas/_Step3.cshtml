@@ -27,7 +27,7 @@
                                 </select>
                             </td>
                             <td></td>
-                            <td><span id="TotalCocheraFaroII" class="colorGray">$ 0</span></td>
+                            <td><span id="TotalCocheraFaroII" class="colorGray currencyFormat">$ 0</span></td>
                         </tr>
                         <tr>
                             <th scope="row">2</th>
@@ -59,7 +59,7 @@
                                 </select>
                             </td>
                             <td></td>
-                            <td><span id="TotalVouchers" class="colorGray">$ 0</span></td>
+                            <td><span id="TotalVouchers" class="colorGray currencyFormat">$ 0</span></td>
                         </tr>
                         <tr>
                             <th scope="row">3</th>
@@ -73,7 +73,7 @@
                                 </select>
                             </td>
                             <td></td>
-                            <td><span id="TotalCunas" class="colorGray">$ 0</span></td>
+                            <td><span id="TotalCunas" class="colorGray currencyFormat">$ 0</span></td>
                         </tr>
                     </tbody>
                 </table>             
@@ -83,8 +83,16 @@
 
     <div class="col-md-12">
         <div class="x_panel">
+            <div class="x_content" style="text-align: right; padding-right: 2vw;">
+                <h2>TOTAL A EXTRAS: <span id="TotalExtras"></span></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="x_panel">
             <div class="x_title">
-                <h2>Resumen de reserva</h2>
+                <h2>Información de pasajeros</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -108,7 +116,48 @@
     <div class="col-md-12">
         <div class="x_panel">
             <div class="x_content" style="text-align: right; padding-right: 2vw;">
-                <h2>TOTAL A PAGAR: <span id="TotalReserva"></span></h2>
+                <h2>TOTAL PAQUETES: <span id="TotalPaquetes" class="currencyFormat"></span></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_content" style="text-align: right; padding-right: 2vw;">
+                <h2>TOTAL RESERVA: <span id="TotalReserva" class="currencyFormat"></span></h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Forma de pago</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content pull-right" style="text-align: right; padding-right: 2vw;">
+                <h2>PAGO EN EFECTIVO 5% DE DESCUENTO: <span id="TotalReservaContado" class="currencyFormat"></span></h2>
+                <h2>PAGO EN @ViewBag.Cuotas CUOTAS DE: <span id="TotalReservaCuotas" class="currencyFormat"></span></h2>
+                @*<div>
+                    <label class="control-label" for="SelectFormaDePago">Forma de pago:</label>
+                    <select id="SelectFormaDePago" class="form-control" style="float:right; width:200px; margin-left: 10px;">
+                        <option selected="selected" value="0"></option>
+                        <option value="1">Contado</option>
+                        <option value="2">En cuotas</option>
+                    </select>
+                </div>*@
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Observaciones de la reserva</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <textarea id="TextareaObservaciones" class="form-control" rows="5"></textarea>
             </div>
         </div>
     </div>
@@ -129,7 +178,7 @@
     $('#btnBackStep2').click(function () {
         $('#Panel_Step3').fadeOut();
         $('#Panel_Step2').fadeIn();
-        $('body').animate({ scrollTop: 0 }, 500);
+        $("html, body").animate({ scrollTop: 0 }, 500);
         $('#wizard_step2').attr('class', 'selected');
         $('#wizard_step3').attr('class', 'disabled');
     });
@@ -153,7 +202,7 @@
             '<td>' + ArrayPaxApellidoyNombre[i] + '</td>' +
             '<td>' + ArrayPaquetes[i] + '</td>' +
             '<td>' + ArrayBases[i] + '</td>' +
-            '<td>' + ArrayPaxPrecios[i] + '</td>' +
+            '<td class="currencyFormat">' + ArrayPaxPrecios[i] + '</td>' +
             '</tr>';
         }
         $("#tablaPasajeros tbody").append(d);
@@ -161,100 +210,105 @@
     });
 
     $('#btnGoStep4').click(function () {
-        //HAGO RESERVA
-        var ParamTipoHabitacionesIds = [];
-        var ParamHabitacionesIds = [];
-        var ParamPaxIds = [];
-        var ParamPaquetesIds = [];
-        var ParamBaseIds = [];
-        var ParamBusIdaIds = [];
-        var ParamAsientosIdaIds = [];
-        var ParamBusVueltaIds = [];
-        var ParamAsientosVueltaIds = [];
-        var ParamExtrasIds = [1,2,3];
-        var ParamExtrasCantidad = [];
-        
-        $(".SelectTipoHabitacion").each(function () { ParamTipoHabitacionesIds.push($(this).val()); });
-        $(".SelectNroHabitacion").each(function () { ParamHabitacionesIds.push($(this).val()); });
-        $(".PaxIds").each(function () { ParamPaxIds.push($(this).val()); });
-        $(".SelectPaquetesDisponibles").each(function () { ParamPaquetesIds.push($(this).val()); });
-        $(".SelectBase").each(function () { ParamBaseIds.push($(this).val()); });
-        $(".BusIdaIds").each(function () {
-            if ($(this).val() == "") {
-                ParamBusIdaIds.push("0");
-            }
-            else {
-                ParamBusIdaIds.push($(this).val());
-            }
-        });
-        $(".ButacaBusIda").each(function () {
-            if ($(this).text() == "") {
-                ParamAsientosIdaIds.push("0");
-            }
-            else {
-                ParamAsientosIdaIds.push($(this).text());
-            }
-        });
-        $(".BusVueltaIds").each(function () {
-            if ($(this).val() == "") {
-                ParamBusVueltaIds.push("0");
-            }
-            else {
-                ParamBusVueltaIds.push($(this).val());
-            }
-        });
-        $(".ButacaBusVuelta").each(function () {
-            if ($(this).text() == "") {
-                ParamAsientosVueltaIds.push("0");
-            }
-            else {
-                ParamAsientosVueltaIds.push($(this).text());
-            }
-        });
-                
-        ParamExtrasCantidad.push($('#SelectVouchers option:selected').val());
-        ParamExtrasCantidad.push($('#SelectCunas option:selected').val());
-        ParamExtrasCantidad.push($('#SelectCocheraFaroII option:selected').val());
-        
-        var _url = GetPathApp("/Reservas/Step4");        
-        $.ajax({
-            method: "POST",
-            url: _url,
-            data: {                
-                ParamFecha: $('#FechaEntrada').val(),
-                ParamHotelId: $('#DDL_Hotel option:selected').val(),
-                ParamNochesId: $('#NochesId option:selected').text(),
-                ParamTitularId: $('#PaxID_' + $('input[name=radioTitular]:checked').val()).val(),
-                ParamTipoHabitacionesIds: ParamTipoHabitacionesIds,
-                ParamHabitacionesIds: ParamHabitacionesIds,
-                ParamPasajerosIds: ParamPaxIds,
-                ParamPaquetesIds: ParamPaquetesIds,
-                ParamBaseIds: ParamBaseIds,
-                ParamBusIdaIds: ParamBusIdaIds,
-                ParamAsientosIdaIds: ParamAsientosIdaIds,
-                ParamBusVueltaIds: ParamBusVueltaIds,
-                ParamAsientosVueltaIds: ParamAsientosVueltaIds,
-                ParamExtrasIds: ParamExtrasIds,
-                ParamExtrasCantidad: ParamExtrasCantidad,
-                __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
-            },
-            success: function (result) {
-                $('#Panel_Step4').html(result);
-            },
-            error: function () {
-                alert("Error al procesar la solicitud de reserva. Por favor contactese con el administrador");
-            }
-        });
+        if(ValidarFormularioStep3()){
+            openSpinner();
+            //HAGO RESERVA
+            var ParamTipoHabitacionesIds = [];
+            var ParamHabitacionesIds = [];
+            var ParamPaxIds = [];
+            var ParamPaquetesIds = [];
+            var ParamBaseIds = [];
+            var ParamBusIdaIds = [];
+            var ParamAsientosIdaIds = [];
+            var ParamBusVueltaIds = [];
+            var ParamAsientosVueltaIds = [];
+            var ParamExtrasIds = [1,2,3];
+            var ParamExtrasCantidad = [];
 
-        //PASO DE AGRADECIMIENTO
-        $('#Panel_Step3').fadeOut();
-        $('#Panel_Step4').fadeIn();
-        $("html, body").animate({ scrollTop: 0 }, 500);
-        $('#wizard_step3').attr('class', 'done');
-        $('#wizard_step4').attr('class', 'selected');
+            $(".SelectTipoHabitacion").each(function () { ParamTipoHabitacionesIds.push($(this).val()); });
+            $(".SelectNroHabitacion").each(function () { ParamHabitacionesIds.push($(this).val()); });
+            $(".PaxIds").each(function () { ParamPaxIds.push($(this).val()); });
+            $(".SelectPaquetesDisponibles").each(function () { ParamPaquetesIds.push($(this).val()); });
+            $(".SelectBase").each(function () { ParamBaseIds.push($(this).val()); });
+            $(".BusIdaIds").each(function () {
+                if ($(this).val() == "") {
+                    ParamBusIdaIds.push("0");
+                }
+                else {
+                    ParamBusIdaIds.push($(this).val());
+                }
+            });
+            $(".ButacaBusIda").each(function () {
+                if ($(this).text() == "") {
+                    ParamAsientosIdaIds.push("0");
+                }
+                else {
+                    ParamAsientosIdaIds.push($(this).text());
+                }
+            });
+            $(".BusVueltaIds").each(function () {
+                if ($(this).val() == "") {
+                    ParamBusVueltaIds.push("0");
+                }
+                else {
+                    ParamBusVueltaIds.push($(this).val());
+                }
+            });
+            $(".ButacaBusVuelta").each(function () {
+                if ($(this).text() == "") {
+                    ParamAsientosVueltaIds.push("0");
+                }
+                else {
+                    ParamAsientosVueltaIds.push($(this).text());
+                }
+            });
+
+            ParamExtrasCantidad.push($('#SelectVouchers option:selected').val());
+            ParamExtrasCantidad.push($('#SelectCunas option:selected').val());
+            ParamExtrasCantidad.push($('#SelectCocheraFaroII option:selected').val());
+
+            var _url = GetPathApp("/Reservas/Step4");
+            $.ajax({
+                method: "POST",
+                url: _url,
+                data: {
+                    ParamFecha: $('#FechaEntrada').val(),
+                    ParamHotelId: $('#DDL_Hotel option:selected').val(),
+                    ParamNochesId: $('#NochesId option:selected').text(),
+                    ParamTitularId: $('#PaxID_' + $('input[name=radioTitular]:checked').val()).val(),
+                    ParamTipoHabitacionesIds: ParamTipoHabitacionesIds,
+                    ParamHabitacionesIds: ParamHabitacionesIds,
+                    ParamPasajerosIds: ParamPaxIds,
+                    ParamPaquetesIds: ParamPaquetesIds,
+                    ParamBaseIds: ParamBaseIds,
+                    ParamBusIdaIds: ParamBusIdaIds,
+                    ParamAsientosIdaIds: ParamAsientosIdaIds,
+                    ParamBusVueltaIds: ParamBusVueltaIds,
+                    ParamAsientosVueltaIds: ParamAsientosVueltaIds,
+                    ParamExtrasIds: ParamExtrasIds,
+                    ParamExtrasCantidad: ParamExtrasCantidad,
+                    ParamObservaciones: $('textarea#TextareaObservaciones').val(),
+                    __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
+                },
+                success: function (result) {
+                    $('#Panel_Step4').html(result);
+                    closeSpinner();
+                },
+                error: function () {
+                    alert("Error al procesar la solicitud de reserva. Por favor contactese con el administrador");
+                }
+            });
+
+            //PASO DE AGRADECIMIENTO
+            $('#Panel_Step3').fadeOut();
+            $('#Panel_Step4').fadeIn();
+            $("html, body").animate({ scrollTop: 0 }, 500);
+            $('#wizard_step3').attr('class', 'done');
+            $('#wizard_step4').attr('class', 'selected');
+        }
     });
 
-    
+
     $("#SelectCocheraFaroII").change(function () {
         var selectedItem = $(this).val();
         if (selectedItem > 0) {
@@ -294,23 +348,52 @@
 
     function calcularTotal() {
         var SumTotal = 0;
-        var SumPax = 0;
+        var TotalPaquetes = 0;
         var PrecioCochera = 0;
         var PrecioVouchers = 0
         var PrecioCunas = 0;
-       
+        var TotalExtras = 0
         var ArrayPaxPrecios = [];
         $(".PaxPrice").each(function () { ArrayPaxPrecios.push($(this).val()); });
-        
+
         for (var i = 0; i < ArrayPaxPrecios.length; i++) {
-            SumPax = SumPax + parseFloat(ArrayPaxPrecios[i].replace("$ ", ""));
+            TotalPaquetes = TotalPaquetes + parseFloat(ArrayPaxPrecios[i].replace("$ ", ""));
         }
 
         PrecioCochera = parseFloat($('#TotalCocheraFaroII').text().replace("$ ", ""));
         PrecioVouchers = parseFloat($('#TotalVouchers').text().replace("$ ", ""));
         PrecioCunas = parseFloat($('#TotalCunas').text().replace("$ ", ""));
-        SumTotal = SumPax + PrecioCochera + PrecioVouchers + PrecioCunas;
 
+        TotalExtras = PrecioCochera + PrecioVouchers + PrecioCunas
+        SumTotal = TotalPaquetes + TotalExtras;
+
+        $("#TotalPaquetes").text("$ " + TotalPaquetes);
+        $("#TotalExtras").text("$ " + TotalExtras);
         $("#TotalReserva").text("$ " + SumTotal);
+        $("#TotalReservaContado").text("$ " + (SumTotal * 0.95));
+        $("#TotalReservaCuotas").text("$ " + SumTotal / @ViewBag.cuotas);
+        
+        $(".currencyFormat").each(function(){
+            $(this).text($(this).text().replace(".",",").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
+        })
+    }
+    
+    var BanValidaStep2 = false;
+    function ValidarFormularioStep3() {
+        var rslt = true;
+        var selectedItem;
+        $(".input-validation-error").removeClass("input-validation-error");
+        $(".colorRed").removeClass("colorRed");        
+        
+        $("#SelectFormaDePago").each(function () {
+            selectedItem = $(this).val();
+            if (selectedItem == 0) {
+                rslt = false;
+                $(this).addClass("input-validation-error");
+            }
+        });                
+        BanValidaStep2 = true;
+        $("html, body").animate({ scrollTop: 0 }, 500);
+        return rslt;
     }
 </script>

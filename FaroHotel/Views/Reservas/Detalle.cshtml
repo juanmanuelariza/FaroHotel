@@ -1,230 +1,396 @@
-﻿<section class="content">
-    <div class="x_panel">
-        <div class="x_title">
-@if (ViewBag.Confirmada == false)
-{
-    <h2 class="box-title">Detalles de solicitud de reserva</h2>
+﻿@{
+    var Permisos = Session["Permisos"] as List<FaroHotel.Models.MenuAccionVM>;
 }
-else
-{
-    <h2 class="box-title">Detalles de Reserva</h2>
-}
-            <div class="clearfix"></div>
-        </div>
-        <!-- /.box-header -->
-        <div class="x_content">
-            <div id="DivReserva" class="row form-horizontal">
-                @foreach (FaroHotel.Models.GetReserva_Result item in ViewBag.DatosReserva)
-                {
-                    <div class="col-md-6">
-                        <h4><strong>Información de la reserva</strong></h4>
-                        <strong>ID de reserva:</strong> <span id="SpanIdReserva">@item.ID</span><br />
-                        <strong>Usuario alta:</strong> <span id="SpanUsuarioAlta">@item.UserName (@item.NombreVentanilla)</span><br />
-                        <strong>Fecha de alta:</strong> <span id="SpanFechaAlta">@item.FechaAlta</span><br />
-                        <strong>Hotel:</strong> <span id="SpanHotel">@item.Hotel</span><br />
-                        <strong>Fecha de entrada:</strong> <span id="SpanFechaEntrada">@item.FechaEntrada</span><br />
-                        <strong>Fecha de salida:</strong> <span id="SpanFechaSalida">@item.FechaSalida</span><br />
-                        <strong>Confirmada:</strong> <span id="SpanConfirmada">@item.Confirmada</span>
-                    </div>
-                    <div class="col-md-6">
-                        <h4><strong>Información del titular</strong></h4>
-                        <strong>DNI:</strong> <span id="SpanDniTitular">@item.DNI</span><br />
-                        <strong>Apellido:</strong> <span id="SpanApellidoTitular">@item.Apellido</span><br />
-                        <strong>Nombre:</strong> <span id="SpanNombreTitular">@item.Nombre</span><br />
-                        <strong>Edad:</strong> <span id="SpanEdadTitular">@item.Edad</span><br />
-                        <strong>Teléfono:</strong> <span id="SpanTelefonoTitular">@item.Telefono</span><br />
-                        <strong>Email:</strong> <span id="SpanEmailTitular">@item.Email</span>
-                    </div>
+<section class="content">
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                @if (ViewBag.Confirmada == false)
+            {
+                    <h2 class="box-title">Detalles de solicitud de reserva</h2>
                 }
-
+                else
+                {
+                    <h2 class="box-title">Detalles de Reserva</h2>
+                }
+                <div class="clearfix"></div>
             </div>
+            <!-- /.box-header -->
+            <div class="x_content">
+                <div id="DivReserva" class="row form-horizontal">
+                    @foreach (FaroHotel.Models.GetReserva_Result item in ViewBag.DatosReserva)
+                    {
+                        <div class="col-md-6">
+                            <h4><strong>Información de la reserva</strong></h4>
+                            <strong>ID de reserva:</strong> <span id="SpanIdReserva">@item.ID</span><br />
+                            <strong>Usuario alta:</strong> <span id="SpanUsuarioAlta">@item.UserName (@item.NombreVentanilla)</span><br />
+                            <strong>Fecha de alta:</strong> <span id="SpanFechaAlta">@item.FechaAlta</span><br />
+                            <strong>Hotel:</strong> <span id="SpanHotel">@item.Hotel</span><br />
+                            <strong>Fecha de entrada:</strong> <span id="SpanFechaEntrada">@item.FechaEntrada</span><br />
+                            <strong>Fecha de salida:</strong> <span id="SpanFechaSalida">@item.FechaSalida</span><br />
+                            <strong>Confirmada:</strong> <span id="SpanConfirmada">@item.Confirmada.ToString().Replace("False", "No").Replace("True", "Si")</span>
+                        </div>
+                        <div class="col-md-6">
+                            <h4><strong>Información del titular</strong></h4>
+                            <strong>DNI:</strong> <span id="SpanDniTitular">@item.DNI</span><br />
+                            <strong>Apellido:</strong> <span id="SpanApellidoTitular">@item.Apellido</span><br />
+                            <strong>Nombre:</strong> <span id="SpanNombreTitular">@item.Nombre</span><br />
+                            <strong>Edad:</strong> <span id="SpanEdadTitular">@item.Edad</span><br />
+                            <strong>Teléfono:</strong> <span id="SpanTelefonoTitular">@item.Telefono</span><br />
+                            <strong>Email:</strong> <span id="SpanEmailTitular">@item.Email</span>
+                        </div>
+                    }
 
+                </div>
+
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2 class="box-title">Información de habitaciones</h2>
+                <button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/AgregarHabitacion/@ViewBag.ReservaId', 'Agregar', 'Habitación')">
+                    <i class="fa fa-plus"></i> Agregar
+                </button>
+                <div class="clearfix"></div>
+            </div>
+            <!-- /.box-header -->
+            <div class="x_content">
+                <div id="divHabitaciones" class="row form-horizontal">
+
+                    <div class="col-md-12">
+                        <table id="dtReservas" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Hotel</th>
+                                    <th>Número de Habitación</th>
+                                    <th>Tipo Habitación</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (FaroHotel.Models.GetReservaHabitaciones_Result item in ViewBag.HabitacionesReservadas)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NombreHotel)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NumeroHabitacion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TipoHabitacion)
+                                        </td>
+                                        <td>
+                                            <span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarHabitacion/@item.ID','Editar','Habitacion')"></a></span>
+                                            <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EliminarHabitacion/@item.ID','Eliminar','Habitacion')"></a></span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <!-- /.box-body -->
         </div>
-        <!-- /.box -->
     </div>
-    <div class="x_panel">
-        <div class="x_title">
-            <h2 class="box-title">Información de habitaciones</h2>
-            <button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/AgregarHabitacion/@ViewBag.ReservaId', 'Agregar', 'Habitación')">
-                <i class="fa fa-plus"></i> Agregar
-            </button>
-            <div class="clearfix"></div>
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2 class="box-title">Información de pasajeros</h2>
+                <button type="button" class="btn btn-primary btn-md pull-right" onclick="nuevoPasajero()">
+                    <i class="fa fa-plus"></i> Agregar
+                </button>
+                <div class="clearfix"></div>
+            </div>
+            <!-- /.box-header -->
+            <div class="x_content">
+                <div id="DivPasajeros" class="row form-horizontal">
+                    @foreach (FaroHotel.Models.GetReservaPasajeros_Result item in ViewBag.PasajerosReserva)
+                    {
+                        <div class="rowPasajero">
+                            <div class="col-md-12">
+                                <h4>
+                                    <strong>@item.Apellido, @item.Nombre</strong>
+                                    <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger pull-right fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="eliminarPasajero(@item.ID)"></a></span>
+                                    @*<span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarHabitacion/@item.ID','Editar','Habitacion')"></a></span>*@
+                                </h4>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>DNI:</strong> <span>@item.DNI</span><br />
+                                <strong>Edad:</strong> <span>@item.Edad</span><br />
+                                <strong>Teléfono:</strong> <span>@item.Telefono</span><br />
+                                <strong>Email:</strong> <span>@item.Email</span>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>Paquete:</strong> <span>@item.Titulo</span><br />
+                                <strong>Base:</strong> <span>@item.Base</span><br />
+                                <strong>Precio:</strong> $<span class="MontoPaquete">@item.Precio</span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="busesSeleccionados" data-butaca="@item.NroButacaIda">
+                                    <strong>Fecha Bus ida:</strong> <span>@item.FechaBusIda</span><br />
+                                    <strong>Bus:</strong> <span>@item.NroBusIda</span>, <strong>Asiento:</strong> <span>@item.NroButacaIda</span><br />
+                                </div>
+                                <div class="busesSeleccionados" data-butaca="@item.NroButacaVuelta">
+                                    <strong>Fecha Bus Vuelta:</strong> <span>@item.FechaBusVuelta</span><br />
+                                    <strong>Bus:</strong> <span>@item.NroBusVuelta</span>, <strong>Asiento:</strong> <span>@item.NroButacaVuelta</span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    }
+                </div>
+
+                <div id="DivNuevoPasajero" style="margin-top:20px; display:none">
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
+                        <div class="form-group row">
+                            <input id="PaxID_1" type="hidden" class="PaxIds" data-boxId="1" value="" />
+                            <label class="control-label col-md-3" for="DNI">DNI:</label>
+                            <div class="col-md-6">
+                                <input id="PaxDNI_1" type="text" class="form-control PaxDNI" data-boxId="1" />
+                            </div>
+                            <div class="col-md-3">
+                                <span id="btnSearchPax_1" class="btn btn-dark btnSearchPax" data-boxId="1">Buscar</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Apellido">Apellido:</label>
+                            <div class="col-md-9">
+                                <input id="PaxSurname_1" class="form-control" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Nombre">Nombre:</label>
+                            <div class="col-md-9">
+                                <input id="PaxName_1" class="form-control" readonly="readonly" />
+                            </div>
+                        </div>
+                        <input id="PaxApellidoyNombre_1" class="PaxApellidoyNombre" type="hidden" value="" />
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Paquete">Paquete:</label>
+                            <div class="col-md-9">
+                                @Html.DropDownList("SelectPaquetesDisponibles", null, "", htmlAttributes: new { @id = "SelectPaquete_1", @class = "form-control SelectPaquetesDisponibles", data_boxId = 1 })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Paquete">Base:</label>
+                            <div class="col-md-9">
+                                <select name="SelectBase_1" id="SelectBase_1" class="form-control SelectBase" data-boxId="1" disabled="disabled">
+                                    <option selected="selected" value="0"></option>
+                                    <option value="1">Base Simple</option>
+                                    <option value="2">Base Doble</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-3" for="Nombre">Precio:</label>
+                            <div class="col-md-9">
+                                <input id="PaxPrice_1" class="form-control PaxPrice" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
+                        <div id="Panel_BusIda_1" class="form-group row" style="display:none">
+                            <label class="col-md-12" for="Paquete">Bus de ida y vuelta:</label>
+                            <div class="col-md-12">
+                                <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento(1,'Ida')">Seleccionar asiento</span>
+                            </div>
+                            <div class="col-md-12">
+                                <div><img src="/images/6.png">  Asiento Ida: <span id="ButacaBusIda_1" data-boxId="1" class="ButacaBusIda"></span></div>
+                            </div>
+                            <div class="col-md-12">
+                                <div><img src="/images/6.png">  Asiento Vuelta: <span id="ButacaBusVuelta_1" data-boxId="1" class="ButacaBusVuelta"></span></div>
+                            </div>
+                            <input type="hidden" id="BusIdaId_1" class="BusIdaIds" value="" />
+                            <input type="hidden" id="BusVueltaId_1" class="BusVueltaIds" value="" />
+                        </div>
+                        <input type="hidden" id="BoxId" value="" />
+                        <input type="hidden" id="BoxTrayecto" value="" />
+                    </div>
+                    <span id="btnGuardarPasajero" class="btn btn-primary btn-md pull-right" data-boxId="1">Guardar</span>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- /.box-body -->
         </div>
-        <!-- /.box-header -->
-        <div class="x_content">
-            <div id="divHabitaciones" class="row form-horizontal">
-                
+    </div>
+
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2 class="box-title">Extras</h2>
+                <div class="clearfix"></div>
+            </div>
+            <!-- /.box-header -->
+            <div class="x_content">
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2 class="box-title">Pagos</h2>
+                <button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/AgregarPago/@ViewBag.ReservaId', 'Agregar', 'Pago')">
+                    <i class="fa fa-plus"></i> Agregar
+                </button>
+                <div class="clearfix"></div>
+            </div>
+            <!-- /.box-header -->
+            <div class="x_content">
+                @if (Enumerable.Count(ViewBag.Pagos) > 0)
+                {
                 <div class="col-md-12">
-                    <table id="dtReservas" class="table table-bordered table-striped">
+                    <table id="dtPagos" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Hotel</th>
-                                <th>Número de Habitación</th>
-                                <th>Tipo Habitación</th>
+                                <th>Tipo de Pago</th>
+                                <th>Monto</th>
+                                <th>Fecha de pago</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (FaroHotel.Models.GetReservaHabitaciones_Result item in ViewBag.HabitacionesReservadas)
+                            @foreach (FaroHotel.Models.EnlaceReservaHotelPago item in ViewBag.Pagos)
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.NombreHotel)
+                                        <span>@Html.DisplayFor(modelItem => item.TipoFormaDePago.Descripcion)</span>
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.NumeroHabitacion)
+                                        $ <span class="MontoPago">@Html.DisplayFor(modelItem => item.Monto)</span>
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.TipoHabitacion)
+                                        <span>@Html.DisplayFor(modelItem => item.Fecha)</span>
                                     </td>
                                     <td>
-                                        <span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarHabitacion/@item.ID','Editar','Habitacion')"></a></span>
-                                        <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EliminarHabitacion/@item.ID','Eliminar','Habitacion')"></a></span>
+                                        @*<span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarPago/@item.ID','Editar','Pago')"></a></span>*@
+                                         <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EliminarPago/@item.ID','Eliminar','Pago')"></a></span>
                                     </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
+                <div class="col-md-6">Total: $ <span id="Total_Pagos"></span></div>
+                }
             </div>
+            <!-- /.box-body -->
         </div>
-        <!-- /.box-body -->
     </div>
-    <div class="x_panel">
-        <div class="x_title">
-            <h2 class="box-title">Información de pasajeros</h2>
-            <button type="button" class="btn btn-primary btn-md pull-right" onclick="nuevoPasajero()">
-                <i class="fa fa-plus"></i> Agregar
-            </button>
-            <div class="clearfix"></div>
-        </div>
-        <!-- /.box-header -->
-        <div class="x_content">
-            <div id="DivPasajeros" class="row form-horizontal">
-                @foreach (FaroHotel.Models.GetReservaPasajeros_Result item in ViewBag.PasajerosReserva)
+
+    <div class="col-md-6">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2 class="box-title">Descuentos</h2>
+                @if (Permisos != null && Permisos.Any(r => r.menu.Nombre == "Listado de Reservas" && r.accion.Any(x => x.Nombre == "Descuentos")))
                 {
-                    <div class="rowPasajero">
-                        <div class="col-md-12">
-                            <h4><strong>@item.Apellido, @item.Nombre</strong>
-                                <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger pull-right fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="eliminarPasajero(@item.ID)"></a></span>                        
-                                @*<span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarHabitacion/@item.ID','Editar','Habitacion')"></a></span>*@
-                            </h4>
-                        </div>
-                        <div class="col-md-4">
-                            <strong>DNI:</strong> <span>@item.DNI</span><br />
-                            <strong>Edad:</strong> <span>@item.Edad</span><br />
-                            <strong>Teléfono:</strong> <span>@item.Telefono</span><br />
-                            <strong>Email:</strong> <span>@item.Email</span>
-                        </div>
-                        <div class="col-md-4">
-                            <strong>Paquete:</strong> <span>@item.Titulo</span><br />
-                            <strong>Base:</strong> <span>@item.Base</span><br />
-                            <strong>Precio:</strong> <span>$ @item.Precio</span>
-                        </div>
-                        <div class="col-md-4">
-                            <strong>Fecha Bus ida:</strong> <span>@item.FechaBusIda</span><br />
-                            <strong>Bus:</strong> <span>@item.NroBusIda</span>, <strong>Asiento:</strong> <span>@item.NroButacaIda</span><br />
-                            <strong>Fecha Bus Vuelta:</strong> <span>@item.FechaBusVuelta</span><br />
-                            <strong>Bus:</strong> <span>@item.NroBusVuelta</span>, <strong>Asiento:</strong> <span>@item.NroButacaVuelta</span>
-                        </div>
-                        <div class="clearfix"></div>
+                    <button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/AgregarDescuento/@ViewBag.ReservaId', 'Agregar', 'Descuento')">
+                        <i class="fa fa-plus"></i> Agregar
+                    </button>
+                }
+                <div class="clearfix"></div>
+            </div>
+            <!-- /.box-header -->
+            <div class="x_content">
+                @if (Enumerable.Count(ViewBag.Descuentos) > 0)
+                {
+                    <div class="col-md-12">
+
+                        <table id="dtDescuentos" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Monto</th>
+                                    <th>Fecha de descuento</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (FaroHotel.Models.EnlaceReservaHotelDescuento item in ViewBag.Descuentos)
+                                {
+                                    <tr>
+                                        <td>
+                                            $ <span class="MontoDescuento">@Html.DisplayFor(modelItem => item.Monto)</span>
+                                        </td>
+                                        <td>
+                                            <span>@Html.DisplayFor(modelItem => item.Fecha)</span>
+                                        </td>
+                                        <td>
+                                            @if (Permisos != null && Permisos.Any(r => r.menu.Nombre == "Listado de Reservas" && r.accion.Any(x => x.Nombre == "Descuentos")))
+                                            {
+                                                @*<span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarPago/@item.ID','Editar','Pago')"></a></span>*@
+                                                <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EliminarDescuento/@item.ID','Eliminar','Descuento')"></a></span>
+                                            }                                            
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
                     </div>
                 }
             </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="clearfix"></div>
 
-            <div id="DivNuevoPasajero" style="display:none">
-                <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
-                    <div class="form-group row">
-                        <input id="PaxID_1" type="hidden" class="PaxIds" data-boxId="1" value="" />
-                        <label class="control-label col-md-3" for="DNI">DNI:</label>
-                        <div class="col-md-6">
-                            <input id="PaxDNI_1" type="text" class="form-control PaxDNI" data-boxId="1" />
-                        </div>
-                        <div class="col-md-3">
-                            <span id="btnSearchPax_1" class="btn btn-dark btnSearchPax" data-boxId="1">Buscar</span>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="control-label col-md-3" for="Apellido">Apellido:</label>
-                        <div class="col-md-9">
-                            <input id="PaxSurname_1" class="form-control" readonly="readonly" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="control-label col-md-3" for="Nombre">Nombre:</label>
-                        <div class="col-md-9">
-                            <input id="PaxName_1" class="form-control" readonly="readonly" />
-                        </div>
-                    </div>
-                    <input id="PaxApellidoyNombre_1" class="PaxApellidoyNombre" type="hidden" value="" />
-                </div>
-                <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
-                    <div class="form-group row">
-                        <label class="control-label col-md-3" for="Paquete">Paquete:</label>
-                        <div class="col-md-9">
-                            @Html.DropDownList("SelectPaquetesDisponibles", null, "", htmlAttributes: new { @id = "SelectPaquete_1", @class = "form-control SelectPaquetesDisponibles", data_boxId = 1 })
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="control-label col-md-3" for="Paquete">Base:</label>
-                        <div class="col-md-9">
-                            <select name="SelectBase_1" id="SelectBase_1" class="form-control SelectBase" data-boxId="1" disabled="disabled">
-                                <option selected="selected" value="0"></option>
-                                <option value="1">Base Simple</option>
-                                <option value="2">Base Doble</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="control-label col-md-3" for="Nombre">Precio:</label>
-                        <div class="col-md-9">
-                            <input id="PaxPrice_1" class="form-control PaxPrice" readonly="readonly" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-12 col-xs-12 form-horizontal">
-                    <div id="Panel_BusIda_1" class="form-group row" style="display:none">
-                        <label class="col-md-12" for="Paquete">Bus de ida y vuelta:</label>
-                        <div class="col-md-12">
-                            <span id="btnSelectSeat" class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="SeleccionarAsiento(1,'Ida')">Seleccionar asiento</span>
-                        </div>
-                        <div class="col-md-12">
-                            <div><img src="/images/6.png">  Asiento Ida: <span id="ButacaBusIda_1" data-boxId="1" class="ButacaBusIda"></span></div>
-                        </div>
-                        <div class="col-md-12">
-                            <div><img src="/images/6.png">  Asiento Vuelta: <span id="ButacaBusVuelta_1" data-boxId="1" class="ButacaBusVuelta"></span></div>
-                        </div>
-                        <input type="hidden" id="BusIdaId_1" class="BusIdaIds" value="" />
-                        <input type="hidden" id="BusVueltaId_1" class="BusVueltaIds" value="" />
-                    </div>
-                    <input type="hidden" id="BoxId" value="" />
-                    <input type="hidden" id="BoxTrayecto" value="" />
-                </div>
-                <span id="btnGuardarPasajero" class="btn btn-primary btn-md pull-right" data-boxId="1">Guardar</span>
+
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2 class="box-title">Desglose de Precio</h2>               
+                <div class="clearfix"></div>
             </div>
+            <!-- /.box-header -->
+            <div class="x_content">
+                <div class="col-md-4">
+                    <div class="text-right">
+                        PAQUETES --> $ <span id="Total_Paquetes"></span>
+                        <br />
+                        EXTRAS --> $ <span id="Total_Extras">0</span>
+                        <br />
+                        <strong>SUBTOTAL --> $ <span id="SubTotal_1"></span></strong>
+                    </div>
+                </div>  
+                <div class="col-md-4">
+                    <div class="text-right">
+                        DESCUENTOS --> $ <span id="Total_Descuentos"></span>
+                        <br />
+                        DESCUENTO POR PAGO CONTADO --> $ <span id="Total_DescuentosPagoContado"></span>
+                        <br />
+                        <strong>SUBTOTAL DESCUENTOS --> $<span id="SubTotal_2"></span></strong>
+                    </div>
+                </div>    
+                <div class="col-md-4">
+                    <div class="text-right">
+                        <strong>DEUDA --> $ 8000</strong>
+                    </div>
+                </div>                  
+            </div>
+            <!-- /.box-body -->
         </div>
-        <!-- /.box-body -->
     </div>
-    <div class="x_panel">
-        <div class="x_title">
-            <h2 class="box-title">Pagos</h2>
-            <div class="clearfix"></div>
-        </div>
-        <!-- /.box-header -->
-        <div class="x_content">
-
-        </div>
-        <!-- /.box-body -->
-    </div>
+    <div class="clearfix"></div>
 
 
-    @if (ViewBag.Confirmada == false)
+
+    @*@if (ViewBag.Confirmada == false && ViewBag.VentanillaUsuarioId == 9)*@
+
+    @if (Permisos != null && Permisos.Any(r => r.menu.Nombre == "Listado de Solicitudes" && r.accion.Any(x => x.Nombre == "Confirmar")) && ViewBag.Confirmada == false)
     {
         <div class="x_panel">
             <div class="x_content">
                 <div class="actionBar">
-                    <a class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/Confirmar/@ViewBag.ReservaId','Confirmar','Reserva')">Confirmar Reserva</a>                    
+                    <a class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/Confirmar/@ViewBag.ReservaId','Confirmar','Reserva')">Confirmar Reserva</a>
                 </div>
             </div>
         </div>
@@ -290,7 +456,6 @@ else
             var paramBusVueltaId = $('#BusVueltaId_' + boxId).val();
             var paramAsientoVuelta = $('#ButacaBusIda_' + boxId).text();
 
-            debugger
             if(!$.isNumeric(paramBusIdaId)){
                 paramBusIdaId = 0;
             }
@@ -318,6 +483,7 @@ else
                     __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
                 },
                 success: function (result) {
+                    debugger
                     if (result.ok) {
                         window.location.href = window.location.href;
                         return;
@@ -378,7 +544,36 @@ else
             }
         });
 
+        $(".busesSeleccionados").each(function () {
+            var butaca = $(this).data("butaca");
+            if (butaca == 0){
+                $(this).hide();
+            }
+        });
 
+        var TotalPagos = 0;
+        $(".MontoPago").each(function () {
+            TotalPagos +=  parseInt($(this).text());
+            $("#Total_Pagos").text(TotalPagos);
+        });
+        var TotalDescuentosPagoContado = TotalPagos * 0.95;        
+        $("#Total_DescuentosPagoContado").text(TotalDescuentosPagoContado);
+
+        var TotalDescuentos = 0;
+        $(".MontoDescuento").each(function () {
+            TotalDescuentos +=  parseInt($(this).text());
+        });
+        $("#Total_Descuentos").text(TotalDescuentos);
+        $("#SubTotal_2").text((TotalDescuentos+TotalDescuentosPagoContado));
+
+        var TotalPaquetes = 0;
+        $(".MontoPaquete").each(function () {
+            TotalPaquetes +=  parseInt($(this).text());
+        });
+        $("#Total_Paquetes").text(TotalPaquetes);
+
+        $("#SubTotal_1").text(TotalPaquetes);
+        
         function eliminarPasajero(pasajeroId){
             var data = {};
             data["ParamReservaId"] = @ViewBag.ReservaId;

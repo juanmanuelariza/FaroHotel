@@ -1,36 +1,37 @@
-﻿<div id="divStep3" class="row">
+﻿<div id="divStep4" class="row">
     <div class="col-md-12">
-        <div class="x_panel">@if (ViewBag.NroReserva > 0)
-        {
-            <div class="x_title">
-                <h2>Gracias por enviar la solicitud de reserva</h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">               
-                <div class="bs-example">
-                    <div class="jumbotron">
-                        <p>La solicitud sera evaluada por el administrador, y está sujeta a cambios.</p>
-                        <p>Su número de solicutud de reserva es:</p>
-                        <h1 class="h1Reserva">@ViewBag.NroReserva</h1>
+        <div class="x_panel">
+            @if (ViewBag.NroReserva > 0)
+            {
+                <div class="x_title">
+                    <h2>Gracias por enviar la solicitud de reserva</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="bs-example">
+                        <div class="jumbotron">
+                            <p>La solicitud sera evaluada por el administrador, y está sujeta a cambios.</p>
+                            <p>Su número de solicutud de reserva es:</p>
+                            <h1 class="h1Reserva">@ViewBag.NroReserva</h1>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
-        else
-        {
-            <div class="x_title">
-                <h2>ERROR</h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <div class="bs-example">
-                    <div class="jumbotron">
-                        <p>Ha ocurrido un error al solicitar la reserva.</p>
-                        <p>Por favor comuniquese con el administrador</p>
+            }
+            else
+            {
+                <div class="x_title">
+                    <h2>ERROR</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="bs-example">
+                        <div class="jumbotron">
+                            <p>Ha ocurrido un error al solicitar la reserva.</p>
+                            <p>Por favor comuniquese con el administrador</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
-        </div>  
+            }
+        </div>
     </div>
 </div>

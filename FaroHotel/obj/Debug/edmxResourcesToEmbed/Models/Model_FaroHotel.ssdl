@@ -114,6 +114,15 @@
     <Property Name="ReservaHotelId" Type="int" Nullable="false" />
     <Property Name="BusId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="EnlaceReservaHotelDescuento">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReservaHotelId" Type="int" Nullable="false" />
+    <Property Name="Monto" Type="float" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="EnlaceReservaHotelExtra">
     <Key>
       <PropertyRef Name="ReservaHotelId" />
@@ -133,6 +142,16 @@
     <Property Name="ReservaHotelId" Type="int" Nullable="false" />
     <Property Name="HabitacionId" Type="int" Nullable="false" />
     <Property Name="TipoHabitacionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EnlaceReservaHotelPago">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReservaHotelId" Type="int" Nullable="false" />
+    <Property Name="TipoFormaDePagoId" Type="int" Nullable="false" />
+    <Property Name="Monto" Type="float" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="EnlaceReservaHotelPasajero">
     <Key>
@@ -248,6 +267,8 @@
     <Property Name="FechaCancelada" Type="datetime" />
     <Property Name="UsuarioCancela" Type="nvarchar" MaxLength="128" />
     <Property Name="Activa" Type="bit" Nullable="false" />
+    <Property Name="FormaDePagoId" Type="int" Nullable="false" />
+    <Property Name="Observaciones" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="TipoBase">
     <Key>
@@ -287,6 +308,13 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoFormaDePago">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="TipoHabitacion">
@@ -556,6 +584,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_EnlaceReservaHotelDescuento_ReservaHotel">
+    <End Role="ReservaHotel" Type="Self.ReservaHotel" Multiplicity="1" />
+    <End Role="EnlaceReservaHotelDescuento" Type="Self.EnlaceReservaHotelDescuento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReservaHotel">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnlaceReservaHotelDescuento">
+        <PropertyRef Name="ReservaHotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_EnlaceReservaHotelExtra_Extra">
     <End Role="Extra" Type="Self.Extra" Multiplicity="1" />
     <End Role="EnlaceReservaHotelExtra" Type="Self.EnlaceReservaHotelExtra" Multiplicity="*" />
@@ -601,6 +641,30 @@
       </Principal>
       <Dependent Role="EnlaceReservaHotelHabitacion">
         <PropertyRef Name="ReservaHotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EnlaceReservaHotelPago_ReservaHotel">
+    <End Role="ReservaHotel" Type="Self.ReservaHotel" Multiplicity="1" />
+    <End Role="EnlaceReservaHotelPago" Type="Self.EnlaceReservaHotelPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReservaHotel">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnlaceReservaHotelPago">
+        <PropertyRef Name="ReservaHotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EnlaceReservaHotelPago_TipoFormaDePago">
+    <End Role="TipoFormaDePago" Type="Self.TipoFormaDePago" Multiplicity="1" />
+    <End Role="EnlaceReservaHotelPago" Type="Self.EnlaceReservaHotelPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoFormaDePago">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnlaceReservaHotelPago">
+        <PropertyRef Name="TipoFormaDePagoId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -856,6 +920,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ReservaHotel_TipoFormaDePago">
+    <End Role="TipoFormaDePago" Type="Self.TipoFormaDePago" Multiplicity="1" />
+    <End Role="ReservaHotel" Type="Self.ReservaHotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoFormaDePago">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ReservaHotel">
+        <PropertyRef Name="FormaDePagoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ReservaHotel_TipoHotel">
     <End Role="TipoHotel" Type="Self.TipoHotel" Multiplicity="1" />
     <End Role="ReservaHotel" Type="Self.ReservaHotel" Multiplicity="*" />
@@ -939,6 +1015,7 @@
     <Parameter Name="AsientosVueltaIds" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="ExtrasIds" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="ExtrasCantidad" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Observaciones" Type="nvarchar(max)" Mode="In" />
   </Function>
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -983,8 +1060,10 @@
     <EntitySet Name="EnlaceHabitacionTipoHabitacion" EntityType="Self.EnlaceHabitacionTipoHabitacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EnlacePaqueteVentanilla" EntityType="Self.EnlacePaqueteVentanilla" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EnlaceReservaHotelBus" EntityType="Self.EnlaceReservaHotelBus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EnlaceReservaHotelDescuento" EntityType="Self.EnlaceReservaHotelDescuento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EnlaceReservaHotelExtra" EntityType="Self.EnlaceReservaHotelExtra" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EnlaceReservaHotelHabitacion" EntityType="Self.EnlaceReservaHotelHabitacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EnlaceReservaHotelPago" EntityType="Self.EnlaceReservaHotelPago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EnlaceReservaHotelPasajero" EntityType="Self.EnlaceReservaHotelPasajero" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Extra" EntityType="Self.Extra" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Habitacion" EntityType="Self.Habitacion" Schema="dbo" store:Type="Tables" />
@@ -999,6 +1078,7 @@
     <EntitySet Name="TipoCuota" EntityType="Self.TipoCuota" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoDescripcionPaquete" EntityType="Self.TipoDescripcionPaquete" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoExtra" EntityType="Self.TipoExtra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoFormaDePago" EntityType="Self.TipoFormaDePago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoHabitacion" EntityType="Self.TipoHabitacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoHotel" EntityType="Self.TipoHotel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoNoche" EntityType="Self.TipoNoche" Schema="dbo" store:Type="Tables" />
@@ -1074,6 +1154,10 @@
       <End Role="ReservaHotel" EntitySet="ReservaHotel" />
       <End Role="EnlaceReservaHotelBus" EntitySet="EnlaceReservaHotelBus" />
     </AssociationSet>
+    <AssociationSet Name="FK_EnlaceReservaHotelDescuento_ReservaHotel" Association="Self.FK_EnlaceReservaHotelDescuento_ReservaHotel">
+      <End Role="ReservaHotel" EntitySet="ReservaHotel" />
+      <End Role="EnlaceReservaHotelDescuento" EntitySet="EnlaceReservaHotelDescuento" />
+    </AssociationSet>
     <AssociationSet Name="FK_EnlaceReservaHotelExtra_Extra" Association="Self.FK_EnlaceReservaHotelExtra_Extra">
       <End Role="Extra" EntitySet="Extra" />
       <End Role="EnlaceReservaHotelExtra" EntitySet="EnlaceReservaHotelExtra" />
@@ -1089,6 +1173,14 @@
     <AssociationSet Name="FK_EnlaceReservaHotelHabitacion_ReservaHotel" Association="Self.FK_EnlaceReservaHotelHabitacion_ReservaHotel">
       <End Role="ReservaHotel" EntitySet="ReservaHotel" />
       <End Role="EnlaceReservaHotelHabitacion" EntitySet="EnlaceReservaHotelHabitacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnlaceReservaHotelPago_ReservaHotel" Association="Self.FK_EnlaceReservaHotelPago_ReservaHotel">
+      <End Role="ReservaHotel" EntitySet="ReservaHotel" />
+      <End Role="EnlaceReservaHotelPago" EntitySet="EnlaceReservaHotelPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnlaceReservaHotelPago_TipoFormaDePago" Association="Self.FK_EnlaceReservaHotelPago_TipoFormaDePago">
+      <End Role="TipoFormaDePago" EntitySet="TipoFormaDePago" />
+      <End Role="EnlaceReservaHotelPago" EntitySet="EnlaceReservaHotelPago" />
     </AssociationSet>
     <AssociationSet Name="FK_EnlaceReservaHotelPasajero_Paquete" Association="Self.FK_EnlaceReservaHotelPasajero_Paquete">
       <End Role="Paquete" EntitySet="Paquete" />
@@ -1172,6 +1264,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_ReservaHotel_Pasajero" Association="Self.FK_ReservaHotel_Pasajero">
       <End Role="Pasajero" EntitySet="Pasajero" />
+      <End Role="ReservaHotel" EntitySet="ReservaHotel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservaHotel_TipoFormaDePago" Association="Self.FK_ReservaHotel_TipoFormaDePago">
+      <End Role="TipoFormaDePago" EntitySet="TipoFormaDePago" />
       <End Role="ReservaHotel" EntitySet="ReservaHotel" />
     </AssociationSet>
     <AssociationSet Name="FK_ReservaHotel_TipoHotel" Association="Self.FK_ReservaHotel_TipoHotel">

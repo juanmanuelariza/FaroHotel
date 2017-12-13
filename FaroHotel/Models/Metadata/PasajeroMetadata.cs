@@ -23,9 +23,5 @@ namespace FaroHotel.Models
         [Required(ErrorMessage = "El campo Fecha de Nacimiento es obligatorio.")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime FechaNacimiento { get; set; }
-        [Required(ErrorMessage = "El campo email es obligatorio.")]
-        public string Email { get; set; }
-        [Required(ErrorMessage = "El campo teléfono es obligatorio.")]
-        public Nullable<long> Telefono { get; set; }
     }
 }

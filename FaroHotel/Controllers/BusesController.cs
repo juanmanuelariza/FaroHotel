@@ -18,7 +18,7 @@ namespace FaroHotel.Controllers
         public ActionResult Index()
         {
             var bus = db.Bus.Include(b => b.TipoTrayecto);
-            return View(bus.ToList().OrderByDescending(b => b.ID));
+            return View(bus.ToList());
         }
 
         // GET: Buses/Details/5
@@ -85,7 +85,7 @@ namespace FaroHotel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Fecha,TrayectoId,TipoBusId")] Bus bus)
+        public ActionResult Edit(Bus bus)
         {
             if (ModelState.IsValid)
             {

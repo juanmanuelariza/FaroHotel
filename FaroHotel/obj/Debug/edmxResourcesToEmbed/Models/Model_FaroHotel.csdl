@@ -251,6 +251,11 @@
     <NavigationProperty Name="TipoHotel" Relationship="Self.FK_ReservaHotel_TipoHotel" FromRole="ReservaHotel" ToRole="TipoHotel" />
     <NavigationProperty Name="Bus" Relationship="FaroHotelModel.EnlaceReservaHotelBus" FromRole="ReservaHotel" ToRole="Bus" />
     <NavigationProperty Name="EnlaceReservaHotelExtra" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_ReservaHotel" FromRole="ReservaHotel" ToRole="EnlaceReservaHotelExtra" />
+    <Property Name="FormaDePagoId" Type="Int32" Nullable="false" />
+    <Property Name="Observaciones" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TipoFormaDePago" Relationship="FaroHotelModel.FK_ReservaHotel_TipoFormaDePago" FromRole="ReservaHotel" ToRole="TipoFormaDePago" />
+    <NavigationProperty Name="EnlaceReservaHotelDescuento" Relationship="FaroHotelModel.FK_EnlaceReservaHotelDescuento_ReservaHotel" FromRole="ReservaHotel" ToRole="EnlaceReservaHotelDescuento" />
+    <NavigationProperty Name="EnlaceReservaHotelPago" Relationship="FaroHotelModel.FK_EnlaceReservaHotelPago_ReservaHotel" FromRole="ReservaHotel" ToRole="EnlaceReservaHotelPago" />
   </EntityType>
   <EntityType Name="TipoCuota">
     <Key>
@@ -871,6 +876,7 @@
       <Parameter Name="AsientosVueltaIds" Mode="In" Type="String" />
       <Parameter Name="ExtrasIds" Mode="In" Type="String" />
       <Parameter Name="ExtrasCantidad" Mode="In" Type="String" />
+      <Parameter Name="Observaciones" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_alterdiagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -973,6 +979,25 @@
       <Parameter Name="ReservaId" Mode="In" Type="Int32" />
       <Parameter Name="PasajeroId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="TipoFormaDePago" EntityType="FaroHotelModel.TipoFormaDePago" />
+    <AssociationSet Name="FK_ReservaHotel_TipoFormaDePago" Association="FaroHotelModel.FK_ReservaHotel_TipoFormaDePago">
+      <End Role="TipoFormaDePago" EntitySet="TipoFormaDePago" />
+      <End Role="ReservaHotel" EntitySet="ReservaHotel" />
+    </AssociationSet>
+    <EntitySet Name="EnlaceReservaHotelDescuento" EntityType="FaroHotelModel.EnlaceReservaHotelDescuento" />
+    <EntitySet Name="EnlaceReservaHotelPago" EntityType="FaroHotelModel.EnlaceReservaHotelPago" />
+    <AssociationSet Name="FK_EnlaceReservaHotelDescuento_ReservaHotel" Association="FaroHotelModel.FK_EnlaceReservaHotelDescuento_ReservaHotel">
+      <End Role="ReservaHotel" EntitySet="ReservaHotel" />
+      <End Role="EnlaceReservaHotelDescuento" EntitySet="EnlaceReservaHotelDescuento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnlaceReservaHotelPago_ReservaHotel" Association="FaroHotelModel.FK_EnlaceReservaHotelPago_ReservaHotel">
+      <End Role="ReservaHotel" EntitySet="ReservaHotel" />
+      <End Role="EnlaceReservaHotelPago" EntitySet="EnlaceReservaHotelPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnlaceReservaHotelPago_TipoFormaDePago" Association="FaroHotelModel.FK_EnlaceReservaHotelPago_TipoFormaDePago">
+      <End Role="TipoFormaDePago" EntitySet="TipoFormaDePago" />
+      <End Role="EnlaceReservaHotelPago" EntitySet="EnlaceReservaHotelPago" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1202,4 +1227,83 @@
   <ComplexType Name="EliminarPasajeroDeReserva_Result">
     <Property Type="Int32" Name="Resultado" Nullable="false" />
   </ComplexType>
+  <EntityType Name="TipoFormaDePago">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ReservaHotel" Relationship="FaroHotelModel.FK_ReservaHotel_TipoFormaDePago" FromRole="TipoFormaDePago" ToRole="ReservaHotel" />
+    <NavigationProperty Name="EnlaceReservaHotelPago" Relationship="FaroHotelModel.FK_EnlaceReservaHotelPago_TipoFormaDePago" FromRole="TipoFormaDePago" ToRole="EnlaceReservaHotelPago" />
+  </EntityType>
+  <Association Name="FK_ReservaHotel_TipoFormaDePago">
+    <End Type="FaroHotelModel.TipoFormaDePago" Role="TipoFormaDePago" Multiplicity="1" />
+    <End Type="FaroHotelModel.ReservaHotel" Role="ReservaHotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoFormaDePago">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ReservaHotel">
+        <PropertyRef Name="FormaDePagoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EnlaceReservaHotelDescuento">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReservaHotelId" Type="Int32" Nullable="false" />
+    <Property Name="Monto" Type="Double" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ReservaHotel" Relationship="FaroHotelModel.FK_EnlaceReservaHotelDescuento_ReservaHotel" FromRole="EnlaceReservaHotelDescuento" ToRole="ReservaHotel" />
+  </EntityType>
+  <EntityType Name="EnlaceReservaHotelPago">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReservaHotelId" Type="Int32" Nullable="false" />
+    <Property Name="TipoFormaDePagoId" Type="Int32" Nullable="false" />
+    <Property Name="Monto" Type="Double" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ReservaHotel" Relationship="FaroHotelModel.FK_EnlaceReservaHotelPago_ReservaHotel" FromRole="EnlaceReservaHotelPago" ToRole="ReservaHotel" />
+    <NavigationProperty Name="TipoFormaDePago" Relationship="FaroHotelModel.FK_EnlaceReservaHotelPago_TipoFormaDePago" FromRole="EnlaceReservaHotelPago" ToRole="TipoFormaDePago" />
+  </EntityType>
+  <Association Name="FK_EnlaceReservaHotelDescuento_ReservaHotel">
+    <End Type="FaroHotelModel.ReservaHotel" Role="ReservaHotel" Multiplicity="1" />
+    <End Type="FaroHotelModel.EnlaceReservaHotelDescuento" Role="EnlaceReservaHotelDescuento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReservaHotel">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnlaceReservaHotelDescuento">
+        <PropertyRef Name="ReservaHotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EnlaceReservaHotelPago_ReservaHotel">
+    <End Type="FaroHotelModel.ReservaHotel" Role="ReservaHotel" Multiplicity="1" />
+    <End Type="FaroHotelModel.EnlaceReservaHotelPago" Role="EnlaceReservaHotelPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReservaHotel">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnlaceReservaHotelPago">
+        <PropertyRef Name="ReservaHotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EnlaceReservaHotelPago_TipoFormaDePago">
+    <End Type="FaroHotelModel.TipoFormaDePago" Role="TipoFormaDePago" Multiplicity="1" />
+    <End Type="FaroHotelModel.EnlaceReservaHotelPago" Role="EnlaceReservaHotelPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoFormaDePago">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnlaceReservaHotelPago">
+        <PropertyRef Name="TipoFormaDePagoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
