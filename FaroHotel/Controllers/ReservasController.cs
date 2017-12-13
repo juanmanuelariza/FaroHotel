@@ -99,8 +99,8 @@ namespace FaroHotel.Controllers
                 //Envio Mail
                 SendMail mail = new SendMail();
                 mail.Destinatario = "juanma.ariza23@gmail.com";
-                mail.Asunto = "Test2";
-                mail.Mensaje = "Nueva reserva!!";
+                mail.Asunto = "Nueva Reserva!!";
+                mail.Mensaje = "http://www.sistemaelfarohotel.com/Reservas/Detalle/" + result.ReservaHotelID;
                 mail.Send();
             }
             catch (Exception)
