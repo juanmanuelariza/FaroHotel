@@ -83,8 +83,9 @@ namespace FaroHotel.Controllers
         public ActionResult Step4(DateTime ParamFecha, int ParamHotelId, int ParamNochesId, int ParamTitularId, int[] ParamTipoHabitacionesIds, 
             int[] ParamHabitacionesIds, int[] ParamPasajerosIds, int[] ParamPaquetesIds, int[] ParamBaseIds, int[] ParamBusIdaIds, 
             int[] ParamAsientosIdaIds, int[] ParamBusVueltaIds, int[] ParamAsientosVueltaIds, int[] ParamExtrasIds, int[] ParamExtrasCantidad,
-            string ParamObservaciones)
+            string ParamObservaciones, decimal ParamImporteContado, decimal ParamImporteBonificacion, decimal ParamImporteCuotas, int ParamCantCuotas)            
         {
+
             InsertBooking_Result result = db.InsertBooking(ParamFecha, ParamHotelId, ParamNochesId, ParamTitularId,
                 string.Join(",", ParamTipoHabitacionesIds), string.Join(",", ParamHabitacionesIds),
                 string.Join(",", ParamPasajerosIds), string.Join(",", ParamPaquetesIds), string.Join(",", ParamBaseIds),

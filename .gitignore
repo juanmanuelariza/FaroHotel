@@ -47,3 +47,8 @@ Temporary Items
 .apdisk
 obj/
 packages
+*.config
+*.config
+*.dll
+FaroHotel/Web.config
+*.cache

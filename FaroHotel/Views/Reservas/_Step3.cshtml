@@ -1,11 +1,23 @@
-﻿<div id="divStep3" class="row">
+﻿
+<style>
+    #formPago .form-group {
+        margin-bottom: 0px;
+    }
+
+    #formPago .form-group input {
+        text-align: right;
+        width: 70%;
+    }
+</style>
+
+<div id="divStep3" class="row">
     <div class="col-md-12">
         <div class="x_panel">
             <div class="x_title">
                 <h2>Extras</h2>
                 <div class="clearfix"></div>
             </div>
-            <div class="x_content">                
+            <div class="x_content">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -76,7 +88,7 @@
                             <td><span id="TotalCunas" class="colorGray currencyFormat">$ 0</span></td>
                         </tr>
                     </tbody>
-                </table>             
+                </table>
             </div>
         </div>
     </div>
@@ -106,8 +118,7 @@
                             <th style="width:20%">Total</th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
@@ -128,27 +139,60 @@
             </div>
         </div>
     </div>
-    
+
+
+    <!--Formulario "Formas de Pago-->
     <div class="col-md-12">
         <div class="x_panel">
             <div class="x_title">
                 <h2>Forma de pago</h2>
                 <div class="clearfix"></div>
             </div>
-            <div class="x_content pull-right" style="text-align: right; padding-right: 2vw;">
-                <h2>PAGO EN EFECTIVO 5% DE DESCUENTO: <span id="TotalReservaContado" class="currencyFormat"></span></h2>
-                <h2>PAGO EN @ViewBag.Cuotas CUOTAS DE: <span id="TotalReservaCuotas" class="currencyFormat"></span></h2>
-                @*<div>
-                    <label class="control-label" for="SelectFormaDePago">Forma de pago:</label>
-                    <select id="SelectFormaDePago" class="form-control" style="float:right; width:200px; margin-left: 10px;">
-                        <option selected="selected" value="0"></option>
-                        <option value="1">Contado</option>
-                        <option value="2">En cuotas</option>
-                    </select>
-                </div>*@
+            <div class="x_content">
+                <!--pull-righ   style="text-align: right; padding-right: 2vw;"-->
+
+                <div id="formPago" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Pago de Contado:</label>
+                        <div class="col-sm-2 input-group">
+                            <div class="input-group-addon">$</div>
+                            <input type="text" class="form-control" id="ImporteContado" value="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Bonificacion pago de contado(5%):</label>
+                        <div class="col-sm-2 input-group">
+                            <div class="input-group-addon">$</div>
+                            <input type="text" class="form-control" id="ImporteBonificacion" readonly value="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label for="inputPassword3" class="col-sm-4 control-label">Pago en Cuotas:</label>
+                        <input type="number" value="10" max="10" min="1" class="form-control col-sm-1" id="CantCuotas" style="width: 5%;">
+
+                        <label for="inputPassword3" class="col-sm-1 control-label" style="width: 35px;">de </label>
+                        <div class="col-sm-2 input-group">
+                            <div class="input-group-addon">$</div>
+                            <input type="text" class="form-control" id="ImporteCuotas" readonly>
+                        </div>
+
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">TOTAL:</label>
+                        <div class="col-sm-2 input-group">
+                            <div class="input-group-addon">$</div>
+                            <input type="text" class="form-control" id="ImporteTotal" readonly>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
         </div>
     </div>
+
 
     <div class="col-md-12">
         <div class="x_panel">
@@ -172,9 +216,14 @@
             </div>
         </div>
     </div>
-
 </div>
+
+
+@*</div>*@
 <script type="text/javascript">
+    var SumTotalGlobal =0;
+
+
     $('#btnBackStep2').click(function () {
         $('#Panel_Step3').fadeOut();
         $('#Panel_Step2').fadeIn();
@@ -210,6 +259,7 @@
     });
 
     $('#btnGoStep4').click(function () {
+        debugger
         if(ValidarFormularioStep3()){
             openSpinner();
             //HAGO RESERVA
@@ -267,6 +317,12 @@
             ParamExtrasCantidad.push($('#SelectCunas option:selected').val());
             ParamExtrasCantidad.push($('#SelectCocheraFaroII option:selected').val());
 
+
+            var ParamImporteContado = parseFloat($('#ImporteContado').val());
+            var ParamImporteBonificacion = parseFloat($('#ImporteBonificacion').val() * -1);
+            var ParamImporteCuotas = parseFloat($('#ImporteCuotas').val());
+            var ParamCantCuotas = $('#CantCuotas').val();
+
             var _url = GetPathApp("/Reservas/Step4");
             $.ajax({
                 method: "POST",
@@ -288,7 +344,12 @@
                     ParamExtrasIds: ParamExtrasIds,
                     ParamExtrasCantidad: ParamExtrasCantidad,
                     ParamObservaciones: $('textarea#TextareaObservaciones').val(),
-                    __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val()
+                    __RequestVerificationToken: $("input[name='__RequestVerificationToken']").val(),
+
+                    ParamImporteContado : ParamImporteContado,
+                    ParamImporteBonificacion : ParamImporteBonificacion,
+                    ParamImporteCuotas : ParamImporteCuotas,
+                    ParamCantCuotas : ParamCantCuotas,
                 },
                 success: function (result) {
                     $('#Panel_Step4').html(result);
@@ -372,26 +433,61 @@
         $("#TotalReserva").text("$ " + SumTotal);
         $("#TotalReservaContado").text("$ " + (SumTotal * 0.95));
         $("#TotalReservaCuotas").text("$ " + SumTotal / @ViewBag.cuotas);
-        
+
         $(".currencyFormat").each(function(){
             $(this).text($(this).text().replace(".",",").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
         })
+
+        SumTotalGlobal = SumTotal;
+        calculaFormPago();
     }
+
+
     
+    //
+    //Funciones y eventos JS agregadas por Paulo Garcia
+    //
+    function calculaFormPago() {
+        
+        var total = SumTotalGlobal;
+
+        var importeContado=$("#ImporteContado").val();
+        var cantCuotas = $("#CantCuotas").val();
+        var importeBonificacion= (5 * importeContado)/100;
+        var importeTotalCuotas= total - importeContado;
+
+
+        
+        //var importeBonificacion= (5 * importeContado)/100;
+        $("#ImporteTotal").val(total-importeBonificacion);
+        $("#ImporteBonificacion").val(importeBonificacion * -1);
+        $("#ImporteCuotas").val(importeTotalCuotas/cantCuotas); //Falta el interes
+        
+    }
+
+    $("#CantCuotas").change(function () {
+        calculaFormPago();//si no tengo el "total" a mano, envio cero... la funcion "calculaFormPago()" lo obtiene.
+    });
+
+    $("#ImporteContado").change(function () {
+        calculaFormPago();//si no tengo el "total" a mano, envio cero... la funcion "calculaFormPago()" lo obtiene.
+    });
+
+
     var BanValidaStep2 = false;
     function ValidarFormularioStep3() {
         var rslt = true;
         var selectedItem;
         $(".input-validation-error").removeClass("input-validation-error");
-        $(".colorRed").removeClass("colorRed");        
-        
+        $(".colorRed").removeClass("colorRed");
+
         $("#SelectFormaDePago").each(function () {
             selectedItem = $(this).val();
             if (selectedItem == 0) {
                 rslt = false;
                 $(this).addClass("input-validation-error");
             }
-        });                
+        });
         BanValidaStep2 = true;
         $("html, body").animate({ scrollTop: 0 }, 500);
         return rslt;
