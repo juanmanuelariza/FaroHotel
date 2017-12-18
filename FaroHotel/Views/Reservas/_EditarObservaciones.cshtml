@@ -1,0 +1,40 @@
+﻿@model FaroHotel.Models.ReservaHotel
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    @Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @id = "TextareaObservaciones", @class = "form-control", rows = "5" } })
+</div>
+<div class="clearfix"></div>
+
+<input type="hidden" id="InputId" value="@ViewBag.Id" />
+
+<script type="text/javascript">
+    //Click "Guardar"
+    $("#btnGuardar").unbind();
+    $("#btnGuardar").click(function () {
+
+        var data = {};
+        data["ParamReservaHotelId"] = $('#InputId').val();
+        data["ParamObservaciones"] = $('textarea#TextareaObservaciones').val();
+        data["__RequestVerificationToken"] = $("input[name='__RequestVerificationToken']").val();
+        $.ajax({
+            url: "/Reservas/EditarObservaciones",
+            type: "POST",
+            data: data,
+            beforeSend: function (xhr) {
+                abrirWaiting();
+            },
+            success: function (result) {
+                cerrarWaiting();
+                if (result.ok) {
+                    cerrarModal();
+                    window.location.href = window.location.href;
+                    return;
+                }
+                $('#contenidoModal').html(result);
+            },
+            error: function () {
+                cerrarWaiting();
+            }
+        });
+    });
+</script>

@@ -650,6 +650,8 @@
     <Content Include="Views\Extras\Details.cshtml" />
     <Content Include="Views\Extras\Edit.cshtml" />
     <Content Include="Views\Extras\Index.cshtml" />
+    <Content Include="Views\Reservas\_EditarObservaciones.cshtml" />
+    <Content Include="Views\Reservas\_AgregarObservaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -581,5 +581,55 @@ namespace FaroHotel.Controllers
                 return Json(new { ok = "false" });
             }
         }
+
+        public ActionResult AgregarObservaciones(int? Id)
+        {
+            ReservaHotel reserva = db.ReservaHotel.Where(r => r.ID == Id).First();
+            ViewBag.Id = Id;
+            return PartialView("_EditarObservaciones", reserva);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AgregarObservaciones(int ParamReservaHotelId, string ParamObservaciones)
+        {
+            try
+            {
+                ReservaHotel reserva = db.ReservaHotel.Where(r => r.ID == ParamReservaHotelId).First();
+                reserva.Observaciones = ParamObservaciones;
+                db.Entry(reserva).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json(new { ok = "true" });
+            }
+            catch
+            {
+                return Json(new { ok = "false" });
+            }
+        }
+
+        public ActionResult EditarObservaciones(int? Id)
+        {
+            ReservaHotel reserva = db.ReservaHotel.Where(r => r.ID == Id).First();
+            ViewBag.Id = Id;
+            return PartialView("_EditarObservaciones", reserva);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarObservaciones(int ParamReservaHotelId, string ParamObservaciones)
+        {
+            try
+            {
+                ReservaHotel reserva = db.ReservaHotel.Where(r => r.ID == ParamReservaHotelId).First();
+                reserva.Observaciones = ParamObservaciones;
+                db.Entry(reserva).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json(new { ok = "true" });
+            }
+            catch
+            {
+                return Json(new { ok = "false" });
+            }
+        }
     }
 }

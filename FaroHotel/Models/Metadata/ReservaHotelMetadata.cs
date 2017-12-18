@@ -17,6 +17,9 @@ namespace FaroHotel.Models
         public System.DateTime FechaEntrada { get; set; }
              
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public System.DateTime FechaSalida { get; set; }        
+        public System.DateTime FechaSalida { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Observaciones { get; set; }
     }
 }
