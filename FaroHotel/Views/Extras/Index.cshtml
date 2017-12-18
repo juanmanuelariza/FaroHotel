@@ -1,0 +1,88 @@
+﻿@model IEnumerable<FaroHotel.Models.Extra>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">Listado de Buses</h2>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.box-header -->
+        <div class="x_content">
+            <!-- Button trigger modal -->
+            <button type="button" style="margin-bottom: 15px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Extras/Create', 'Agregar', 'Extra')">
+                <i class="fa fa-plus"></i> Nuevo
+            </button>
+            @*<div class="table-responsive">*@
+            <table id="dtExtras" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaDesde)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaHasta)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Precio)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TipoExtra.Descripcion)
+                            </td>
+                            <td data-order="@item.FechaDesde.Ticks">
+                                @Html.DisplayFor(modelItem => item.FechaDesde)
+                            </td>
+                            <td data-order="@item.FechaHasta.Ticks">
+                                @Html.DisplayFor(modelItem => item.FechaHasta)
+                            </td>
+                            <td>
+                                $ @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                            <td>
+                                <div class="btn-group-sm">
+                                    <span title="Detalle" data-toggle="tooltip"><a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Extras/Details/@item.ID','Detalle','Extra')"></a></span>
+                                    <span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Extras/Edit/@item.ID','Editar','Extra')"></a></span>
+                                    @*<span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Extras/Delete/@item.ID','Eliminar','Extra')"></a></span>*@
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        @*</div>*@
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dtExtras').DataTable({
+            "responsive": true,
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": DataTableEsp(),
+            responsive: true
+        });
+    });
+</script>

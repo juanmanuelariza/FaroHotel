@@ -290,6 +290,7 @@ namespace FaroHotel.Controllers
             ViewBag.Noches = (reserva.FechaSalida - reserva.FechaEntrada).Days;
             ViewBag.Pagos = db.EnlaceReservaHotelPago.Where(p => p.ReservaHotelId == Id).OrderBy(p => p.Fecha);
             ViewBag.Descuentos = db.EnlaceReservaHotelDescuento.Where(p => p.ReservaHotelId == Id).OrderBy(p => p.Fecha);
+            ViewBag.Extras = db.EnlaceReservaHotelExtra.Where(e => e.ReservaHotelId == Id);
 
             List < Paquete> paquetes = db.Paquete.Where(p => p.FechaInicio <= reserva.FechaEntrada && p.FechaFin >= reserva.FechaEntrada && p.Ventanilla.Any(v => v.ID == usuario.VentanillaId)).ToList();
             ViewBag.SelectPaquetesDisponibles = new SelectList(paquetes, "ID", "Titulo");

@@ -174,6 +174,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BusesController.cs" />
     <Compile Include="Controllers\DescripcionesPaquetesController.cs" />
+    <Compile Include="Controllers\ExtrasController.cs" />
     <Compile Include="Controllers\HabitacionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Menu\MenuController.cs" />
@@ -283,6 +284,7 @@
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Metadata\BusMetadata.cs" />
+    <Compile Include="Models\Metadata\ExtraMetadata.cs" />
     <Compile Include="Models\Metadata\GetReserva_ResultMetadata.cs" />
     <Compile Include="Models\Metadata\GetReservaPasajeros_ResultMetadata.cs" />
     <Compile Include="Models\Metadata\PaqueteMetadata.cs" />
@@ -643,6 +645,11 @@
     <Content Include="Views\Reservas\_AgregarDescuento.cshtml" />
     <Content Include="Views\Reservas\_EliminarPago.cshtml" />
     <Content Include="Views\Reservas\_EliminarDescuento.cshtml" />
+    <Content Include="Views\Extras\Create.cshtml" />
+    <Content Include="Views\Extras\Delete.cshtml" />
+    <Content Include="Views\Extras\Details.cshtml" />
+    <Content Include="Views\Extras\Edit.cshtml" />
+    <Content Include="Views\Extras\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -226,10 +226,48 @@
         <div class="x_panel">
             <div class="x_title">
                 <h2 class="box-title">Extras</h2>
+                <button type="button" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/AgregarPago/@ViewBag.ReservaId', 'Agregar', 'Extra')">
+                    <i class="fa fa-plus"></i> Agregar
+                </button>
                 <div class="clearfix"></div>
             </div>
             <!-- /.box-header -->
             <div class="x_content">
+                @if (Enumerable.Count(ViewBag.Extras) > 0)
+                {
+                    <div class="col-md-12">
+                        <table id="dtPagos" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (FaroHotel.Models.EnlaceReservaHotelExtra item in ViewBag.Extras)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span>@Html.DisplayFor(modelItem => item.Extra.TipoExtra.Descripcion)</span>
+                                        </td>
+                                        <td>
+                                            <span>@Html.DisplayFor(modelItem => item.Cantidad)</span>
+                                        </td>
+                                        <td>
+                                            $ <span class="MontoExtra">@(item.Extra.Precio * item.Cantidad)</span>
+                                        </td>
+                                        <td>
+                                            @*<span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarPago/@item.ID','Editar','Pago')"></a></span>*@
+                                            <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EliminarPago/@item.ID','Eliminar','Extra')"></a></span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
             </div>
             <!-- /.box-body -->
         </div>
@@ -356,7 +394,7 @@
                     <div class="text-right">
                         PAQUETES --> $ <span id="Total_Paquetes"></span>
                         <br />
-                        EXTRAS --> $ <span id="Total_Extras">0</span>
+                        EXTRAS --> $ <span id="Total_Extras"></span>
                         <br />
                         <strong>SUBTOTAL --> $ <span id="SubTotal_1"></span></strong>
                     </div>
@@ -556,6 +594,13 @@
             TotalPagos +=  parseInt($(this).text());
             $("#Total_Pagos").text(TotalPagos);
         });
+        
+        var TotalExtras = 0;
+        $(".MontoExtra").each(function () {
+            TotalExtras +=  parseInt($(this).text());
+            $("#Total_Extras").text(TotalExtras);
+        });
+        
         var TotalDescuentosPagoContado = TotalPagos * 0.95;        
         $("#Total_DescuentosPagoContado").text(TotalDescuentosPagoContado);
 
