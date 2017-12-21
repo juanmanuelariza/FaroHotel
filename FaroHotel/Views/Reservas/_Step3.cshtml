@@ -4,10 +4,10 @@
         margin-bottom: 0px;
     }
 
-    #formPago .form-group input {
-        text-align: right;
-        width: 70%;
-    }
+        #formPago .form-group input {
+            text-align: right;
+            width: 70%;
+        }
 </style>
 
 <div id="divStep3" class="row">
@@ -149,43 +149,142 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <!--pull-righ   style="text-align: right; padding-right: 2vw;"-->
+                <div class="row">
+                    <!--Columna Izquierda-->
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div id="formPago" class="form-horizontal">
 
-                <div id="formPago" class="form-horizontal">
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-4 control-label">Pago de Contado:</label>
-                        <div class="col-sm-2 input-group">
-                            <div class="input-group-addon">$</div>
-                            <input type="text" class="form-control" id="ImporteContado" value="0">
+                                <!--ImporteTotalCuotas-->
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-6 control-label">Pago en Cuotas(Total):</label>
+                                    <div class="col-sm-4 input-group">
+                                        <div class="input-group-addon">$</div>
+                                        <input type="text" class="form-control" id="ImporteTotalCuotas" value="0">
+                                    </div>
+                                </div>
+
+                                <!--CantCuotas - ImporteCuotas-->
+                                <div class="form-group">
+
+                                    <label for="inputPassword3" class="col-sm-6 control-label">Cant. de Cuotas:</label>
+                                    <input type="number" value="10" max="10" min="1" class="form-control col-sm-2" id="CantCuotas" style="width: 10%;">
+
+                                    <label for="inputPassword3" class="col-sm-1 control-label" style="width: 35px;">de </label>
+                                    <div class="col-sm-4 input-group">
+                                        <div class="input-group-addon">$</div>
+                                        <input type="text" class="form-control" id="ImporteCuotas" readonly>
+                                    </div>
+
+                                </div>
+
+                                <!--ImporteContado-->
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-6 control-label">Pago de Contado:</label>
+                                    <div class="col-sm-4 input-group">
+                                        <div class="input-group-addon">$</div>
+                                        <input type="text" class="form-control" id="ImporteContado" value="0" readonly>
+                                    </div>
+                                </div>
+
+                                <!--ImporteBonificacion-->
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-6 control-label">Bonificacion pago de contado(5%):</label>
+                                    <div class="col-sm-4 input-group">
+                                        <div class="input-group-addon">$</div>
+                                        <input type="text" class="form-control" id="ImporteBonificacion" readonly value="0">
+                                    </div>
+                                </div>
+                                <hr />
+
+                                <!--ImporteTotal-->
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-6 control-label">TOTAL:</label>
+                                    <div class="col-sm-4 input-group">
+                                        <div class="input-group-addon">$</div>
+                                        <input type="text" class="form-control" id="ImporteTotal" readonly>
+                                    </div>
+                                </div>
+
+
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-4 control-label">Bonificacion pago de contado(5%):</label>
-                        <div class="col-sm-2 input-group">
-                            <div class="input-group-addon">$</div>
-                            <input type="text" class="form-control" id="ImporteBonificacion" readonly value="0">
+
+                    <!--Columna Derecha-->
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div id="formPago" class="form-horizontal">
+
+                                <!--NroComprobantePago-->
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-4 control-label">Nro Comprobante de Pago:</label>
+                                    <div class="col-sm-4 input-group">
+                                        @*<div class="input-group-addon">$</div>*@
+                                        <input type="text" class="form-control" id="NroComprobantePago" >
+                                    </div>
+                                </div>
+
+
+                                <!--Pago UDAP-->
+                                <div class="checkbox col-sm-4">
+                                    <label>
+                                        <input type="checkbox" id="chkPagoUdap"> Pago UDAP
+                                    </label>
+                                </div>
+
+
+                                @*<!--CantCuotas - ImporteCuotas-->
+                                <div class="form-group">
+
+                                    <label for="inputPassword3" class="col-sm-4 control-label">Cant. de Cuotas:</label>
+                                    <input type="number" value="10" max="10" min="1" class="form-control col-sm-1" id="CantCuotas" style="width: 5%;">
+
+                                    <label for="inputPassword3" class="col-sm-1 control-label" style="width: 35px;">de </label>
+                                    <div class="col-sm-2 input-group">
+                                        <div class="input-group-addon">$</div>
+                                        <input type="text" class="form-control" id="ImporteCuotas" readonly>
+                                    </div>
+
+                                </div>
+
+                                <!--ImporteContado-->
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-4 control-label">Pago de Contado:</label>
+                                    <div class="col-sm-2 input-group">
+                                        <div class="input-group-addon">$</div>
+                                        <input type="text" class="form-control" id="ImporteContado" value="0" readonly>
+                                    </div>
+                                </div>
+
+                                <!--ImporteBonificacion-->
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-4 control-label">Bonificacion pago de contado(5%):</label>
+                                    <div class="col-sm-2 input-group">
+                                        <div class="input-group-addon">$</div>
+                                        <input type="text" class="form-control" id="ImporteBonificacion" readonly value="0">
+                                    </div>
+                                </div>
+                                <hr />
+
+                                <!--ImporteTotal-->
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-4 control-label">TOTAL:</label>
+                                    <div class="col-sm-2 input-group">
+                                        <div class="input-group-addon">$</div>
+                                        <input type="text" class="form-control" id="ImporteTotal" readonly>
+                                    </div>
+                                </div>*@
+
+         
+
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
 
-                        <label for="inputPassword3" class="col-sm-4 control-label">Pago en Cuotas:</label>
-                        <input type="number" value="10" max="10" min="1" class="form-control col-sm-1" id="CantCuotas" style="width: 5%;">
 
-                        <label for="inputPassword3" class="col-sm-1 control-label" style="width: 35px;">de </label>
-                        <div class="col-sm-2 input-group">
-                            <div class="input-group-addon">$</div>
-                            <input type="text" class="form-control" id="ImporteCuotas" readonly>
-                        </div>
+                    
 
-                    </div>
-                    <hr />
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-4 control-label">TOTAL:</label>
-                        <div class="col-sm-2 input-group">
-                            <div class="input-group-addon">$</div>
-                            <input type="text" class="form-control" id="ImporteTotal" readonly>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -222,7 +321,9 @@
 @*</div>*@
 <script type="text/javascript">
     var SumTotalGlobal =0;
-
+    $('#ImporteTotalCuotas').on('input', function() {
+        this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+    });
 
     $('#btnBackStep2').click(function () {
         $('#Panel_Step3').fadeOut();
@@ -443,33 +544,61 @@
     }
 
 
-    
+
     //
     //Funciones y eventos JS agregadas por Paulo Garcia
     //
     function calculaFormPago() {
-        
+        debugger
+
         var total = SumTotalGlobal;
+        var importeTotalCuotas= total;
 
-        var importeContado=$("#ImporteContado").val();
-        var cantCuotas = $("#CantCuotas").val();
+        if ( $("#ImporteTotalCuotas").val() == 0) {
+            importeTotalCuotas= total;
+        }
+        else{
+            if ( $("#ImporteTotalCuotas").val() != total)
+                importeTotalCuotas = $("#ImporteTotalCuotas").val() ;
+        }
+
+        var importeContado=total - importeTotalCuotas;
         var importeBonificacion= (5 * importeContado)/100;
-        var importeTotalCuotas= total - importeContado;
+        var cantCuotas = $("#CantCuotas").val();
 
 
-        
-        //var importeBonificacion= (5 * importeContado)/100;
-        $("#ImporteTotal").val(total-importeBonificacion);
-        $("#ImporteBonificacion").val(importeBonificacion * -1);
+        $("#ImporteTotalCuotas").val(importeTotalCuotas);
         $("#ImporteCuotas").val(importeTotalCuotas/cantCuotas); //Falta el interes
-        
+
+        $("#ImporteContado").val(importeContado);
+        $("#ImporteBonificacion").val(importeBonificacion * -1);
+        $("#ImporteTotal").val(total-importeBonificacion);
+
+
+        //Deprecated
+
+        //var importeContado=$("#ImporteContado").val();
+        //var cantCuotas = $("#CantCuotas").val();
+        //var importeBonificacion= (5 * importeContado)/100;
+        //var importeTotalCuotas= total - importeContado;
+
+
+        //$("#ImporteTotal").val(total-importeBonificacion);
+        //$("#ImporteBonificacion").val(importeBonificacion * -1);
+        //$("#ImporteCuotas").val(importeTotalCuotas/cantCuotas); //Falta el interes
+
     }
 
     $("#CantCuotas").change(function () {
         calculaFormPago();//si no tengo el "total" a mano, envio cero... la funcion "calculaFormPago()" lo obtiene.
     });
 
-    $("#ImporteContado").change(function () {
+    $("#ImporteTotalCuotas").change(function () {
+
+        if ($("#ImporteTotalCuotas").val() > SumTotalGlobal) {
+            $("#ImporteTotalCuotas").val(SumTotalGlobal);
+        }
+
         calculaFormPago();//si no tengo el "total" a mano, envio cero... la funcion "calculaFormPago()" lo obtiene.
     });
 

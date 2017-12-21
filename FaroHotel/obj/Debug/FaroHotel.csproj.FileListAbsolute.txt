@@ -150,6 +150,11 @@ C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\bin\Microsoft.Owin.S
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\obj\Debug\FaroHotel.dll
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\obj\Debug\FaroHotel.pdb
 C:\Users\Juan Manuel\Documents\Sistemas\FaroHotel\FaroHotel\obj\Debug\FaroHotel.csprojResolveAssemblyReference.cache
+F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CodeAnalysis.dll
+F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\VBCSCompiler.exe
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\FaroHotel.dll.config
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\FaroHotel.dll
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\FaroHotel.pdb
@@ -159,25 +164,18 @@ F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\csc.rsp
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\csi.exe
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\csi.rsp
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
-F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CodeAnalysis.dll
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
-F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.CSharp.Core.targets
-F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\Microsoft.VisualBasic.Core.targets
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\System.AppContext.dll
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\System.Collections.Immutable.dll
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\System.Diagnostics.StackTrace.dll
-F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\System.IO.FileSystem.dll
-F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\System.IO.FileSystem.Primitives.dll
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\System.Reflection.Metadata.dll
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\vbc.exe
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\vbc.exe.config
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\vbc.rsp
-F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\VBCSCompiler.exe
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\VBCSCompiler.exe.config
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\Antlr3.Runtime.dll
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\EntityFramework.dll
@@ -230,6 +228,7 @@ F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\Microsoft.Owin.Security.
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\Microsoft.Owin.Security.Google.xml
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\Microsoft.Owin.Security.Twitter.xml
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\obj\Debug\FaroHotel.csprojResolveAssemblyReference.cache
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\obj\Debug\FaroHotel.dll
 F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\obj\Debug\FaroHotel.pdb
+F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\System.IO.FileSystem.dll
+F:\Sistemas\GitHub-Repositorios\FaroHotel\FaroHotel\bin\roslyn\System.IO.FileSystem.Primitives.dll
