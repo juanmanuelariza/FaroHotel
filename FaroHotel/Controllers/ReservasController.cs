@@ -74,7 +74,7 @@ namespace FaroHotel.Controllers
                         break;
                 }
             }
-
+            ViewBag.esUsuarioUdap = db.AspNetUsers.Find(User.Identity.GetUserId()).Ventanilla.Nombre == "UDAP" ? true : false;
             ViewBag.cuotas = db.Paquete.Find(ParamPaqueteId).TipoCuota.Cuotas;
 
             return PartialView("_Step3");

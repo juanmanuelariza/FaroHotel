@@ -211,76 +211,47 @@
                         </div>
                     </div>
 
-                    <!--Columna Derecha-->
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div id="formPago" class="form-horizontal">
+                    @if (ViewBag.esUsuarioUdap)
+                    {
+                        <!--Columna Derecha-->
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div id="formPago" class="form-horizontal">
 
-                                <!--NroComprobantePago-->
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-4 control-label">Nro Comprobante de Pago:</label>
-                                    <div class="col-sm-4 input-group">
-                                        @*<div class="input-group-addon">$</div>*@
-                                        <input type="text" class="form-control" id="NroComprobantePago" >
-                                    </div>
-                                </div>
-
-
-                                <!--Pago UDAP-->
-                                <div class="checkbox col-sm-4">
-                                    <label>
-                                        <input type="checkbox" id="chkPagoUdap"> Pago UDAP
-                                    </label>
-                                </div>
-
-
-                                @*<!--CantCuotas - ImporteCuotas-->
-                                <div class="form-group">
-
-                                    <label for="inputPassword3" class="col-sm-4 control-label">Cant. de Cuotas:</label>
-                                    <input type="number" value="10" max="10" min="1" class="form-control col-sm-1" id="CantCuotas" style="width: 5%;">
-
-                                    <label for="inputPassword3" class="col-sm-1 control-label" style="width: 35px;">de </label>
-                                    <div class="col-sm-2 input-group">
-                                        <div class="input-group-addon">$</div>
-                                        <input type="text" class="form-control" id="ImporteCuotas" readonly>
+                                    <!--NroComprobantePago-->
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-5 control-label">Nro Comprobante de Pago:</label>
+                                        <div class="col-sm-5 input-group">
+                                            @*<div class="input-group-addon">$</div>*@
+                                            <input type="text" class="form-control" id="NroComprobantePago">
+                                        </div>
                                     </div>
 
-                                </div>
-
-                                <!--ImporteContado-->
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-4 control-label">Pago de Contado:</label>
-                                    <div class="col-sm-2 input-group">
-                                        <div class="input-group-addon">$</div>
-                                        <input type="text" class="form-control" id="ImporteContado" value="0" readonly>
+                                    <!--NombreTitular-->
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-5 control-label">Nombre del Titular:</label>
+                                        <div class="col-sm-5 input-group">
+                                            @*<div class="input-group-addon">$</div>*@
+                                            <input type="text" class="form-control" id="NombreTitular">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <!--ImporteBonificacion-->
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-4 control-label">Bonificacion pago de contado(5%):</label>
-                                    <div class="col-sm-2 input-group">
-                                        <div class="input-group-addon">$</div>
-                                        <input type="text" class="form-control" id="ImporteBonificacion" readonly value="0">
+                                    <!--DniTitular-->
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-5 control-label">DNI del Titular:</label>
+                                        <div class="col-sm-5 input-group">
+                                            @*<div class="input-group-addon">$</div>*@
+                                            <input type="text" class="form-control" id="DniTitular">
+                                        </div>
                                     </div>
+
+
                                 </div>
-                                <hr />
-
-                                <!--ImporteTotal-->
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-4 control-label">TOTAL:</label>
-                                    <div class="col-sm-2 input-group">
-                                        <div class="input-group-addon">$</div>
-                                        <input type="text" class="form-control" id="ImporteTotal" readonly>
-                                    </div>
-                                </div>*@
-
-         
-
                             </div>
                         </div>
-                    </div>
+                    }
+
+                    
 
 
                     
