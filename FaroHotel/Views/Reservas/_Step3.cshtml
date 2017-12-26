@@ -223,7 +223,7 @@
                                         <label for="inputEmail3" class="col-sm-5 control-label">Nro Comprobante de Pago:</label>
                                         <div class="col-sm-5 input-group">
                                             @*<div class="input-group-addon">$</div>*@
-                                            <input type="text" class="form-control" id="NroComprobantePago">
+                                            <input type="text" class="form-control" id="NroComprobantePago" style="text-align:left">
                                         </div>
                                     </div>
 
@@ -232,7 +232,7 @@
                                         <label for="inputEmail3" class="col-sm-5 control-label">Nombre del Titular:</label>
                                         <div class="col-sm-5 input-group">
                                             @*<div class="input-group-addon">$</div>*@
-                                            <input type="text" class="form-control" id="NombreTitular">
+                                            <input type="text" class="form-control" id="NombreTitular" style="text-align:left">
                                         </div>
                                     </div>
 
@@ -241,7 +241,7 @@
                                         <label for="inputEmail3" class="col-sm-5 control-label">DNI del Titular:</label>
                                         <div class="col-sm-5 input-group">
                                             @*<div class="input-group-addon">$</div>*@
-                                            <input type="text" class="form-control" id="DniTitular">
+                                            <input type="text" class="form-control" id="DniTitular" style="text-align:left">
                                         </div>
                                     </div>
 
@@ -305,9 +305,16 @@
     });
 
     $(document).ready(function () {
+
+        var nombreTitular =$('#PaxSurname_' + $('input[name=radioTitular]:checked').val()).val()+", "+$('#PaxName_' + $('input[name=radioTitular]:checked').val()).val();
+        $('#NombreTitular').val(nombreTitular);
+
+        var DNITitular =$('#PaxDNI_' + $('input[name=radioTitular]:checked').val()).val();
+        $('#DniTitular').val(DNITitular);
+
+
         //Completar tablas
         //Tabla Pasajeros
-
         var ArrayPaxApellidoyNombre = [];
         var ArrayPaquetes = [];
         var ArrayBases = [];
@@ -395,11 +402,20 @@
             var ParamImporteCuotas = parseFloat($('#ImporteCuotas').val());
             var ParamCantCuotas = $('#CantCuotas').val();
 
+            var ParamNroComprobantePago = $('#NroComprobantePago').val();
+            var ParamNombreTitular = $('#NombreTitular').val();
+            var ParamDniTitular = $('#DniTitular').val();
+
+
+
+
+
             var _url = GetPathApp("/Reservas/Step4");
             $.ajax({
                 method: "POST",
+                contentType: "application/json; charset=utf-8",
                 url: _url,
-                data: {
+                data:JSON.stringify( {
                     ParamFecha: $('#FechaEntrada').val(),
                     ParamHotelId: $('#DDL_Hotel option:selected').val(),
                     ParamNochesId: $('#NochesId option:selected').text(),
@@ -422,7 +438,11 @@
                     ParamImporteBonificacion : ParamImporteBonificacion,
                     ParamImporteCuotas : ParamImporteCuotas,
                     ParamCantCuotas : ParamCantCuotas,
-                },
+
+                    ParamNroComprobantePago : ParamNroComprobantePago,
+                    ParamNombreTitular : ParamNombreTitular,
+                    ParamDniTitular : ParamDniTitular
+                }),
                 success: function (result) {
                     $('#Panel_Step4').html(result);
                     closeSpinner();
@@ -588,8 +608,44 @@
                 $(this).addClass("input-validation-error");
             }
         });
+
+
+        //ValidaFormPago
+        @if (ViewBag.esUsuarioUdap)
+        {
+            <text>
+
+            var ParamNroComprobantePago = $('#NroComprobantePago').val();
+            if (!ParamNroComprobantePago || 0 === ParamNroComprobantePago.length) {
+                rslt = false;
+                $('#NroComprobantePago').addClass("input-validation-error");    
+            }
+        
+            var ParamNombreTitular = $('#NombreTitular').val();
+            if (!ParamNombreTitular || 0 === ParamNombreTitular.length) {
+                rslt = false;
+                //$('#NombreTitular').focus();
+                $('#NombreTitular').addClass("input-validation-error");
+            }
+
+            var ParamDniTitular = $('#DniTitular').val();
+            if (!ParamDniTitular || 0 === ParamDniTitular.length) {
+                rslt = false;
+                //$('#DniTitular').focus();
+                $('#DniTitular').addClass("input-validation-error");
+            }
+            </text>
+        }
+
+        
+
+        
+
+
+
+
         BanValidaStep2 = true;
-        $("html, body").animate({ scrollTop: 0 }, 500);
+        //$("html, body").animate({ scrollTop: 0 }, 500);
         return rslt;
     }
 </script>

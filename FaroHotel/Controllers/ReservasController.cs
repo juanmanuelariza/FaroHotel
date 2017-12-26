@@ -74,6 +74,8 @@ namespace FaroHotel.Controllers
                         break;
                 }
             }
+
+           
             ViewBag.esUsuarioUdap = db.AspNetUsers.Find(User.Identity.GetUserId()).Ventanilla.Nombre == "UDAP" ? true : false;
             ViewBag.cuotas = db.Paquete.Find(ParamPaqueteId).TipoCuota.Cuotas;
 
@@ -82,9 +84,14 @@ namespace FaroHotel.Controllers
         }
         public ActionResult Step4(DateTime ParamFecha, int ParamHotelId, int ParamNochesId, int ParamTitularId, int[] ParamTipoHabitacionesIds, 
             int[] ParamHabitacionesIds, int[] ParamPasajerosIds, int[] ParamPaquetesIds, int[] ParamBaseIds, int[] ParamBusIdaIds, 
-            int[] ParamAsientosIdaIds, int[] ParamBusVueltaIds, int[] ParamAsientosVueltaIds, int[] ParamExtrasIds, int[] ParamExtrasCantidad,
-            string ParamObservaciones, decimal ParamImporteContado, decimal ParamImporteBonificacion, decimal ParamImporteCuotas, int ParamCantCuotas)            
+            int[] ParamAsientosIdaIds, int[] ParamBusVueltaIds, int[] ParamAsientosVueltaIds, int[] ParamExtrasIds, int[] ParamExtrasCantidad,string ParamObservaciones,
+            
+            decimal ParamImporteContado, decimal ParamImporteBonificacion, decimal ParamImporteCuotas, int ParamCantCuotas,
+            string ParamNroComprobantePago, string ParamNombreTitular, string ParamDniTitular
+            )            
         {
+
+
 
             InsertBooking_Result result = db.InsertBooking(ParamFecha, ParamHotelId, ParamNochesId, ParamTitularId,
                 string.Join(",", ParamTipoHabitacionesIds), string.Join(",", ParamHabitacionesIds),
@@ -104,10 +111,10 @@ namespace FaroHotel.Controllers
                 mail.Mensaje = "http://www.sistemaelfarohotel.com/Reservas/Detalle/" + result.ReservaHotelID;
                 mail.Send();
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+                //throw;
             }
 
             return PartialView("_Step4");
