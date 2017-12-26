@@ -568,5 +568,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="EliminarReserva" FunctionName="FaroHotelModel.Store.EliminarReserva" />
   </EntityContainerMapping>
 </Mapping>

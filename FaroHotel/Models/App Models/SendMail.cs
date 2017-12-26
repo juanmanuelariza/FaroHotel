@@ -22,6 +22,8 @@ namespace FaroHotel.Models
             message.To.Add(new MailAddress(this.Destinatario));  // replace with valid value 
             message.From = new MailAddress("juanma.ariza23@gmail.com");  // replace with valid value
             message.ReplyToList.Add("juanma.ariza23@gmail.com");
+            //message.From = new MailAddress("virginiaharanda@gmail.com");  // replace with valid value
+            //message.ReplyToList.Add("virginiaharanda@gmail.com");
             message.Subject = this.Asunto;
             message.Body = string.Format(body, this.Mensaje);
             message.IsBodyHtml = true;
@@ -30,8 +32,8 @@ namespace FaroHotel.Models
             {
                 var credential = new NetworkCredential
                 {
-                    UserName = "juanma.ariza23@gmail.com",  // replace with valid value
-                    Password = "B4ut1$ta"  // replace with valid value
+                    UserName = "sistemaelfarohotel@gmail.com",  // replace with valid value
+                    Password = "C3pmm6hRUr7q07XqfrVS"  // replace with valid value
                 };
                 smtp.Credentials = credential;
                 smtp.Host = "smtp.gmail.com";

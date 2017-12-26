@@ -1,0 +1,91 @@
+﻿@model IEnumerable<FaroHotel.Models.ReservaHotel>
+
+<section class="content">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2 class="box-title">Listado de reservas</h2>
+            <div class="clearfix"></div>
+        </div>
+        <!-- /.box-header -->
+        <div class="x_content">
+            @*<div class="table-responsive">*@
+            <table id="dtReservas" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Pasajero.Apellido)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Pasajero.Nombre)
+                        </th>
+                        <th>
+                            Hotel
+                        </th>
+                        <th>
+                            Fecha Entrada
+                        </th>
+                        <th>
+                            Fecha Salida
+                        </th>
+                        <th>
+                            Fecha Alta
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Pasajero.Apellido)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Pasajero.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TipoHotel.Descripcion)
+                            </td>
+                            <td data-order="@item.FechaEntrada.Ticks">
+                                @Html.DisplayFor(modelItem => item.FechaEntrada)
+                            </td>
+                            <td data-order="@item.FechaSalida.Ticks">
+                                @Html.DisplayFor(modelItem => item.FechaSalida)
+                            </td>
+                            <td data-order="@item.FechaAlta.Ticks">
+                                @Html.DisplayFor(modelItem => item.FechaAlta)
+                            </td>
+                            <td>
+                                <div class="btn-group-sm">
+                                    <span title="Detalle" data-toggle="tooltip"><a class="btn btn-default fa fa-file-text-o" href="/Reservas/Detalle/@item.ID"></a></span>
+                                       @*<span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Edit/@item.ID','Editar','Pasajero')"></a></span>*@
+                                    @*<span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Pasajeros/Delete/@item.ID','Eliminar','Pasajero')"></a></span>*@
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        @*</div>*@
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</section>
+
+<script type="text/javascript">
+    $(function () {
+        $('#dtReservas').DataTable({
+            "responsive": true,
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": DataTableEsp(),
+            responsive: true
+        });
+    });
+</script>

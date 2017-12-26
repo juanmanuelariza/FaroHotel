@@ -246,11 +246,11 @@ namespace FaroHotel.Controllers
 
             if (usuario.VentanillaId == 9) //Usuario de HOTEL
             {
-                reservas = db.ReservaHotel.Where(r => r.Confirmada == true);
+                reservas = db.ReservaHotel.Where(r => r.Confirmada == true && r.FechaCancelada == null);
             }
             else
             {
-                reservas = db.ReservaHotel.Where(r => r.Confirmada == true && r.UsuarioAlta == usuario.Id);
+                reservas = db.ReservaHotel.Where(r => r.Confirmada == true && r.FechaCancelada == null && r.UsuarioAlta == usuario.Id);
             }
             return View(reservas.ToList());
         }
@@ -262,15 +262,30 @@ namespace FaroHotel.Controllers
 
             if (usuario.VentanillaId == 9) //Usuario de HOTEL
             {
-                reservas = db.ReservaHotel.Where(r => r.Confirmada == false);
+                reservas = db.ReservaHotel.Where(r => r.Confirmada == false && r.FechaCancelada == null);
             }
             else
             {
-                reservas = db.ReservaHotel.Where(r => r.Confirmada == false && r.UsuarioAlta == usuario.Id);
+                reservas = db.ReservaHotel.Where(r => r.Confirmada == false && r.FechaCancelada == null && r.UsuarioAlta == usuario.Id);
             }
             return View(reservas.ToList());
         }
 
+        public ActionResult Canceladas()
+        {
+            IEnumerable<ReservaHotel> reservas;
+            AspNetUsers usuario = db.AspNetUsers.Find(User.Identity.GetUserId());
+
+            if (usuario.VentanillaId == 9) //Usuario de HOTEL
+            {
+                reservas = db.ReservaHotel.Where(r => r.FechaCancelada != null);
+            }
+            else
+            {
+                reservas = db.ReservaHotel.Where(r => r.FechaCancelada != null && r.UsuarioAlta == usuario.Id);
+            }
+            return View(reservas.ToList());
+        }
         public ActionResult Detalle(int? Id)
         {
             if (Id == null)
@@ -294,8 +309,7 @@ namespace FaroHotel.Controllers
 
             List < Paquete> paquetes = db.Paquete.Where(p => p.FechaInicio <= reserva.FechaEntrada && p.FechaFin >= reserva.FechaEntrada && p.Ventanilla.Any(v => v.ID == usuario.VentanillaId)).ToList();
             ViewBag.SelectPaquetesDisponibles = new SelectList(paquetes, "ID", "Titulo");
-
-
+            
             return View();
         }
 
@@ -627,6 +641,57 @@ namespace FaroHotel.Controllers
                 return Json(new { ok = "true" });
             }
             catch
+            {
+                return Json(new { ok = "false" });
+            }
+        }
+
+
+        public ActionResult EditarTitular(int? Id)
+        {
+            ReservaHotel reserva = db.ReservaHotel.Where(r => r.ID == Id).First();
+            ViewBag.Id = Id;
+            return PartialView("_EditarTitular", reserva);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarTitular(int ParamReservaHotelId, int ParamNuevoTitularId)
+        {
+            try
+            {
+                ReservaHotel reserva = db.ReservaHotel.Where(r => r.ID == ParamReservaHotelId).First();
+                reserva.TitularId = ParamNuevoTitularId;
+                db.Entry(reserva).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json(new { ok = "true" });
+            }
+            catch
+            {
+                return Json(new { ok = "false" });
+            }
+        }
+
+        public ActionResult EliminarReserva(int? Id)
+        {
+            ViewBag.ReservaHotelId = Id;
+            return PartialView("_EliminarReserva");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EliminarReserva(int ParamReservaHotelId)
+        {
+            try
+            {
+                //ReservaHotel reserva = db.ReservaHotel.Where(r => r.ID == ParamReservaHotelId).First();
+                //EnlaceReservaHotelHabitacion habitacion = db.EnlaceReservaHotelHabitacion.Where(h => h.ID == ParamReservaHotelId).First();
+                //db.EnlaceReservaHotelHabitacion.Remove(habitacion);
+                //EnlaceBusPasajero butaca = db.EnlaceBusPasajero.Where(b => b.BusId)
+                db.EliminarReserva(ParamReservaHotelId, User.Identity.GetUserId());
+                return Json(new { ok = "true" });
+            }
+            catch (Exception)
             {
                 return Json(new { ok = "false" });
             }

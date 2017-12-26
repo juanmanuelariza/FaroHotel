@@ -384,5 +384,18 @@ namespace FaroHotel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EliminarPasajeroDeReserva_Result>("EliminarPasajeroDeReserva", reservaIdParameter, pasajeroIdParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> EliminarReserva(Nullable<int> reservaId, string usuarioId)
+        {
+            var reservaIdParameter = reservaId.HasValue ?
+                new ObjectParameter("ReservaId", reservaId) :
+                new ObjectParameter("ReservaId", typeof(int));
+    
+            var usuarioIdParameter = usuarioId != null ?
+                new ObjectParameter("usuarioId", usuarioId) :
+                new ObjectParameter("usuarioId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("EliminarReserva", reservaIdParameter, usuarioIdParameter);
+        }
     }
 }

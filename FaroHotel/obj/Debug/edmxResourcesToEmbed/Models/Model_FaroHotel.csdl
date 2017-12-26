@@ -998,6 +998,10 @@
       <End Role="TipoFormaDePago" EntitySet="TipoFormaDePago" />
       <End Role="EnlaceReservaHotelPago" EntitySet="EnlaceReservaHotelPago" />
     </AssociationSet>
+    <FunctionImport Name="EliminarReserva" ReturnType="Collection(Int32)">
+      <Parameter Name="ReservaId" Mode="In" Type="Int32" />
+      <Parameter Name="usuarioId" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />

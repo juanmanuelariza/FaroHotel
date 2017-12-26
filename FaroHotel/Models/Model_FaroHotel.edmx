@@ -963,6 +963,10 @@
           <Parameter Name="ReservaId" Type="int" Mode="In" />
           <Parameter Name="PasajeroId" Type="int" Mode="In" />
         </Function>
+        <Function Name="EliminarReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReservaId" Type="int" Mode="In" />
+          <Parameter Name="usuarioId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="func_Split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DelimitedString" Type="varchar" Mode="In" />
@@ -2282,6 +2286,10 @@
             <End Role="TipoFormaDePago" EntitySet="TipoFormaDePago" />
             <End Role="EnlaceReservaHotelPago" EntitySet="EnlaceReservaHotelPago" />
           </AssociationSet>
+          <FunctionImport Name="EliminarReserva" ReturnType="Collection(Int32)">
+            <Parameter Name="ReservaId" Mode="In" Type="Int32" />
+            <Parameter Name="usuarioId" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -3163,6 +3171,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="EliminarReserva" FunctionName="FaroHotelModel.Store.EliminarReserva" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

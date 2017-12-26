@@ -958,6 +958,10 @@
     <Parameter Name="ReservaId" Type="int" Mode="In" />
     <Parameter Name="PasajeroId" Type="int" Mode="In" />
   </Function>
+  <Function Name="EliminarReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ReservaId" Type="int" Mode="In" />
+    <Parameter Name="usuarioId" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="func_Split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="DelimitedString" Type="varchar" Mode="In" />

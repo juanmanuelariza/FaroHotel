@@ -6,13 +6,16 @@
         <div class="x_panel">
             <div class="x_title">
                 @if (ViewBag.Confirmada == false)
-            {
+                {
                     <h2 class="box-title">Detalles de solicitud de reserva</h2>
                 }
                 else
                 {
                     <h2 class="box-title">Detalles de Reserva</h2>
                 }
+                <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EliminarReserva/@ViewBag.ReservaId', 'Eliminar', 'Reserva')">
+                    <i class="fa fa-trash"></i> Cancelar Reserva
+                </button>
                 <div class="clearfix"></div>
             </div>
             <!-- /.box-header -->
@@ -31,7 +34,10 @@
                             <strong>Confirmada:</strong> <span id="SpanConfirmada">@item.Confirmada.ToString().Replace("False", "No").Replace("True", "Si")</span>
                         </div>
                         <div class="col-md-6">
-                            <h4><strong>Información del titular</strong></h4>
+                            <h4><strong>Información del titular</strong>
+                                <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarTitular/@ViewBag.ReservaId', 'Editar', 'Titular')">
+                                    <i class="fa fa-pencil-square-o"></i> Editar Titular
+                                </button></h4>
                             <strong>DNI:</strong> <span id="SpanDniTitular">@item.DNI</span><br />
                             <strong>Apellido:</strong> <span id="SpanApellidoTitular">@item.Apellido</span><br />
                             <strong>Nombre:</strong> <span id="SpanNombreTitular">@item.Nombre</span><br />
@@ -465,6 +471,12 @@
     }
 
     <script type="text/javascript">
+        $(document).ready(function(){
+            if('@ViewBag.Reserva.FechaCancelada' != ''){
+                //Elimino botones cuando la reserva esta canceladad
+                $('.btn').remove();
+            }
+        });
         function nuevoPasajero() {
             $("#DivNuevoPasajero").show();
             scrollToElement('#DivNuevoPasajero', 500);
@@ -623,14 +635,14 @@
             TotalPagos +=  parseInt($(this).text());
             $("#Total_Pagos").text(TotalPagos);
         });
-        
+
         var TotalExtras = 0;
         $(".MontoExtra").each(function () {
             TotalExtras +=  parseInt($(this).text());
             $("#Total_Extras").text(TotalExtras);
         });
-        
-        var TotalDescuentosPagoContado = TotalPagos * 0.95;        
+
+        var TotalDescuentosPagoContado = TotalPagos * 0.95;
         $("#Total_DescuentosPagoContado").text(TotalDescuentosPagoContado);
 
         var TotalDescuentos = 0;
@@ -647,7 +659,7 @@
         $("#Total_Paquetes").text(TotalPaquetes);
 
         $("#SubTotal_1").text(TotalPaquetes);
-        
+
         function eliminarPasajero(pasajeroId){
             var data = {};
             data["ParamReservaId"] = @ViewBag.ReservaId;
