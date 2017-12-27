@@ -13,10 +13,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2017 23:14:57</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>12/13/2017 12:05:31</publishTime>
+      <publishTime>12/27/2017 02:13:10</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>12/13/2017 12:05:31</publishTime>
+      <publishTime>12/27/2017 02:13:09</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/08/2017 23:14:58</publishTime>
@@ -25,7 +25,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2017 23:14:58</publishTime>
     </File>
     <File Include="bin/FaroHotel.dll">
-      <publishTime>12/13/2017 12:05:25</publishTime>
+      <publishTime>12/27/2017 02:13:01</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
       <publishTime>10/08/2017 23:14:58</publishTime>
@@ -391,13 +391,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2017 23:14:56</publishTime>
     </File>
     <File Include="Models/Model_FaroHotel.edmx.diagram">
-      <publishTime>12/03/2017 20:50:38</publishTime>
+      <publishTime>12/27/2017 01:39:32</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>11/14/2017 22:52:23</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>12/13/2017 12:05:27</publishTime>
+      <publishTime>12/27/2017 02:13:04</publishTime>
     </File>
     <File Include="Scripts/bootstrap - copia.js">
       <publishTime>10/08/2017 23:14:51</publishTime>
@@ -823,7 +823,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/28/2017 23:50:49</publishTime>
     </File>
     <File Include="Views/Buses/Index.cshtml">
-      <publishTime>11/28/2017 23:54:43</publishTime>
+      <publishTime>12/17/2017 20:30:48</publishTime>
     </File>
     <File Include="Views/DescripcionesPaquetes/Create.cshtml">
       <publishTime>11/08/2017 23:18:55</publishTime>
@@ -839,6 +839,21 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/DescripcionesPaquetes/Index.cshtml">
       <publishTime>10/08/2017 23:14:53</publishTime>
+    </File>
+    <File Include="Views/Extras/Create.cshtml">
+      <publishTime>12/17/2017 20:35:52</publishTime>
+    </File>
+    <File Include="Views/Extras/Delete.cshtml">
+      <publishTime>12/17/2017 20:18:57</publishTime>
+    </File>
+    <File Include="Views/Extras/Details.cshtml">
+      <publishTime>12/17/2017 20:22:48</publishTime>
+    </File>
+    <File Include="Views/Extras/Edit.cshtml">
+      <publishTime>12/17/2017 20:33:43</publishTime>
+    </File>
+    <File Include="Views/Extras/Index.cshtml">
+      <publishTime>12/17/2017 20:34:49</publishTime>
     </File>
     <File Include="Views/Habitaciones/Create.cshtml">
       <publishTime>11/28/2017 20:38:12</publishTime>
@@ -909,11 +924,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Reportes/_OcupacionHotel.cshtml">
       <publishTime>11/12/2017 18:49:29</publishTime>
     </File>
+    <File Include="Views/Reservas/Canceladas.cshtml">
+      <publishTime>12/23/2017 17:46:41</publishTime>
+    </File>
     <File Include="Views/Reservas/Detalle.cshtml">
-      <publishTime>12/04/2017 17:21:35</publishTime>
+      <publishTime>12/27/2017 01:50:25</publishTime>
     </File>
     <File Include="Views/Reservas/Index.cshtml">
-      <publishTime>11/29/2017 18:31:46</publishTime>
+      <publishTime>12/18/2017 00:10:26</publishTime>
     </File>
     <File Include="Views/Reservas/Listado.cshtml">
       <publishTime>11/12/2017 19:39:33</publishTime>
@@ -926,6 +944,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Reservas/_AgregarHabitacion.cshtml">
       <publishTime>11/17/2017 22:16:11</publishTime>
+    </File>
+    <File Include="Views/Reservas/_AgregarObservaciones.cshtml">
+      <publishTime>12/18/2017 00:07:46</publishTime>
     </File>
     <File Include="Views/Reservas/_AgregarPago.cshtml">
       <publishTime>12/02/2017 20:10:45</publishTime>
@@ -948,6 +969,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Reservas/_EditarHabitacion.cshtml">
       <publishTime>11/17/2017 22:36:27</publishTime>
     </File>
+    <File Include="Views/Reservas/_EditarObservaciones.cshtml">
+      <publishTime>12/18/2017 00:01:32</publishTime>
+    </File>
+    <File Include="Views/Reservas/_EditarTitular.cshtml">
+      <publishTime>12/23/2017 17:00:06</publishTime>
+    </File>
     <File Include="Views/Reservas/_EliminarDescuento.cshtml">
       <publishTime>12/03/2017 21:02:05</publishTime>
     </File>
@@ -960,6 +987,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Reservas/_EliminarPasajero.cshtml">
       <publishTime>11/19/2017 21:40:57</publishTime>
     </File>
+    <File Include="Views/Reservas/_EliminarReserva.cshtml">
+      <publishTime>12/23/2017 17:10:59</publishTime>
+    </File>
     <File Include="Views/Reservas/_ErrorAlBuscar.cshtml">
       <publishTime>11/29/2017 18:43:54</publishTime>
     </File>
@@ -967,13 +997,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/20/2017 19:59:50</publishTime>
     </File>
     <File Include="Views/Reservas/_Step2.cshtml">
-      <publishTime>11/20/2017 21:12:10</publishTime>
+      <publishTime>12/23/2017 16:53:42</publishTime>
     </File>
     <File Include="Views/Reservas/_Step3.cshtml">
-      <publishTime>12/04/2017 16:11:33</publishTime>
+      <publishTime>12/27/2017 00:28:05</publishTime>
     </File>
     <File Include="Views/Reservas/_Step4.cshtml">
-      <publishTime>11/29/2017 18:42:58</publishTime>
+      <publishTime>12/26/2017 00:37:10</publishTime>
     </File>
     <File Include="Views/Roles/Create.cshtml">
       <publishTime>10/08/2017 23:14:54</publishTime>
@@ -1045,7 +1075,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2017 23:14:54</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/14/2017 23:15:30</publishTime>
+      <publishTime>12/27/2017 01:15:57</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -29,5 +29,8 @@ namespace FaroHotel.Models
         public Nullable<byte> NroBusIda { get; set; }
         public Nullable<byte> NroBusVuelta { get; set; }
         public int ID { get; set; }
+        public bool Celiaquia { get; set; }
+        public bool Diabetes { get; set; }
+        public bool Motricidad { get; set; }
     }
 }

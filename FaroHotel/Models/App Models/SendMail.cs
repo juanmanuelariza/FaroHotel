@@ -20,8 +20,8 @@ namespace FaroHotel.Models
             var body = "<p>{0}</p>";
             var message = new MailMessage();
             message.To.Add(new MailAddress(this.Destinatario));  // replace with valid value 
-            message.From = new MailAddress("juanma.ariza23@gmail.com");  // replace with valid value
-            message.ReplyToList.Add("juanma.ariza23@gmail.com");
+            message.From = new MailAddress("sistemaelfarohotel@gmail.com");  // replace with valid value
+            message.ReplyToList.Add("sistemaelfarohotel@gmail.com");
             //message.From = new MailAddress("virginiaharanda@gmail.com");  // replace with valid value
             //message.ReplyToList.Add("virginiaharanda@gmail.com");
             message.Subject = this.Asunto;

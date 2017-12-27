@@ -100,6 +100,18 @@
             </div>
         </div>
     </div>
+    
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Observaciones de la reserva</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <textarea id="TextareaObservaciones" class="form-control" rows="5"></textarea>
+            </div>
+        </div>
+    </div>
 
     <div class="col-md-12">
         <div class="x_panel">
@@ -189,7 +201,7 @@
 
                                 <!--ImporteBonificacion-->
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-6 control-label">Bonificacion pago de contado(5%):</label>
+                                    <label for="inputEmail3" class="col-sm-6 control-label">Descuento por pago de contado(5%):</label>
                                     <div class="col-sm-4 input-group">
                                         <div class="input-group-addon">$</div>
                                         <input type="text" class="form-control" id="ImporteBonificacion" readonly value="0">
@@ -260,19 +272,6 @@
             </div>
 
 
-        </div>
-    </div>
-
-
-    <div class="col-md-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Observaciones de la reserva</h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <textarea id="TextareaObservaciones" class="form-control" rows="5"></textarea>
-            </div>
         </div>
     </div>
 
@@ -473,6 +472,7 @@
             $('#TotalCocheraFaroII').text("$ 0");
         }
         calcularTotal();
+        calculaFormPago();
     });
     $("#SelectVouchers").change(function () {
         var selectedItem = $(this).val();
@@ -485,6 +485,7 @@
             $('#TotalVouchers').text("$ 0");
         }
         calcularTotal();
+        calculaFormPago();
     });
     $("#SelectCunas").change(function () {
         var selectedItem = $(this).val();
@@ -497,6 +498,7 @@
             $('#TotalCunas').text("$ 0");
         }
         calcularTotal();
+        calculaFormPago();
     });
 
     function calcularTotal() {

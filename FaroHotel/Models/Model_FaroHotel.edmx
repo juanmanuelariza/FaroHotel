@@ -127,6 +127,7 @@
           <Property Name="ReservaHotelId" Type="int" Nullable="false" />
           <Property Name="Monto" Type="float" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="PagoId" Type="int" />
         </EntityType>
         <EntityType Name="EnlaceReservaHotelExtra">
           <Key>
@@ -157,6 +158,9 @@
           <Property Name="TipoFormaDePagoId" Type="int" Nullable="false" />
           <Property Name="Monto" Type="float" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="NroComprobante" Type="int" />
+          <Property Name="NombreTitular" Type="nvarchar" MaxLength="50" />
+          <Property Name="DniTitular" Type="int" />
         </EntityType>
         <EntityType Name="EnlaceReservaHotelPasajero">
           <Key>
@@ -590,14 +594,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EnlaceReservaHotelDescuento_ReservaHotel">
-          <End Role="ReservaHotel" Type="Self.ReservaHotel" Multiplicity="1" />
+          <End Role="EnlaceReservaHotelPago" Type="Self.EnlaceReservaHotelPago" Multiplicity="0..1" />
           <End Role="EnlaceReservaHotelDescuento" Type="Self.EnlaceReservaHotelDescuento" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ReservaHotel">
+            <Principal Role="EnlaceReservaHotelPago">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="EnlaceReservaHotelDescuento">
-              <PropertyRef Name="ReservaHotelId" />
+              <PropertyRef Name="PagoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -967,7 +971,6 @@
           <Parameter Name="ReservaId" Type="int" Mode="In" />
           <Parameter Name="usuarioId" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="func_Split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DelimitedString" Type="varchar" Mode="In" />
           <Parameter Name="Delimiter" Type="varchar" Mode="In" />
@@ -1025,37 +1028,12 @@
           <Parameter Name="ExtrasIds" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="ExtrasCantidad" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Observaciones" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ImporteContado" Type="decimal" Mode="In" />
+          <Parameter Name="ImporteBonificacion" Type="decimal" Mode="In" />
+          <Parameter Name="NroComprobantePago" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="NombreTitular" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DniTitular" Type="nvarchar(max)" Mode="In" />
         </Function>
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="FaroHotelModelStoreContainer">
           <EntitySet Name="Accion" EntityType="Self.Accion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetMenuAccion" EntityType="Self.AspNetMenuAccion" Schema="dbo" store:Type="Tables" />
@@ -1164,7 +1142,7 @@
             <End Role="EnlaceReservaHotelBus" EntitySet="EnlaceReservaHotelBus" />
           </AssociationSet>
           <AssociationSet Name="FK_EnlaceReservaHotelDescuento_ReservaHotel" Association="Self.FK_EnlaceReservaHotelDescuento_ReservaHotel">
-            <End Role="ReservaHotel" EntitySet="ReservaHotel" />
+            <End Role="EnlaceReservaHotelPago" EntitySet="EnlaceReservaHotelPago" />
             <End Role="EnlaceReservaHotelDescuento" EntitySet="EnlaceReservaHotelDescuento" />
           </AssociationSet>
           <AssociationSet Name="FK_EnlaceReservaHotelExtra_Extra" Association="Self.FK_EnlaceReservaHotelExtra_Extra">
@@ -1538,12 +1516,12 @@
           <NavigationProperty Name="Pasajero" Relationship="Self.FK_ReservaHotel_Pasajero" FromRole="ReservaHotel" ToRole="Pasajero" />
           <NavigationProperty Name="TipoHotel" Relationship="Self.FK_ReservaHotel_TipoHotel" FromRole="ReservaHotel" ToRole="TipoHotel" />
           <NavigationProperty Name="Bus" Relationship="FaroHotelModel.EnlaceReservaHotelBus" FromRole="ReservaHotel" ToRole="Bus" />
-          <NavigationProperty Name="EnlaceReservaHotelExtra" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_ReservaHotel" FromRole="ReservaHotel" ToRole="EnlaceReservaHotelExtra" />
           <Property Name="FormaDePagoId" Type="Int32" Nullable="false" />
           <Property Name="Observaciones" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TipoFormaDePago" Relationship="FaroHotelModel.FK_ReservaHotel_TipoFormaDePago" FromRole="ReservaHotel" ToRole="TipoFormaDePago" />
           <NavigationProperty Name="EnlaceReservaHotelDescuento" Relationship="FaroHotelModel.FK_EnlaceReservaHotelDescuento_ReservaHotel" FromRole="ReservaHotel" ToRole="EnlaceReservaHotelDescuento" />
           <NavigationProperty Name="EnlaceReservaHotelPago" Relationship="FaroHotelModel.FK_EnlaceReservaHotelPago_ReservaHotel" FromRole="ReservaHotel" ToRole="EnlaceReservaHotelPago" />
+          <NavigationProperty Name="EnlaceReservaHotelExtra" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_ReservaHotel" FromRole="ReservaHotel" ToRole="EnlaceReservaHotelExtra" />
         </EntityType>
         <EntityType Name="TipoCuota">
           <Key>
@@ -2165,6 +2143,11 @@
             <Parameter Name="ExtrasIds" Mode="In" Type="String" />
             <Parameter Name="ExtrasCantidad" Mode="In" Type="String" />
             <Parameter Name="Observaciones" Mode="In" Type="String" />
+            <Parameter Name="ImporteContado" Mode="In" Type="Decimal" />
+            <Parameter Name="ImporteBonificacion" Mode="In" Type="Decimal" />
+            <Parameter Name="NroComprobantePago" Mode="In" Type="String" />
+            <Parameter Name="NombreTitular" Mode="In" Type="String" />
+            <Parameter Name="DniTitular" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -2223,17 +2206,8 @@
           <FunctionImport Name="GetReserva" ReturnType="Collection(FaroHotelModel.GetReserva_Result)">
           <Parameter Name="ReservaId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="EnlaceReservaHotelExtra" EntityType="FaroHotelModel.EnlaceReservaHotelExtra" />
           <EntitySet Name="Extra" EntityType="FaroHotelModel.Extra" />
           <EntitySet Name="TipoExtra" EntityType="FaroHotelModel.TipoExtra" />
-          <AssociationSet Name="FK_EnlaceReservaHotelExtra_Extra" Association="FaroHotelModel.FK_EnlaceReservaHotelExtra_Extra">
-            <End Role="Extra" EntitySet="Extra" />
-            <End Role="EnlaceReservaHotelExtra" EntitySet="EnlaceReservaHotelExtra" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EnlaceReservaHotelExtra_ReservaHotel" Association="FaroHotelModel.FK_EnlaceReservaHotelExtra_ReservaHotel">
-            <End Role="ReservaHotel" EntitySet="ReservaHotel" />
-            <End Role="EnlaceReservaHotelExtra" EntitySet="EnlaceReservaHotelExtra" />
-          </AssociationSet>
           <AssociationSet Name="FK_Extra_TipoExtra" Association="FaroHotelModel.FK_Extra_TipoExtra">
             <End Role="TipoExtra" EntitySet="TipoExtra" />
             <End Role="Extra" EntitySet="Extra" />
@@ -2290,6 +2264,19 @@
             <Parameter Name="ReservaId" Mode="In" Type="Int32" />
             <Parameter Name="usuarioId" Mode="In" Type="String" />
           </FunctionImport>
+          <AssociationSet Name="FK_EnlaceReservaHotelDescuento_ReservaHotel1" Association="FaroHotelModel.FK_EnlaceReservaHotelDescuento_ReservaHotel1">
+            <End Role="EnlaceReservaHotelPago" EntitySet="EnlaceReservaHotelPago" />
+            <End Role="EnlaceReservaHotelDescuento" EntitySet="EnlaceReservaHotelDescuento" />
+          </AssociationSet>
+          <EntitySet Name="EnlaceReservaHotelExtra" EntityType="FaroHotelModel.EnlaceReservaHotelExtra" />
+          <AssociationSet Name="FK_EnlaceReservaHotelExtra_Extra" Association="FaroHotelModel.FK_EnlaceReservaHotelExtra_Extra">
+            <End Role="Extra" EntitySet="Extra" />
+            <End Role="EnlaceReservaHotelExtra" EntitySet="EnlaceReservaHotelExtra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceReservaHotelExtra_ReservaHotel" Association="FaroHotelModel.FK_EnlaceReservaHotelExtra_ReservaHotel">
+            <End Role="ReservaHotel" EntitySet="ReservaHotel" />
+            <End Role="EnlaceReservaHotelExtra" EntitySet="EnlaceReservaHotelExtra" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -2379,6 +2366,9 @@
           <Property Type="Byte" Name="NroBusIda" Nullable="true" />
           <Property Type="Byte" Name="NroBusVuelta" Nullable="true" />
           <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Boolean" Name="Celiaquia" Nullable="false" />
+          <Property Type="Boolean" Name="Diabetes" Nullable="false" />
+          <Property Type="Boolean" Name="Motricidad" Nullable="false" />
         </ComplexType>
         <ComplexType Name="GetReserva_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -2396,18 +2386,6 @@
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
           <Property Type="String" Name="NombreVentanilla" Nullable="false" MaxLength="100" />
         </ComplexType>
-        <EntityType Name="EnlaceReservaHotelExtra">
-          <Key>
-            <PropertyRef Name="ReservaHotelId" />
-            <PropertyRef Name="ExtraId" />
-          </Key>
-          <Property Name="ReservaHotelId" Type="Int32" Nullable="false" />
-          <Property Name="ExtraId" Type="Int32" Nullable="false" />
-          <Property Name="Cantidad" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Extra" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_Extra" FromRole="EnlaceReservaHotelExtra" ToRole="Extra" />
-          <NavigationProperty Name="ReservaHotel" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_ReservaHotel" FromRole="EnlaceReservaHotelExtra" ToRole="ReservaHotel" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
         <EntityType Name="Extra">
           <Key>
             <PropertyRef Name="ID" />
@@ -2417,8 +2395,8 @@
           <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Precio" Type="Double" Nullable="false" />
-          <NavigationProperty Name="EnlaceReservaHotelExtra" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_Extra" FromRole="Extra" ToRole="EnlaceReservaHotelExtra" />
           <NavigationProperty Name="TipoExtra" Relationship="FaroHotelModel.FK_Extra_TipoExtra" FromRole="Extra" ToRole="TipoExtra" />
+          <NavigationProperty Name="EnlaceReservaHotelExtra" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_Extra" FromRole="Extra" ToRole="EnlaceReservaHotelExtra" />
         </EntityType>
         <EntityType Name="TipoExtra">
           <Key>
@@ -2428,30 +2406,6 @@
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Extra" Relationship="FaroHotelModel.FK_Extra_TipoExtra" FromRole="TipoExtra" ToRole="Extra" />
         </EntityType>
-        <Association Name="FK_EnlaceReservaHotelExtra_Extra">
-          <End Type="FaroHotelModel.Extra" Role="Extra" Multiplicity="1" />
-          <End Type="FaroHotelModel.EnlaceReservaHotelExtra" Role="EnlaceReservaHotelExtra" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Extra">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EnlaceReservaHotelExtra">
-              <PropertyRef Name="ExtraId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EnlaceReservaHotelExtra_ReservaHotel">
-          <End Type="FaroHotelModel.ReservaHotel" Role="ReservaHotel" Multiplicity="1" />
-          <End Type="FaroHotelModel.EnlaceReservaHotelExtra" Role="EnlaceReservaHotelExtra" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ReservaHotel">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EnlaceReservaHotelExtra">
-              <PropertyRef Name="ReservaHotelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Extra_TipoExtra">
           <End Type="FaroHotelModel.TipoExtra" Role="TipoExtra" Multiplicity="1" />
           <End Type="FaroHotelModel.Extra" Role="Extra" Multiplicity="*" />
@@ -2549,6 +2503,8 @@
           <Property Name="Monto" Type="Double" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="ReservaHotel" Relationship="FaroHotelModel.FK_EnlaceReservaHotelDescuento_ReservaHotel" FromRole="EnlaceReservaHotelDescuento" ToRole="ReservaHotel" />
+          <Property Name="PagoId" Type="Int32" />
+          <NavigationProperty Name="EnlaceReservaHotelPago" Relationship="FaroHotelModel.FK_EnlaceReservaHotelDescuento_ReservaHotel1" FromRole="EnlaceReservaHotelDescuento" ToRole="EnlaceReservaHotelPago" />
         </EntityType>
         <EntityType Name="EnlaceReservaHotelPago">
           <Key>
@@ -2561,6 +2517,10 @@
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="ReservaHotel" Relationship="FaroHotelModel.FK_EnlaceReservaHotelPago_ReservaHotel" FromRole="EnlaceReservaHotelPago" ToRole="ReservaHotel" />
           <NavigationProperty Name="TipoFormaDePago" Relationship="FaroHotelModel.FK_EnlaceReservaHotelPago_TipoFormaDePago" FromRole="EnlaceReservaHotelPago" ToRole="TipoFormaDePago" />
+          <Property Name="NroComprobante" Type="Int32" />
+          <Property Name="NombreTitular" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DniTitular" Type="Int32" />
+          <NavigationProperty Name="EnlaceReservaHotelDescuento" Relationship="FaroHotelModel.FK_EnlaceReservaHotelDescuento_ReservaHotel1" FromRole="EnlaceReservaHotelPago" ToRole="EnlaceReservaHotelDescuento" />
         </EntityType>
         <Association Name="FK_EnlaceReservaHotelDescuento_ReservaHotel">
           <End Type="FaroHotelModel.ReservaHotel" Role="ReservaHotel" Multiplicity="1" />
@@ -2595,6 +2555,54 @@
             </Principal>
             <Dependent Role="EnlaceReservaHotelPago">
               <PropertyRef Name="TipoFormaDePagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceReservaHotelDescuento_ReservaHotel1">
+          <End Type="FaroHotelModel.EnlaceReservaHotelPago" Role="EnlaceReservaHotelPago" Multiplicity="0..1" />
+          <End Type="FaroHotelModel.EnlaceReservaHotelDescuento" Role="EnlaceReservaHotelDescuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnlaceReservaHotelPago">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceReservaHotelDescuento">
+              <PropertyRef Name="PagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EnlaceReservaHotelExtra">
+          <Key>
+            <PropertyRef Name="ReservaHotelId" />
+            <PropertyRef Name="ExtraId" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReservaHotelId" Type="Int32" Nullable="false" />
+          <Property Name="ExtraId" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Extra" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_Extra" FromRole="EnlaceReservaHotelExtra" ToRole="Extra" />
+          <NavigationProperty Name="ReservaHotel" Relationship="FaroHotelModel.FK_EnlaceReservaHotelExtra_ReservaHotel" FromRole="EnlaceReservaHotelExtra" ToRole="ReservaHotel" />
+        </EntityType>
+        <Association Name="FK_EnlaceReservaHotelExtra_Extra">
+          <End Type="FaroHotelModel.Extra" Role="Extra" Multiplicity="1" />
+          <End Type="FaroHotelModel.EnlaceReservaHotelExtra" Role="EnlaceReservaHotelExtra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Extra">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceReservaHotelExtra">
+              <PropertyRef Name="ExtraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceReservaHotelExtra_ReservaHotel">
+          <End Type="FaroHotelModel.ReservaHotel" Role="ReservaHotel" Multiplicity="1" />
+          <End Type="FaroHotelModel.EnlaceReservaHotelExtra" Role="EnlaceReservaHotelExtra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReservaHotel">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceReservaHotelExtra">
+              <PropertyRef Name="ReservaHotelId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2950,30 +2958,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="FaroHotelModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="FaroHotelModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="FaroHotelModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="FaroHotelModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="FaroHotelModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="FaroHotelModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="FaroHotelModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="FaroHotelModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="FaroHotelModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="GetHabitacionesDisponibles" FunctionName="FaroHotelModel.Store.GetHabitacionesDisponibles">
             <ResultMapping>
               <ComplexTypeMapping TypeName="FaroHotelModel.GetHabitacionesDisponibles_Result">
@@ -3027,6 +3011,9 @@
                 <ScalarProperty Name="NroBusIda" ColumnName="NroBusIda" />
                 <ScalarProperty Name="NroBusVuelta" ColumnName="NroBusVuelta" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Celiaquia" ColumnName="Celiaquia" />
+                <ScalarProperty Name="Diabetes" ColumnName="Diabetes" />
+                <ScalarProperty Name="Motricidad" ColumnName="Motricidad" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3050,16 +3037,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="EnlaceReservaHotelExtra">
-            <EntityTypeMapping TypeName="FaroHotelModel.EnlaceReservaHotelExtra">
-              <MappingFragment StoreEntitySet="EnlaceReservaHotelExtra">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="ExtraId" ColumnName="ExtraId" />
-                <ScalarProperty Name="ReservaHotelId" ColumnName="ReservaHotelId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Extra">
             <EntityTypeMapping TypeName="FaroHotelModel.Extra">
               <MappingFragment StoreEntitySet="Extra">
@@ -3153,6 +3130,7 @@
           <EntitySetMapping Name="EnlaceReservaHotelDescuento">
             <EntityTypeMapping TypeName="FaroHotelModel.EnlaceReservaHotelDescuento">
               <MappingFragment StoreEntitySet="EnlaceReservaHotelDescuento">
+                <ScalarProperty Name="PagoId" ColumnName="PagoId" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Monto" ColumnName="Monto" />
                 <ScalarProperty Name="ReservaHotelId" ColumnName="ReservaHotelId" />
@@ -3163,6 +3141,9 @@
           <EntitySetMapping Name="EnlaceReservaHotelPago">
             <EntityTypeMapping TypeName="FaroHotelModel.EnlaceReservaHotelPago">
               <MappingFragment StoreEntitySet="EnlaceReservaHotelPago">
+                <ScalarProperty Name="DniTitular" ColumnName="DniTitular" />
+                <ScalarProperty Name="NombreTitular" ColumnName="NombreTitular" />
+                <ScalarProperty Name="NroComprobante" ColumnName="NroComprobante" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Monto" ColumnName="Monto" />
                 <ScalarProperty Name="TipoFormaDePagoId" ColumnName="TipoFormaDePagoId" />
@@ -3172,6 +3153,16 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="EliminarReserva" FunctionName="FaroHotelModel.Store.EliminarReserva" />
+          <EntitySetMapping Name="EnlaceReservaHotelExtra">
+            <EntityTypeMapping TypeName="FaroHotelModel.EnlaceReservaHotelExtra">
+              <MappingFragment StoreEntitySet="EnlaceReservaHotelExtra">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ExtraId" ColumnName="ExtraId" />
+                <ScalarProperty Name="ReservaHotelId" ColumnName="ReservaHotelId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

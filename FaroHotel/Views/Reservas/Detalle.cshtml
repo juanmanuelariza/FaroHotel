@@ -34,10 +34,12 @@
                             <strong>Confirmada:</strong> <span id="SpanConfirmada">@item.Confirmada.ToString().Replace("False", "No").Replace("True", "Si")</span>
                         </div>
                         <div class="col-md-6">
-                            <h4><strong>Información del titular</strong>
+                            <h4>
+                                <strong>Información del titular</strong>
                                 <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarTitular/@ViewBag.ReservaId', 'Editar', 'Titular')">
                                     <i class="fa fa-pencil-square-o"></i> Editar Titular
-                                </button></h4>
+                                </button>
+                            </h4>
                             <strong>DNI:</strong> <span id="SpanDniTitular">@item.DNI</span><br />
                             <strong>Apellido:</strong> <span id="SpanApellidoTitular">@item.Apellido</span><br />
                             <strong>Nombre:</strong> <span id="SpanNombreTitular">@item.Nombre</span><br />
@@ -55,36 +57,36 @@
         </div>
     </div>
 
-  
-        <div class="col-md-12">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2 class="box-title">Observaciones</h2>
-                    @if (@ViewBag.Reserva.Observaciones != null && @ViewBag.Reserva.Observaciones != "")
-                    {
-                        <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarObservaciones/@ViewBag.ReservaId', 'Editar', 'Observaciones')">
-                            <i class="fa fa-pencil-square-o"></i> Editar
-                        </button>
-                    }
-                    else
-                    {
-                        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/AgregarObservaciones/@ViewBag.ReservaId', 'Agregar', 'Observaciones')">
-                            <i class="fa fa-plus"></i> Agregar
-                        </button>
-                    }
-                    <div class="clearfix"></div>
-                </div>
-                <!-- /.box-header -->
-                <div class="x_content">
-                    <div class="col-md-12">
-                        <p>@ViewBag.Reserva.Observaciones</p>
-                    </div>
-                </div>
-                <!-- /.box-body -->
+
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2 class="box-title">Observaciones</h2>
+                @if (@ViewBag.Reserva.Observaciones != null && @ViewBag.Reserva.Observaciones != "")
+                {
+                    <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarObservaciones/@ViewBag.ReservaId', 'Editar', 'Observaciones')">
+                        <i class="fa fa-pencil-square-o"></i> Editar
+                    </button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/AgregarObservaciones/@ViewBag.ReservaId', 'Agregar', 'Observaciones')">
+                        <i class="fa fa-plus"></i> Agregar
+                    </button>
+                }
+                <div class="clearfix"></div>
             </div>
+            <!-- /.box-header -->
+            <div class="x_content">
+                <div class="col-md-12">
+                    <p>@ViewBag.Reserva.Observaciones</p>
+                </div>
+            </div>
+            <!-- /.box-body -->
         </div>
-        <div class="clearfix"></div>
-    
+    </div>
+    <div class="clearfix"></div>
+
     <div class="col-md-12">
         <div class="x_panel">
             <div class="x_title">
@@ -153,6 +155,12 @@
                             <div class="col-md-12">
                                 <h4>
                                     <strong>@item.Apellido, @item.Nombre</strong>
+                                    @if (item.Celiaquia == true)
+                                    {<span class="colorRed">(Celiaquia) </span>}
+                                    @if (item.Diabetes == true)
+                                    {<span class="colorRed">(Diabetes) </span>}
+                                    @if (item.Motricidad == true)
+                                    {<span class="colorRed">(Motricidad)</span>}
                                     <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger pull-right fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="eliminarPasajero(@item.ID)"></a></span>
                                     @*<span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarHabitacion/@item.ID','Editar','Habitacion')"></a></span>*@
                                 </h4>
@@ -323,39 +331,39 @@
             <div class="x_content">
                 @if (Enumerable.Count(ViewBag.Pagos) > 0)
                 {
-                <div class="col-md-12">
-                    <table id="dtPagos" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Tipo de Pago</th>
-                                <th>Monto</th>
-                                <th>Fecha de pago</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (FaroHotel.Models.EnlaceReservaHotelPago item in ViewBag.Pagos)
-                            {
+                    <div class="col-md-12">
+                        <table id="dtPagos" class="table table-bordered table-striped">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <span>@Html.DisplayFor(modelItem => item.TipoFormaDePago.Descripcion)</span>
-                                    </td>
-                                    <td>
-                                        $ <span class="MontoPago">@Html.DisplayFor(modelItem => item.Monto)</span>
-                                    </td>
-                                    <td>
-                                        <span>@Html.DisplayFor(modelItem => item.Fecha)</span>
-                                    </td>
-                                    <td>
-                                        @*<span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarPago/@item.ID','Editar','Pago')"></a></span>*@
-                                         <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EliminarPago/@item.ID','Eliminar','Pago')"></a></span>
-                                    </td>
+                                    <th>Tipo de Pago</th>
+                                    <th>Monto</th>
+                                    <th>Fecha de pago</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-6">Total: $ <span id="Total_Pagos"></span></div>
+                            </thead>
+                            <tbody>
+                                @foreach (FaroHotel.Models.EnlaceReservaHotelPago item in ViewBag.Pagos)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span>@Html.DisplayFor(modelItem => item.TipoFormaDePago.Descripcion)</span>
+                                        </td>
+                                        <td>
+                                            $ <span class="MontoPago">@Html.DisplayFor(modelItem => item.Monto)</span>
+                                        </td>
+                                        <td>
+                                            <span>@Html.DisplayFor(modelItem => item.Fecha)</span>
+                                        </td>
+                                        <td>
+                                            @*<span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarPago/@item.ID','Editar','Pago')"></a></span>*@
+                                            <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EliminarPago/@item.ID','Eliminar','Pago')"></a></span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">Total: $ <span id="Total_Pagos"></span></div>
                 }
             </div>
             <!-- /.box-body -->
@@ -384,6 +392,7 @@
                             <thead>
                                 <tr>
                                     <th>Monto</th>
+                                    <th>Tipo</th>
                                     <th>Fecha de descuento</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -396,6 +405,18 @@
                                             $ <span class="MontoDescuento">@Html.DisplayFor(modelItem => item.Monto)</span>
                                         </td>
                                         <td>
+                                            @if (item.PagoId != null)
+                                            {
+                                                <span>Descuento por pago contado</span>
+
+                                            }
+                                            else
+                                            {
+                                                <span>Descuento</span>
+
+                                            }
+                                        </td>
+                                        <td>
                                             <span>@Html.DisplayFor(modelItem => item.Fecha)</span>
                                         </td>
                                         <td>
@@ -403,7 +424,7 @@
                                             {
                                                 @*<span title="Editar" data-toggle="tooltip"><a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarPago/@item.ID','Editar','Pago')"></a></span>*@
                                                 <span title="Eliminar" data-toggle="tooltip"><a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EliminarDescuento/@item.ID','Eliminar','Descuento')"></a></span>
-                                            }                                            
+                                            }
                                         </td>
                                     </tr>
                                 }
@@ -419,41 +440,41 @@
     <div class="clearfix"></div>
 
 
-    <div class="col-md-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2 class="box-title">Desglose de Precio</h2>               
-                <div class="clearfix"></div>
+    @*<div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2 class="box-title">Desglose de Precio</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- /.box-header -->
+                <div class="x_content">
+                    <div class="col-md-4">
+                        <div class="text-right">
+                            PAQUETES --> $ <span id="Total_Paquetes"></span>
+                            <br />
+                            EXTRAS --> $ <span id="Total_Extras"></span>
+                            <br />
+                            <strong>SUBTOTAL --> $ <span id="SubTotal_1"></span></strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-right">
+                            DESCUENTOS --> $ <span id="Total_Descuentos"></span>
+                            <br />
+                            DESCUENTO POR PAGO CONTADO --> $ <span id="Total_DescuentosPagoContado"></span>
+                            <br />
+                            <strong>SUBTOTAL DESCUENTOS --> $<span id="SubTotal_2"></span></strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-right">
+                            <strong>DEUDA --> $ 8000</strong>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
             </div>
-            <!-- /.box-header -->
-            <div class="x_content">
-                <div class="col-md-4">
-                    <div class="text-right">
-                        PAQUETES --> $ <span id="Total_Paquetes"></span>
-                        <br />
-                        EXTRAS --> $ <span id="Total_Extras"></span>
-                        <br />
-                        <strong>SUBTOTAL --> $ <span id="SubTotal_1"></span></strong>
-                    </div>
-                </div>  
-                <div class="col-md-4">
-                    <div class="text-right">
-                        DESCUENTOS --> $ <span id="Total_Descuentos"></span>
-                        <br />
-                        DESCUENTO POR PAGO CONTADO --> $ <span id="Total_DescuentosPagoContado"></span>
-                        <br />
-                        <strong>SUBTOTAL DESCUENTOS --> $<span id="SubTotal_2"></span></strong>
-                    </div>
-                </div>    
-                <div class="col-md-4">
-                    <div class="text-right">
-                        <strong>DEUDA --> $ 8000</strong>
-                    </div>
-                </div>                  
-            </div>
-            <!-- /.box-body -->
-        </div>
-    </div>
+        </div>*@
     <div class="clearfix"></div>
 
     @*@if (ViewBag.Confirmada == false && ViewBag.VentanillaUsuarioId == 9)*@

@@ -53,13 +53,13 @@ namespace FaroHotel.Models
         public virtual DbSet<TipoTrayecto> TipoTrayecto { get; set; }
         public virtual DbSet<Ventanilla> Ventanilla { get; set; }
         public virtual DbSet<TipoBase> TipoBase { get; set; }
-        public virtual DbSet<EnlaceReservaHotelExtra> EnlaceReservaHotelExtra { get; set; }
         public virtual DbSet<Extra> Extra { get; set; }
         public virtual DbSet<TipoExtra> TipoExtra { get; set; }
         public virtual DbSet<TipoBus> TipoBus { get; set; }
         public virtual DbSet<TipoFormaDePago> TipoFormaDePago { get; set; }
         public virtual DbSet<EnlaceReservaHotelDescuento> EnlaceReservaHotelDescuento { get; set; }
         public virtual DbSet<EnlaceReservaHotelPago> EnlaceReservaHotelPago { get; set; }
+        public virtual DbSet<EnlaceReservaHotelExtra> EnlaceReservaHotelExtra { get; set; }
     
         [DbFunction("FaroHotelEntities", "func_Split")]
         public virtual IQueryable<func_Split_Result> func_Split(string delimitedString, string delimiter)
@@ -84,7 +84,7 @@ namespace FaroHotel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPermisosPorNombreDeUsuario_Result>("GetPermisosPorNombreDeUsuario", userNameParameter);
         }
     
-        public virtual ObjectResult<InsertBooking_Result> InsertBooking(Nullable<System.DateTime> fecha, Nullable<int> hotelId, Nullable<int> noches, Nullable<int> titularId, string tipoHabitacionesIds, string habitacionesIds, string pasajerosIds, string paquetesIds, string baseIds, string usuarioAlta, string busesIdaIds, string asientosIdaIds, string busesVueltaIds, string asientosVueltaIds, string extrasIds, string extrasCantidad, string observaciones)
+        public virtual ObjectResult<InsertBooking_Result> InsertBooking(Nullable<System.DateTime> fecha, Nullable<int> hotelId, Nullable<int> noches, Nullable<int> titularId, string tipoHabitacionesIds, string habitacionesIds, string pasajerosIds, string paquetesIds, string baseIds, string usuarioAlta, string busesIdaIds, string asientosIdaIds, string busesVueltaIds, string asientosVueltaIds, string extrasIds, string extrasCantidad, string observaciones, Nullable<decimal> importeContado, Nullable<decimal> importeBonificacion, string nroComprobantePago, string nombreTitular, string dniTitular)
         {
             var fechaParameter = fecha.HasValue ?
                 new ObjectParameter("Fecha", fecha) :
@@ -154,7 +154,27 @@ namespace FaroHotel.Models
                 new ObjectParameter("Observaciones", observaciones) :
                 new ObjectParameter("Observaciones", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertBooking_Result>("InsertBooking", fechaParameter, hotelIdParameter, nochesParameter, titularIdParameter, tipoHabitacionesIdsParameter, habitacionesIdsParameter, pasajerosIdsParameter, paquetesIdsParameter, baseIdsParameter, usuarioAltaParameter, busesIdaIdsParameter, asientosIdaIdsParameter, busesVueltaIdsParameter, asientosVueltaIdsParameter, extrasIdsParameter, extrasCantidadParameter, observacionesParameter);
+            var importeContadoParameter = importeContado.HasValue ?
+                new ObjectParameter("ImporteContado", importeContado) :
+                new ObjectParameter("ImporteContado", typeof(decimal));
+    
+            var importeBonificacionParameter = importeBonificacion.HasValue ?
+                new ObjectParameter("ImporteBonificacion", importeBonificacion) :
+                new ObjectParameter("ImporteBonificacion", typeof(decimal));
+    
+            var nroComprobantePagoParameter = nroComprobantePago != null ?
+                new ObjectParameter("NroComprobantePago", nroComprobantePago) :
+                new ObjectParameter("NroComprobantePago", typeof(string));
+    
+            var nombreTitularParameter = nombreTitular != null ?
+                new ObjectParameter("NombreTitular", nombreTitular) :
+                new ObjectParameter("NombreTitular", typeof(string));
+    
+            var dniTitularParameter = dniTitular != null ?
+                new ObjectParameter("DniTitular", dniTitular) :
+                new ObjectParameter("DniTitular", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertBooking_Result>("InsertBooking", fechaParameter, hotelIdParameter, nochesParameter, titularIdParameter, tipoHabitacionesIdsParameter, habitacionesIdsParameter, pasajerosIdsParameter, paquetesIdsParameter, baseIdsParameter, usuarioAltaParameter, busesIdaIdsParameter, asientosIdaIdsParameter, busesVueltaIdsParameter, asientosVueltaIdsParameter, extrasIdsParameter, extrasCantidadParameter, observacionesParameter, importeContadoParameter, importeBonificacionParameter, nroComprobantePagoParameter, nombreTitularParameter, dniTitularParameter);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)

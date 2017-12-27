@@ -14,13 +14,24 @@ namespace FaroHotel.Models
     
     public partial class EnlaceReservaHotelPago
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public EnlaceReservaHotelPago()
+        {
+            this.EnlaceReservaHotelDescuento = new HashSet<EnlaceReservaHotelDescuento>();
+        }
+    
         public int ID { get; set; }
         public int ReservaHotelId { get; set; }
         public int TipoFormaDePagoId { get; set; }
         public double Monto { get; set; }
         public System.DateTime Fecha { get; set; }
+        public Nullable<int> NroComprobante { get; set; }
+        public string NombreTitular { get; set; }
+        public Nullable<int> DniTitular { get; set; }
     
         public virtual ReservaHotel ReservaHotel { get; set; }
         public virtual TipoFormaDePago TipoFormaDePago { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EnlaceReservaHotelDescuento> EnlaceReservaHotelDescuento { get; set; }
     }
 }

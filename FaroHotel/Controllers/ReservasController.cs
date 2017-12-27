@@ -84,8 +84,7 @@ namespace FaroHotel.Controllers
         }
         public ActionResult Step4(DateTime ParamFecha, int ParamHotelId, int ParamNochesId, int ParamTitularId, int[] ParamTipoHabitacionesIds, 
             int[] ParamHabitacionesIds, int[] ParamPasajerosIds, int[] ParamPaquetesIds, int[] ParamBaseIds, int[] ParamBusIdaIds, 
-            int[] ParamAsientosIdaIds, int[] ParamBusVueltaIds, int[] ParamAsientosVueltaIds, int[] ParamExtrasIds, int[] ParamExtrasCantidad,string ParamObservaciones,
-            
+            int[] ParamAsientosIdaIds, int[] ParamBusVueltaIds, int[] ParamAsientosVueltaIds, int[] ParamExtrasIds, int[] ParamExtrasCantidad, string ParamObservaciones,            
             decimal ParamImporteContado, decimal ParamImporteBonificacion, decimal ParamImporteCuotas, int ParamCantCuotas,
             string ParamNroComprobantePago, string ParamNombreTitular, string ParamDniTitular
             )            
@@ -99,19 +98,21 @@ namespace FaroHotel.Controllers
                 User.Identity.GetUserId(), string.Join(",", ParamBusIdaIds), string.Join(",", ParamAsientosIdaIds),
                 string.Join(",", ParamBusVueltaIds), string.Join(",", ParamAsientosVueltaIds), 
                 string.Join(",", ParamExtrasIds), string.Join(",", ParamExtrasCantidad),
-                ParamObservaciones).FirstOrDefault();
+                ParamObservaciones, ParamImporteContado, ParamImporteBonificacion, ParamNroComprobantePago, 
+                ParamNombreTitular, ParamDniTitular).FirstOrDefault();
             ViewBag.NroReserva = result.ReservaHotelID;
 
             try
             {
+                ReservaHotel NuevaReserva = db.ReservaHotel.Find(result.ReservaHotelID);
                 //Envio Mail
                 SendMail mail = new SendMail();
-                mail.Destinatario = "juanma.ariza23@gmail.com";
-                mail.Asunto = "Nueva Reserva!!";
-                mail.Mensaje = "http://www.sistemaelfarohotel.com/Reservas/Detalle/" + result.ReservaHotelID;
+                mail.Destinatario = "virginiaharanda@gmail.com";
+                mail.Asunto = "Nueva Reserva!! " + NuevaReserva.AspNetUsers.Ventanilla.Nombre;
+                mail.Mensaje = NuevaReserva.Pasajero.Apellido + " x" + NuevaReserva.EnlaceReservaHotelPasajero.Count + "<br/> http://www.sistemaelfarohotel.com/Reservas/Detalle/" + result.ReservaHotelID;
                 mail.Send();
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 //throw;

@@ -18,7 +18,9 @@ namespace FaroHotel.Models
         public int ReservaHotelId { get; set; }
         public double Monto { get; set; }
         public System.DateTime Fecha { get; set; }
+        public Nullable<int> PagoId { get; set; }
     
         public virtual ReservaHotel ReservaHotel { get; set; }
+        public virtual EnlaceReservaHotelPago EnlaceReservaHotelPago { get; set; }
     }
 }

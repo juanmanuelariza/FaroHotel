@@ -26,8 +26,8 @@ namespace FaroHotel.Models
         public System.DateTime FechaHasta { get; set; }
         public double Precio { get; set; }
     
+        public virtual TipoExtra TipoExtra { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EnlaceReservaHotelExtra> EnlaceReservaHotelExtra { get; set; }
-        public virtual TipoExtra TipoExtra { get; set; }
     }
 }
