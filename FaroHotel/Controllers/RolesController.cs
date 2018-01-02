@@ -258,38 +258,42 @@ namespace FaroHotel.Controllers
                     #region Alta de registros en "MenuAspNetRoles" y "MenuAspNetRolesAccion"
                     foreach (var idMenu in idMenus)
                     {
-                        //Creo el nuevo registro "MenuAspNetRoles"
-                        var itemMenuRol = new MenuAspNetRoles
-                        {
-                            MenuId = int.Parse(idMenu.id),
-                            AspNetRolesId = idRol
-                        };
+                        Menu menu = db.Menu.Find(int.Parse(idMenu.id));
 
-                        //Guardo el nuevo registro "MenuAspNetRoles"
-                        db.MenuAspNetRoles.Add(itemMenuRol);
-                        db.SaveChanges();
-
-
-                        //Si existe alguna accion asociada al menu registrado, se crean los registros
-                        //correspondientes en "MenuAspNetRolesAccion"
-                        if (idMenusAccion.Any(r => r.idMenu == idMenu.id))
-                        {
-                            foreach (var accion in idMenusAccion.Where(r => r.idMenu == idMenu.id))
+                        if(menu.PadreID != null)
                             {
-                                //Creo el nuevo registro "MenuAspNetRolesAccion"
-                                var itemMenuRolAccion = new MenuAspNetRolesAccion
-                                {
-                                    MenuAspNetRolesId = itemMenuRol.ID,
-                                    AccionId = int.Parse(accion.idAccion)
-                                };
+                            //Creo el nuevo registro "MenuAspNetRoles"
+                            var itemMenuRol = new MenuAspNetRoles
+                            {
+                                MenuId = int.Parse(idMenu.id),
+                                AspNetRolesId = idRol
+                            };
 
-                                //Guardo el nuevo registro "MenuAspNetRolesAccion"
-                                db.MenuAspNetRolesAccion.Add(itemMenuRolAccion);
-                            }
+                            //Guardo el nuevo registro "MenuAspNetRoles"
+                            db.MenuAspNetRoles.Add(itemMenuRol);
                             db.SaveChanges();
 
-                        }
 
+                            //Si existe alguna accion asociada al menu registrado, se crean los registros
+                            //correspondientes en "MenuAspNetRolesAccion"
+                            if (idMenusAccion.Any(r => r.idMenu == idMenu.id))
+                            {
+                                foreach (var accion in idMenusAccion.Where(r => r.idMenu == idMenu.id))
+                                {
+                                    //Creo el nuevo registro "MenuAspNetRolesAccion"
+                                    var itemMenuRolAccion = new MenuAspNetRolesAccion
+                                    {
+                                        MenuAspNetRolesId = itemMenuRol.ID,
+                                        AccionId = int.Parse(accion.idAccion)
+                                    };
+
+                                    //Guardo el nuevo registro "MenuAspNetRolesAccion"
+                                    db.MenuAspNetRolesAccion.Add(itemMenuRolAccion);
+                                }
+                                db.SaveChanges();
+
+                            }
+                        }
                     }
 
                     tran.Complete();
