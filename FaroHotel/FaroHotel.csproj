@@ -235,6 +235,9 @@
     <Compile Include="Models\EnlaceReservaHotelPasajero.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EnlaceUsuarioVentanilla.cs">
+      <DependentUpon>Model_FaroHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Extra.cs">
       <DependentUpon>Model_FaroHotel.tt</DependentUpon>
     </Compile>

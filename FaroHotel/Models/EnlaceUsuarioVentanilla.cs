@@ -12,14 +12,13 @@ namespace FaroHotel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EnlaceReservaHotelHabitacion
+    public partial class EnlaceUsuarioVentanilla
     {
         public int ID { get; set; }
-        public int ReservaHotelId { get; set; }
-        public int HabitacionId { get; set; }
-        public int TipoHabitacionId { get; set; }
+        public string UserId { get; set; }
+        public int VentanillaId { get; set; }
     
-        public virtual Habitacion Habitacion { get; set; }
-        public virtual ReservaHotel ReservaHotel { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual Ventanilla Ventanilla { get; set; }
     }
 }

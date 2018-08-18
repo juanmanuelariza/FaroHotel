@@ -23,7 +23,6 @@
                         <th>Usuario</th>
                         <th>Apellido</th>
                         <th>Nombre</th>
-                        <th>Ventanilla</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -34,7 +33,6 @@
                             <td>@Html.DisplayFor(modelItem => item.UserName)</td>
                             <td>@Html.DisplayFor(modelItem => item.LastName)</td>
                             <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Ventanilla.Nombre)</td>
                             <td>
                                 <div class="btn-group-sm">
                                     <span title="Detalle" data-toggle="tooltip"><a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Usuarios/Details/@item.Id','Detalle','Usuario')"></a></span>

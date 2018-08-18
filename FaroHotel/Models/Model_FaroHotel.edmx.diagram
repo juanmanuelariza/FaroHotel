@@ -9,10 +9,8 @@
         <EntityTypeShape EntityType="FaroHotelModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FaroHotelModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FaroHotelModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FaroHotelModel.AspNetUsers" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FaroHotelModel.Bus" Width="1.5" PointX="10" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FaroHotelModel.EnlaceBusPasajero" Width="1.5" PointX="13.25" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FaroHotelModel.EnlaceReservaHotelHabitacion" Width="1.5" PointX="10.5" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FaroHotelModel.EnlaceReservaHotelPasajero" Width="1.5" PointX="10.5" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FaroHotelModel.Habitacion" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FaroHotelModel.Menu" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
@@ -32,18 +30,9 @@
         <EntityTypeShape EntityType="FaroHotelModel.Ventanilla" Width="1.5" PointX="10.5" PointY="29.5" IsExpanded="true" />
         <AssociationConnector Association="FaroHotelModel.FK_MenuAspNetRolesAccion_Accion" ManuallyRouted="false" />
         <AssociationConnector Association="FaroHotelModel.FK_MenuAspNetRoles_AspNetRoles" ManuallyRouted="false" />
-        <AssociationConnector Association="FaroHotelModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="FaroHotelModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="FaroHotelModel.FK_ReservaHotel_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="FaroHotelModel.FK_ReservaHotel_AspNetUsers1" ManuallyRouted="false" />
-        <AssociationConnector Association="FaroHotelModel.FK_ReservaHotel_AspNetUsers2" ManuallyRouted="false" />
-        <AssociationConnector Association="FaroHotelModel.FK_ReservaHotel_AspNetUsers3" ManuallyRouted="false" />
         <AssociationConnector Association="FaroHotelModel.FK_Bus_TipoTrayecto" ManuallyRouted="false" />
         <AssociationConnector Association="FaroHotelModel.FK_EnlaceBusPasajero_Bus" ManuallyRouted="false" />
         <AssociationConnector Association="FaroHotelModel.FK_EnlaceBusPasajero_Pasajero" ManuallyRouted="false" />
-        <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelHabitacion_EnlaceReservaHotelHabitacion" ManuallyRouted="false" />
-        <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelHabitacion_Habitacion" ManuallyRouted="false" />
-        <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelHabitacion_ReservaHotel" ManuallyRouted="false" />
         <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelPasajero_Paquete" ManuallyRouted="false" />
         <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelPasajero_Pasajero" ManuallyRouted="false" />
         <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelPasajero_ReservaHotel" ManuallyRouted="false" />
@@ -59,10 +48,8 @@
         <AssociationConnector Association="FaroHotelModel.FK_ReservaHotel_Pasajero" ManuallyRouted="false" />
         <AssociationConnector Association="FaroHotelModel.FK_ReservaHotel_TipoHotel" ManuallyRouted="false" />
         <AssociationConnector Association="FaroHotelModel.AspNetMenuAccion" ManuallyRouted="false" />
-        <AssociationConnector Association="FaroHotelModel.AspNetUserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="FaroHotelModel.EnlaceHabitacionTipoHabitacion" ManuallyRouted="false" />
         <AssociationConnector Association="FaroHotelModel.EnlacePaqueteVentanilla" ManuallyRouted="false" />
-        <AssociationConnector Association="FaroHotelModel.FK_AspNetUsers_Ventanilla" />
         <AssociationConnector Association="FaroHotelModel.EnlaceReservaHotelBus" />
         <EntityTypeShape EntityType="FaroHotelModel.TipoBase" Width="1.5" PointX="10.375" PointY="0.875" />
         <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelPasajero_TipoBase" />
@@ -82,6 +69,21 @@
         <EntityTypeShape EntityType="FaroHotelModel.EnlaceReservaHotelExtra" Width="1.5" PointX="16.875" PointY="7.75" />
         <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelExtra_Extra" />
         <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelExtra_ReservaHotel" />
+        <EntityTypeShape EntityType="FaroHotelModel.AspNetUsers" Width="1.5" PointX="3" PointY="10" />
+        <EntityTypeShape EntityType="FaroHotelModel.EnlaceUsuarioVentanilla" Width="1.5" PointX="12.75" PointY="20" />
+        <AssociationConnector Association="FaroHotelModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="FaroHotelModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="FaroHotelModel.FK_EnlaceUsuarioVentanilla_AspNetUsers" />
+        <AssociationConnector Association="FaroHotelModel.FK_ReservaHotel_AspNetUsers" />
+        <AssociationConnector Association="FaroHotelModel.FK_ReservaHotel_AspNetUsers1" />
+        <AssociationConnector Association="FaroHotelModel.FK_ReservaHotel_AspNetUsers2" />
+        <AssociationConnector Association="FaroHotelModel.FK_ReservaHotel_AspNetUsers3" />
+        <AssociationConnector Association="FaroHotelModel.FK_EnlaceUsuarioVentanilla_Ventanilla" />
+        <AssociationConnector Association="FaroHotelModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="FaroHotelModel.EnlaceReservaHotelHabitacion" Width="1.5" PointX="13.5" PointY="7.625" />
+        <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelHabitacion_Habitacion" />
+        <AssociationConnector Association="FaroHotelModel.FK_EnlaceReservaHotelHabitacion_ReservaHotel" />
+        <AssociationConnector Association="FaroHotelModel.FK_ReservaHotel_Ventanilla" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -38,27 +38,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AspNetUsers">
-      <EntityTypeMapping TypeName="FaroHotelModel.AspNetUsers">
-        <MappingFragment StoreEntitySet="AspNetUsers">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="VentanillaId" ColumnName="VentanillaId" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Bus">
       <EntityTypeMapping TypeName="FaroHotelModel.Bus">
         <MappingFragment StoreEntitySet="Bus">
@@ -76,16 +55,6 @@
           <ScalarProperty Name="BusId" ColumnName="BusId" />
           <ScalarProperty Name="PasajeroId" ColumnName="PasajeroId" />
           <ScalarProperty Name="NroButaca" ColumnName="NroButaca" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EnlaceReservaHotelHabitacion">
-      <EntityTypeMapping TypeName="FaroHotelModel.EnlaceReservaHotelHabitacion">
-        <MappingFragment StoreEntitySet="EnlaceReservaHotelHabitacion">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ReservaHotelId" ColumnName="ReservaHotelId" />
-          <ScalarProperty Name="HabitacionId" ColumnName="HabitacionId" />
-          <ScalarProperty Name="TipoHabitacionId" ColumnName="TipoHabitacionId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -183,6 +152,7 @@
     <EntitySetMapping Name="ReservaHotel">
       <EntityTypeMapping TypeName="FaroHotelModel.ReservaHotel">
         <MappingFragment StoreEntitySet="ReservaHotel">
+          <ScalarProperty Name="VentanillaId" ColumnName="VentanillaId" />
           <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
           <ScalarProperty Name="FormaDePagoId" ColumnName="FormaDePagoId" />
           <ScalarProperty Name="ID" ColumnName="ID" />
@@ -291,14 +261,6 @@
       </EndProperty>
       <EndProperty Name="Menu">
         <ScalarProperty Name="ID" ColumnName="IdMenu" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="AspNetUserRoles" TypeName="FaroHotelModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-      <EndProperty Name="AspNetRoles">
-        <ScalarProperty Name="Id" ColumnName="RoleId" />
-      </EndProperty>
-      <EndProperty Name="AspNetUsers">
-        <ScalarProperty Name="Id" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="EnlaceHabitacionTipoHabitacion" TypeName="FaroHotelModel.EnlaceHabitacionTipoHabitacion" StoreEntitySet="EnlaceHabitacionTipoHabitacion">
@@ -547,6 +509,53 @@
         <MappingFragment StoreEntitySet="EnlaceReservaHotelExtra">
           <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
           <ScalarProperty Name="ExtraId" ColumnName="ExtraId" />
+          <ScalarProperty Name="ReservaHotelId" ColumnName="ReservaHotelId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="FaroHotelModel.AspNetUsers">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnlaceUsuarioVentanilla">
+      <EntityTypeMapping TypeName="FaroHotelModel.EnlaceUsuarioVentanilla">
+        <MappingFragment StoreEntitySet="EnlaceUsuarioVentanilla">
+          <ScalarProperty Name="VentanillaId" ColumnName="VentanillaId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="FaroHotelModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="EnlaceReservaHotelHabitacion">
+      <EntityTypeMapping TypeName="FaroHotelModel.EnlaceReservaHotelHabitacion">
+        <MappingFragment StoreEntitySet="EnlaceReservaHotelHabitacion">
+          <ScalarProperty Name="TipoHabitacionId" ColumnName="TipoHabitacionId" />
+          <ScalarProperty Name="HabitacionId" ColumnName="HabitacionId" />
           <ScalarProperty Name="ReservaHotelId" ColumnName="ReservaHotelId" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>

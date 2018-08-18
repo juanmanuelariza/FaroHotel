@@ -57,16 +57,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-12">
-                        <div class="form-group row">
-                            <label class="control-label col-md-3" for="Ventanilla">Ventanilla:</label>
-                            <div class="col-md-8">
-                                @Html.DropDownList("VentanillaId", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.VentanillaId, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </fieldset>
         </div>

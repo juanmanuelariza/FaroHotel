@@ -67,7 +67,6 @@
     <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-    <Property Name="VentanillaId" Type="int" Nullable="false" />
     <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
@@ -167,6 +166,14 @@
     <Property Name="PasajeroId" Type="int" Nullable="false" />
     <Property Name="PaqueteId" Type="int" Nullable="false" />
     <Property Name="BaseId" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EnlaceUsuarioVentanilla">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="VentanillaId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Extra">
     <Key>
@@ -273,6 +280,7 @@
     <Property Name="Activa" Type="bit" Nullable="false" />
     <Property Name="FormaDePagoId" Type="int" Nullable="false" />
     <Property Name="Observaciones" Type="nvarchar" MaxLength="50" />
+    <Property Name="VentanillaId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TipoBase">
     <Key>
@@ -397,18 +405,6 @@
       </Principal>
       <Dependent Role="AspNetMenuAccion">
         <PropertyRef Name="IdMenu" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AspNetUsers_Ventanilla">
-    <End Role="Ventanilla" Type="Self.Ventanilla" Multiplicity="1" />
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Ventanilla">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="AspNetUsers">
-        <PropertyRef Name="VentanillaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -720,6 +716,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_EnlaceUsuarioVentanilla_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="EnlaceUsuarioVentanilla" Type="Self.EnlaceUsuarioVentanilla" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EnlaceUsuarioVentanilla">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EnlaceUsuarioVentanilla_Ventanilla">
+    <End Role="Ventanilla" Type="Self.Ventanilla" Multiplicity="1" />
+    <End Role="EnlaceUsuarioVentanilla" Type="Self.EnlaceUsuarioVentanilla" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ventanilla">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnlaceUsuarioVentanilla">
+        <PropertyRef Name="VentanillaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Extra_TipoExtra">
     <End Role="TipoExtra" Type="Self.TipoExtra" Multiplicity="1" />
     <End Role="Extra" Type="Self.Extra" Multiplicity="*" />
@@ -948,6 +968,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ReservaHotel_Ventanilla">
+    <End Role="Ventanilla" Type="Self.Ventanilla" Multiplicity="1" />
+    <End Role="ReservaHotel" Type="Self.ReservaHotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ventanilla">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ReservaHotel">
+        <PropertyRef Name="VentanillaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="AgregarPasajeroAReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ReservaId" Type="int" Mode="In" />
     <Parameter Name="PasajeroId" Type="int" Mode="In" />
@@ -1047,6 +1079,7 @@
     <EntitySet Name="EnlaceReservaHotelHabitacion" EntityType="Self.EnlaceReservaHotelHabitacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EnlaceReservaHotelPago" EntityType="Self.EnlaceReservaHotelPago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EnlaceReservaHotelPasajero" EntityType="Self.EnlaceReservaHotelPasajero" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EnlaceUsuarioVentanilla" EntityType="Self.EnlaceUsuarioVentanilla" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Extra" EntityType="Self.Extra" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Habitacion" EntityType="Self.Habitacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
@@ -1075,10 +1108,6 @@
     <AssociationSet Name="FK_AspNetMenuAccion_Menu" Association="Self.FK_AspNetMenuAccion_Menu">
       <End Role="Menu" EntitySet="Menu" />
       <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
-    </AssociationSet>
-    <AssociationSet Name="FK_AspNetUsers_Ventanilla" Association="Self.FK_AspNetUsers_Ventanilla">
-      <End Role="Ventanilla" EntitySet="Ventanilla" />
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
     <AssociationSet Name="FK_Bus_TipoBus" Association="Self.FK_Bus_TipoBus">
       <End Role="TipoBus" EntitySet="TipoBus" />
@@ -1180,6 +1209,14 @@
       <End Role="TipoBase" EntitySet="TipoBase" />
       <End Role="EnlaceReservaHotelPasajero" EntitySet="EnlaceReservaHotelPasajero" />
     </AssociationSet>
+    <AssociationSet Name="FK_EnlaceUsuarioVentanilla_AspNetUsers" Association="Self.FK_EnlaceUsuarioVentanilla_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="EnlaceUsuarioVentanilla" EntitySet="EnlaceUsuarioVentanilla" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnlaceUsuarioVentanilla_Ventanilla" Association="Self.FK_EnlaceUsuarioVentanilla_Ventanilla">
+      <End Role="Ventanilla" EntitySet="Ventanilla" />
+      <End Role="EnlaceUsuarioVentanilla" EntitySet="EnlaceUsuarioVentanilla" />
+    </AssociationSet>
     <AssociationSet Name="FK_Extra_TipoExtra" Association="Self.FK_Extra_TipoExtra">
       <End Role="TipoExtra" EntitySet="TipoExtra" />
       <End Role="Extra" EntitySet="Extra" />
@@ -1254,6 +1291,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_ReservaHotel_TipoHotel" Association="Self.FK_ReservaHotel_TipoHotel">
       <End Role="TipoHotel" EntitySet="TipoHotel" />
+      <End Role="ReservaHotel" EntitySet="ReservaHotel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReservaHotel_Ventanilla" Association="Self.FK_ReservaHotel_Ventanilla">
+      <End Role="Ventanilla" EntitySet="Ventanilla" />
       <End Role="ReservaHotel" EntitySet="ReservaHotel" />
     </AssociationSet>
   </EntityContainer>

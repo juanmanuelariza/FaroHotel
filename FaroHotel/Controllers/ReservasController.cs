@@ -24,11 +24,13 @@ namespace FaroHotel.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Buscar(DateTime ParamFecha, int ParamNochesId, int ParamHabitaciones, int ParamPasajeros)
+        public ActionResult Buscar(DateTime ParamFecha, int ParamNochesId, int ParamHabitaciones, int ParamPasajeros, int ParamVentanillaID)
         {
+            //ARREGLAR VENTANILLA
             AspNetUsers usuario = db.AspNetUsers.Find(User.Identity.GetUserId());
-            List<Paquete> paquetes = db.Paquete.Where(p => p.FechaInicio <= ParamFecha && p.FechaFin >= ParamFecha && p.NochesId == ParamNochesId && p.Ventanilla.Any(v => v.ID == usuario.VentanillaId)).ToList();
-            if(paquetes.Count > 0)
+            //List<Paquete> paquetes = db.Paquete.Where(p => p.FechaInicio <= ParamFecha && p.FechaFin >= ParamFecha && p.NochesId == ParamNochesId && p.Ventanilla.Any(v => v.ID == usuario.VentanillaId)).ToList();
+            List<Paquete> paquetes = db.Paquete.Where(p => p.FechaInicio <= ParamFecha && p.FechaFin >= ParamFecha && p.NochesId == ParamNochesId && p.Ventanilla.Any(v => v.ID == ParamVentanillaID)).ToList();
+            if (paquetes.Count > 0)
             {
                 ViewBag.NochesId = ParamNochesId;
                 ViewBag.CantHabitaciones = ParamHabitaciones;
@@ -43,14 +45,16 @@ namespace FaroHotel.Controllers
         }
 
 
-        public ActionResult Step2(DateTime ParamFecha, int ParamNochesId, int ParamHabitaciones, int ParamPasajeros)
+        public ActionResult Step2(DateTime ParamFecha, int ParamNochesId, int ParamHabitaciones, int ParamPasajeros, int ParamVentanillaID)
         {
+            //ARREGLAR VENTANILLA
             ViewBag.NochesId = ParamNochesId;
             ViewBag.CantHabitaciones = ParamHabitaciones;
             ViewBag.CantPasajeros = ParamPasajeros;
 
             AspNetUsers usuario = db.AspNetUsers.Find(User.Identity.GetUserId());
-            List<Paquete> paquetes = db.Paquete.Where(p => p.FechaInicio <= ParamFecha && p.FechaFin >= ParamFecha && p.NochesId == ParamNochesId && p.Ventanilla.Any(v => v.ID == usuario.VentanillaId)).ToList();       
+            //List<Paquete> paquetes = db.Paquete.Where(p => p.FechaInicio <= ParamFecha && p.FechaFin >= ParamFecha && p.NochesId == ParamNochesId && p.Ventanilla.Any(v => v.ID == usuario.VentanillaId)).ToList();       
+            List<Paquete> paquetes = db.Paquete.Where(p => p.FechaInicio <= ParamFecha && p.FechaFin >= ParamFecha && p.NochesId == ParamNochesId && p.Ventanilla.Any(v => v.ID == ParamVentanillaID)).ToList();
             ViewBag.SelectPaquetesDisponibles = new SelectList(paquetes, "ID", "Titulo");
             return PartialView("_Step2");
         }
@@ -75,8 +79,10 @@ namespace FaroHotel.Controllers
                 }
             }
 
-           
-            ViewBag.esUsuarioUdap = db.AspNetUsers.Find(User.Identity.GetUserId()).Ventanilla.Nombre == "UDAP" ? true : false;
+
+            //ARREGLAR VENTANILLA
+            //ViewBag.esUsuarioUdap = db.AspNetUsers.Find(User.Identity.GetUserId()).Ventanilla.Nombre == "UDAP" ? true : false;
+            ViewBag.esUsuarioUdap = db.AspNetUsers.Find(User.Identity.GetUserId()).EnlaceUsuarioVentanilla.Any(v => v.Ventanilla.Nombre == "UDAP") ? true : false;
             ViewBag.cuotas = db.Paquete.Find(ParamPaqueteId).TipoCuota.Cuotas;
 
             return PartialView("_Step3");
@@ -86,7 +92,7 @@ namespace FaroHotel.Controllers
             int[] ParamHabitacionesIds, int[] ParamPasajerosIds, int[] ParamPaquetesIds, int[] ParamBaseIds, int[] ParamBusIdaIds, 
             int[] ParamAsientosIdaIds, int[] ParamBusVueltaIds, int[] ParamAsientosVueltaIds, int[] ParamExtrasIds, int[] ParamExtrasCantidad, string ParamObservaciones,            
             decimal ParamImporteContado, decimal ParamImporteBonificacion, decimal ParamImporteCuotas, int ParamCantCuotas,
-            string ParamNroComprobantePago, string ParamNombreTitular, string ParamDniTitular
+            string ParamNroComprobantePago, string ParamNombreTitular, string ParamDniTitular, int ParamVentanillaNombre
             )            
         {
 
@@ -108,7 +114,8 @@ namespace FaroHotel.Controllers
                 //Envio Mail
                 SendMail mail = new SendMail();
                 mail.Destinatario = "virginiaharanda@gmail.com";
-                mail.Asunto = "Nueva Reserva!! " + NuevaReserva.AspNetUsers.Ventanilla.Nombre;
+                //mail.Asunto = "Nueva Reserva!! " + NuevaReserva.AspNetUsers.Ventanilla.Nombre;
+                mail.Asunto = "Nueva Reserva!! " + ParamVentanillaNombre;
                 mail.Mensaje = NuevaReserva.Pasajero.Apellido + " x" + NuevaReserva.EnlaceReservaHotelPasajero.Count + "<br/> http://www.sistemaelfarohotel.com/Reservas/Detalle/" + result.ReservaHotelID;
                 mail.Send();
             }
@@ -252,7 +259,8 @@ namespace FaroHotel.Controllers
             IQueryable<ReservaHotel> reservas;
             AspNetUsers usuario = db.AspNetUsers.Find(User.Identity.GetUserId());
 
-            if (usuario.VentanillaId == 9) //Usuario de HOTEL
+            //ARREGLAR VENTANILLA
+            if (usuario.EnlaceUsuarioVentanilla.Any(v => v.VentanillaId == 9)) //Usuario de HOTEL
             {
                 reservas = db.ReservaHotel.Where(r => r.Confirmada == true && r.FechaCancelada == null);
             }
@@ -268,7 +276,8 @@ namespace FaroHotel.Controllers
             IEnumerable<ReservaHotel> reservas;
             AspNetUsers usuario = db.AspNetUsers.Find(User.Identity.GetUserId());
 
-            if (usuario.VentanillaId == 9) //Usuario de HOTEL
+            //ARREGLAR VENTANILLA
+            if (usuario.EnlaceUsuarioVentanilla.Any(v => v.VentanillaId == 9)) //Usuario de HOTEL
             {
                 reservas = db.ReservaHotel.Where(r => r.Confirmada == false && r.FechaCancelada == null);
             }
@@ -284,7 +293,8 @@ namespace FaroHotel.Controllers
             IEnumerable<ReservaHotel> reservas;
             AspNetUsers usuario = db.AspNetUsers.Find(User.Identity.GetUserId());
 
-            if (usuario.VentanillaId == 9) //Usuario de HOTEL
+            //ARREGLAR VENTANILLA
+            if (usuario.EnlaceUsuarioVentanilla.Any(v => v.VentanillaId == 9)) //Usuario de HOTEL
             {
                 reservas = db.ReservaHotel.Where(r => r.FechaCancelada != null);
             }
@@ -296,6 +306,7 @@ namespace FaroHotel.Controllers
         }
         public ActionResult Detalle(int? Id)
         {
+            //ARREGLAR VENTANILLA
             if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -303,7 +314,7 @@ namespace FaroHotel.Controllers
             ReservaHotel reserva = db.ReservaHotel.Find(Id);
             AspNetUsers usuario = db.AspNetUsers.Find(User.Identity.GetUserId());
             ViewBag.Reserva = reserva;
-            ViewBag.VentanillaUsuarioId = usuario.VentanillaId;
+            //ViewBag.VentanillaUsuarioId = usuario.VentanillaId;
             ViewBag.ReservaId = reserva.ID;
             ViewBag.Confirmada = reserva.Confirmada;            
             ViewBag.DatosReserva = db.GetReserva(Id);
@@ -315,7 +326,8 @@ namespace FaroHotel.Controllers
             ViewBag.Descuentos = db.EnlaceReservaHotelDescuento.Where(p => p.ReservaHotelId == Id).OrderBy(p => p.Fecha);
             ViewBag.Extras = db.EnlaceReservaHotelExtra.Where(e => e.ReservaHotelId == Id);
 
-            List < Paquete> paquetes = db.Paquete.Where(p => p.FechaInicio <= reserva.FechaEntrada && p.FechaFin >= reserva.FechaEntrada && p.Ventanilla.Any(v => v.ID == usuario.VentanillaId)).ToList();
+            //List < Paquete> paquetes = db.Paquete.Where(p => p.FechaInicio <= reserva.FechaEntrada && p.FechaFin >= reserva.FechaEntrada && p.Ventanilla.Any(v => v.ID == usuario.VentanillaId)).ToList();
+            List < Paquete> paquetes = db.Paquete.Where(p => p.FechaInicio <= reserva.FechaEntrada && p.FechaFin >= reserva.FechaEntrada).ToList();
             ViewBag.SelectPaquetesDisponibles = new SelectList(paquetes, "ID", "Titulo");
             
             return View();

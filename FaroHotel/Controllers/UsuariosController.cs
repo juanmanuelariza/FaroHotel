@@ -42,7 +42,9 @@ namespace FaroHotel.Controllers
         // GET: Usuarios
         public ActionResult Index()
         {
-            var aspNetUsers = db.AspNetUsers.Include(a => a.Ventanilla);
+            //ARREGLAR VENTANILLA
+            //var aspNetUsers = db.AspNetUsers.Include(a => a.Ventanilla);
+            var aspNetUsers = db.AspNetUsers;
             return View(aspNetUsers.ToList());
         }
 
@@ -77,7 +79,7 @@ namespace FaroHotel.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber, VentanillaId = model.VentanillaId, FirstName = model.FirstName, LastName = model.LastName };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -112,8 +114,8 @@ namespace FaroHotel.Controllers
             user.LastName = appUser.LastName;
             user.PhoneNumber = appUser.PhoneNumber;
             user.Email = appUser.Email;
-            user.VentanillaId = appUser.VentanillaId;
-            ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre", user.VentanillaId);
+            //user.VentanillaId = appUser.VentanillaId;
+            //ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre", user.VentanillaId);
             return View(user);
         }
 
@@ -137,7 +139,7 @@ namespace FaroHotel.Controllers
                     currentUser.LastName = model.LastName;
                     currentUser.Email = model.Email;
                     currentUser.PhoneNumber = model.PhoneNumber;
-                    currentUser.VentanillaId = model.VentanillaId;
+                    //currentUser.VentanillaId = model.VentanillaId;
                     await UserManager.UpdateAsync(currentUser);
 
                     var ctx = store.Context;

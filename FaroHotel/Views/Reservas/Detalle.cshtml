@@ -25,29 +25,77 @@
                     {
                         <div class="col-md-6">
                             <h4><strong>Información de la reserva</strong></h4>
-                            <strong>ID de reserva:</strong> <span id="SpanIdReserva">@item.ID</span><br />
-                            <strong>Usuario alta:</strong> <span id="SpanUsuarioAlta">@item.UserName (@item.NombreVentanilla)</span><br />
-                            <strong>Fecha de alta:</strong> <span id="SpanFechaAlta">@item.FechaAlta</span><br />
-                            <strong>Hotel:</strong> <span id="SpanHotel">@item.Hotel</span><br />
-                            <strong>Fecha de entrada:</strong> <span id="SpanFechaEntrada">@item.FechaEntrada</span><br />
-                            <strong>Fecha de salida:</strong> <span id="SpanFechaSalida">@item.FechaSalida</span><br />
-                            <strong>Confirmada:</strong> <span id="SpanConfirmada">@item.Confirmada.ToString().Replace("False", "No").Replace("True", "Si")</span>
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<td><strong>ID de reserva:</strong></td>
+										<td> <span id="SpanIdReserva">@item.ID</span></td>
+									</tr>
+									<tr>
+										<td><strong>Usuario alta:</strong></td>
+										<td> <span id="SpanUsuarioAlta">@item.UserName (@item.NombreVentanilla)</span></td>
+									</tr>
+									<tr>
+										<td><strong>Fecha de alta:</strong></td>
+										<td> <span id="SpanFechaAlta">@item.FechaAlta</span></td>
+									</tr>
+									<tr>
+										<td><strong>Hotel:</strong></td>
+										<td> <span id="SpanHotel">@item.Hotel</span></td>
+									</tr>
+									<tr>
+										<td><strong>Fecha de entrada:</strong></td>
+										<td> <span id="SpanFechaEntrada">@item.FechaEntrada.ToString("dd/MM/yyyy")</span></td>
+									</tr>
+									<tr>
+										<td><strong>Fecha de salida:</strong></td>
+										<td> <span id="SpanFechaSalida">@item.FechaSalida.ToString("dd/MM/yyyy")</span></td>
+									</tr>
+									<tr>
+										<td><strong>Confirmada:</strong></td>
+										<td> <span id="SpanConfirmada">@item.Confirmada.ToString().Replace("False", "No").Replace("True", "Si")</span></td>
+									</tr>
+								</tbody>
+							</table>
                         </div>
-                        <div class="col-md-6">
-                            <h4>
-                                <strong>Información del titular</strong>
-                                <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarTitular/@ViewBag.ReservaId', 'Editar', 'Titular')">
-                                    <i class="fa fa-pencil-square-o"></i> Editar Titular
-                                </button>
-                            </h4>
-                            <strong>DNI:</strong> <span id="SpanDniTitular">@item.DNI</span><br />
-                            <strong>Apellido:</strong> <span id="SpanApellidoTitular">@item.Apellido</span><br />
-                            <strong>Nombre:</strong> <span id="SpanNombreTitular">@item.Nombre</span><br />
-                            <strong>Edad:</strong> <span id="SpanEdadTitular">@item.Edad</span><br />
-                            <strong>Teléfono:</strong> <span id="SpanTelefonoTitular">@item.Telefono</span><br />
-                            <strong>Email:</strong> <span id="SpanEmailTitular">@item.Email</span>
-                        </div>
-                    }
+						<div class="col-md-6">							
+							<h4>
+								<strong>Información del titular</strong>
+							</h4>
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<td><strong>DNI:</strong></td>
+										<td><span id="SpanDniTitular">@item.DNI</span></td>
+									</tr>
+									<tr>
+										<td><strong>Apellido:</strong></td>
+										<td><span id="SpanApellidoTitular">@item.Apellido</span></td>
+									</tr>
+									<tr>
+										<td><strong>Nombre:</strong></td>
+										<td><span id="SpanNombreTitular">@item.Nombre</span></td>
+									</tr>
+									<tr>
+										<td><strong>Edad:</strong></td>
+										<td><span id="SpanEdadTitular">@item.Edad</span></td>
+									</tr>
+									<tr>
+										<td><strong>Teléfono:</strong></td>
+										<td><span id="SpanTelefonoTitular">@item.Telefono</span></td>
+									</tr>
+									<tr>
+										<td><strong>Email:</strong></td>
+										<td><span id="SpanEmailTitular">@item.Email</span></td>
+									</tr>
+								</tbody>
+							</table>
+
+							<button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Reservas/EditarTitular/@ViewBag.ReservaId', 'Editar', 'Titular')">
+								<i class="fa fa-pencil-square-o"></i> Editar Titular
+							</button>
+						</div>
+					}
 
                 </div>
 

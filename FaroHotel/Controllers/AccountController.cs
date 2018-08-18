@@ -156,7 +156,7 @@ namespace FaroHotel.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber, VentanillaId = model.VentanillaId };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -189,13 +189,14 @@ namespace FaroHotel.Controllers
             user.Password = aspNetUsers.PasswordHash;
             user.Email = aspNetUsers.Email;
             user.PhoneNumber = aspNetUsers.PhoneNumber;
-            user.VentanillaId = aspNetUsers.VentanillaId;
+            user.Ventanillas = aspNetUsers.EnlaceUsuarioVentanilla.ToList();
 
             if (aspNetUsers == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre", aspNetUsers.VentanillaId);
+            //ARREGLAR VENTANILLA
+            //ViewBag.VentanillaId = new SelectList(db.Ventanilla, "ID", "Nombre", aspNetUsers.VentanillaId);
             return PartialView(user);
         }
 
